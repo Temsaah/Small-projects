@@ -722,6 +722,10 @@ video {
   border-top-right-radius: 0.75rem;
 }
 
+.bg-white {
+  background-color: white; 
+}
+
 .bg-primary-desat-darkblue{
   --tw-bg-opacity: 1;
   background-color: hsl(214 17% 51% / var(--tw-bg-opacity));
