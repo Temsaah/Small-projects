@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Article preview component</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link rel="stylesheet" href="output.css" />
+  </head>
+  <body
+    class="bg-primary-l-grayishblue min-h-screen grid place-items-center font-monrope"
+  >
+    <main>
+      <div
+        class="container max-w-[90%] m-auto grid grid-rows-40-60 rounded-t-xl sm:flex sm:w-[90%] sm:max-w-[1000px]"
+      >
+        <div class="image">
+          <img
+            class="max-h-[100%] w-full object-cover object-top rounded-t-xl sm:rounded-none sm:rounded-l-xl sm:h-[100%] sm:max-w-[300px]"
+            src="images/drawers.jpg"
+            alt=""
+          />
+        </div>
+        <article
+          class="pt-10 flex flex-col justify-between gap-7 sm:pt-5 sm:pb-5 sm:gap-7"
+        >
+          <div
+            class="description pl-8 pr-8 flex flex-col gap-[8vw] sm:gap-5 sm:max-w-[600px]"
+          >
+            <h2 class="text-primary-vd-grayishblue text-xl font-bold">
+              Shift the overall look and feel by adding these wonderful touches
+              to furniture in your home
+            </h2>
+            <p
+              class="text-base/6 sm:text-sm text-primary-vd-grayishblue font-light"
+            >
+              Ever been in a room and felt like something was missing? Perhaps
+              it felt slightly bare and uninviting. I’ve got some simple tips to
+              help you make any room feel complete.
+            </p>
+          </div>
+          <div
+            class="about pt-5 pb-5 pl-8 pr-8 flex flex-wrap justify-between items-center relative"
+          >
+            <div class="about__img mr-7">
+              <img
+                class="max-w-12 rounded-full"
+                src="images/avatar-michelle.jpg"
+                alt=""
+              />
+            </div>
+            <div class="about__info mr-auto">
+              <p class="text-sm font-extrabold text-primary-vd-grayishblue">
+                Michelle Appleton
+              </p>
+              <p class="text-primary-grayish-blue text-sm">28 Jun 2020</p>
+            </div>
+            <div class="relative">
+              <button>
+                <i
+                  class="share cursor-pointer fa-solid text-lg fa-share text-primary-desat-darkblue"
+                ></i>
+              </button>
+            </div>
+
+            <div
+              class="hidden share-desktop-container active-desktop absolute right-[-87px] bottom-24 bg-primary-vd-grayishblue opacity-0 ease-in-out duration-500 transition-opacity rounded-xl after:content-center after:absolute after:border-primary-border after:border-solid after:border-[15px] after:w-0 after:h-0 after:left-[50%] after:translate-x-[-34%]"
+            >
+              <div
+                class="container pt-4 pb-4 pl-10 pr-10 flex flex-wrap items-center gap-4"
+              >
+                <p
+                  class="text-primary-grayish-blue tracking-custom-wide text-sm"
+                >
+                  SHARE
+                </p>
+                <div class="socials flex items-center gap-4">
+                  <button>
+                    <i
+                      class="text-white text-2xl fa-brands fa-square-facebook"
+                    ></i>
+                  </button>
+                  <button>
+                    <i class="text-white text-2xl fa-brands fa-twitter"></i>
+                  </button>
+                  <button>
+                    <i class="text-white text-2xl fa-brands fa-pinterest"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="hidden about-share bg-primary-vd-grayishblue opacity-0 ease-in-out duration-500 transition-opacity rounded-b-xl"
+          >
+            <div
+              class="container pt-6 pb-6 pl-8 pr-5 flex justify-between items-center flex-wrap"
+            >
+              <p class="text-primary-grayish-blue tracking-custom-wide mr-6">
+                SHARE
+              </p>
+              <div class="socials mr-auto flex items-center gap-4">
+                <button>
+                  <i
+                    class="text-white text-3xl fa-brands fa-square-facebook"
+                  ></i>
+                </button>
+                <button>
+                  <i class="text-white text-2xl fa-brands fa-twitter"></i>
+                </button>
+                <button>
+                  <i class="text-white text-3xl fa-brands fa-pinterest"></i>
+                </button>
+              </div>
+              <button class="share-active">
+                <i
+                  class="fa-solid fa-share text-white text-lg bg-primary-desat-darkblue w-10 h-10 flex items-center justify-center rounded-full"
+                ></i>
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
