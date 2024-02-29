@@ -17,35 +17,58 @@
     <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
     <link rel="stylesheet" href="output.css" />
   </head>
-  <body>
-    <div class="p-10 logo w-48">
-      <img src="/images/logo.svg" alt="" />
-    </div>
-    <div class="main-img">
+  <body class="min-h-screen">
+    <main
+      class="min-h-screen grid grid-rows-custom-grid-mobile sm:grid-cols-custom-col-desktop sm:grid-rows-custom-row-desktop"
+    >
+      <div class="p-10 logo w-48 sm:p-12">
+        <img src="/images/logo.svg" alt="" />
+      </div>
+
+      <!-- <div class="main-img">
+        <img
+          class="w-full object-cover object-top"
+          src="/images/hero-mobile.jpg"
+          alt=""
+        />
+      </div> -->
       <img
-        class="w-full h-[300px] object-cover object-top"
+        class="w-full h-[30vh] object-cover object-top sm:hidden"
         src="/images/hero-mobile.jpg"
         alt=""
       />
-    </div>
-
-    <main class="p-10 flex flex-col gap-4">
-      <div
-        class="main-text font-Josefin text-center text-5xl tracking-custom-spacing leading-tight"
-      >
-        <p class="text-primary-desat-red font-extralight">WE'RE</p>
-        <p class="text-primary-dark-grayish-red font-semibold">COMING</p>
-        <p class="text-primary-dark-grayish-red font-semibold">SOON</p>
-      </div>
-      <p class="text-primary-desat-red text-center">
-        Hello fellow shoppers! We're currently building our new fashion store.
-        Add your email below to stay up-to-date with announcements and our
-        launch deals.
-      </p>
-      <input
-        class="p-2 border-2 border-primary-desat-red rounded-3xl"
-        type="text"
+      <img
+        class="hidden sm:block object-cover object-top"
+        src="/images/hero-desktop.jpg"
+        alt=""
       />
+
+      <div class="text-container p-7 flex flex-col justify-center gap-6">
+        <div
+          class="main-text font-Josefin text-center text-5xl tracking-custom-spacing leading-tight"
+        >
+          <p class="text-primary-desat-red font-extralight">WE'RE</p>
+          <p class="text-primary-dark-grayish-red font-semibold">COMING</p>
+          <p class="text-primary-dark-grayish-red font-semibold">SOON</p>
+        </div>
+        <p class="text-primary-desat-red text-center">
+          Hello fellow shoppers! We're currently building our new fashion store.
+          Add your email below to stay up-to-date with announcements and our
+          launch deals.
+        </p>
+        <div class="form relative w-full flex justify-center">
+          <input
+            class="p-3 w-full pl-8 pr-20 border-2 border-primary-desat-red/50 rounded-3xl"
+            type="text"
+            placeholder="Email Address"
+          />
+          <button
+            class="text-3xl absolute right-0 text-white bg-primary-soft-red pl-7 pr-7 pt-2 pb-2 rounded-full"
+          >
+            >
+          </button>
+        </div>
+      </div>
     </main>
   </body>
 </html>
