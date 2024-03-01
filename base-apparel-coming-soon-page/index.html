@@ -17,58 +17,64 @@
     <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
     <link rel="stylesheet" href="output.css" />
   </head>
-  <body class="min-h-screen">
+  <body class="min-h-screen font-Josefin">
     <main
-      class="min-h-screen grid grid-rows-custom-grid-mobile sm:grid-cols-custom-col-desktop sm:grid-rows-custom-row-desktop"
+      class="min-h-screen grid grid-rows-custom-row-mobile sm:grid-cols-custom-col-desktop-md lg:grid-cols-custom-col-desktop-lg sm:grid-rows-custom-row-desktop"
     >
-      <div class="p-10 logo w-48 sm:p-12">
-        <img src="/images/logo.svg" alt="" />
-      </div>
-
-      <!-- <div class="main-img">
+      <div class="logo">
         <img
-          class="w-full object-cover object-top"
-          src="/images/hero-mobile.jpg"
+          class="p-7 sm:p-20 md:pl-20 md:pr-20 lg:pl-60 lg:pr-60"
+          src="images/logo.svg"
           alt=""
         />
-      </div> -->
+      </div>
+
       <img
         class="w-full h-[30vh] object-cover object-top sm:hidden"
-        src="/images/hero-mobile.jpg"
+        src="images/hero-mobile.jpg"
         alt=""
       />
       <img
-        class="hidden sm:block object-cover object-top"
-        src="/images/hero-desktop.jpg"
+        class="hidden sm:block object-cover object-top lg:object-center row-span-2 h-full"
+        src="images/hero-desktop.jpg"
         alt=""
       />
 
-      <div class="text-container p-7 flex flex-col justify-center gap-6">
+      <div
+        class="text-container p-7 md:pl-20 md:pr-20 lg:pl-60 lg:pr-60 max-w-[1000px] flex flex-col justify-center gap-6"
+      >
         <div
-          class="main-text font-Josefin text-center text-5xl tracking-custom-spacing leading-tight"
+          class="main-text text-center lg:text-left text-5xl tracking-custom-spacing leading-tight"
         >
           <p class="text-primary-desat-red font-extralight">WE'RE</p>
           <p class="text-primary-dark-grayish-red font-semibold">COMING</p>
           <p class="text-primary-dark-grayish-red font-semibold">SOON</p>
         </div>
-        <p class="text-primary-desat-red text-center">
+        <p class="text-primary-desat-red text-center lg:text-left">
           Hello fellow shoppers! We're currently building our new fashion store.
           Add your email below to stay up-to-date with announcements and our
           launch deals.
         </p>
         <div class="form relative w-full flex justify-center">
           <input
-            class="p-3 w-full pl-8 pr-20 border-2 border-primary-desat-red/50 rounded-3xl"
+            class="email-input p-3 w-full pl-8 pr-20 border-2 border-primary-desat-red/50 rounded-3xl"
             type="text"
             placeholder="Email Address"
           />
+          <i
+            class="hidden error-icon fa-solid fa-exclamation absolute text-sm right-24 top-1/2 -translate-y-1/2 bg-primary-soft-red rounded-full flex justify-center items-center w-6 h-6 text-center text-white"
+          ></i>
           <button
-            class="text-3xl absolute right-0 text-white bg-primary-soft-red pl-7 pr-7 pt-2 pb-2 rounded-full"
+            class="submit-btn text-3xl absolute right-0 text-white bg-primary-soft-red pl-7 pr-7 pt-2 pb-2 rounded-full"
           >
             >
           </button>
         </div>
+        <p class="hidden error-msg pl-5 -mt-3 text-primary-soft-red text-sm">
+          Please provide a valid email
+        </p>
       </div>
     </main>
+    <script src="app.js"></script>
   </body>
 </html>
