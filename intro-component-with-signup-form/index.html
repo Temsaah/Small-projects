@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="output.css" />
   </head>
   <body
-    class="font-Poppins min-h-screen grid place-items-center bg-primary-red bg-mobile-image"
+    class="font-Poppins min-h-screen grid place-items-center bg-primary-red bg-mobile-image sm:bg-mobile-desktop"
   >
     <main
       class="max-w-[90%] m-auto grid gap-10 sm:grid-cols-2 sm:w-[95%] sm:max-w-[1100px]"
@@ -44,28 +44,79 @@
       </div>
 
       <div class="form rounded-md p-6 bg-white grid gap-4 sm:col-start-2">
-        <input
-          class="p-3 rounded-md border-2 border-primary-grayishblue/50"
-          type="text"
-          placeholder="First Name"
-        />
-        <input
-          class="p-3 rounded-md border-2 border-primary-grayishblue/50"
-          type="text"
-          placeholder="Last Name"
-        />
-        <input
-          class="p-3 rounded-md border-2 border-primary-grayishblue/50"
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          class="p-3 rounded-md border-2 border-primary-grayishblue/50"
-          type="text"
-          placeholder="Password"
-        />
+        <div class="relative">
+          <div class="input-container relative">
+            <input
+              class="w-full input-text p-3 rounded-md border-2 border-primary-grayishblue/50"
+              type="text"
+              placeholder="First Name"
+            />
+            <i
+              class="hidden error-icon absolute right-5 top-1/2 -translate-y-1/2 fa-solid fa-exclamation w-6 h-6 bg-primary-red text-white flex justify-center items-center rounded-full text-sm"
+            ></i>
+          </div>
+          <p
+            class="hidden error-text text-xs italic font-medium relative w-fit ml-auto mt-2 text-red-700 right-0"
+          >
+            First Name cannot be empty
+          </p>
+        </div>
+        <div class="relative">
+          <div class="input-container relative">
+            <input
+              class="w-full input-text p-3 rounded-md border-2 border-primary-grayishblue/50"
+              type="text"
+              placeholder="Last Name"
+            />
+            <i
+              class="hidden error-icon absolute right-5 top-1/2 -translate-y-1/2 fa-solid fa-exclamation w-6 h-6 bg-primary-red text-white flex justify-center items-center rounded-full text-sm"
+            ></i>
+          </div>
+          <p
+            class="hidden error-text text-xs italic font-medium relative w-fit ml-auto mt-2 text-red-700 right-0"
+          >
+            Last Name cannot be empty
+          </p>
+        </div>
+        <div class="relative">
+          <div class="input-container relative">
+            <input
+              class="w-full email-text p-3 rounded-md border-2 border-primary-grayishblue/50"
+              type="text"
+              placeholder="Email Address"
+            />
+            <i
+              class="hidden error-icon absolute right-5 top-1/2 -translate-y-1/2 fa-solid fa-exclamation w-6 h-6 bg-primary-red text-white flex justify-center items-center rounded-full text-sm"
+            ></i>
+          </div>
+
+          <p
+            class="hidden error-text text-xs italic font-medium relative w-fit ml-auto mt-2 text-red-700 right-0"
+          >
+            Looks like this is not an email
+          </p>
+        </div>
+        <div class="relative">
+          <div class="input-container relative">
+            <input
+              class="w-full input-text p-3 rounded-md border-2 border-primary-grayishblue/50"
+              type="text"
+              placeholder="Password"
+            />
+            <i
+              class="hidden error-icon absolute right-5 top-1/2 -translate-y-1/2 fa-solid fa-exclamation w-6 h-6 bg-primary-red text-white flex justify-center items-center rounded-full text-sm"
+            ></i>
+          </div>
+
+          <p
+            class="absolute hidden error-text text-xs italic font-medium relative w-fit ml-auto mt-2 text-red-700 right-0"
+          >
+            Password cannot be empty
+          </p>
+        </div>
+
         <button
-          class="text-white font-semibold tracking-wide bg-primary-green p-4 rounded-md"
+          class="submit-btn text-white font-semibold tracking-wide bg-primary-green p-4 rounded-md"
         >
           CLAIM YOUR FREE TRIAL
         </button>
@@ -76,9 +127,6 @@
       </div>
     </main>
 
-    <!-- Learn to code by watching others  Try it free 7 days then
-    $20/mo. thereafter First Name Last Name Email Address Password Claim your
-    free trial By clicking the button, you are agreeing to our Terms and
-    Services -->
+    <script src="app.js"></script>
   </body>
 </html>
