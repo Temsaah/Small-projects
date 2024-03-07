@@ -749,6 +749,10 @@ video {
   font-weight: 800;
 }
 
+.font-light{
+  font-weight: 300;
+}
+
 .tracking-custom{
   letter-spacing: 0.2rem;
 }
@@ -811,6 +815,46 @@ video {
 .after\:bg-black\/60::after{
   content: var(--tw-content);
   background-color: rgb(0 0 0 / 0.6);
+}
+
+.hover\:cursor-pointer:hover{
+  cursor: pointer;
+}
+
+.hover\:bg-neutral-vdark-blue:hover{
+  --tw-bg-opacity: 1;
+  background-color: hsl(240 100% 5% / var(--tw-bg-opacity));
+}
+
+.hover\:text-primary-soft-orange:hover{
+  --tw-text-opacity: 1;
+  color: hsl(35 77% 62% / var(--tw-text-opacity));
+}
+
+.hover\:text-neutral-dark-grayishblue:hover{
+  --tw-text-opacity: 1;
+  color: hsl(236 13% 42% / var(--tw-text-opacity));
+}
+
+.hover\:text-primary-soft-orange\/50:hover{
+  color: hsl(35 77% 62% / 0.5);
+}
+
+.hover\:text-primary-soft-orange\/20:hover{
+  color: hsl(35 77% 62% / 0.2);
+}
+
+.hover\:text-primary-soft-orange\/30:hover{
+  color: hsl(35 77% 62% / 0.3);
+}
+
+.hover\:text-primary-soft-orange\/90:hover{
+  color: hsl(35 77% 62% / 0.9);
+}
+
+.hover\:text-primary-soft-red:hover{
+  --tw-text-opacity: 1;
+  color: hsl(5 85% 63% / var(--tw-text-opacity));
 }
 
 @media (min-width: 640px){
