@@ -566,6 +566,18 @@ video {
   z-index: 50;
 }
 
+.col-start-1{
+  grid-column-start: 1;
+}
+
+.col-start-3{
+  grid-column-start: 3;
+}
+
+.col-start-2{
+  grid-column-start: 2;
+}
+
 .m-auto{
   margin: auto;
 }
@@ -586,8 +598,24 @@ video {
   display: none;
 }
 
+.h-screen{
+  height: 100vh;
+}
+
 .max-h-\[250px\]{
   max-height: 250px;
+}
+
+.max-h-\[20px\]{
+  max-height: 20px;
+}
+
+.max-h-\[240px\]{
+  max-height: 240px;
+}
+
+.max-h-\[230px\]{
+  max-height: 230px;
 }
 
 .min-h-screen{
@@ -610,8 +638,29 @@ video {
   max-width: 7rem;
 }
 
+.max-w-2{
+  max-width: 0.5rem;
+}
+
+.max-w-24{
+  max-width: 6rem;
+}
+
+.max-w-20{
+  max-width: 5rem;
+}
+
 .cursor-pointer{
   cursor: pointer;
+}
+
+.columns-1{
+  -moz-columns: 1;
+       columns: 1;
+}
+
+.grid-cols-1{
+  grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
 .flex-col{
@@ -741,6 +790,11 @@ video {
   line-height: 1.75rem;
 }
 
+.text-xs{
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
 .font-bold{
   font-weight: 700;
 }
@@ -831,27 +885,6 @@ video {
   color: hsl(35 77% 62% / var(--tw-text-opacity));
 }
 
-.hover\:text-neutral-dark-grayishblue:hover{
-  --tw-text-opacity: 1;
-  color: hsl(236 13% 42% / var(--tw-text-opacity));
-}
-
-.hover\:text-primary-soft-orange\/50:hover{
-  color: hsl(35 77% 62% / 0.5);
-}
-
-.hover\:text-primary-soft-orange\/20:hover{
-  color: hsl(35 77% 62% / 0.2);
-}
-
-.hover\:text-primary-soft-orange\/30:hover{
-  color: hsl(35 77% 62% / 0.3);
-}
-
-.hover\:text-primary-soft-orange\/90:hover{
-  color: hsl(35 77% 62% / 0.9);
-}
-
 .hover\:text-primary-soft-red:hover{
   --tw-text-opacity: 1;
   color: hsl(5 85% 63% / var(--tw-text-opacity));
@@ -925,6 +958,14 @@ video {
     grid-column-end: 3;
   }
 
+  .md\:col-end-1{
+    grid-column-end: 1;
+  }
+
+  .md\:col-end-4{
+    grid-column-end: 4;
+  }
+
   .md\:row-span-2{
     grid-row: span 2 / span 2;
   }
@@ -943,6 +984,10 @@ video {
 
   .md\:m-auto{
     margin: auto;
+  }
+
+  .md\:m-0{
+    margin: 0px;
   }
 
   .md\:block{
@@ -965,11 +1010,23 @@ video {
     grid-template-columns: repeat(3,1fr);
   }
 
+  .md\:grid-cols-3{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .md\:grid-rows-custom-row{
     grid-template-rows: repeat(3,1fr);
   }
 
   .md\:gap-8{
     gap: 2rem;
+  }
+
+  .md\:gap-0{
+    gap: 0px;
+  }
+
+  .md\:p-0{
+    padding: 0px;
   }
 }
