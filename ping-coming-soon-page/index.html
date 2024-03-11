@@ -24,43 +24,50 @@
     <link rel="stylesheet" href="output.css" />
   </head>
   <body class="min-h-screen font-Libre">
-    <main class="min-h-screen pt-20 flex flex-col gap-16 p-10">
-      <img class="max-w-20 ml-auto mr-auto" src="/images/logo.svg" alt="" />
+    <main
+      class="min-h-screen max-w-[600px] m-auto pt-20 flex flex-col gap-16 p-10"
+    >
+      <img class="max-w-20 ml-auto mr-auto" src="images/logo.svg" alt="" />
       <div class="info grid gap-5">
-        <h1 class="text-center text-2xl text-neutral-grey">
+        <h1 class="text-center text-2xl text-neutral-grey sm:text-5xl">
           We Are launching <span class="font-bold text-black">soon!</span>
         </h1>
         <p class="text-center">Subscribe and get notified!</p>
       </div>
-      <div class="form grid gap-5">
-        <input
-          class="border-2 border-neutral-grey/50 rounded-full p-3 placeholder:p-4"
-          type="email"
-          placeholder="Your email address..."
-          name=""
-          id=""
-        />
+      <div class="relative form grid gap-5 sm:flex sm:items-start">
+        <div class="input-container w-full">
+          <input
+            class="email-input border-2 w-full border-neutral-grey/50 rounded-full p-3 pl-6"
+            type="email"
+            placeholder="Your email address..."
+            name=""
+            id=""
+          />
+          <p
+            class="hidden error-msg top-14 pt-2 pl-6 text-sm text-center italic text-red-700 sm:text-start"
+          >
+            Please provide a vaild email address!
+          </p>
+        </div>
         <button
-          class="block w-full bg-primary-blue p-3 text-white rounded-full"
+          class="form-btn block bg-primary-blue hover:bg-primary-blue/90 p-3 text-white rounded-full sm:pl-10 sm:pr-10 sm:flex-shrink-0"
         >
           Notify me
         </button>
       </div>
-      <img
-        class="ml-auto mr-auto"
-        src="/images/illustration-dashboard.png"
-        alt=""
-      />
+      <div class="image max-w-[400px] ml-auto mr-auto sm:max-w-[800px]">
+        <img src="images/illustration-dashboard.png" alt="" />
+      </div>
       <div class="footer mt-auto grid gap-10">
         <div class="socials flex justify-center gap-10">
           <i
-            class="w-10 h-10 border-2 border-neutral-grey/40 rounded-full grid place-items-center text-primary-blue fa-brands fa-facebook-f"
+            class="cursor-pointer w-10 h-10 border-2 border-neutral-grey/40 hover:text-white hover:bg-primary-blue rounded-full grid place-items-center text-primary-blue fa-brands fa-facebook-f"
           ></i>
           <i
-            class="w-10 h-10 border-2 border-neutral-grey/40 rounded-full grid place-items-center text-primary-blue fa-brands fa-twitter"
+            class="cursor-pointer w-10 h-10 border-2 border-neutral-grey/40 hover:text-white hover:bg-primary-blue rounded-full grid place-items-center text-primary-blue fa-brands fa-twitter"
           ></i>
           <i
-            class="w-10 h-10 border-2 border-neutral-grey/40 rounded-full grid place-items-center text-primary-blue fa-brands fa-instagram"
+            class="cursor-pointer w-10 h-10 border-2 border-neutral-grey/40 hover:text-white hover:bg-primary-blue rounded-full grid place-items-center text-primary-blue fa-brands fa-instagram"
           ></i>
         </div>
         <p class="mt-auto text-sm text-center text-neutral-grey">
@@ -68,5 +75,6 @@
         </p>
       </div>
     </main>
+    <script src="app.js"></script>
   </body>
 </html>
