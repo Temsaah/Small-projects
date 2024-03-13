@@ -17,15 +17,22 @@
     <link rel="stylesheet" href="output.css" />
   </head>
   <body
-    class="min-h-screen grid grid-rows-custom-mobile font-Space font-medium"
+    class="min-h-screen grid grid-rows-custom-mobile sm:grid-cols-custom-desktop font-Space font-medium"
   >
-    <header class="bg-[url('/images/bg-main-mobile.png')] relative">
-      <img
-        class="max-w-[300px] absolute p-4 pt-7 right-0"
-        src="/images/bg-card-back.png"
-        alt=""
-      />
-      <div class="absolute card-front top-24 p-4">
+    <header
+      class="bg-[url('/images/bg-main-mobile.png')] sm:bg-[url('/images/bg-main-desktop.png')] bg-cover relative"
+    >
+      <div class="card-back absolute p-4 pt-7 right-0">
+        <div class="card-back__container relative">
+          <img class="max-w-[300px]" src="/images/bg-card-back.png" alt="" />
+          <p
+            class="cvc-card-back absolute top-1/2 -translate-y-1/2 right-10 text-sm text-neutral-light-grayish-violet font-bold"
+          >
+            000
+          </p>
+        </div>
+      </div>
+      <div class="absolute card-front right-10 top-28 p-4">
         <div class="relative card-front__container">
           <img class="max-w-[300px]" src="/images/bg-card-front.png" alt="" />
           <div
@@ -36,7 +43,9 @@
             </div>
             <div class="other-info grid gap-2">
               <div class="card-front__number">
-                <p class="text-neutral-light-grayish-violet text-xl">
+                <p
+                  class="card-front-number text-neutral-light-grayish-violet text-xl"
+                >
                   0000 0000 0000 0000
                 </p>
               </div>
@@ -44,7 +53,7 @@
                 class="card-front__name-exp flex justify-between text-neutral-light-grayish-violet text-xss"
               >
                 <p class="uppercase">Jane appleseed</p>
-                <p>00/00</p>
+                <p class="card-">00/00</p>
               </div>
             </div>
           </div>
@@ -52,7 +61,7 @@
       </div>
     </header>
     <main>
-      <div class="container p-5 pt-32 grid gap-5">
+      <div class="container m-auto p-5 pt-32 grid gap-5">
         <div class="card-name grid gap-2 text-neutral-vd-violet">
           <p class="uppercase text-xs tracking-widest">Cardholder name</p>
           <input

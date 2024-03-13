@@ -592,12 +592,24 @@ video {
   right: 0px;
 }
 
+.right-10{
+  right: 2.5rem;
+}
+
 .top-0{
   top: 0px;
 }
 
-.top-24{
-  top: 6rem;
+.top-1\/2{
+  top: 50%;
+}
+
+.top-28{
+  top: 7rem;
+}
+
+.m-auto{
+  margin: auto;
 }
 
 .flex{
@@ -632,6 +644,11 @@ video {
   flex: 1 1 0%;
 }
 
+.-translate-y-1\/2{
+  --tw-translate-y: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .grid-rows-custom-mobile{
   grid-template-rows: 30vh 1fr;
 }
@@ -652,12 +669,12 @@ video {
   gap: 0.5rem;
 }
 
-.gap-5{
-  gap: 1.25rem;
-}
-
 .gap-4{
   gap: 1rem;
+}
+
+.gap-5{
+  gap: 1.25rem;
 }
 
 .rounded-md{
@@ -672,10 +689,6 @@ video {
   border-width: 1px;
 }
 
-.border-neutral-dark-grayish-violet\/40{
-  border-color: hsl(279 6% 55% / 0.4);
-}
-
 .border-neutral-dark-grayish-violet\/50{
   border-color: hsl(279 6% 55% / 0.5);
 }
@@ -687,6 +700,10 @@ video {
 
 .bg-\[url\(\'\/images\/bg-main-mobile\.png\'\)\]{
   background-image: url('/images/bg-main-mobile.png');
+}
+
+.bg-cover{
+  background-size: cover;
 }
 
 .p-2{
@@ -721,33 +738,27 @@ video {
   font-family: Space Grotesk;
 }
 
+.text-sm{
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 .text-xl{
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+
+.text-xs{
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
 .text-xss{
   font-size: 0.6rem;
 }
 
-.text-base{
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
-
-.text-base\/relaxed{
-  font-size: 1rem;
-  line-height: 1.625;
-}
-
-.text-sm{
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.text-xs{
-  font-size: 0.75rem;
-  line-height: 1rem;
+.font-bold{
+  font-weight: 700;
 }
 
 .font-medium{
@@ -756,10 +767,6 @@ video {
 
 .uppercase{
   text-transform: uppercase;
-}
-
-.tracking-wider{
-  letter-spacing: 0.05em;
 }
 
 .tracking-widest{
@@ -771,11 +778,6 @@ video {
   color: hsl(270 3% 87% / var(--tw-text-opacity));
 }
 
-.text-neutral-dark-grayish-violet{
-  --tw-text-opacity: 1;
-  color: hsl(279 6% 55% / var(--tw-text-opacity));
-}
-
 .text-neutral-vd-violet{
   --tw-text-opacity: 1;
   color: hsl(278 68% 11% / var(--tw-text-opacity));
@@ -784,4 +786,30 @@ video {
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+@media (min-width: 640px){
+  .sm\:grid-cols-custom-desktop{
+    grid-template-columns: 40vh 1fr;
+  }
+
+  .sm\:bg-\[url\(\'\/images\/bg-main-mobile\.png\'\)\]{
+    background-image: url('/images/bg-main-mobile.png');
+  }
+
+  .sm\:bg-\[url\(\'\/images\/bg-main-d\.png\'\)\]{
+    background-image: url('/images/bg-main-d.png');
+  }
+
+  .sm\:bg-\[url\(\'\/images\/bg-main-des\.png\'\)\]{
+    background-image: url('/images/bg-main-des.png');
+  }
+
+  .sm\:bg-\[url\(\'\/images\/bg-main-deskt\.png\'\)\]{
+    background-image: url('/images/bg-main-deskt.png');
+  }
+
+  .sm\:bg-\[url\(\'\/images\/bg-main-desktop\.png\'\)\]{
+    background-image: url('/images/bg-main-desktop.png');
+  }
 }
