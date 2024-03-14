@@ -17,24 +17,36 @@
     <link rel="stylesheet" href="output.css" />
   </head>
   <body
-    class="min-h-screen grid grid-rows-custom-mobile sm:grid-cols-custom-desktop font-Space font-medium"
+    class="min-h-screen grid grid-rows-custom-mobile sm:grid-cols-custom-desktop-sm lg:grid-cols-custom-desktop-lg font-Space font-medium"
   >
     <header
-      class="bg-[url('/images/bg-main-mobile.png')] sm:bg-[url('/images/bg-main-desktop.png')] bg-cover relative"
+      class="bg-[url('/images/bg-main-mobile.png')] sm:bg-[url('/images/bg-main-desktop.png')] bg-cover relative sm:row-start-1 sm:row-end-3"
     >
-      <div class="card-back absolute p-4 pt-7 right-0">
+      <div
+        class="card-back absolute p-4 pt-7 right-0 sm:top-1/2 sm:right-1/2 sm:translate-x-1/2 sm:p-0 lg:right-0"
+      >
         <div class="card-back__container relative">
-          <img class="max-w-[300px]" src="/images/bg-card-back.png" alt="" />
+          <img
+            class="sm:max-w-[35vw] lg:max-w-[25vw]"
+            src="/images/bg-card-back.png"
+            alt=""
+          />
           <p
-            class="cvc-card-back absolute top-1/2 -translate-y-1/2 right-10 text-sm text-neutral-light-grayish-violet font-bold"
+            class="cvc-card-back absolute top-1/2 -translate-y-1/2 right-10 xl:right-12 text-sm text-neutral-light-grayish-violet font-bold"
           >
             000
           </p>
         </div>
       </div>
-      <div class="absolute card-front right-10 top-28 p-4">
+      <div
+        class="absolute card-front right-10 top-28 p-4 sm:top-40 md:top-32 sm:right-1/2 sm:translate-x-1/2 lg:p-0 lg:top-1/4 lg:-right-1/4 lg:translate-x-0 xl:-translate-y-1/2"
+      >
         <div class="relative card-front__container">
-          <img class="max-w-[300px]" src="/images/bg-card-front.png" alt="" />
+          <img
+            class="sm:max-w-[35vw] lg:max-w-[25vw]"
+            src="/images/bg-card-front.png"
+            alt=""
+          />
           <div
             class="card-front__info w-full h-full absolute top-0 p-5 flex flex-col justify-between"
           >
@@ -60,8 +72,10 @@
         </div>
       </div>
     </header>
-    <main>
-      <div class="container m-auto p-5 pt-32 grid gap-5">
+    <main class="sm:h-screen grid items-center">
+      <div
+        class="container m-auto p-5 pt-32 grid gap-5 sm:pt-0 sm:max-w-[500px]"
+      >
         <div class="card-name grid gap-2 text-neutral-vd-violet">
           <p class="uppercase text-xs tracking-widest">Cardholder name</p>
           <input
@@ -73,7 +87,7 @@
         <div class="card-number grid gap-2 text-neutral-vd-violet">
           <p class="uppercase text-xs tracking-widest">Card Number</p>
           <input
-            class="border-1 border-neutral-dark-grayish-violet/50 w-full p-2 pl-4 pr-4 rounded-md"
+            class="cardnum-input border-1 border-neutral-dark-grayish-violet/50 w-full p-2 pl-4 pr-4 rounded-md"
             type="text"
             placeholder="e.g 1234 5678 9123 0000"
           />
@@ -83,12 +97,12 @@
             <p class="uppercase text-xs tracking-widest">EXP. Date (MM/YY)</p>
             <div class="exp-date-container flex gap-2">
               <input
-                class="border-1 border-neutral-dark-grayish-violet/50 w-full p-2 pl-4 pr-4 rounded-md"
+                class="month-input border-1 border-neutral-dark-grayish-violet/50 w-full p-2 pl-4 pr-4 rounded-md"
                 type="text"
                 placeholder="MM "
               />
               <input
-                class="border-1 border-neutral-dark-grayish-violet/50 w-full p-2 pl-4 pr-4 rounded-md"
+                class="year-input border-1 border-neutral-dark-grayish-violet/50 w-full p-2 pl-4 pr-4 rounded-md"
                 type="text"
                 placeholder="YY"
               />
@@ -97,7 +111,7 @@
           <div class="cvc grid gap-2 flex-1">
             <p class="uppercase text-xs tracking-widest">CVC</p>
             <input
-              class="border-1 border-neutral-dark-grayish-violet/50 w-full p-2 pl-4 pr-4 rounded-md"
+              class="cvc-input border-1 border-neutral-dark-grayish-violet/50 w-full p-2 pl-4 pr-4 rounded-md"
               type="text"
               placeholder="e.g 123 "
             />
