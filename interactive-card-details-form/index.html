@@ -23,11 +23,11 @@
       class="bg-[url('/images/bg-main-mobile.png')] sm:bg-[url('/images/bg-main-desktop.png')] bg-cover relative sm:row-start-1 sm:row-end-3"
     >
       <div
-        class="card-back absolute p-4 pt-7 right-0 sm:top-1/2 sm:right-1/2 sm:translate-x-1/2 sm:p-0 lg:right-0"
+        class="card-back absolute p-4 pt-7 right-0 sm:top-1/2 sm:right-1/2 sm:translate-x-1/2 xl:translate-x-1/2 sm:p-0 lg:right-5 xl:right-0"
       >
         <div class="card-back__container relative">
           <img
-            class="sm:max-w-[35vw] lg:max-w-[25vw]"
+            class="max-w-[300px] sm:max-w-[35vw] lg:max-w-[25vw]"
             src="/images/bg-card-back.png"
             alt=""
           />
@@ -39,11 +39,11 @@
         </div>
       </div>
       <div
-        class="absolute card-front right-10 top-28 p-4 sm:top-40 md:top-32 sm:right-1/2 sm:translate-x-1/2 lg:p-0 lg:top-1/4 lg:-right-1/4 lg:translate-x-0 xl:-translate-y-1/2"
+        class="absolute card-front left-0 sm:left-auto top-28 p-4 sm:top-40 md:top-32 sm:right-1/2 sm:translate-x-1/2 lg:p-0 lg:top-1/4 lg:-right-1/4 lg:translate-x-0 xl:-translate-y-1/2"
       >
         <div class="relative card-front__container">
           <img
-            class="sm:max-w-[35vw] lg:max-w-[25vw]"
+            class="max-w-[300px] sm:max-w-[35vw] lg:max-w-[25vw]"
             src="/images/bg-card-front.png"
             alt=""
           />
@@ -64,8 +64,8 @@
               <div
                 class="card-front__name-exp flex justify-between text-neutral-light-grayish-violet text-xss"
               >
-                <p class="uppercase">Jane appleseed</p>
-                <p class="card-">00/00</p>
+                <p class="card-front-name uppercase">Jane appleseed</p>
+                <p class="card-front-date">00/00</p>
               </div>
             </div>
           </div>
@@ -73,13 +73,11 @@
       </div>
     </header>
     <main class="sm:h-screen grid items-center">
-      <div
-        class="container m-auto p-5 pt-32 grid gap-5 sm:pt-0 sm:max-w-[500px]"
-      >
+      <div class="container m-auto p-5 pt-32 grid gap-5 sm:max-w-[500px]">
         <div class="card-name grid gap-2 text-neutral-vd-violet">
           <p class="uppercase text-xs tracking-widest">Cardholder name</p>
           <input
-            class="border-1 border-neutral-dark-grayish-violet/50 w-full p-2 pl-4 pr-4 rounded-md"
+            class="cardname-input border-1 border-neutral-dark-grayish-violet/50 w-full p-2 pl-4 pr-4 rounded-md"
             type="text"
             placeholder="e.g Jane Appleseed"
           />
@@ -89,6 +87,7 @@
           <input
             class="cardnum-input border-1 border-neutral-dark-grayish-violet/50 w-full p-2 pl-4 pr-4 rounded-md"
             type="text"
+            maxlength="16"
             placeholder="e.g 1234 5678 9123 0000"
           />
         </div>
@@ -99,11 +98,13 @@
               <input
                 class="month-input border-1 border-neutral-dark-grayish-violet/50 w-full p-2 pl-4 pr-4 rounded-md"
                 type="text"
+                maxlength="2"
                 placeholder="MM "
               />
               <input
                 class="year-input border-1 border-neutral-dark-grayish-violet/50 w-full p-2 pl-4 pr-4 rounded-md"
                 type="text"
+                maxlength="2"
                 placeholder="YY"
               />
             </div>
@@ -113,14 +114,27 @@
             <input
               class="cvc-input border-1 border-neutral-dark-grayish-violet/50 w-full p-2 pl-4 pr-4 rounded-md"
               type="text"
+              maxlength="3"
               placeholder="e.g 123 "
             />
           </div>
         </div>
         <button
-          class="submit w-full bg-neutral-vd-violet text-white p-4 rounded-xl"
+          class="submit-btn w-full bg-neutral-vd-violet text-white p-4 rounded-xl"
         >
           Confirm
+        </button>
+      </div>
+      <div
+        class="hidden success-container w-full m-auto p-5 grid gap-8 sm:pt-0 sm:max-w-[500px] text-center"
+      >
+        <img class="m-auto" src="/images/icon-complete.svg" alt="" />
+        <p class="uppercase text-3xl">Thank You!</p>
+        <p>We've added your card details</p>
+        <button
+          class="continue-btn w-full bg-neutral-vd-violet text-white p-4 rounded-xl"
+        >
+          Continue
         </button>
       </div>
     </main>
