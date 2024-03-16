@@ -35,10 +35,15 @@ submitBtn.addEventListener("click", () => {
 continueBtn.addEventListener("click", () => {
   successContainer.classList.add("hidden");
   defaultContainer.classList.remove("hidden");
+  removeCardDetails();
 });
 
 function IsCardNameValid(cardName) {
-  return cardName.length >= 4;
+  if (!/\d/.test(cardName) && cardName.length >= 4) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function IsCardNumberValid(cardNumber) {
@@ -70,13 +75,90 @@ function showMessage(
   isCardCVCValid
 ) {
   if (
-    (isCardNameValid, isCardNumberValid && isCardDateValid && isCardCVCValid)
+    isCardNameValid &&
+    isCardNumberValid &&
+    isCardDateValid &&
+    isCardCVCValid
   ) {
     defaultContainer.classList.add("hidden");
     successContainer.classList.remove("hidden");
+    setTimeout(() => successContainer.classList.add("opacity-100"), 0);
     AddCardDetails();
   } else {
-    alert("Card details are not valid. Please check and try again.");
+    showError(
+      isCardNameValid,
+      isCardNumberValid,
+      isCardDateValid,
+      isCardCVCValid
+    );
+  }
+}
+
+function showError(
+  isCardNameValid,
+  isCardNumberValid,
+  isCardDateValid,
+  isCardCVCValid
+) {
+  if (!isCardNameValid) {
+    if (cardNameInput.value < 4) {
+      document.querySelector(".name-errormsg").textContent =
+        "Wrong format, name should be more than 3 letters";
+      cardNameInput.classList.add("border-red-700");
+    } else {
+      document.querySelector(".name-errormsg").textContent =
+        "Wrong format, name should contain no digits";
+      cardNameInput.classList.add("border-red-700");
+    }
+  } else {
+    document.querySelector(".name-errormsg").textContent = "";
+    cardNameInput.classList.remove("border-red-700");
+  }
+
+  if (!isCardNumberValid) {
+    if (cardNumberInput.value.length < 16) {
+      document.querySelector(".number-errormsg").textContent =
+        "Wrong format, card number should contain 16 digits";
+      cardNumberInput.classList.add("border-red-700");
+    } else if (/[a-zA-Z]/.test(cardNumberInput.value)) {
+      document.querySelector(".number-errormsg").textContent =
+        "Wrong format, numbers only";
+      cardNumberInput.classList.add("border-red-700");
+    }
+  } else {
+    document.querySelector(".number-errormsg").textContent = "";
+    cardNumberInput.classList.remove("border-red-700");
+  }
+
+  if (!isCardDateValid) {
+    if (expDateMonthInput.value.length === 0) {
+      document.querySelector(".month-errormsg").textContent = "Cant be blank";
+      expDateMonthInput.classList.add("border-red-700");
+    }
+
+    if (expDateYearInput.value.length === 0) {
+      document.querySelector(".year-errormsg").textContent = "Cant be blank";
+      expDateYearInput.classList.add("border-red-700");
+    }
+  } else {
+    document.querySelector(".month-errormsg").textContent = "";
+    document.querySelector(".year-errormsg").textContent = "";
+    expDateMonthInput.classList.remove("border-red-700");
+    expDateYearInput.classList.remove("border-red-700");
+  }
+
+  if (!isCardCVCValid) {
+    if (cvcInput.value.length === 0) {
+      document.querySelector(".cvc-errormsg").textContent = "Can't be blank";
+      cvcInput.classList.add("border-red-700");
+    } else if (cvcInput.value.length < 3) {
+      document.querySelector(".cvc-errormsg").textContent =
+        "Must contain 3 digits";
+      ("must contain 3 digits");
+    }
+  } else {
+    document.querySelector(".cvc-errormsg").textContent = "";
+    cvcInput.classList.remove("border-red-700");
   }
 }
 
@@ -87,4 +169,11 @@ function AddCardDetails() {
     .trim();
   cardDateFront.textContent = `${expDateMonthInput.value}/${expDateYearInput.value}`;
   cardCVCBack.textContent = cvcInput.value;
+}
+
+function removeCardDetails() {
+  cardNameFront.textContent = "Jane Appleseed";
+  cardNumberFront.textContent = "0000 0000 0000 0000";
+  cardDateFront.textContent = "00/00";
+  cardCVCBack.textContent = "000";
 }

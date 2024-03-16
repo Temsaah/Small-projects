@@ -20,7 +20,7 @@
     class="min-h-screen grid grid-rows-custom-mobile sm:grid-cols-custom-desktop-sm lg:grid-cols-custom-desktop-lg font-Space font-medium"
   >
     <header
-      class="bg-[url('/images/bg-main-mobile.png')] sm:bg-[url('/images/bg-main-desktop.png')] bg-cover relative sm:row-start-1 sm:row-end-3"
+      class="bg-[url('images/bg-main-mobile.png')] sm:bg-[url('images/bg-main-desktop.png')] bg-cover relative sm:row-start-1 sm:row-end-3"
     >
       <div
         class="card-back absolute p-4 pt-7 right-0 sm:top-1/2 sm:right-1/2 sm:translate-x-1/2 xl:translate-x-1/2 sm:p-0 lg:right-5 xl:right-0"
@@ -28,7 +28,7 @@
         <div class="card-back__container relative">
           <img
             class="max-w-[300px] sm:max-w-[35vw] lg:max-w-[25vw]"
-            src="/images/bg-card-back.png"
+            src="images/bg-card-back.png"
             alt=""
           />
           <p
@@ -44,19 +44,19 @@
         <div class="relative card-front__container">
           <img
             class="max-w-[300px] sm:max-w-[35vw] lg:max-w-[25vw]"
-            src="/images/bg-card-front.png"
+            src="images/bg-card-front.png"
             alt=""
           />
           <div
             class="card-front__info w-full h-full absolute top-0 p-5 flex flex-col justify-between"
           >
             <div class="card-front__logo">
-              <img class="max-w-[50px]" src="/images/card-logo.svg" alt="" />
+              <img class="max-w-[50px]" src="images/card-logo.svg" alt="" />
             </div>
-            <div class="other-info grid gap-2">
+            <div class="other-info grid gap-2 xl:gap-5">
               <div class="card-front__number">
                 <p
-                  class="card-front-number text-neutral-light-grayish-violet text-xl"
+                  class="card-front-number text-neutral-light-grayish-violet text-xl sm:text-base md:text-xl lg:text-lg xl:text-2xl"
                 >
                   0000 0000 0000 0000
                 </p>
@@ -64,8 +64,10 @@
               <div
                 class="card-front__name-exp flex justify-between text-neutral-light-grayish-violet text-xss"
               >
-                <p class="card-front-name uppercase">Jane appleseed</p>
-                <p class="card-front-date">00/00</p>
+                <p class="card-front-name uppercase tracking-wider xl:text-sm">
+                  Jane appleseed
+                </p>
+                <p class="card-front-date xl:text-sm">00/00</p>
               </div>
             </div>
           </div>
@@ -73,14 +75,19 @@
       </div>
     </header>
     <main class="sm:h-screen grid items-center">
-      <div class="container m-auto p-5 pt-32 grid gap-5 sm:max-w-[500px]">
+      <div
+        class="container m-auto p-5 pt-10 grid gap-8 sm:max-w-[500px] relative"
+      >
         <div class="card-name grid gap-2 text-neutral-vd-violet">
           <p class="uppercase text-xs tracking-widest">Cardholder name</p>
-          <input
-            class="cardname-input border-1 border-neutral-dark-grayish-violet/50 w-full p-2 pl-4 pr-4 rounded-md"
-            type="text"
-            placeholder="e.g Jane Appleseed"
-          />
+          <div class="relative">
+            <input
+              class="cardname-input border-1 border-neutral-dark-grayish-violet/50 w-full p-2 pl-4 pr-4 rounded-md"
+              type="text"
+              placeholder="e.g Jane Appleseed"
+            />
+            <p class="name-errormsg text-xs text-red-700 absolute pt-1"></p>
+          </div>
         </div>
         <div class="card-number grid gap-2 text-neutral-vd-violet">
           <p class="uppercase text-xs tracking-widest">Card Number</p>
@@ -90,33 +97,45 @@
             maxlength="16"
             placeholder="e.g 1234 5678 9123 0000"
           />
+          <p class="number-errormsg text-xs text-red-700"></p>
         </div>
         <div class="card-name flex items-center gap-4 text-neutral-vd-violet">
           <div class="exp-date grid gap-2 flex-1">
             <p class="uppercase text-xs tracking-widest">EXP. Date (MM/YY)</p>
             <div class="exp-date-container flex gap-2">
-              <input
-                class="month-input border-1 border-neutral-dark-grayish-violet/50 w-full p-2 pl-4 pr-4 rounded-md"
-                type="text"
-                maxlength="2"
-                placeholder="MM "
-              />
-              <input
-                class="year-input border-1 border-neutral-dark-grayish-violet/50 w-full p-2 pl-4 pr-4 rounded-md"
-                type="text"
-                maxlength="2"
-                placeholder="YY"
-              />
+              <div class="relative">
+                <input
+                  class="month-input border-1 border-neutral-dark-grayish-violet/50 w-full p-2 pl-4 pr-4 rounded-md"
+                  type="text"
+                  maxlength="2"
+                  placeholder="MM "
+                />
+                <p
+                  class="month-errormsg text-xs text-red-700 absolute pt-1"
+                ></p>
+              </div>
+              <div>
+                <input
+                  class="year-input border-1 border-neutral-dark-grayish-violet/50 w-full p-2 pl-4 pr-4 rounded-md"
+                  type="text"
+                  maxlength="2"
+                  placeholder="YY"
+                />
+                <p class="year-errormsg text-xs text-red-700 absolute pt-1"></p>
+              </div>
             </div>
           </div>
-          <div class="cvc grid gap-2 flex-1">
+          <div class="cvc grid gap-2 flex-1 relative">
             <p class="uppercase text-xs tracking-widest">CVC</p>
-            <input
-              class="cvc-input border-1 border-neutral-dark-grayish-violet/50 w-full p-2 pl-4 pr-4 rounded-md"
-              type="text"
-              maxlength="3"
-              placeholder="e.g 123 "
-            />
+            <div>
+              <input
+                class="cvc-input border-1 border-neutral-dark-grayish-violet/50 w-full p-2 pl-4 pr-4 rounded-md"
+                type="text"
+                maxlength="3"
+                placeholder="e.g 123 "
+              />
+              <p class="cvc-errormsg text-xs text-red-700 absolute pt-1"></p>
+            </div>
           </div>
         </div>
         <button
@@ -126,9 +145,9 @@
         </button>
       </div>
       <div
-        class="hidden success-container w-full m-auto p-5 grid gap-8 sm:pt-0 sm:max-w-[500px] text-center"
+        class="hidden opacity-0 success-container w-full m-auto p-5 grid gap-8 sm:pt-0 sm:max-w-[500px] text-center transition-opacity duration-500"
       >
-        <img class="m-auto" src="/images/icon-complete.svg" alt="" />
+        <img class="m-auto" src="images/icon-complete.svg" alt="" />
         <p class="uppercase text-3xl">Thank You!</p>
         <p>We've added your card details</p>
         <button
