@@ -670,6 +670,20 @@ video {
   overflow-y: hidden;
 }
 
+.border-neutral-grayish-blue\/30{
+  border-color: hsl(233 8% 79% / 0.3);
+}
+
+.bg-neutral-vdark-blue{
+  --tw-bg-opacity: 1;
+  background-color: hsl(240 100% 5% / var(--tw-bg-opacity));
+}
+
+.bg-primary-soft-red{
+  --tw-bg-opacity: 1;
+  background-color: hsl(5 85% 63% / var(--tw-bg-opacity));
+}
+
 .bg-white{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -698,6 +712,10 @@ video {
 
 .pt-28{
   padding-top: 7rem;
+}
+
+.font-Inter{
+  font-family: Inter;
 }
 
 .text-2xl{
@@ -752,6 +770,30 @@ video {
   font-weight: 300;
 }
 
+.tracking-custom{
+  letter-spacing: 0.2rem;
+}
+
+.text-neutral-dark-grayishblue{
+  --tw-text-opacity: 1;
+  color: hsl(236 13% 42% / var(--tw-text-opacity));
+}
+
+.text-neutral-grayish-blue{
+  --tw-text-opacity: 1;
+  color: hsl(233 8% 79% / var(--tw-text-opacity));
+}
+
+.text-neutral-vdark-blue{
+  --tw-text-opacity: 1;
+  color: hsl(240 100% 5% / var(--tw-text-opacity));
+}
+
+.text-primary-soft-orange{
+  --tw-text-opacity: 1;
+  color: hsl(35 77% 62% / var(--tw-text-opacity));
+}
+
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -761,6 +803,10 @@ video {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+.duration-400{
+  transition-duration: 400ms;
 }
 
 .after\:fixed::after{
@@ -790,6 +836,21 @@ video {
 
 .hover\:cursor-pointer:hover{
   cursor: pointer;
+}
+
+.hover\:bg-neutral-vdark-blue:hover{
+  --tw-bg-opacity: 1;
+  background-color: hsl(240 100% 5% / var(--tw-bg-opacity));
+}
+
+.hover\:text-primary-soft-orange:hover{
+  --tw-text-opacity: 1;
+  color: hsl(35 77% 62% / var(--tw-text-opacity));
+}
+
+.hover\:text-primary-soft-red:hover{
+  --tw-text-opacity: 1;
+  color: hsl(5 85% 63% / var(--tw-text-opacity));
 }
 
 @media (min-width: 640px){
@@ -906,6 +967,10 @@ video {
 
   .md\:grid-cols-3{
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-custom-col{
+    grid-template-columns: repeat(3,1fr);
   }
 
   .md\:gap-8{
