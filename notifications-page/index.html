@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Notifications page</title>
+
+    <link rel="stylesheet" href="output.css" />
+  </head>
+  <body
+    class="font-Plus min-h-screen bg-neutral-light-grayish-blue1 grid items-center"
+  >
+    <main class="">
+      <div
+        class="notifications-container bg-white p-5 max-w-[700px] m-auto grid gap-10"
+      >
+        <div class="notify-header flex justify-between items-baseline">
+          <div class="notifications flex items-center gap-3">
+            <h1 class="font-bold text-xl text-neutral-vd-blue">
+              Notifications
+            </h1>
+            <p
+              class="notif-number bg-primary-blue w-8 h-7 text-white rounded-md flex justify-center items-center"
+            >
+              3
+            </p>
+          </div>
+          <button class="mark-read-btn text-xs text-neutral-dgrayish-blue">
+            Mark all as read
+          </button>
+        </div>
+        <div class="notify-body grid gap-5">
+          <div class="notify p-4 bg-neutral-light-grayish-blue1 flex gap-2">
+            <div class="notify-img max-w-[40px]">
+              <img src="/assets/images/avatar-mark-webber.webp" alt="" />
+            </div>
+            <div class="notify-content grid gap-2">
+              <p class="notify-msg relative text-sm text-neutral-dgrayish-blue">
+                <span class="font-bold text-black">Mark Webber </span> reacted
+                to your recent post
+                <span class="font-bold">My first tournament today!</span>
+                <span
+                  class="notify-read inline-block w-2 h-2 ml-2 rounded-full bg-primary-red"
+                ></span>
+              </p>
+              <p class="text-xs text-neutral-dgrayish-blue">1m ago</p>
+            </div>
+          </div>
+          <div class="notify p-4 bg-neutral-light-grayish-blue1 flex gap-2">
+            <div class="notify-img max-w-[40px]">
+              <img src="/assets/images/avatar-angela-gray.webp" alt="" />
+            </div>
+            <div class="notify-content grid gap-2">
+              <p class="notify-msg relative text-sm text-neutral-dgrayish-blue">
+                <span class="font-bold text-black mr-2">Angela Gray </span>
+                followed you
+                <span
+                  class="notify-read inline-block w-2 h-2 ml-2 rounded-full bg-primary-red"
+                ></span>
+              </p>
+              <p class="text-xs text-neutral-dgrayish-blue">5m ago</p>
+            </div>
+          </div>
+          <div class="notify p-4 bg-neutral-light-grayish-blue1 flex gap-2">
+            <div class="notify-img max-w-[40px]">
+              <img src="/assets/images/avatar-jacob-thompson.webp" alt="" />
+            </div>
+            <div class="notify-content grid gap-2">
+              <p class="notify-msg relative text-sm text-neutral-dgrayish-blue">
+                <span class="font-bold text-black mr-2">Jacob Thompson </span>
+                has joined your group
+                <a class="ml-1 text-primary-blue font-bold" href="#"
+                  >Chess Club</a
+                >
+                <span
+                  class="notify-read inline-block w-2 h-2 ml-2 rounded-full bg-primary-red"
+                ></span>
+              </p>
+              <p class="text-xs text-neutral-dgrayish-blue">1 day ago</p>
+            </div>
+          </div>
+          <div class="notify p-4 bg-neutral-light-grayish-blue1 flex gap-2">
+            <div class="notify-img max-w-[40px] shrink-0">
+              <img src="/assets/images/avatar-rizky-hasanuddin.webp" alt="" />
+            </div>
+            <div class="notify-content grid gap-2">
+              <p class="notify-msg relative text-sm text-neutral-dgrayish-blue">
+                <span class="font-bold text-black mr-2">Rizky Hasanuddin </span>
+                sent you a private message
+                <span
+                  class="hidden notify-read inline-block w-2 h-2 ml-2 rounded-full bg-primary-red"
+                ></span>
+              </p>
+              <p class="text-xs text-neutral-dgrayish-blue">5 days ago</p>
+              <p
+                class="text-sm border-neutral-light-grayish-blue2 border-2 p-4 text-neutral-dgrayish-blue font-medium"
+              >
+                Hello, thanks for setting up the Chess Club. I've been a member
+                for a few weeks now and I'm already having lots of fun and
+                improving my game.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="notify p-4 bg-neutral-light-grayish-blue1 flex w-full gap-2"
+          >
+            <div class="notify-img max-w-[40px]">
+              <img src="/assets/images/avatar-kimberly-smith.webp" alt="" />
+            </div>
+            <div class="notify-content flex justify-between">
+              <div class="notify-msg grid gap-2">
+                <p class="relative text-sm text-neutral-dgrayish-blue">
+                  <span class="font-bold text-black mr-2 mr-2"
+                    >Kimberly Smith
+                  </span>
+                  commented on your picture
+
+                  <span
+                    class="hidden notify-read inline-block w-2 h-2 ml-2 rounded-full bg-primary-red"
+                  ></span>
+                </p>
+                <p class="text-xs text-neutral-dgrayish-blue">1 week ago</p>
+              </div>
+            </div>
+            <img
+              class="max-h-[40px] object-cover ml-auto"
+              src="/assets/images/image-chess.webp"
+              alt=""
+            />
+          </div>
+          <div class="notify p-4 bg-neutral-light-grayish-blue1 flex gap-2">
+            <div class="notify-img max-w-[40px]">
+              <img src="/assets/images/avatar-nathan-peterson.webp" alt="" />
+            </div>
+            <div class="notify-content grid gap-2">
+              <p class="notify-msg relative text-sm text-neutral-dgrayish-blue">
+                <span class="font-bold text-black mr-2">Nathan Peterson </span>
+                reacted to your recent post
+                <span class="font-bold"
+                  >5 end-game strategies to increase your win rate</span
+                >
+                <span
+                  class="hidden notify-read inline-block w-2 h-2 ml-2 rounded-full bg-primary-red"
+                ></span>
+              </p>
+              <p class="text-xs text-neutral-dgrayish-blue">5m ago</p>
+            </div>
+          </div>
+
+          <div class="notify p-4 bg-neutral-light-grayish-blue1 flex gap-2">
+            <div class="notify-img max-w-[40px]">
+              <img src="/assets/images/avatar-anna-kim.webp" alt="" />
+            </div>
+            <div class="notify-content grid gap-2">
+              <p class="notify-msg relative text-sm text-neutral-dgrayish-blue">
+                <span class="font-bold text-black mr-2">Anna Kim </span>
+                left the group
+                <a class="text-primary-blue font-bold ml-2" href="#"
+                  >Chess Club</a
+                >
+                <span
+                  class="hidden notify-read inline-block w-2 h-2 ml-2 rounded-full bg-primary-red"
+                ></span>
+              </p>
+              <p class="text-xs text-neutral-dgrayish-blue">1m ago</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Notifications 3
+
+  Mark all as read
+
+  Mark Webber reacted to your recent post My first tournament today!
+  1m ago
+
+  Angela Gray followed you
+  5m ago
+
+  Jacob Thompson has joined your group Chess Club
+  1 day ago
+
+  Rizky Hasanuddin sent you a private message
+  5 days ago
+  Hello, thanks for setting up the Chess Club. I've been a member for a few weeks now and 
+  I'm already having lots of fun and improving my game.
+
+  Kimberly Smith commented on your picture
+  1 week ago
+
+  Nathan Peterson reacted to your recent post 5 end-game strategies to increase your win rate
+  2 weeks ago
+
+  Anna Kim left the group Chess Club
+  2 weeks ago -->
+    <script src="app.js"></script>
+  </body>
+</html>
