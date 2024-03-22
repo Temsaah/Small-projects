@@ -29,18 +29,59 @@
       <img src="/images/logo.svg" alt="" />
       <img src="/images/icon-menu.svg" alt="" />
       <div
-        class="hidden mobile-menu-expand flex flex-col gap-10 p-5 absolute right-0 top-0 bg-neutral-white w-[60%] min-h-screen self-stretch"
+        class="mobile-menu-expand flex flex-col gap-10 p-5 absolute right-0 top-0 bg-neutral-white w-[60%] min-h-screen self-stretch"
       >
         <img class="ml-auto" src="/images/icon-close-menu.svg" alt="" />
         <nav>
           <ul class="flex flex-col gap-5">
-            <li class="flex items-center gap-3">
-              <p>Features</p>
-              <i class="fa-solid fa-chevron-down text-xs"></i>
+            <li class="relative">
+              <div class="features flex items-center gap-3">
+                <p>Features</p>
+                <button class="feature-btn m-0 p-0 outline-none">
+                  <i
+                    class="cursor-pointer fa-solid fa-chevron-down text-xs"
+                  ></i>
+                </button>
+              </div>
+              <div class="hidden feature-menu p-6 grid gap-5">
+                <div class="feature flex items-center gap-4">
+                  <img class="w-5" src="/images/icon-todo.svg" alt="" />
+                  <p>Todo List</p>
+                </div>
+                <div class="feature flex items-center gap-4">
+                  <img class="w-5" src="/images/icon-calendar.svg" alt="" />
+                  <p>Calendar</p>
+                </div>
+                <div class="feature flex items-center gap-4">
+                  <img class="w-5" src="/images/icon-reminders.svg" alt="" />
+                  <p>Reminders</p>
+                </div>
+                <div class="feature flex items-center gap-4">
+                  <img class="w-5" src="/images/icon-planning.svg" alt="" />
+                  <p>Planning</p>
+                </div>
+              </div>
             </li>
-            <li class="flex items-center gap-3">
-              <p>Company</p>
-              <i class="fa-solid fa-chevron-down text-xs"></i>
+            <li class="">
+              <div class="company flex items-center gap-3">
+                <p>Company</p>
+                <button class="company-btn m-0 p-0 outline-none">
+                  <i
+                    class="cursor-pointer fa-solid fa-chevron-down text-xs"
+                  ></i>
+                </button>
+              </div>
+              <div class="hidden company-menu p-6 grid gap-5">
+                <div class="feature flex items-center gap-4">
+                  <p>History</p>
+                </div>
+                <div class="feature flex items-center gap-4">
+                  <p>Our Team</p>
+                </div>
+                <div class="feature flex items-center gap-4">
+                  <p>Blog</p>
+                </div>
+              </div>
             </li>
             <li class="flex items-center gap-3">
               <p>Careers</p>
