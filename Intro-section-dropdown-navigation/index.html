@@ -25,80 +25,92 @@
     <link rel="stylesheet" href="output.css" />
   </head>
   <body class="min-h-screen font-Epilogue">
-    <header class="flex justify-between items-center p-5">
+    <header class="flex justify-between items-center p-5 z-50 relative">
       <img src="/images/logo.svg" alt="" />
-      <img src="/images/icon-menu.svg" alt="" />
+      <div class="menu cursor-pointer">
+        <img src="/images/icon-menu.svg" alt="" />
+      </div>
       <div
-        class="mobile-menu-expand flex flex-col gap-10 p-5 absolute right-0 top-0 bg-neutral-white w-[60%] min-h-screen self-stretch"
+        class="hidden mobile-menu-expand flex flex-col gap-10 p-5 absolute right-0 top-0 bg-neutral-white w-[60%] min-h-screen self-stretch"
       >
-        <img class="ml-auto" src="/images/icon-close-menu.svg" alt="" />
+        <div class="close-menu cursor-pointer">
+          <img class="ml-auto" src="/images/icon-close-menu.svg" alt="" />
+        </div>
         <nav>
           <ul class="flex flex-col gap-5">
             <li class="relative">
-              <div class="features flex items-center gap-3">
-                <p>Features</p>
+              <div
+                class="features cursor-pointer w-fit flex items-center gap-3"
+              >
+                <p class="text-neutral-medium-grey">Features</p>
                 <button class="feature-btn m-0 p-0 outline-none">
                   <i
-                    class="cursor-pointer fa-solid fa-chevron-down text-xs"
+                    class="toggle-icon cursor-pointer fa-solid fa-chevron-down text-xs"
                   ></i>
                 </button>
               </div>
               <div class="hidden feature-menu p-6 grid gap-5">
                 <div class="feature flex items-center gap-4">
                   <img class="w-5" src="/images/icon-todo.svg" alt="" />
-                  <p>Todo List</p>
+                  <p class="text-neutral-medium-grey">Todo List</p>
                 </div>
                 <div class="feature flex items-center gap-4">
                   <img class="w-5" src="/images/icon-calendar.svg" alt="" />
-                  <p>Calendar</p>
+                  <p class="text-neutral-medium-grey">Calendar</p>
                 </div>
                 <div class="feature flex items-center gap-4">
                   <img class="w-5" src="/images/icon-reminders.svg" alt="" />
-                  <p>Reminders</p>
+                  <p class="text-neutral-medium-grey">Reminders</p>
                 </div>
                 <div class="feature flex items-center gap-4">
                   <img class="w-5" src="/images/icon-planning.svg" alt="" />
-                  <p>Planning</p>
+                  <p class="text-neutral-medium-grey">Planning</p>
                 </div>
               </div>
             </li>
             <li class="">
-              <div class="company flex items-center gap-3">
-                <p>Company</p>
+              <div class="company cursor-pointer w-fit flex items-center gap-3">
+                <p class="text-neutral-medium-grey">Company</p>
                 <button class="company-btn m-0 p-0 outline-none">
                   <i
-                    class="cursor-pointer fa-solid fa-chevron-down text-xs"
+                    class="toggle-icon cursor-pointer fa-solid fa-chevron-down text-xs"
                   ></i>
                 </button>
               </div>
               <div class="hidden company-menu p-6 grid gap-5">
                 <div class="feature flex items-center gap-4">
-                  <p>History</p>
+                  <p class="text-neutral-medium-grey">History</p>
                 </div>
                 <div class="feature flex items-center gap-4">
-                  <p>Our Team</p>
+                  <p class="text-neutral-medium-grey">Our Team</p>
                 </div>
                 <div class="feature flex items-center gap-4">
-                  <p>Blog</p>
+                  <p class="text-neutral-medium-grey">Blog</p>
                 </div>
               </div>
             </li>
             <li class="flex items-center gap-3">
-              <p>Careers</p>
+              <p class="text-neutral-medium-grey">Careers</p>
             </li>
             <li class="flex items-center gap-3">
-              <p>About</p>
+              <p class="text-neutral-medium-grey">About</p>
             </li>
           </ul>
         </nav>
         <div class="menu-btns flex flex-col gap-5">
-          <button>Login</button>
-          <button class="border-2 border-black rounded-xl pt-2 pb-2">
+          <button class="text-neutral-medium-grey">Login</button>
+          <button
+            class="border-2 border-neutral-black/40 rounded-xl pt-2 pb-2 text-neutral-medium-grey"
+          >
             Register
           </button>
         </div>
       </div>
     </header>
+    <div
+      id="overlay"
+      class="hidden fixed top-0 right-0 left-0 bottom-0 bg-black/50"
+    ></div>
     <main class="grid gap-10">
       <div class="main-img">
         <img
@@ -140,8 +152,6 @@
         />
       </div>
     </main>
-    <!-- Features Company Careers About Login Register Make remote work Get your team
-    in sync, no matter your location. Streamline processes, create team rituals,
-    and watch productivity soar. Learn more -->
+    <script src="app.js"></script>
   </body>
 </html>
