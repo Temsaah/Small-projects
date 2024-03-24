@@ -8,12 +8,12 @@ const companyBtn = document.querySelector(".company");
 const companyMenu = document.querySelector(".company-menu");
 
 function hideMenu() {
-  mobileMenuExpand.classList.add("hidden");
+  mobileMenuExpand.classList.add("max-md:hidden");
   overlay.classList.add("hidden");
 }
 
 function showMenu() {
-  mobileMenuExpand.classList.remove("hidden");
+  mobileMenuExpand.classList.remove("max-md:hidden");
   overlay.classList.remove("hidden");
 }
 

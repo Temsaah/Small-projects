@@ -25,22 +25,28 @@
     <link rel="stylesheet" href="output.css" />
   </head>
   <body class="min-h-screen font-Epilogue">
-    <header class="flex justify-between items-center p-5 z-50 relative">
+    <header
+      class="flex justify-between items-center p-5 z-50 relative md:justify-normal md:gap-10"
+    >
       <img src="/images/logo.svg" alt="" />
-      <div class="menu cursor-pointer">
+      <div class="menu cursor-pointer md:hidden">
         <img src="/images/icon-menu.svg" alt="" />
       </div>
       <div
-        class="hidden mobile-menu-expand flex flex-col gap-10 p-5 absolute right-0 top-0 bg-neutral-white w-[60%] min-h-screen self-stretch"
+        class="max-md:hidden mobile-menu-expand flex flex-col gap-10 p-5 absolute right-0 top-0 bg-neutral-white w-[60%] min-h-screen self-stretch md:flex-row md:justify-between md:items-center md:relative md:p-0 md:gap-0 md:w-full md:min-h-min"
       >
         <div class="close-menu cursor-pointer">
-          <img class="ml-auto" src="/images/icon-close-menu.svg" alt="" />
+          <img
+            class="ml-auto md:hidden"
+            src="/images/icon-close-menu.svg"
+            alt=""
+          />
         </div>
-        <nav>
-          <ul class="flex flex-col gap-5">
+        <nav class="md:mr-auto">
+          <ul class="flex flex-col gap-5 md:flex-row md:gap-10">
             <li class="relative">
               <div
-                class="features cursor-pointer w-fit flex items-center gap-3"
+                class="features cursor-pointer w-fit flex items-center gap-1"
               >
                 <p class="text-neutral-medium-grey">Features</p>
                 <button class="feature-btn m-0 p-0 outline-none">
@@ -69,7 +75,7 @@
               </div>
             </li>
             <li class="">
-              <div class="company cursor-pointer w-fit flex items-center gap-3">
+              <div class="company cursor-pointer w-fit flex items-center gap-1">
                 <p class="text-neutral-medium-grey">Company</p>
                 <button class="company-btn m-0 p-0 outline-none">
                   <i
@@ -97,10 +103,10 @@
             </li>
           </ul>
         </nav>
-        <div class="menu-btns flex flex-col gap-5">
+        <div class="menu-btns flex flex-col gap-5 md:flex-row">
           <button class="text-neutral-medium-grey">Login</button>
           <button
-            class="border-2 border-neutral-black/40 rounded-xl pt-2 pb-2 text-neutral-medium-grey"
+            class="border-2 border-neutral-black/40 rounded-xl pt-2 pb-2 text-neutral-medium-grey md:pl-4 md:pr-4"
           >
             Register
           </button>
