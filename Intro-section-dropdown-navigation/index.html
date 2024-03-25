@@ -24,7 +24,7 @@
 
     <link rel="stylesheet" href="output.css" />
   </head>
-  <body class="min-h-screen font-Epilogue">
+  <body class="min-h-screen font-Epilogue md:grid md:grid-rows-custom-desktop">
     <header
       class="flex justify-between items-center p-5 z-50 relative md:justify-normal md:gap-10"
     >
@@ -46,60 +46,90 @@
           <ul class="flex flex-col gap-5 md:flex-row md:gap-10">
             <li class="relative">
               <div
-                class="features cursor-pointer w-fit flex items-center gap-1"
+                class="features cursor-pointer w-fit flex items-center gap-2"
               >
-                <p class="text-neutral-medium-grey">Features</p>
+                <p class="text-neutral-medium-grey text-sm">Features</p>
                 <button class="feature-btn m-0 p-0 outline-none">
                   <i
-                    class="toggle-icon cursor-pointer fa-solid fa-chevron-down text-xs"
+                    class="toggle-icon cursor-pointer fa-solid fa-chevron-down text-neutral-medium-grey text-xs"
                   ></i>
                 </button>
               </div>
-              <div class="hidden feature-menu p-6 grid gap-5">
+              <div
+                class="hidden feature-menu p-6 grid gap-5 md:absolute md:rounded-lg md:bg-white md:mt-3 md:right-0 md:p-6 md:w-max md:pl-10 md:pr-10 md:shadow-black md:drop-shadow-2xl"
+              >
                 <div class="feature flex items-center gap-4">
-                  <img class="w-5" src="/images/icon-todo.svg" alt="" />
-                  <p class="text-neutral-medium-grey">Todo List</p>
+                  <img class="w-5 md:w-4" src="/images/icon-todo.svg" alt="" />
+                  <p class="text-neutral-medium-grey text-xs font-medium">
+                    Todo List
+                  </p>
                 </div>
                 <div class="feature flex items-center gap-4">
-                  <img class="w-5" src="/images/icon-calendar.svg" alt="" />
-                  <p class="text-neutral-medium-grey">Calendar</p>
+                  <img
+                    class="w-5 md:w-4"
+                    src="/images/icon-calendar.svg"
+                    alt=""
+                  />
+                  <p class="text-neutral-medium-grey text-xs font-medium">
+                    Calendar
+                  </p>
                 </div>
                 <div class="feature flex items-center gap-4">
-                  <img class="w-5" src="/images/icon-reminders.svg" alt="" />
-                  <p class="text-neutral-medium-grey">Reminders</p>
+                  <img
+                    class="w-5 md:w-4"
+                    src="/images/icon-reminders.svg"
+                    alt=""
+                  />
+                  <p class="text-neutral-medium-grey text-xs font-medium">
+                    Reminders
+                  </p>
                 </div>
                 <div class="feature flex items-center gap-4">
-                  <img class="w-5" src="/images/icon-planning.svg" alt="" />
-                  <p class="text-neutral-medium-grey">Planning</p>
+                  <img
+                    class="w-5 md:w-4"
+                    src="/images/icon-planning.svg"
+                    alt=""
+                  />
+                  <p class="text-neutral-medium-grey text-xs font-medium">
+                    Planning
+                  </p>
                 </div>
               </div>
             </li>
-            <li class="">
+            <li class="relative">
               <div class="company cursor-pointer w-fit flex items-center gap-1">
-                <p class="text-neutral-medium-grey">Company</p>
+                <p class="text-neutral-medium-grey text-sm">Company</p>
                 <button class="company-btn m-0 p-0 outline-none">
                   <i
-                    class="toggle-icon cursor-pointer fa-solid fa-chevron-down text-xs"
+                    class="toggle-icon cursor-pointer fa-solid fa-chevron-down text-neutral-medium-grey text-xs"
                   ></i>
                 </button>
               </div>
-              <div class="hidden company-menu p-6 grid gap-5">
+              <div
+                class="hidden company-menu p-6 grid gap-5 md:gap-4 md:absolute md:rounded-lg md:bg-white md:mt-3 md:left-0 md:p-6 md:w-max md:pl-8 md:pr-8 md:shadow-black md:drop-shadow-2xl"
+              >
                 <div class="feature flex items-center gap-4">
-                  <p class="text-neutral-medium-grey">History</p>
+                  <p class="text-neutral-medium-grey text-xs font-medium">
+                    History
+                  </p>
                 </div>
                 <div class="feature flex items-center gap-4">
-                  <p class="text-neutral-medium-grey">Our Team</p>
+                  <p class="text-neutral-medium-grey text-xs font-medium">
+                    Our Team
+                  </p>
                 </div>
                 <div class="feature flex items-center gap-4">
-                  <p class="text-neutral-medium-grey">Blog</p>
+                  <p class="text-neutral-medium-grey text-xs font-medium">
+                    Blog
+                  </p>
                 </div>
               </div>
             </li>
             <li class="flex items-center gap-3">
-              <p class="text-neutral-medium-grey">Careers</p>
+              <p class="text-neutral-medium-grey text-sm">Careers</p>
             </li>
             <li class="flex items-center gap-3">
-              <p class="text-neutral-medium-grey">About</p>
+              <p class="text-neutral-medium-grey text-sm">About</p>
             </li>
           </ul>
         </nav>
@@ -117,25 +147,38 @@
       id="overlay"
       class="hidden fixed top-0 right-0 left-0 bottom-0 bg-black/50"
     ></div>
-    <main class="grid gap-10">
-      <div class="main-img">
+    <main
+      class="grid gap-10 md:grid-rows-custom-desktop-main md:grid-cols-custom-desktop md:pb-24 md:pl-24 md:pr-24 md:gap-y-0 md:gap-x-20 md:m-auto max-w-[1400px]"
+    >
+      <div
+        class="main-img md:col-start-2 md:row-start-1 md:row-end-3 md:max-w-[700px]"
+      >
         <img
-          class="max-h-[300px] w-full object-cover object-top"
+          class="max-h-[300px] w-full object-cover object-top md:hidden"
           src="/images/image-hero-mobile.png"
           alt=""
         />
+        <img
+          class="hidden w-full md:block object-cover h-full"
+          src="/images/image-hero-desktop.png"
+          alt=""
+        />
       </div>
-      <div class="description text-center flex flex-col items-center gap-5 p-4">
-        <h1 class="text-4xl font-bold">Make remote work</h1>
+      <div
+        class="description text-center flex flex-col items-center gap-5 p-4 md:gap-12 md:row-start-1 md:m-auto md:items-start md:text-start"
+      >
+        <h1 class="text-4xl font-bold md:text-6xl">Make remote work</h1>
         <p class="text-sm text-neutral-medium-grey">
           Get your team in sync, no matter your location. Streamline processes,
           create team rituals, and watch productivity soar.
         </p>
-        <button class="p-2 pl-5 pr-5 bg-black text-white rounded-xl">
+        <button class="p-3 pl-6 pr-6 bg-black font-bold text-white rounded-xl">
           Learn more
         </button>
       </div>
-      <div class="sponsors gap-5 p-4 flex justify-between flex-wrap">
+      <div
+        class="sponsors gap-5 p-4 flex justify-between flex-wrap md:pb-0 md:mt-auto"
+      >
         <img
           class="object-contain max-w-20"
           src="/images/client-databiz.svg"
