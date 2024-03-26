@@ -6,6 +6,7 @@ const featureBtn = document.querySelector(".features");
 const featureMenu = document.querySelector(".feature-menu");
 const companyBtn = document.querySelector(".company");
 const companyMenu = document.querySelector(".company-menu");
+const dropDownMenus = document.querySelectorAll(".dropdown-menu");
 
 function hideMenu() {
   mobileMenuExpand.classList.add("max-md:hidden");
@@ -17,15 +18,27 @@ function showMenu() {
   overlay.classList.remove("hidden");
 }
 
-function toggleIcon(node) {
-  const icon = node.querySelector(".toggle-icon");
-  if (icon.classList.contains("fa-chevron-down")) {
-    icon.classList.remove("fa-chevron-down");
-    icon.classList.add("fa-chevron-up");
-  } else {
-    icon.classList.remove("fa-chevron-up");
-    icon.classList.add("fa-chevron-down");
-  }
+function toggleIcon() {
+  dropDownMenus.forEach((menu) => {
+    const icon = menu.previousElementSibling.querySelector(".toggle-icon");
+    if (menu.classList.contains("hidden")) {
+      if (icon.classList.contains("fa-chevron-up")) {
+        icon.classList.replace("fa-chevron-up", "fa-chevron-down");
+      }
+    } else {
+      if (icon.classList.contains("fa-chevron-down")) {
+        icon.classList.replace("fa-chevron-down", "fa-chevron-up");
+      }
+    }
+  });
+}
+
+function collapseAll() {
+  dropDownMenus.forEach((menu) => {
+    if (!menu.classList.contains("hidden")) {
+      menu.classList.add("hidden");
+    }
+  });
 }
 
 menuBtn.addEventListener("click", () => {
@@ -41,11 +54,13 @@ overlay.addEventListener("click", () => {
 });
 
 featureBtn.addEventListener("click", () => {
+  collapseAll();
   featureMenu.classList.toggle("hidden");
-  toggleIcon(featureBtn);
+  toggleIcon();
 });
 
 companyBtn.addEventListener("click", () => {
+  collapseAll();
   companyMenu.classList.toggle("hidden");
-  toggleIcon(companyBtn);
+  toggleIcon();
 });

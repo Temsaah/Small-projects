@@ -28,9 +28,9 @@
     <header
       class="flex justify-between items-center p-5 z-50 relative md:justify-normal md:gap-10"
     >
-      <img src="/images/logo.svg" alt="" />
+      <img src="images/logo.svg" alt="" />
       <div class="menu cursor-pointer md:hidden">
-        <img src="/images/icon-menu.svg" alt="" />
+        <img src="images/icon-menu.svg" alt="" />
       </div>
       <div
         class="max-md:hidden mobile-menu-expand flex flex-col gap-10 p-5 absolute right-0 top-0 bg-neutral-white w-[60%] min-h-screen self-stretch md:flex-row md:justify-between md:items-center md:relative md:p-0 md:gap-0 md:w-full md:min-h-min"
@@ -38,7 +38,7 @@
         <div class="close-menu cursor-pointer">
           <img
             class="ml-auto md:hidden"
-            src="/images/icon-close-menu.svg"
+            src="images/icon-close-menu.svg"
             alt=""
           />
         </div>
@@ -48,7 +48,9 @@
               <div
                 class="features cursor-pointer w-fit flex items-center gap-2"
               >
-                <p class="text-neutral-medium-grey text-sm">Features</p>
+                <p class="text-neutral-medium-grey text-sm hover:text-black">
+                  Features
+                </p>
                 <button class="feature-btn m-0 p-0 outline-none">
                   <i
                     class="toggle-icon cursor-pointer fa-solid fa-chevron-down text-neutral-medium-grey text-xs"
@@ -56,10 +58,10 @@
                 </button>
               </div>
               <div
-                class="hidden feature-menu p-6 grid gap-5 md:absolute md:rounded-lg md:bg-white md:mt-3 md:right-0 md:p-6 md:w-max md:pl-10 md:pr-10 md:shadow-black md:drop-shadow-2xl"
+                class="hidden feature-menu dropdown-menu p-6 grid gap-5 md:absolute md:rounded-lg md:bg-white md:mt-3 md:right-0 md:p-6 md:w-max md:pl-10 md:pr-10 md:shadow-black md:drop-shadow-2xl"
               >
                 <div class="feature flex items-center gap-4">
-                  <img class="w-5 md:w-4" src="/images/icon-todo.svg" alt="" />
+                  <img class="w-5 md:w-4" src="images/icon-todo.svg" alt="" />
                   <p class="text-neutral-medium-grey text-xs font-medium">
                     Todo List
                   </p>
@@ -67,7 +69,7 @@
                 <div class="feature flex items-center gap-4">
                   <img
                     class="w-5 md:w-4"
-                    src="/images/icon-calendar.svg"
+                    src="images/icon-calendar.svg"
                     alt=""
                   />
                   <p class="text-neutral-medium-grey text-xs font-medium">
@@ -77,7 +79,7 @@
                 <div class="feature flex items-center gap-4">
                   <img
                     class="w-5 md:w-4"
-                    src="/images/icon-reminders.svg"
+                    src="images/icon-reminders.svg"
                     alt=""
                   />
                   <p class="text-neutral-medium-grey text-xs font-medium">
@@ -87,7 +89,7 @@
                 <div class="feature flex items-center gap-4">
                   <img
                     class="w-5 md:w-4"
-                    src="/images/icon-planning.svg"
+                    src="images/icon-planning.svg"
                     alt=""
                   />
                   <p class="text-neutral-medium-grey text-xs font-medium">
@@ -98,7 +100,9 @@
             </li>
             <li class="relative">
               <div class="company cursor-pointer w-fit flex items-center gap-1">
-                <p class="text-neutral-medium-grey text-sm">Company</p>
+                <p class="text-neutral-medium-grey text-sm hover:text-black">
+                  Company
+                </p>
                 <button class="company-btn m-0 p-0 outline-none">
                   <i
                     class="toggle-icon cursor-pointer fa-solid fa-chevron-down text-neutral-medium-grey text-xs"
@@ -106,7 +110,7 @@
                 </button>
               </div>
               <div
-                class="hidden company-menu p-6 grid gap-5 md:gap-4 md:absolute md:rounded-lg md:bg-white md:mt-3 md:left-0 md:p-6 md:w-max md:pl-8 md:pr-8 md:shadow-black md:drop-shadow-2xl"
+                class="hidden company-menu dropdown-menu p-6 grid gap-5 md:gap-4 md:absolute md:rounded-lg md:bg-white md:mt-3 md:left-0 md:p-6 md:w-max md:pl-8 md:pr-8 md:shadow-black md:drop-shadow-2xl"
               >
                 <div class="feature flex items-center gap-4">
                   <p class="text-neutral-medium-grey text-xs font-medium">
@@ -126,17 +130,28 @@
               </div>
             </li>
             <li class="flex items-center gap-3">
-              <p class="text-neutral-medium-grey text-sm">Careers</p>
+              <a
+                class="text-neutral-medium-grey text-sm hover:text-black"
+                href="#"
+              >
+                Careers
+              </a>
             </li>
             <li class="flex items-center gap-3">
-              <p class="text-neutral-medium-grey text-sm">About</p>
+              <a
+                class="text-neutral-medium-grey text-sm hover:text-black"
+                href="#"
+                >About</a
+              >
             </li>
           </ul>
         </nav>
         <div class="menu-btns flex flex-col gap-5 md:flex-row">
-          <button class="text-neutral-medium-grey">Login</button>
+          <button class="text-neutral-medium-grey hover:text-black">
+            Login
+          </button>
           <button
-            class="border-2 border-neutral-black/40 rounded-xl pt-2 pb-2 text-neutral-medium-grey md:pl-4 md:pr-4"
+            class="border-2 border-neutral-black/40 rounded-xl pt-2 pb-2 text-neutral-medium-grey md:pl-4 md:pr-4 hover:text-black hover:border-black"
           >
             Register
           </button>
@@ -145,22 +160,22 @@
     </header>
     <div
       id="overlay"
-      class="hidden fixed top-0 right-0 left-0 bottom-0 bg-black/50"
+      class="hidden md:hidden fixed top-0 right-0 left-0 bottom-0 bg-black/50"
     ></div>
     <main
-      class="grid gap-10 md:grid-rows-custom-desktop-main md:grid-cols-custom-desktop md:pb-24 md:pl-24 md:pr-24 md:gap-y-0 md:gap-x-20 md:m-auto max-w-[1400px]"
+      class="grid gap-10 md:grid-rows-custom-desktop-main md:grid-cols-custom-desktop md:pl-24 md:pr-24 md:pb-12 md:gap-y-0 md:gap-x-20 md:m-auto max-w-[1400px]"
     >
       <div
         class="main-img md:col-start-2 md:row-start-1 md:row-end-3 md:max-w-[700px]"
       >
         <img
           class="max-h-[300px] w-full object-cover object-top md:hidden"
-          src="/images/image-hero-mobile.png"
+          src="images/image-hero-mobile.png"
           alt=""
         />
         <img
           class="hidden w-full md:block object-cover h-full"
-          src="/images/image-hero-desktop.png"
+          src="images/image-hero-desktop.png"
           alt=""
         />
       </div>
@@ -172,7 +187,9 @@
           Get your team in sync, no matter your location. Streamline processes,
           create team rituals, and watch productivity soar.
         </p>
-        <button class="p-3 pl-6 pr-6 bg-black font-bold text-white rounded-xl">
+        <button
+          class="p-3 pl-6 pr-6 bg-black font-bold text-white rounded-xl border border-transparent hover:text-black hover:bg-white hover:border-black hover:border"
+        >
           Learn more
         </button>
       </div>
@@ -181,22 +198,22 @@
       >
         <img
           class="object-contain max-w-20"
-          src="/images/client-databiz.svg"
+          src="images/client-databiz.svg"
           alt=""
         />
         <img
           class="object-contain max-w-20"
-          src="/images/client-audiophile.svg"
+          src="images/client-audiophile.svg"
           alt=""
         />
         <img
           class="object-contain max-w-20"
-          src="/images/client-meet.svg"
+          src="images/client-meet.svg"
           alt=""
         />
         <img
           class="object-contain max-w-20"
-          src="/images/client-maker.svg"
+          src="images/client-maker.svg"
           alt=""
         />
       </div>
