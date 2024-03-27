@@ -8,6 +8,8 @@ const companyBtn = document.querySelector(".company");
 const companyMenu = document.querySelector(".company-menu");
 const dropDownMenus = document.querySelectorAll(".dropdown-menu");
 
+let openedMenu = null;
+
 function hideMenu() {
   mobileMenuExpand.classList.add("max-md:hidden");
   overlay.classList.add("hidden");
@@ -18,27 +20,35 @@ function showMenu() {
   overlay.classList.remove("hidden");
 }
 
-function toggleIcon() {
-  dropDownMenus.forEach((menu) => {
-    const icon = menu.previousElementSibling.querySelector(".toggle-icon");
-    if (menu.classList.contains("hidden")) {
-      if (icon.classList.contains("fa-chevron-up")) {
-        icon.classList.replace("fa-chevron-up", "fa-chevron-down");
-      }
-    } else {
-      if (icon.classList.contains("fa-chevron-down")) {
-        icon.classList.replace("fa-chevron-down", "fa-chevron-up");
-      }
-    }
-  });
+function toggleMenu(menu) {
+  if (openedMenu && openedMenu !== menu) {
+    hideMenu(openedMenu);
+  }
+
+  if (menu === openedMenu) {
+    hideMenu(openedMenu);
+    openedMenu = null;
+  } else {
+    showMenu(menu);
+    openedMenu = menu;
+  }
 }
 
-function collapseAll() {
-  dropDownMenus.forEach((menu) => {
-    if (!menu.classList.contains("hidden")) {
-      menu.classList.add("hidden");
-    }
-  });
+function showMenu(menu) {
+  menu.classList.remove("hidden");
+  updateIcon(menu, "fa-chevron-down", "fa-chevron-up");
+}
+
+function hideMenu(menu) {
+  menu.classList.add("hidden");
+  updateIcon(menu, "fa-chevron-up", "fa-chevron-down");
+}
+
+function updateIcon(menu, oldIcon, newIcon) {
+  const icon = menu.previousElementSibling.querySelector(".toggle-icon");
+  if (icon.classList.contains(oldIcon)) {
+    icon.classList.replace(oldIcon, newIcon);
+  }
 }
 
 menuBtn.addEventListener("click", () => {
@@ -54,13 +64,9 @@ overlay.addEventListener("click", () => {
 });
 
 featureBtn.addEventListener("click", () => {
-  collapseAll();
-  featureMenu.classList.toggle("hidden");
-  toggleIcon();
+  toggleMenu(featureMenu);
 });
 
 companyBtn.addEventListener("click", () => {
-  collapseAll();
-  companyMenu.classList.toggle("hidden");
-  toggleIcon();
+  toggleMenu(companyMenu);
 });
