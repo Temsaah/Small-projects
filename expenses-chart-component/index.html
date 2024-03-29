@@ -16,8 +16,10 @@
 
     <link rel="stylesheet" href="output.css" />
   </head>
-  <body class="min-h-screen bg-primary-cyan/25 grid items-center font-DM-Sans">
-    <main class="p-4 grid gap-4">
+  <body
+    class="min-h-screen bg-primary-cyan/25 flex justify-center items-center font-DM-Sans"
+  >
+    <main class="grid p-4 gap-4 w-full max-w-[450px]">
       <div
         class="balance-container bg-primary-soft-red rounded-xl p-5 flex justify-between items-center"
       >
@@ -27,9 +29,40 @@
         </div>
         <img class="w-12" src="/images/logo.svg" alt="" />
       </div>
-      <div class="chart-container p-4 bg-white grid gap-10">
-        <p>Spending - Last 7 days</p>
-        <div class="chart"></div>
+      <div class="chart-container p-4 bg-white grid gap-16">
+        <p class="text-2xl font-bold">Spending - Last 7 days</p>
+        <div
+          class="chart flex justify-between items-baseline relative after:absolute after:-bottom-8 after:h-[1px] after:bg-primary-cyan/40 after:w-full"
+        >
+          <div class="day-expenses w-9 grid gap-3">
+            <span class="block bg-primary-soft-red h-12 rounded"></span>
+            <p class="text-center text-xs text-neutral-cream">mon</p>
+          </div>
+          <div class="day-expenses w-9 grid gap-3">
+            <span class="block bg-primary-soft-red h-24 rounded"></span>
+            <p class="text-center text-xs text-neutral-cream">tue</p>
+          </div>
+          <div class="day-expenses w-9 grid gap-3">
+            <span class="block bg-primary-cyan h-36 rounded"></span>
+            <p class="text-center text-xs text-neutral-cream">wed</p>
+          </div>
+          <div class="day-expenses w-9 grid gap-3">
+            <span class="block bg-primary-soft-red h-20 rounded"></span>
+            <p class="text-center text-xs text-neutral-cream">thu</p>
+          </div>
+          <div class="day-expenses w-9 grid gap-3">
+            <span class="block bg-primary-soft-red h-16 rounded"></span>
+            <p class="text-center text-xs text-neutral-cream">fri</p>
+          </div>
+          <div class="day-expenses w-9 grid gap-3">
+            <span class="block bg-primary-soft-red h-28 rounded"></span>
+            <p class="text-center text-xs text-neutral-cream">sat</p>
+          </div>
+          <div class="day-expenses w-9 grid gap-3">
+            <span class="block bg-primary-soft-red h-[4.5rem] rounded"></span>
+            <p class="text-center text-xs text-neutral-cream">sun</p>
+          </div>
+        </div>
         <div class="total-container flex justify-between">
           <div class="total grid gap-2">
             <p class="text-primary-cyan text-xs font-semibold">
