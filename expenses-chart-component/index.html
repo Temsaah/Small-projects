@@ -19,7 +19,7 @@
   <body
     class="min-h-screen bg-primary-cyan/25 flex justify-center items-center font-DM-Sans"
   >
-    <main class="grid p-4 gap-4 w-full max-w-[450px]">
+    <main class="grid gap-4 w-[95%] max-w-[450px]">
       <div
         class="balance-container bg-primary-soft-red rounded-xl p-5 flex justify-between items-center"
       >
@@ -34,32 +34,67 @@
         <div
           class="chart flex justify-between items-baseline relative after:absolute after:-bottom-8 after:h-[1px] after:bg-primary-cyan/40 after:w-full"
         >
-          <div class="day-expenses w-9 grid gap-3">
-            <span class="block bg-primary-soft-red h-12 rounded"></span>
+          <div class="day-expenses relative w-9 grid gap-3">
+            <p
+              class="hidden absolute hover-price -top-8 right-1/2 translate-x-1/2 bg-black p-1 pl-2 pr-2 rounded-md text-white text-sm font-bold"
+            >
+              $52.63
+            </p>
+            <span class="monday-bar bar block h-12 rounded"></span>
             <p class="text-center text-xs text-neutral-cream">mon</p>
           </div>
-          <div class="day-expenses w-9 grid gap-3">
-            <span class="block bg-primary-soft-red h-24 rounded"></span>
+          <div class="day-expenses relative w-9 grid gap-3">
+            <p
+              class="hidden absolute hover-price -top-8 right-1/2 translate-x-1/2 bg-black p-1 pl-2 pr-2 rounded-md text-white text-sm font-bold"
+            >
+              $52.63
+            </p>
+            <span class="tuesday-bar bar block h-24 rounded"></span>
             <p class="text-center text-xs text-neutral-cream">tue</p>
           </div>
-          <div class="day-expenses w-9 grid gap-3">
-            <span class="block bg-primary-cyan h-36 rounded"></span>
+          <div class="day-expenses relative w-9 grid gap-3">
+            <p
+              class="hidden absolute hover-price -top-8 right-1/2 translate-x-1/2 bg-black p-1 pl-2 pr-2 rounded-md text-white text-sm font-bold"
+            >
+              $52.63
+            </p>
+            <span class="wednesday-bar bar block h-36 rounded"></span>
             <p class="text-center text-xs text-neutral-cream">wed</p>
           </div>
-          <div class="day-expenses w-9 grid gap-3">
-            <span class="block bg-primary-soft-red h-20 rounded"></span>
+          <div class="day-expenses relative w-9 grid gap-3">
+            <p
+              class="hidden absolute hover-price -top-8 right-1/2 translate-x-1/2 bg-black p-1 pl-2 pr-2 rounded-md text-white text-sm font-bold"
+            >
+              $100.63
+            </p>
+            <span class="thursday-bar bar block h-20 rounded"></span>
             <p class="text-center text-xs text-neutral-cream">thu</p>
           </div>
-          <div class="day-expenses w-9 grid gap-3">
-            <span class="block bg-primary-soft-red h-16 rounded"></span>
+          <div class="day-expenses relative w-9 grid gap-3">
+            <p
+              class="hidden absolute hover-price -top-8 right-1/2 translate-x-1/2 bg-black p-1 pl-2 pr-2 rounded-md text-white text-sm font-bold"
+            >
+              $52.63
+            </p>
+            <span class="friday-bar bar block h-16 rounded"></span>
             <p class="text-center text-xs text-neutral-cream">fri</p>
           </div>
-          <div class="day-expenses w-9 grid gap-3">
-            <span class="block bg-primary-soft-red h-28 rounded"></span>
+          <div class="day-expenses relative w-9 grid gap-3">
+            <p
+              class="hidden absolute hover-price -top-8 right-1/2 translate-x-1/2 bg-black p-1 pl-2 pr-2 rounded-md text-white text-sm font-bold"
+            >
+              $52.63
+            </p>
+            <span class="saturday-bar bar block h-28 rounded"></span>
             <p class="text-center text-xs text-neutral-cream">sat</p>
           </div>
-          <div class="day-expenses w-9 grid gap-3">
-            <span class="block bg-primary-soft-red h-[4.5rem] rounded"></span>
+          <div class="day-expenses relative w-9 grid gap-3">
+            <p
+              class="hidden absolute hover-price -top-8 right-1/2 translate-x-1/2 bg-black p-1 pl-2 pr-2 rounded-md text-white text-sm font-bold"
+            >
+              $52.63
+            </p>
+            <span class="sunday-bar bar block h-[4.5rem] rounded"></span>
             <p class="text-center text-xs text-neutral-cream">sun</p>
           </div>
         </div>
@@ -79,5 +114,6 @@
         </div>
       </div>
     </main>
+    <script src="app.js"></script>
   </body>
 </html>
