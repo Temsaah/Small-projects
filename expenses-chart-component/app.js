@@ -1,13 +1,25 @@
 const daysExpenses = document.querySelectorAll(".day-expenses");
 let highestBar;
 
+function setPrices(data, dayExpenses, index) {
+  let priceEl = dayExpenses.querySelector(".hover-price");
+  const price = data[index].amount;
+  priceEl.textContent = `$${price}`;
+  priceEl.dataset.price = price;
+}
+
+// function setBarHeight(data, dayExpenses, index) {
+//   let bar = dayExpenses.querySelector(".bar");
+//   let barHeight = parseInt(data[index].amount * 2);
+//   bar.classList.add(`h-[${barHeight}]px`);
+// }
+
 fetch("data.json")
   .then((response) => response.json())
   .then((data) => {
-    console.log(data[0]);
     daysExpenses.forEach((dayExpenses, index) => {
-      let priceEl = dayExpenses.querySelector(".hover-price");
-      priceEl.textContent = `$${data[index].amount}`;
+      setPrices(data, dayExpenses, index);
+      // setBarHeight(data, dayExpenses, index);
     });
     highestBar = getHeighestBar(daysExpenses);
 
@@ -24,30 +36,36 @@ fetch("data.json")
         );
       }
 
-      dayExpenses.addEventListener("mouseenter", () => {
+      bar.addEventListener("mouseenter", () => {
         hoverPrice.classList.remove("hidden");
+        setTimeout(() => {
+          hoverPrice.classList.replace("opacity-0", "opacity-100");
+          hoverPrice.classList.replace("-top-6", "-top-8");
+        }, 0);
       });
 
-      dayExpenses.addEventListener("mouseleave", () => {
+      bar.addEventListener("mouseleave", () => {
         hoverPrice.classList.add("hidden");
+        hoverPrice.classList.replace("opacity-100", "opacity-0");
+        hoverPrice.classList.replace("-top-8", "-top-6");
       });
     });
   });
 
 function getHeighestBar(daysExpenses) {
-  let result = 0;
-  let highestIndex = 0;
+  let highestBar = null;
+  let highestPrice = 0;
 
   daysExpenses.forEach((dayExpenses, index) => {
-    let price = dayExpenses.querySelector(".hover-price").textContent;
+    let priceEl = dayExpenses.querySelector(".hover-price");
 
-    price = parseFloat(price.replace(/[^0-9.-]+/g, ""));
+    price = parseFloat(priceEl.dataset.price);
 
-    if (price > result) {
-      result = price;
-      highestIndex = index;
+    if (price > highestPrice) {
+      highestPrice = price;
+      highestBar = dayExpenses.querySelector(".bar");
     }
   });
 
-  return daysExpenses[highestIndex].querySelector(".bar");
+  return highestBar;
 }
