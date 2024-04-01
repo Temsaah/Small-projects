@@ -1,4 +1,5 @@
 const daysExpenses = document.querySelectorAll(".day-expenses");
+const totalSpending = document.querySelector(".total-spending");
 let highestBar;
 
 function setPrices(data, dayExpenses, index) {
@@ -8,18 +9,21 @@ function setPrices(data, dayExpenses, index) {
   priceEl.dataset.price = price;
 }
 
-// function setBarHeight(data, dayExpenses, index) {
-//   let bar = dayExpenses.querySelector(".bar");
-//   let barHeight = parseInt(data[index].amount * 2);
-//   bar.classList.add(`h-[${barHeight}]px`);
-// }
+function setBarHeight(data, dayExpenses, index) {
+  let maxAmount = Math.max(...data.map((item) => item.amount));
+  let maxBarHeight = 150;
+  console.log(maxAmount);
+  let bar = dayExpenses.querySelector(".bar");
+  let barHeight = (data[index].amount / maxAmount) * maxBarHeight;
+  bar.style.height = `${barHeight}px`;
+}
 
 fetch("data.json")
   .then((response) => response.json())
   .then((data) => {
     daysExpenses.forEach((dayExpenses, index) => {
       setPrices(data, dayExpenses, index);
-      // setBarHeight(data, dayExpenses, index);
+      setBarHeight(data, dayExpenses, index);
     });
     highestBar = getHeighestBar(daysExpenses);
 
@@ -50,6 +54,14 @@ fetch("data.json")
         hoverPrice.classList.replace("-top-8", "-top-6");
       });
     });
+    return data;
+  })
+  .then((data) => {
+    let total = 0;
+    for (let day of data) {
+      total += day.amount;
+    }
+    totalSpending.textContent = `$${total.toFixed(2)}`;
   });
 
 function getHeighestBar(daysExpenses) {
