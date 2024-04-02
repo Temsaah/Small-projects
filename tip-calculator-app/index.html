@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Tip calculator app</title>
+
+    <link rel="stylesheet" href="output.css" />
+  </head>
+  <body
+    class="min-h-screen bg-neutral-light-grayish-cyan font-mono grid items-center"
+  >
+    <header>
+      <img class="m-auto" src="images/logo.svg" alt="" />
+    </header>
+    <main class="bg-white p-6 grid gap-10">
+      <div class="bill-form grid gap-2">
+        <p class="text-neutral-dgrayish-cyan font-bold">Bill</p>
+        <div class="bill-price relative">
+          <img
+            class="absolute left-4 top-1/2 -translate-y-1/2"
+            src="images/icon-dollar.svg"
+            alt=""
+          />
+          <input
+            dir="rtl"
+            class="bg-neutral-vl-grayish-cyan border p-2 w-full font-mono text-neutral-vdark-cyan font-bold text-xl mt-auto"
+            type="text"
+          />
+        </div>
+      </div>
+      <div class="tips">
+        <p class="text-neutral-dgrayish-cyan font-bold">Select Tip %</p>
+        <div class="tips-btns grid grid-cols-2 gap-4">
+          <button
+            class="bg-neutral-vdark-cyan text-center text-white text-2xl font-bold flex items-center justify-center pt-2 rounded"
+          >
+            5%
+          </button>
+          <button
+            class="bg-neutral-vdark-cyan text-center text-white text-2xl font-bold flex items-center justify-center pt-2 rounded"
+          >
+            10%
+          </button>
+          <button
+            class="bg-neutral-vdark-cyan text-center text-white text-2xl font-bold flex items-center justify-center pt-2 rounded"
+          >
+            15%
+          </button>
+          <button
+            class="bg-neutral-vdark-cyan text-center text-white text-2xl font-bold flex items-center justify-center pt-2 rounded"
+          >
+            25%
+          </button>
+          <button
+            class="bg-neutral-vdark-cyan text-white text-2xl font-bold flex items-end justify-center pt-2 rounded"
+          >
+            50%
+          </button>
+        </div>
+      </div>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
