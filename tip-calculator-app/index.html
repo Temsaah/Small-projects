@@ -22,9 +22,9 @@
     <header>
       <img class="m-auto" src="images/logo.svg" alt="" />
     </header>
-    <main class="bg-white p-6 grid gap-10">
+    <main class="bg-white p-6 grid gap-8 rounded-xl">
       <div class="bill-form grid gap-2">
-        <p class="text-neutral-dgrayish-cyan font-bold">Bill</p>
+        <p class="text-neutral-dgrayish-cyan font-bold text-xs">Bill</p>
         <div class="bill-price relative">
           <img
             class="absolute left-4 top-1/2 -translate-y-1/2"
@@ -38,35 +38,88 @@
           />
         </div>
       </div>
-      <div class="tips">
-        <p class="text-neutral-dgrayish-cyan font-bold">Select Tip %</p>
+      <div class="tips grid gap-4">
+        <p class="text-neutral-dgrayish-cyan font-bold text-xs">Select Tip %</p>
         <div class="tips-btns grid grid-cols-2 gap-4">
           <button
-            class="bg-neutral-vdark-cyan text-center text-white text-2xl font-bold flex items-center justify-center pt-2 rounded"
+            class="bg-neutral-vdark-cyan text-white text-2xl font-bold rounded pt-2"
           >
             5%
           </button>
           <button
-            class="bg-neutral-vdark-cyan text-center text-white text-2xl font-bold flex items-center justify-center pt-2 rounded"
+            class="bg-neutral-vdark-cyan text-white text-2xl font-bold rounded pt-2"
           >
             10%
           </button>
           <button
-            class="bg-neutral-vdark-cyan text-center text-white text-2xl font-bold flex items-center justify-center pt-2 rounded"
+            class="bg-neutral-vdark-cyan text-white text-2xl font-bold rounded pt-2"
           >
             15%
           </button>
           <button
-            class="bg-neutral-vdark-cyan text-center text-white text-2xl font-bold flex items-center justify-center pt-2 rounded"
+            class="bg-neutral-vdark-cyan text-white text-2xl font-bold rounded pt-2"
           >
             25%
           </button>
           <button
-            class="bg-neutral-vdark-cyan text-white text-2xl font-bold flex items-end justify-center pt-2 rounded"
+            class="bg-neutral-vdark-cyan text-white text-2xl font-bold rounded pt-2"
           >
             50%
           </button>
+          <input
+            placeholder="Custom"
+            class="text-center placeholder:font-bold placeholder:text-2xl placeholder:text-neutral-dgrayish-cyan"
+            type="text"
+          />
         </div>
+      </div>
+      <div class="people-num grid gap-2">
+        <p class="text-neutral-dgrayish-cyan font-bold text-xs">
+          Number of People
+        </p>
+        <div class="people-num-container relative">
+          <img
+            class="absolute left-3 top-1/2 -translate-y-1/2"
+            src="images/icon-person.svg"
+            alt=""
+          />
+          <input
+            dir="rtl"
+            class="bg-neutral-light-grayish-cyan/70 pt-2 px-3 height w-full text-neutral-vdark-cyan font-bold text-xl font-bold"
+            type="text"
+          />
+        </div>
+      </div>
+      <div
+        class="total-price bg-neutral-vdark-cyan p-4 py-8 grid gap-5 rounded-xl"
+      >
+        <div class="tip-amount__container flex justify-between items-center">
+          <div class="title">
+            <p class="text-white text-sm">Tip Amount</p>
+            <p class="text-neutral-dgrayish-cyan text-xs">/ person</p>
+          </div>
+          <div class="tip-amount flex items-center gap-1">
+            <img class="w-3" src="images/icon-dollar.svg" alt="" />
+            <p class="text-3xl font-extrabold text-primary-strong-cyan">4.27</p>
+          </div>
+        </div>
+        <div class="total-amount__container flex justify-between items-center">
+          <div class="title">
+            <p class="text-white text-sm">Total</p>
+            <p class="text-neutral-dgrayish-cyan text-xs">/ person</p>
+          </div>
+          <div class="total-amount flex items-center gap-1">
+            <img class="w-3" src="images/icon-dollar.svg" alt="" />
+            <p class="text-3xl font-extrabold text-primary-strong-cyan">
+              32.79
+            </p>
+          </div>
+        </div>
+        <button
+          class="bg-primary-strong-cyan pt-3 pb-1 text-lg text-neutral-vdark-cyan font-bold rounded-md"
+        >
+          RESET
+        </button>
       </div>
     </main>
     <script src="app.js"></script>
