@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Time tracking dashboard</title>
+    <link rel="stylesheet" href="output.css" />
+  </head>
+  <body
+    class="bg-neutral-vdark-blue min-h-screen grid content-center gap-10 font-Rubik"
+  >
+    <header class="w-[90%] m-auto bg-neutral-dark-blue rounded-xl">
+      <div
+        class="profile p-5 py-7 flex justify-center items-center gap-5 bg-primary-violet rounded-xl"
+      >
+        <div class="profile-pic w-14 border-2 rounded-full">
+          <img src="images/image-jeremy.png" alt="" />
+        </div>
+        <div class="profile-title">
+          <p class="text-sm text-neutral-desat-blue font-semibold">
+            Report for
+          </p>
+          <p class="text-white text-xl font-light">Jeremy Robson</p>
+        </div>
+      </div>
+      <div class="timestamp p-6 flex justify-between text-neutral-desat-blue">
+        <button>Daily</button>
+        <button>Weekly</button>
+        <button>Monthly</button>
+      </div>
+    </header>
+    <main class="w-[90%] m-auto">
+      <div class="card p-5 relative">
+        <div class="image bg-primary-light-red w-full h-[100px]">
+          <img
+            class="absolute right-0 top-0 overflow-hidden opacity-80"
+            src="images/icon-work.svg"
+            alt=""
+          />
+        </div>
+        <div class="work-container bg-neutral-dark-blue p-4">
+          <div class="work flex justify-between">
+            <p>work</p>
+            <img src="images/icon-ellipsis.svg" alt="" />
+          </div>
+          <div class="work-time flex justify-between">
+            <p>32hrs</p>
+            <p>Last Week - 36hrs</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
