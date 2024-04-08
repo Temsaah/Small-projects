@@ -18,177 +18,193 @@
   <body
     class="bg-neutral-vdark-blue min-h-screen grid content-center gap-10 font-Rubik py-7"
   >
-    <header class="w-[90%] m-auto bg-neutral-dark-blue rounded-xl">
-      <div
-        class="profile p-5 py-7 flex justify-center items-center gap-5 bg-primary-violet rounded-xl"
-      >
-        <div class="profile-pic w-14 border-2 rounded-full">
-          <img src="images/image-jeremy.png" alt="" />
-        </div>
-        <div class="profile-title">
-          <p class="text-sm text-neutral-desat-blue font-semibold">
-            Report for
-          </p>
-          <p class="text-white text-xl font-light">Jeremy Robson</p>
-        </div>
-      </div>
-      <div class="timestamp p-6 flex justify-between text-neutral-desat-blue">
-        <button>Daily</button>
-        <button>Weekly</button>
-        <button>Monthly</button>
-      </div>
-    </header>
-    <main class="w-[90%] m-auto">
-      <div class="card work">
+    <div
+      class="app w-[90%] m-auto grid gap-5 md:grid-rows-custom-row md:grid-cols-custom-col"
+    >
+      <header class="bg-neutral-dark-blue rounded-xl">
         <div
-          class="card-logo bg-primary-light-red relative h-20 rounded-xl overflow-hidden"
+          class="profile p-5 py-7 flex justify-center items-center gap-5 bg-primary-violet rounded-xl"
         >
-          <img
-            class="absolute right-5 -top-3 opacity-80"
-            src="images/icon-work.svg"
-            alt=""
-          />
+          <div class="profile-pic w-14 border-2 rounded-full">
+            <img src="images/image-jeremy.png" alt="" />
+          </div>
+          <div class="profile-title">
+            <p class="text-sm text-neutral-desat-blue font-semibold">
+              Report for
+            </p>
+            <p class="text-white text-xl font-light">Jeremy Robson</p>
+          </div>
         </div>
-        <div
-          class="card-description bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 relative -top-10"
-        >
+        <div class="timestamp p-6 flex justify-between text-neutral-desat-blue">
+          <button>Daily</button>
+          <button>Weekly</button>
+          <button>Monthly</button>
+        </div>
+      </header>
+      <main class="md:grid md:gap-5 md:col-start-2 md:col-end-5">
+        <div class="card work row-start-1 col-start-1">
           <div
-            class="card-description__title flex justify-between items-center"
+            class="card-logo bg-primary-light-red relative h-20 rounded-xl overflow-hidden"
           >
-            <p class="text-white text-lg">Work</p>
-            <img src="images/icon-ellipsis.svg" alt="" />
+            <img
+              class="absolute right-5 -top-3 opacity-80"
+              src="images/icon-work.svg"
+              alt=""
+            />
           </div>
-          <div class="card-description__time flex justify-between items-center">
-            <p class="text-white text-3xl font-light">32hrs</p>
-            <p class="text-neutral-pale-blue text-sm">Last week - 36hrs</p>
-          </div>
-        </div>
-      </div>
-      <div class="card play">
-        <div
-          class="card-logo bg-neutral-pale-blue relative h-20 rounded-xl overflow-hidden"
-        >
-          <img
-            class="absolute right-5 -top-3 opacity-80"
-            src="images/icon-play.svg"
-            alt=""
-          />
-        </div>
-        <div
-          class="card-description bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 relative -top-10"
-        >
           <div
-            class="card-description__title flex justify-between items-center"
+            class="card-description bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 relative -top-10"
           >
-            <p class="text-white text-lg">Play</p>
-            <img src="images/icon-ellipsis.svg" alt="" />
-          </div>
-          <div class="card-description__time flex justify-between items-center">
-            <p class="text-white text-3xl font-light">10hrs</p>
-            <p class="text-neutral-pale-blue text-sm">Last week - 8hrs</p>
+            <div
+              class="card-description__title flex justify-between items-center"
+            >
+              <p class="text-white text-lg">Work</p>
+              <img src="images/icon-ellipsis.svg" alt="" />
+            </div>
+            <div
+              class="card-description__time flex justify-between items-center md:flex-col gap-3 md:items-start"
+            >
+              <p class="text-white text-3xl font-light">32hrs</p>
+              <p class="text-neutral-pale-blue text-sm">Last week - 36hrs</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="card study">
-        <div
-          class="card-logo bg-primary-light-red2 relative h-20 rounded-xl overflow-hidden"
-        >
-          <img
-            class="absolute right-5 -top-3 opacity-80"
-            src="images/icon-study.svg"
-            alt=""
-          />
-        </div>
-        <div
-          class="card-description bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 relative -top-10"
-        >
+        <div class="card play row-start-1 col-start-2">
           <div
-            class="card-description__title flex justify-between items-center"
+            class="card-logo bg-neutral-pale-blue relative h-20 rounded-xl overflow-hidden"
           >
-            <p class="text-white text-lg">Study</p>
-            <img src="images/icon-ellipsis.svg" alt="" />
+            <img
+              class="absolute right-5 -top-3 opacity-80"
+              src="images/icon-play.svg"
+              alt=""
+            />
           </div>
-          <div class="card-description__time flex justify-between items-center">
-            <p class="text-white text-3xl font-light">4hrs</p>
-            <p class="text-neutral-pale-blue text-sm">Last week - 7hrs</p>
-          </div>
-        </div>
-      </div>
-      <div class="card exercise">
-        <div
-          class="card-logo bg-primary-lime-green relative h-20 rounded-xl overflow-hidden"
-        >
-          <img
-            class="absolute right-5 -top-3 opacity-80"
-            src="images/icon-exercise.svg"
-            alt=""
-          />
-        </div>
-        <div
-          class="card-description bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 relative -top-10"
-        >
           <div
-            class="card-description__title flex justify-between items-center"
+            class="card-description bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 relative -top-10"
           >
-            <p class="text-white text-lg">Exercise</p>
-            <img src="images/icon-ellipsis.svg" alt="" />
-          </div>
-          <div class="card-description__time flex justify-between items-center">
-            <p class="text-white text-3xl font-light">4hrs</p>
-            <p class="text-neutral-pale-blue text-sm">Last week - 5hrs</p>
+            <div
+              class="card-description__title flex justify-between items-center"
+            >
+              <p class="text-white text-lg">Play</p>
+              <img src="images/icon-ellipsis.svg" alt="" />
+            </div>
+            <div
+              class="card-description__time flex justify-between items-center md:flex-col gap-3 md:items-start"
+            >
+              <p class="text-white text-3xl font-light">10hrs</p>
+              <p class="text-neutral-pale-blue text-sm">Last week - 8hrs</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="card social">
-        <div
-          class="card-logo bg-primary-violet relative h-20 rounded-xl overflow-hidden"
-        >
-          <img
-            class="absolute right-5 -top-3 opacity-80"
-            src="images/icon-social.svg"
-            alt=""
-          />
-        </div>
-        <div
-          class="card-description bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 relative -top-10"
-        >
+        <div class="card study row-start-1 col-start-3">
           <div
-            class="card-description__title flex justify-between items-center"
+            class="card-logo bg-primary-light-red2 relative h-20 rounded-xl overflow-hidden"
           >
-            <p class="text-white text-lg">Social</p>
-            <img src="images/icon-ellipsis.svg" alt="" />
+            <img
+              class="absolute right-5 -top-3 opacity-80"
+              src="images/icon-study.svg"
+              alt=""
+            />
           </div>
-          <div class="card-description__time flex justify-between items-center">
-            <p class="text-white text-3xl font-light">5hrs</p>
-            <p class="text-neutral-pale-blue text-sm">Last week - 10hrs</p>
-          </div>
-        </div>
-      </div>
-      <div class="card self-care">
-        <div
-          class="card-logo bg-primary-soft-orange relative h-20 rounded-xl overflow-hidden"
-        >
-          <img
-            class="absolute right-5 -top-3 opacity-80"
-            src="images/icon-self-care.svg"
-            alt=""
-          />
-        </div>
-        <div
-          class="card-description bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 relative -top-10"
-        >
           <div
-            class="card-description__title flex justify-between items-center"
+            class="card-description bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 relative -top-10"
           >
-            <p class="text-white text-lg">Self Care</p>
-            <img src="images/icon-ellipsis.svg" alt="" />
-          </div>
-          <div class="card-description__time flex justify-between items-center">
-            <p class="text-white text-3xl font-light">2hrs</p>
-            <p class="text-neutral-pale-blue text-sm">Last week - 2hrs</p>
+            <div
+              class="card-description__title flex justify-between items-center"
+            >
+              <p class="text-white text-lg">Study</p>
+              <img src="images/icon-ellipsis.svg" alt="" />
+            </div>
+            <div
+              class="card-description__time flex justify-between items-center md:flex-col gap-3 md:items-start"
+            >
+              <p class="text-white text-3xl font-light">4hrs</p>
+              <p class="text-neutral-pale-blue text-sm">Last week - 7hrs</p>
+            </div>
           </div>
         </div>
-      </div>
-    </main>
+        <div class="card exercise">
+          <div
+            class="card-logo bg-primary-lime-green relative h-20 rounded-xl overflow-hidden"
+          >
+            <img
+              class="absolute right-5 -top-3 opacity-80"
+              src="images/icon-exercise.svg"
+              alt=""
+            />
+          </div>
+          <div
+            class="card-description bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 relative -top-10"
+          >
+            <div
+              class="card-description__title flex justify-between items-center"
+            >
+              <p class="text-white text-lg">Exercise</p>
+              <img src="images/icon-ellipsis.svg" alt="" />
+            </div>
+            <div
+              class="card-description__time flex justify-between items-center md:flex-col gap-3 md:items-start"
+            >
+              <p class="text-white text-3xl font-light">4hrs</p>
+              <p class="text-neutral-pale-blue text-sm">Last week - 5hrs</p>
+            </div>
+          </div>
+        </div>
+        <div class="card social">
+          <div
+            class="card-logo bg-primary-violet relative h-20 rounded-xl overflow-hidden"
+          >
+            <img
+              class="absolute right-5 -top-3 opacity-80"
+              src="images/icon-social.svg"
+              alt=""
+            />
+          </div>
+          <div
+            class="card-description bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 relative -top-10"
+          >
+            <div
+              class="card-description__title flex justify-between items-center"
+            >
+              <p class="text-white text-lg">Social</p>
+              <img src="images/icon-ellipsis.svg" alt="" />
+            </div>
+            <div
+              class="card-description__time flex justify-between items-center md:flex-col gap-3 md:items-start"
+            >
+              <p class="text-white text-3xl font-light">5hrs</p>
+              <p class="text-neutral-pale-blue text-sm">Last week - 10hrs</p>
+            </div>
+          </div>
+        </div>
+        <div class="card self-care">
+          <div
+            class="card-logo bg-primary-soft-orange relative h-20 rounded-xl overflow-hidden"
+          >
+            <img
+              class="absolute right-5 -top-3 opacity-80"
+              src="images/icon-self-care.svg"
+              alt=""
+            />
+          </div>
+          <div
+            class="card-description bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 relative -top-10"
+          >
+            <div
+              class="card-description__title flex justify-between items-center"
+            >
+              <p class="text-white text-lg">Self Care</p>
+              <img src="images/icon-ellipsis.svg" alt="" />
+            </div>
+            <div
+              class="card-description__time flex justify-between items-center md:flex-col gap-3 md:items-start"
+            >
+              <p class="text-white text-3xl font-light">2hrs</p>
+              <p class="text-neutral-pale-blue text-sm">Last week - 2hrs</p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
   </body>
 </html>
