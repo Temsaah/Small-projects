@@ -19,32 +19,36 @@
     class="bg-neutral-vdark-blue min-h-screen grid content-center gap-10 font-Rubik py-7"
   >
     <div
-      class="app w-[90%] m-auto grid gap-5 md:grid-rows-custom-row md:grid-cols-custom-col"
+      class="app flex flex-col w-[90%] md:max-w-[1050px] m-auto md:grid gap-5 md:grid-rows-custom-row md:grid-cols-custom-col"
     >
-      <header class="bg-neutral-dark-blue rounded-xl">
+      <header class="bg-neutral-dark-blue rounded-xl md:grid">
         <div
-          class="profile p-5 py-7 flex justify-center items-center gap-5 bg-primary-violet rounded-xl"
+          class="profile p-5 py-7 flex justify-center items-center gap-5 bg-primary-violet rounded-xl md:flex-col md:items-start"
         >
-          <div class="profile-pic w-14 border-2 rounded-full">
+          <div class="profile-pic w-14 border-2 rounded-full md:w-16">
             <img src="images/image-jeremy.png" alt="" />
           </div>
           <div class="profile-title">
-            <p class="text-sm text-neutral-desat-blue font-semibold">
+            <p class="text-sm text-neutral-desat-blue font-semibold md:text-xs">
               Report for
             </p>
-            <p class="text-white text-xl font-light">Jeremy Robson</p>
+            <p class="text-white text-xl font-light md:text-3xl">
+              Jeremy Robson
+            </p>
           </div>
         </div>
-        <div class="timestamp p-6 flex justify-between text-neutral-desat-blue">
-          <button>Daily</button>
-          <button>Weekly</button>
-          <button>Monthly</button>
+        <div
+          class="timestamp p-6 flex justify-between text-neutral-desat-blue md:flex-col md:items-start"
+        >
+          <button class="text-sm">Daily</button>
+          <button class="text-sm">Weekly</button>
+          <button class="text-sm">Monthly</button>
         </div>
       </header>
-      <main class="md:grid md:gap-5 md:col-start-2 md:col-end-5">
-        <div class="card work row-start-1 col-start-1">
+      <main class="flex flex-col md:grid gap-5 md:col-start-2 md:col-end-5">
+        <div class="card work relative row-start-1 col-start-1">
           <div
-            class="card-logo bg-primary-light-red relative h-20 rounded-xl overflow-hidden"
+            class="card-logo bg-primary-light-red absolute w-full h-1/2 rounded-xl overflow-hidden"
           >
             <img
               class="absolute right-5 -top-3 opacity-80"
@@ -53,7 +57,7 @@
             />
           </div>
           <div
-            class="card-description bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 relative -top-10"
+            class="card-description relative bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 mt-10"
           >
             <div
               class="card-description__title flex justify-between items-center"
@@ -69,9 +73,9 @@
             </div>
           </div>
         </div>
-        <div class="card play row-start-1 col-start-2">
+        <div class="card relative play row-start-1 col-start-2">
           <div
-            class="card-logo bg-neutral-pale-blue relative h-20 rounded-xl overflow-hidden"
+            class="card-logo bg-neutral-pale-blue absolute w-full h-1/2 rounded-xl overflow-hidden"
           >
             <img
               class="absolute right-5 -top-3 opacity-80"
@@ -80,7 +84,7 @@
             />
           </div>
           <div
-            class="card-description bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 relative -top-10"
+            class="card-description bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 relative mt-10"
           >
             <div
               class="card-description__title flex justify-between items-center"
@@ -96,9 +100,9 @@
             </div>
           </div>
         </div>
-        <div class="card study row-start-1 col-start-3">
+        <div class="card relative study row-start-1 col-start-3">
           <div
-            class="card-logo bg-primary-light-red2 relative h-20 rounded-xl overflow-hidden"
+            class="card-logo bg-primary-light-red2 absolute w-full h-1/2 rounded-xl overflow-hidden"
           >
             <img
               class="absolute right-5 -top-3 opacity-80"
@@ -107,7 +111,7 @@
             />
           </div>
           <div
-            class="card-description bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 relative -top-10"
+            class="card-description bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 relative mt-10"
           >
             <div
               class="card-description__title flex justify-between items-center"
@@ -123,9 +127,9 @@
             </div>
           </div>
         </div>
-        <div class="card exercise">
+        <div class="card relative exercise">
           <div
-            class="card-logo bg-primary-lime-green relative h-20 rounded-xl overflow-hidden"
+            class="card-logo bg-primary-lime-green absolute w-full h-1/2 rounded-xl overflow-hidden"
           >
             <img
               class="absolute right-5 -top-3 opacity-80"
@@ -134,7 +138,7 @@
             />
           </div>
           <div
-            class="card-description bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 relative -top-10"
+            class="card-description bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 relative mt-10"
           >
             <div
               class="card-description__title flex justify-between items-center"
@@ -150,9 +154,9 @@
             </div>
           </div>
         </div>
-        <div class="card social">
+        <div class="card relative social">
           <div
-            class="card-logo bg-primary-violet relative h-20 rounded-xl overflow-hidden"
+            class="card-logo bg-primary-violet absolute w-full h-1/2 rounded-xl overflow-hidden"
           >
             <img
               class="absolute right-5 -top-3 opacity-80"
@@ -161,7 +165,7 @@
             />
           </div>
           <div
-            class="card-description bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 relative -top-10"
+            class="card-description bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 relative mt-10"
           >
             <div
               class="card-description__title flex justify-between items-center"
@@ -177,9 +181,9 @@
             </div>
           </div>
         </div>
-        <div class="card self-care">
+        <div class="card relative self-care">
           <div
-            class="card-logo bg-primary-soft-orange relative h-20 rounded-xl overflow-hidden"
+            class="card-logo bg-primary-soft-orange absolute w-full h-1/2 rounded-xl overflow-hidden"
           >
             <img
               class="absolute right-5 -top-3 opacity-80"
@@ -188,7 +192,7 @@
             />
           </div>
           <div
-            class="card-description bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 relative -top-10"
+            class="card-description bg-neutral-dark-blue p-5 py-7 rounded-xl grid gap-2 relative mt-10"
           >
             <div
               class="card-description__title flex justify-between items-center"
