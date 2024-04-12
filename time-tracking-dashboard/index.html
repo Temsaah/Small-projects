@@ -40,12 +40,14 @@
         <div
           class="timestamp p-6 flex justify-between text-neutral-desat-blue md:flex-col md:items-start"
         >
-          <button class="text-sm">Daily</button>
-          <button class="text-sm">Weekly</button>
-          <button class="text-sm">Monthly</button>
+          <button class="timelapse-btn daily-btn text-sm">Daily</button>
+          <button class="timelapse-btn weekly-btn text-sm">Weekly</button>
+          <button class="timelapse-btn monthly-btn text-sm">Monthly</button>
         </div>
       </header>
-      <main class="flex flex-col md:grid gap-5 md:col-start-2 md:col-end-5">
+      <main
+        class="flex flex-col md:grid gap-5 md:col-start-2 md:col-end-5 md:grid-rows-custom-row md:h-[420px] md:overflow-y-auto"
+      >
         <div class="card work relative row-start-1 col-start-1">
           <div
             class="card-logo bg-primary-light-red absolute w-full h-1/2 rounded-xl overflow-hidden"
@@ -62,14 +64,16 @@
             <div
               class="card-description__title flex justify-between items-center"
             >
-              <p class="text-white text-lg">Work</p>
+              <p class="title text-white text-lg">Work</p>
               <img src="images/icon-ellipsis.svg" alt="" />
             </div>
             <div
               class="card-description__time flex justify-between items-center md:flex-col gap-3 md:items-start"
             >
-              <p class="text-white text-3xl font-light">32hrs</p>
-              <p class="text-neutral-pale-blue text-sm">Last week - 36hrs</p>
+              <p class="timelapse text-white text-3xl font-light">32hrs</p>
+              <p class="timelapse-last text-neutral-pale-blue text-sm">
+                Last week - 36hrs
+              </p>
             </div>
           </div>
         </div>
@@ -89,14 +93,16 @@
             <div
               class="card-description__title flex justify-between items-center"
             >
-              <p class="text-white text-lg">Play</p>
+              <p class="title text-white text-lg">Play</p>
               <img src="images/icon-ellipsis.svg" alt="" />
             </div>
             <div
               class="card-description__time flex justify-between items-center md:flex-col gap-3 md:items-start"
             >
-              <p class="text-white text-3xl font-light">10hrs</p>
-              <p class="text-neutral-pale-blue text-sm">Last week - 8hrs</p>
+              <p class="timelapse text-white text-3xl font-light">10hrs</p>
+              <p class="timelapse-last text-neutral-pale-blue text-sm">
+                Last week - 8hrs
+              </p>
             </div>
           </div>
         </div>
@@ -116,14 +122,16 @@
             <div
               class="card-description__title flex justify-between items-center"
             >
-              <p class="text-white text-lg">Study</p>
+              <p class="title text-white text-lg">Study</p>
               <img src="images/icon-ellipsis.svg" alt="" />
             </div>
             <div
               class="card-description__time flex justify-between items-center md:flex-col gap-3 md:items-start"
             >
-              <p class="text-white text-3xl font-light">4hrs</p>
-              <p class="text-neutral-pale-blue text-sm">Last week - 7hrs</p>
+              <p class="timelapse text-white text-3xl font-light">4hrs</p>
+              <p class="timelapse-last text-neutral-pale-blue text-sm">
+                Last week - 7hrs
+              </p>
             </div>
           </div>
         </div>
@@ -143,14 +151,16 @@
             <div
               class="card-description__title flex justify-between items-center"
             >
-              <p class="text-white text-lg">Exercise</p>
+              <p class="title text-white text-lg">Exercise</p>
               <img src="images/icon-ellipsis.svg" alt="" />
             </div>
             <div
               class="card-description__time flex justify-between items-center md:flex-col gap-3 md:items-start"
             >
-              <p class="text-white text-3xl font-light">4hrs</p>
-              <p class="text-neutral-pale-blue text-sm">Last week - 5hrs</p>
+              <p class="timelapse text-white text-3xl font-light">4hrs</p>
+              <p class="timelapse-last text-neutral-pale-blue text-sm">
+                Last week - 5hrs
+              </p>
             </div>
           </div>
         </div>
@@ -170,17 +180,20 @@
             <div
               class="card-description__title flex justify-between items-center"
             >
-              <p class="text-white text-lg">Social</p>
+              <p class="title text-white text-lg">Social</p>
               <img src="images/icon-ellipsis.svg" alt="" />
             </div>
             <div
               class="card-description__time flex justify-between items-center md:flex-col gap-3 md:items-start"
             >
-              <p class="text-white text-3xl font-light">5hrs</p>
-              <p class="text-neutral-pale-blue text-sm">Last week - 10hrs</p>
+              <p class="timelapse text-white text-3xl font-light">5hrs</p>
+              <p class="timelapse-last text-neutral-pale-blue text-sm">
+                Last week - 10hrs
+              </p>
             </div>
           </div>
         </div>
+
         <div class="card relative self-care">
           <div
             class="card-logo bg-primary-soft-orange absolute w-full h-1/2 rounded-xl overflow-hidden"
@@ -197,14 +210,16 @@
             <div
               class="card-description__title flex justify-between items-center"
             >
-              <p class="text-white text-lg">Self Care</p>
+              <p class="title text-white text-lg">Self Care</p>
               <img src="images/icon-ellipsis.svg" alt="" />
             </div>
             <div
               class="card-description__time flex justify-between items-center md:flex-col gap-3 md:items-start"
             >
-              <p class="text-white text-3xl font-light">2hrs</p>
-              <p class="text-neutral-pale-blue text-sm">Last week - 2hrs</p>
+              <p class="timelapse text-white text-3xl font-light">2hrs</p>
+              <p class="timelapse-last text-neutral-pale-blue text-sm">
+                Last week - 2hrs
+              </p>
             </div>
           </div>
         </div>
