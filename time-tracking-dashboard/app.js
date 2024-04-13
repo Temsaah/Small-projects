@@ -4,14 +4,16 @@ const dailyBtn = document.querySelector(".daily-btn");
 const weeklyBtn = document.querySelector(".weekly-btn");
 const monthlyBtn = document.querySelector(".monthly-btn");
 
-fetch("data.json")
-  .then((response) => response.json())
-  .then((data) => {
+async function fetchData(timeframe) {
+  try {
+    const response = await fetch("data.json");
+    const data = await response.json();
+
     data.forEach((activity, index) => {
       let card = cards[index];
       let activityTitle = activity.title;
-      let timeLapseCurrent = activity.timeframes.weekly.current;
-      let timeLapseLast = activity.timeframes.weekly.previous;
+      let timeLapseCurrent = activity["timeframes"][`${timeframe}`]["current"];
+      let timeLapseLast = activity["timeframes"][`${timeframe}`]["previous"];
 
       card.querySelector(".title").textContent = activityTitle;
       card.querySelector(".timelapse").textContent = `${timeLapseCurrent}hrs`;
@@ -19,53 +21,23 @@ fetch("data.json")
         ".timelapse-last"
       ).textContent = `Last week - ${timeLapseLast}hrs`;
     });
-  });
-
-dailyBtn.addEventListener("click", () => {
-  getTimeLapse("daily");
-  timeLapseBtns.forEach((btn) => {
-    if (btn.classList.contains("text-white")) {
-      btn.classList.remove("text-white");
-    }
-  });
-  dailyBtn.classList.add("text-white");
-});
-
-weeklyBtn.addEventListener("click", () => {
-  getTimeLapse("weekly");
-  timeLapseBtns.forEach((btn) => {
-    if (btn.classList.contains("text-white")) {
-      btn.classList.remove("text-white");
-    }
-  });
-  weeklyBtn.classList.add("text-white");
-});
-
-monthlyBtn.addEventListener("click", () => {
-  getTimeLapse("monthly");
-  timeLapseBtns.forEach((btn) => {
-    if (btn.classList.contains("text-white")) {
-      btn.classList.remove("text-white");
-    }
-  });
-  monthlyBtn.classList.add("text-white");
-});
-
-function getTimeLapse(time) {
-  fetch("data.json")
-    .then((response) => response.json())
-    .then((data) => {
-      data.forEach((activity, index) => {
-        let card = cards[index];
-        let activityTitle = activity.title;
-        let timeLapseCurrent = activity["timeframes"][`${time}`]["current"];
-        let timeLapseLast = activity["timeframes"][`${time}`]["previous"];
-
-        card.querySelector(".title").textContent = activityTitle;
-        card.querySelector(".timelapse").textContent = `${timeLapseCurrent}hrs`;
-        card.querySelector(
-          ".timelapse-last"
-        ).textContent = `Last week - ${timeLapseLast}hrs`;
-      });
-    });
+  } catch (error) {
+    console.error("Error:", error);
+  }
 }
+
+function addEventListenerToButton(button, timeframe) {
+  button.addEventListener("click", () => {
+    fetchData(timeframe);
+    timeLapseBtns.forEach((btn) => {
+      if (btn.classList.contains("text-white")) {
+        btn.classList.remove("text-white");
+      }
+    });
+    button.classList.add("text-white");
+  });
+}
+
+addEventListenerToButton(dailyBtn, "daily");
+addEventListenerToButton(weeklyBtn, "weekly");
+addEventListenerToButton(monthlyBtn, "monthly");
