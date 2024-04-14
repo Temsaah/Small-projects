@@ -38,6 +38,6 @@ function addEventListenerToButton(button, timeframe) {
   });
 }
 
-addEventListenerToButton(dailyBtn, "daily");
-addEventListenerToButton(weeklyBtn, "weekly");
-addEventListenerToButton(monthlyBtn, "monthly");
+["daily", "weekly", "monthly"].forEach((timeframe) => {
+  addEventListenerToButton(document.querySelector(`.${timeframe}-btn`), timeframe);
+});
