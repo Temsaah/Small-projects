@@ -562,6 +562,34 @@ video {
   right: 1.25rem;
 }
 
+.left-0{
+  left: 0px;
+}
+
+.right-0{
+  right: 0px;
+}
+
+.left-1{
+  left: 0.25rem;
+}
+
+.left-1\/2{
+  left: 50%;
+}
+
+.right-1\/2{
+  right: 50%;
+}
+
+.top-5{
+  top: 1.25rem;
+}
+
+.top-2{
+  top: 0.5rem;
+}
+
 .col-start-1{
   grid-column-start: 1;
 }
@@ -594,12 +622,12 @@ video {
   display: grid;
 }
 
-.h-1\/2{
-  height: 50%;
+.hidden{
+  display: none;
 }
 
-.h-\[420px\]{
-  height: 420px;
+.h-1\/2{
+  height: 50%;
 }
 
 .min-h-screen{
@@ -616,6 +644,21 @@ video {
 
 .w-full{
   width: 100%;
+}
+
+.translate-x-0{
+  --tw-translate-x: 0px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.translate-x-1{
+  --tw-translate-x: 0.25rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.translate-x-1\/2{
+  --tw-translate-x: 50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .flex-col{
@@ -658,16 +701,16 @@ video {
   overflow: hidden;
 }
 
-.overflow-y-auto{
-  overflow-y: auto;
-}
-
 .rounded-full{
   border-radius: 9999px;
 }
 
 .rounded-xl{
   border-radius: 0.75rem;
+}
+
+.rounded{
+  border-radius: 0.25rem;
 }
 
 .border-2{
@@ -714,6 +757,11 @@ video {
   background-color: hsl(264 64% 52% / var(--tw-bg-opacity));
 }
 
+.bg-white{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
 .p-5{
   padding: 1.25rem;
 }
@@ -722,9 +770,36 @@ video {
   padding: 1.5rem;
 }
 
+.p-4{
+  padding: 1rem;
+}
+
+.p-2{
+  padding: 0.5rem;
+}
+
+.p-3{
+  padding: 0.75rem;
+}
+
 .py-7{
   padding-top: 1.75rem;
   padding-bottom: 1.75rem;
+}
+
+.py-2{
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.px-2{
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.py-1{
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 
 .font-Rubik{
@@ -749,6 +824,11 @@ video {
 .text-xl{
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+
+.text-xs{
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
 .font-light{
