@@ -50,11 +50,18 @@
     <main>
       <section class="transform md:grid md:grid-cols-2">
         <img
-          class="w-full max-h-[60vh] md:h-full md:col-start-2 object-cover object-center"
+          class="w-full object-cover object-center md:hidden"
           src="images/mobile/image-transform.jpg"
           alt=""
         />
-        <div class="info text-center px-7 p-16 grid gap-7 md:row-start-1">
+        <img
+          class="hidden md:block md:col-start-2 object-cover h-full w-full"
+          src="images/desktop/image-transform.jpg"
+          alt=""
+        />
+        <div
+          class="info text-center p-16 grid gap-7 md:content-center md:text-start md:items md:row-start-1"
+        >
           <h2
             class="text-3xl font-extrabold font-Fraunces text-neutral-vd-desat-blue"
           >
@@ -66,7 +73,7 @@
             most of the marketing for you.
           </p>
           <button
-            class="relative z-20 w-fit m-auto uppercase font-Fraunces text-neutral-vd-desat-blue font-bold tracking-wider after:absolute after:block after:w-full after:h-2 after:rounded-full after:bottom-0 after:-z-10 after:bg-primary-yellow/40"
+            class="relative z-20 md:m-0 w-fit m-auto uppercase font-Fraunces text-neutral-vd-desat-blue font-bold tracking-wider after:absolute after:block after:w-full after:h-2 after:rounded-full after:bottom-0 after:-z-10 after:bg-primary-yellow/40"
           >
             Learn More
           </button>
@@ -74,11 +81,18 @@
       </section>
       <section class="stand-out md:grid md:grid-cols-2">
         <img
-          class="w-full max-h-[60vh] md:h-full object-cover object-center"
+          class="w-full object-cover object-center md:hidden"
           src="images/mobile/image-stand-out.jpg"
           alt=""
         />
-        <div class="info text-center px-7 p-16 grid gap-7">
+        <img
+          class="hidden md:block col-start-1 h-full w-full object-cover"
+          src="images/desktop/image-stand-out.jpg"
+          alt=""
+        />
+        <div
+          class="info text-center p-16 grid gap-7 md:content-center md:text-start md:items"
+        >
           <h2
             class="text-3xl font-extrabold font-Fraunces text-neutral-vd-desat-blue"
           >
@@ -90,48 +104,63 @@
             extend your brand in digital places.
           </p>
           <button
-            class="relative z-20 w-fit m-auto uppercase font-Fraunces text-neutral-vd-desat-blue font-bold tracking-wider after:absolute after:block after:w-full after:h-2 after:rounded-full after:bottom-0 after:-z-10 after:bg-primary-dark-desat-cyan/20"
+            class="relative z-20 md:m-0 w-fit m-auto uppercase font-Fraunces text-neutral-vd-desat-blue font-bold tracking-wider after:absolute after:block after:w-full after:h-2 after:rounded-full after:bottom-0 after:-z-10 after:bg-primary-dark-desat-cyan/20"
           >
             Learn More
           </button>
         </div>
       </section>
-      <section class="graphic-design relative">
-        <img
-          class="w-full max-h-[100vh] object-cover object-center"
-          src="images/mobile/image-graphic-design.jpg"
-          alt=""
-        />
-        <div class="info absolute bottom-0 text-center px-7 p-16 grid gap-7">
-          <h2
-            class="text-3xl font-extrabold font-Fraunces text-neutral-vd-grayish-blue"
+      <section class="md:grid md:grid-cols-2">
+        <section class="graphic-design relative">
+          <img
+            class="w-full max-h-[100vh] object-cover object-center md:hidden"
+            src="images/mobile/image-graphic-design.jpg"
+            alt=""
+          />
+          <img
+            class="hidden md:block w-full"
+            src="images/desktop/image-graphic-design.jpg"
+            alt=""
+          />
+          <div class="info absolute bottom-0 text-center px-7 p-16 grid gap-7">
+            <h2
+              class="text-3xl font-extrabold font-Fraunces text-neutral-vd-grayish-blue"
+            >
+              Graphic design
+            </h2>
+            <p class="text-neutral-vd-grayish-blue font-semibold leading-7">
+              Great design makes you memorable. We deliver artwork that
+              underscores your brand message and captures potential clients’
+              attention.
+            </p>
+          </div>
+        </section>
+        <section class="photography relative">
+          <img
+            class="w-full max-h-[100vh] object-cover object-center md:hidden"
+            src="images/mobile/image-photography.jpg"
+            alt=""
+          />
+          <img
+            class="hidden md:block w-full"
+            src="images/desktop/image-photography.jpg"
+            alt=""
+          />
+
+          <div
+            class="info w-full absolute bottom-0 text-center px-7 p-16 grid gap-7"
           >
-            Graphic design
-          </h2>
-          <p class="text-neutral-vd-grayish-blue font-semibold leading-7">
-            Great design makes you memorable. We deliver artwork that
-            underscores your brand message and captures potential clients’
-            attention.
-          </p>
-        </div>
-      </section>
-      <section class="photography relative">
-        <img
-          class="w-full max-h-[100vh] object-cover object-center"
-          src="images/mobile/image-photography.jpg"
-          alt=""
-        />
-        <div class="info absolute bottom-0 text-center px-7 p-16 grid gap-7">
-          <h2
-            class="text-3xl font-extrabold font-Fraunces text-neutral-vd-grayish-blue"
-          >
-            Photography
-          </h2>
-          <p class="text-neutral-vd-grayish-blue font-semibold leading-7">
-            Increase your credibility by getting the most stunning, high-quality
-            photos that improve your business image.
-          </p>
-        </div>
+            <h2
+              class="text-3xl font-extrabold font-Fraunces text-neutral-vd-grayish-blue"
+            >
+              Photography
+            </h2>
+            <p class="text-neutral-vd-grayish-blue font-semibold leading-7">
+              Increase your credibility by getting the most stunning,
+              high-quality photos that improve your business image.
+            </p>
+          </div>
+        </section>
       </section>
       <section class="client-testimonials px-8 p-16 text-center grid gap-16">
         <h2
@@ -205,16 +234,14 @@
           </div>
         </div>
       </section>
-      <section
-        class="image-gallery grid grid-rows-2 grid-cols-2 md:flex md:max-w-[100vw]"
-      >
+      <section class="image-gallery grid grid-rows-2 grid-cols-2 md:flex">
         <img
           class="w-full object-cover object-center md:hidden"
           src="images/mobile/image-gallery-milkbottles.jpg"
           alt=""
         />
         <img
-          class="hidden"
+          class="hidden md:block min-w-0"
           src="images/desktop/image-gallery-milkbottles.jpg"
           alt=""
         />
@@ -224,7 +251,7 @@
           alt=""
         />
         <img
-          class="hidden"
+          class="hidden md:block min-w-0"
           src="images/desktop/image-gallery-orange.jpg"
           alt=""
         />
@@ -234,7 +261,7 @@
           alt=""
         />
         <img
-          class="hidden"
+          class="hidden md:block min-w-0"
           src="images/desktop/image-gallery-cone.jpg"
           alt=""
         />
@@ -244,7 +271,7 @@
           alt=""
         />
         <img
-          class="hidden"
+          class="hidden md:block min-w-0"
           src="images/desktop/image-gallery-sugarcubes.jpg"
           alt=""
         />
