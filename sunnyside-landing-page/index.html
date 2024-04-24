@@ -18,14 +18,20 @@
   </head>
   <body class="font-Barlow">
     <nav class="absolute w-full z-40">
-      <div class="navbar flex justify-between items-center flex-wrap p-4">
+      <div class="navbar flex justify-between items-center flex-wrap p-10">
         <a href="#"><img src="images/logo.svg" alt="" /></a>
         <div class="navbar--items hidden lg:block">
-          <ul class="flex gap-4">
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">Contact</a></li>
+          <ul class="flex gap-10 font-Fraunces">
+            <li><a class="text-white" href="#">About</a></li>
+            <li><a class="text-white" href="#">Services</a></li>
+            <li><a class="text-white" href="#">Projects</a></li>
+            <li>
+              <a
+                class="uppercase text-black text-xs font-bold bg-white py-3 px-5 rounded-full"
+                href="#"
+                >Contact</a
+              >
+            </li>
           </ul>
         </div>
         <img class="lg:hidden" src="images/icon-hamburger.svg" alt="" />
@@ -111,20 +117,12 @@
         </div>
       </section>
       <section class="md:grid md:grid-cols-2">
-        <section class="graphic-design relative">
-          <img
-            class="w-full max-h-[100vh] object-cover object-center md:hidden"
-            src="images/mobile/image-graphic-design.jpg"
-            alt=""
-          />
-          <img
-            class="hidden md:block w-full"
-            src="images/desktop/image-graphic-design.jpg"
-            alt=""
-          />
-          <div class="info absolute bottom-0 text-center px-7 p-16 grid gap-7">
+        <!-- <section
+          class="graphic-design grid items-end bg-no-repeat bg-center bg-cover min-h-screen bg-[url('images/mobile/image-graphic-design.jpg')] md:bg-[url('images/desktop/image-graphic-design.jpg')]"
+        >
+          <div class="info grid gap-6 text-center py-12">
             <h2
-              class="text-3xl font-extrabold font-Fraunces text-neutral-vd-grayish-blue"
+              class="text-3xl font-extrabold font-Fraunces text-neutral-vd-grayish-blue md:text-2xl"
             >
               Graphic design
             </h2>
@@ -135,7 +133,36 @@
             </p>
           </div>
         </section>
-        <section class="photography relative">
+        <section class="photography"></section> -->
+        <section class="graphic-design relative flex items-end">
+          <img
+            class="w-full max-h-[100vh] object-cover object-center md:hidden"
+            src="images/mobile/image-graphic-design.jpg"
+            alt=""
+          />
+          <img
+            class="hidden md:block w-full"
+            src="images/desktop/image-graphic-design.jpg"
+            alt=""
+          />
+          <div
+            class="info w-full absolute text-center px-7 p-[10%] md:p-[5%] lg:p-[10%] grid gap-7 md:gap-5 lg:px-24"
+          >
+            <h2
+              class="text-3xl font-extrabold font-Fraunces text-neutral-vd-grayish-blue md:text-2xl"
+            >
+              Graphic design
+            </h2>
+            <p
+              class="text-neutral-vd-grayish-blue max-w-[40ch] m-auto font-semibold leading-7"
+            >
+              Great design makes you memorable. We deliver artwork that
+              underscores your brand message and captures potential clients’
+              attention.
+            </p>
+          </div>
+        </section>
+        <section class="photography flex items-end relative">
           <img
             class="w-full max-h-[100vh] object-cover object-center md:hidden"
             src="images/mobile/image-photography.jpg"
@@ -148,14 +175,16 @@
           />
 
           <div
-            class="info w-full absolute bottom-0 text-center px-7 p-16 grid gap-7"
+            class="info w-full absolute text-center px-7 p-[10%] md:p-[5%] lg:p-[10%] grid gap-7 md:gap-5 lg:px-24"
           >
             <h2
-              class="text-3xl font-extrabold font-Fraunces text-neutral-vd-grayish-blue"
+              class="text-3xl font-extrabold font-Fraunces text-neutral-vd-grayish-blue md:text-2xl"
             >
               Photography
             </h2>
-            <p class="text-neutral-vd-grayish-blue font-semibold leading-7">
+            <p
+              class="text-neutral-vd-grayish-blue max-w-[40ch] m-auto font-semibold leading-7"
+            >
               Increase your credibility by getting the most stunning,
               high-quality photos that improve your business image.
             </p>
