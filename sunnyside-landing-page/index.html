@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="scroll-smooth" lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,10 +17,10 @@
     <link rel="stylesheet" href="output.css" />
   </head>
   <body class="font-Barlow">
-    <nav class="absolute w-full z-40">
-      <div class="navbar flex justify-between items-center flex-wrap p-10">
+    <nav class="absolute w-full z-40 p-10">
+      <div class="navbar relative flex justify-between items-center flex-wrap">
         <a href="#"><img src="images/logo.svg" alt="" /></a>
-        <div class="navbar--items hidden lg:block">
+        <div class="navbar--items hidden md:block">
           <ul class="flex gap-10 font-Fraunces">
             <li><a class="text-white" href="#">About</a></li>
             <li><a class="text-white" href="#">Services</a></li>
@@ -34,7 +34,45 @@
             </li>
           </ul>
         </div>
-        <img class="lg:hidden" src="images/icon-hamburger.svg" alt="" />
+        <img
+          class="ham-btn z-10 md:hidden"
+          src="images/icon-hamburger.svg"
+          alt=""
+        />
+        <div
+          class="mobile-navbar md:hidden absolute quote w-full top-20 bg-white flex justify-center"
+        >
+          <ul class="grid gap-8 text-center p-7">
+            <li>
+              <a
+                class="text-neutral-vd-grayish-blue text-lg font-medium"
+                href="#"
+                >About</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-neutral-vd-grayish-blue text-lg font-medium"
+                href="#"
+                >Services</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-neutral-vd-grayish-blue text-lg font-medium"
+                href="#"
+                >Projects</a
+              >
+            </li>
+            <li class="px-8 py-3 bg-primary-yellow rounded-full">
+              <a
+                class="uppercase text-black font-Fraunces font-bold text-base"
+                href="#"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
 
@@ -45,16 +83,21 @@
         class="hero min-h-screen flex gap-10 flex-col place-content-center place-items-center"
       >
         <p
-          class="uppercase text-5xl font-Fraunces font-bold text-white text-center tracking-widest"
+          class="uppercase text-3xl sm:text-5xl font-Fraunces font-bold text-white text-center tracking-widest"
         >
           We Are Creatives
         </p>
-        <img src="images/icon-arrow-down.svg" alt="" />
+        <a
+          href="#transform
+        "
+        >
+          <img src="images/icon-arrow-down.svg" alt=""
+        /></a>
       </div>
     </header>
 
     <main>
-      <section class="transform md:grid md:grid-cols-2">
+      <section id="transform" class="md:grid md:grid-cols-2">
         <img
           class="w-full object-cover object-center md:hidden"
           src="images/mobile/image-transform.jpg"
@@ -85,7 +128,7 @@
           </button>
         </div>
       </section>
-      <section class="stand-out md:grid md:grid-cols-2">
+      <section id="stand-out" class="md:grid md:grid-cols-2">
         <img
           class="w-full object-cover object-center md:hidden"
           src="images/mobile/image-stand-out.jpg"
@@ -117,24 +160,7 @@
         </div>
       </section>
       <section class="md:grid md:grid-cols-2">
-        <!-- <section
-          class="graphic-design grid items-end bg-no-repeat bg-center bg-cover min-h-screen bg-[url('images/mobile/image-graphic-design.jpg')] md:bg-[url('images/desktop/image-graphic-design.jpg')]"
-        >
-          <div class="info grid gap-6 text-center py-12">
-            <h2
-              class="text-3xl font-extrabold font-Fraunces text-neutral-vd-grayish-blue md:text-2xl"
-            >
-              Graphic design
-            </h2>
-            <p class="text-neutral-vd-grayish-blue font-semibold leading-7">
-              Great design makes you memorable. We deliver artwork that
-              underscores your brand message and captures potential clients’
-              attention.
-            </p>
-          </div>
-        </section>
-        <section class="photography"></section> -->
-        <section class="graphic-design relative flex items-end">
+        <section id="graphic-design" class="relative flex items-end">
           <img
             class="w-full max-h-[100vh] object-cover object-center md:hidden"
             src="images/mobile/image-graphic-design.jpg"
@@ -162,7 +188,7 @@
             </p>
           </div>
         </section>
-        <section class="photography flex items-end relative">
+        <section id="photography" class="flex items-end relative">
           <img
             class="w-full max-h-[100vh] object-cover object-center md:hidden"
             src="images/mobile/image-photography.jpg"
@@ -191,7 +217,9 @@
           </div>
         </section>
       </section>
-      <section class="client-testimonials px-8 p-16 text-center grid gap-16">
+      <section
+        class="client-testimonials px-8 p-16 text-center grid gap-16 max-w-[1500px] m-auto"
+      >
         <h2
           class="text-lg uppercase text-primary-dark-cyan font-bold font-Fraunces tracking-lg"
         >
@@ -345,5 +373,6 @@
         </ul>
       </div>
     </footer>
+    <script src="app.js"></script>
   </body>
 </html>
