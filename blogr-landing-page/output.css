@@ -771,6 +771,10 @@ video {
   align-items: center;
 }
 
+.justify-center{
+  justify-content: center;
+}
+
 .justify-between{
   justify-content: space-between;
 }
@@ -791,6 +795,22 @@ video {
   gap: 1.25rem;
 }
 
+.gap-1{
+  gap: 0.25rem;
+}
+
+.gap-10{
+  gap: 2.5rem;
+}
+
+.gap-2{
+  gap: 0.5rem;
+}
+
+.gap-20{
+  gap: 5rem;
+}
+
 .overflow-hidden{
   overflow: hidden;
 }
@@ -807,6 +827,14 @@ video {
   border-top-right-radius: 6rem;
 }
 
+.rounded-tr-\[\]{
+  border-top-right-radius: ;
+}
+
+.rounded-tr-\[6\]{
+  border-top-right-radius: 6;
+}
+
 .border{
   border-width: 1px;
 }
@@ -819,6 +847,21 @@ video {
 .bg-white{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-primary-vdark-blue{
+  --tw-bg-opacity: 1;
+  background-color: hsl(208 49% 24% / var(--tw-bg-opacity));
+}
+
+.bg-neutral-vd-grayish-blue{
+  --tw-bg-opacity: 1;
+  background-color: hsl(207 13% 34% / var(--tw-bg-opacity));
+}
+
+.bg-neutral-vd-black-blue{
+  --tw-bg-opacity: 1;
+  background-color: hsl(240 10% 16% / var(--tw-bg-opacity));
 }
 
 .bg-gradient-to-b{
@@ -888,6 +931,21 @@ video {
   padding-bottom: 10rem;
 }
 
+.py-10{
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.py-1{
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.py-16{
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
 .pt-14{
   padding-top: 3.5rem;
 }
@@ -917,6 +975,11 @@ video {
 .text-sm{
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+
+.text-base{
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 .font-bold{
@@ -957,6 +1020,21 @@ video {
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.first\:bg-red-700:first-child{
+  --tw-bg-opacity: 1;
+  background-color: rgb(185 28 28 / var(--tw-bg-opacity));
+}
+
+.first\:text-red-700:first-child{
+  --tw-text-opacity: 1;
+  color: rgb(185 28 28 / var(--tw-text-opacity));
+}
+
+.first-of-type\:text-red-700:first-of-type{
+  --tw-text-opacity: 1;
+  color: rgb(185 28 28 / var(--tw-text-opacity));
 }
 
 @media (min-width: 640px){
@@ -1011,4 +1089,32 @@ video {
     --tw-scale-y: .5;
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   }
+}
+
+.\[\&\>\*\:first-child\]\:mb-10>*:first-child{
+  margin-bottom: 2.5rem;
+}
+
+.\[\&\>\*\:first-child\]\:mb-5>*:first-child{
+  margin-bottom: 1.25rem;
+}
+
+.\[\&\>\*\:first-child\]\:text-red-700>*:first-child{
+  --tw-text-opacity: 1;
+  color: rgb(185 28 28 / var(--tw-text-opacity));
+}
+
+.\[\&\>\*\:first-child\]\:text-white>*:first-child{
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.\[\&\>\:first-child\]\:text-red-700>:first-child{
+  --tw-text-opacity: 1;
+  color: rgb(185 28 28 / var(--tw-text-opacity));
+}
+
+.\[\&\>li\:first-child\]\:text-red-700>li:first-child{
+  --tw-text-opacity: 1;
+  color: rgb(185 28 28 / var(--tw-text-opacity));
 }
