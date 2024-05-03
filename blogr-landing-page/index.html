@@ -18,11 +18,54 @@
     </style>
   </head>
   <body class="font-Overpass">
-    <nav class="absolute w-full py-12 px-6 z-20">
+    <nav class="absolute nav-bar w-full py-12 px-6 z-20">
       <div class="navbar-items flex items-center justify-between flex-wrap">
         <img class="w-16" src="images/logo.svg" alt="">
-        <img src="images/icon-hamburger.svg" alt="">
+        <button class="open-menu"><img src="images/icon-hamburger.svg" alt=""></button>
+        <button class="hidden close-menu"><img src="images/icon-close.svg" alt=""></button>
       </div>
+      <ul class="hidden mobile-menu bg-white px-5 py-10 mt-5 rounded-lg grid gap-6" role="menubar">
+        <li>
+          <div class="menubar-item cursor-pointer flex items-center justify-center gap-2 text-lg font-medium text-neutral-vd-grayish-blue">
+            <a class="sub-menu" href="#">Product</a>
+            <img class="icon" src="images/icon-arrow-dark.svg" alt="">
+          </div>
+          <ul class="hidden text-center bg-neutral-grayish-blue/30 grid gap-5 mt-5  p-4 text-neutral-vd-grayish-blue/80 rounded-lg font-Overpass font-medium text-[15px]">
+            <li>Overview</li>
+            <li>Pricing</li>
+            <li>Marketplace</li>
+            <li>Features</li>
+            <li>Integrations</li>
+          </ul>
+        </li>
+        <li>
+          <div class="menubar-item cursor-pointer flex items-center justify-center gap-2 text-lg font-medium text-neutral-vd-grayish-blue">
+            <a class="sub-menu" href="#">Company</a>
+            <img class="icon" src="images/icon-arrow-dark.svg" alt="">
+          </div>
+          <ul class="hidden text-center bg-neutral-grayish-blue/30 grid gap-5 mt-5  p-4 text-neutral-vd-grayish-blue/80 rounded-lg font-Overpass font-medium text-[15px]">
+            <li>About</li>
+            <li>Team</li>
+            <li>Blog</li>
+            <li>Careers</li>
+          </ul>
+        </li>
+        <li>
+          <div class="menubar-item cursor-pointer flex items-center justify-center text-lg font-medium text-neutral-vd-grayish-blue gap-2">
+            <a class="sub-menu" href="#">Connect</a>
+            <img class="icon" src="images/icon-arrow-dark.svg" alt="">
+          </div>
+          <ul class="hidden text-center bg-neutral-grayish-blue/30 grid gap-5 mt-5  p-4 text-neutral-vd-grayish-blue/80 rounded-lg font-Overpass font-medium text-[15px]">
+            <li>Contact</li>
+            <li>Newsletter</li>
+            <li>LinkedIn</li>
+          </ul>
+        </li>
+        <div class="btns mt-10 grid justify-center gap-5 flex flex-col">
+          <button class="text-neutral-vd-black-blue font-Ubuntu text-lg">Login</button>
+          <button class="bg-gradient-to-r from-bg-vl-red to-bg-l-red px-10 py-3 text-white font-Ubuntu font-extrabold rounded-full">Sign Up</button>
+        </div>
+      </ul>
     </nav>
 
     <header class="bg-gradient-to-b from-bg-vl-red to-bg-l-red grid gap-4 place-items-center text-center py-[10rem] px-[2rem] relative z-10 overflow-hidden rounded-bl-[6rem] ">
@@ -41,7 +84,7 @@
     <main>
       <section class="p-4 py-24 grid gap-16">
         <h2 class="text-center text-2xl text-primary-vdark-blue font-medium">Designed for the future</h2>
-        <img src="images/illustration-editor-mobile.svg" alt="">
+        <img class="m-auto" src="images/illustration-editor-mobile.svg" alt="">
         <div class="editor-info p-2 text-center grid gap-5">
           <h3 class="text-2xl text-primary-vdark-blue font-medium">Introducing an extensible editor</h3>
           <p class="text-sm leading-6 text-primary-vdark-blue font-light">Blogr features an exceedingly intuitive interface which lets you focus on one thing: creating content. 
@@ -69,7 +112,7 @@
         </div>
       </section>
       <section class="p-4 py-24 grid gap-16">
-        <img src="images/illustration-laptop-mobile.svg" alt="">
+        <img class="m-auto" src="images/illustration-laptop-mobile.svg" alt="">
         <div class="editor-info p-2 text-center grid gap-5">
           <h3 class="text-2xl text-primary-vdark-blue font-medium">Free, open, simple</h3>
           <p class="text-sm leading-6 text-primary-vdark-blue font-light">Blogr is a free and open source application backed by a large community of helpful developers. It supports 
@@ -110,14 +153,6 @@
         </ul>       
       </nav>
     </footer>
-
-    <!--
-  
-  Blogr is a free and open source application backed by a large community of helpful developers. It supports 
-  features such as code syntax highlighting, RSS feeds, social media integration, third-party commenting tools, 
-  and works seamlessly with Google Analytics. The architecture is clean and is relatively easy to learn.
-
-  
-   -->
+   <script src="app.js"></script>
   </body>
 </html>
