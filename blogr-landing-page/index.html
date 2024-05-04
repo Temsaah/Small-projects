@@ -18,59 +18,59 @@
     </style>
   </head>
   <body class="font-Overpass">
-    <nav class="absolute nav-bar w-full py-12 px-6 z-20">
-      <div class="navbar-items flex items-center justify-between flex-wrap">
-        <img class="w-16" src="images/logo.svg" alt="">
-        <button class="open-menu"><img src="images/icon-hamburger.svg" alt=""></button>
-        <button class="hidden close-menu"><img src="images/icon-close.svg" alt=""></button>
-      </div>
-      <ul class="hidden mobile-menu bg-white px-5 py-10 mt-5 rounded-lg grid gap-6" role="menubar">
-        <li>
-          <div class="menubar-item cursor-pointer flex items-center justify-center gap-2 text-lg font-medium text-neutral-vd-grayish-blue">
-            <a class="sub-menu" href="#">Product</a>
-            <img class="icon" src="images/icon-arrow-dark.svg" alt="">
-          </div>
-          <ul class="hidden text-center bg-neutral-grayish-blue/30 grid gap-5 mt-5  p-4 text-neutral-vd-grayish-blue/80 rounded-lg font-Overpass font-medium text-[15px]">
-            <li>Overview</li>
-            <li>Pricing</li>
-            <li>Marketplace</li>
-            <li>Features</li>
-            <li>Integrations</li>
-          </ul>
-        </li>
-        <li>
-          <div class="menubar-item cursor-pointer flex items-center justify-center gap-2 text-lg font-medium text-neutral-vd-grayish-blue">
-            <a class="sub-menu" href="#">Company</a>
-            <img class="icon" src="images/icon-arrow-dark.svg" alt="">
-          </div>
-          <ul class="hidden text-center bg-neutral-grayish-blue/30 grid gap-5 mt-5  p-4 text-neutral-vd-grayish-blue/80 rounded-lg font-Overpass font-medium text-[15px]">
-            <li>About</li>
-            <li>Team</li>
-            <li>Blog</li>
-            <li>Careers</li>
-          </ul>
-        </li>
-        <li>
-          <div class="menubar-item cursor-pointer flex items-center justify-center text-lg font-medium text-neutral-vd-grayish-blue gap-2">
-            <a class="sub-menu" href="#">Connect</a>
-            <img class="icon" src="images/icon-arrow-dark.svg" alt="">
-          </div>
-          <ul class="hidden text-center bg-neutral-grayish-blue/30 grid gap-5 mt-5  p-4 text-neutral-vd-grayish-blue/80 rounded-lg font-Overpass font-medium text-[15px]">
-            <li>Contact</li>
-            <li>Newsletter</li>
-            <li>LinkedIn</li>
-          </ul>
-        </li>
-        <div class="btns mt-10 grid justify-center gap-5 flex flex-col">
-          <button class="text-neutral-vd-black-blue font-Ubuntu text-lg">Login</button>
-          <button class="bg-gradient-to-r from-bg-vl-red to-bg-l-red px-10 py-3 text-white font-Ubuntu font-extrabold rounded-full">Sign Up</button>
+    
+    <header class="relative bg-gradient-to-b from-bg-vl-red to-bg-l-red grid gap-4 place-items-center text-center py-[10rem] px-[2rem] relative z-10 overflow-hidden rounded-bl-[6rem] ">
+      <nav class="absolute max-w-[1400px] top-0  nav-bar w-full py-12 px-6 z-20 md:justify-center md:flex md:items-center md:gap-16">
+        <div class="navbar-items flex items-center justify-between flex-wrap md:block md:w-fit ">
+          <img class="w-16" src="images/logo.svg" alt="">
+          <button class="open-menu md:hidden"><img src="images/icon-hamburger.svg" alt=""></button>
+          <button class="hidden close-menu md:hidden"><img src="images/icon-close.svg" alt=""></button>
         </div>
-      </ul>
-    </nav>
-
-    <header class="bg-gradient-to-b from-bg-vl-red to-bg-l-red grid gap-4 place-items-center text-center py-[10rem] px-[2rem] relative z-10 overflow-hidden rounded-bl-[6rem] ">
+        <ul class="hidden mobile-menu bg-white px-5 py-10 mt-5 rounded-lg grid gap-6 md:bg-inherit md:flex md:items-center md:w-full md:p-0 md:m-0" role="menubar">
+          <li>
+            <div class="menubar-item cursor-pointer flex items-center justify-center gap-2 text-lg font-medium text-neutral-vd-grayish-blue">
+              <a class="sub-menu" href="#">Product</a>
+              <img class="icon" src="images/icon-arrow-dark.svg" alt="">
+            </div>
+            <ul class="hidden text-center bg-neutral-grayish-blue/30 grid gap-5 mt-5  p-4 text-neutral-vd-grayish-blue/80 rounded-lg font-Overpass font-medium text-[15px]">
+              <li>Overview</li>
+              <li>Pricing</li>
+              <li>Marketplace</li>
+              <li>Features</li>
+              <li>Integrations</li>
+            </ul>
+          </li>
+          <li>
+            <div class="menubar-item cursor-pointer flex items-center justify-center gap-2 text-lg font-medium text-neutral-vd-grayish-blue">
+              <a class="sub-menu" href="#">Company</a>
+              <img class="icon" src="images/icon-arrow-dark.svg" alt="">
+            </div>
+            <ul class="hidden text-center bg-neutral-grayish-blue/30 grid gap-5 mt-5  p-4 text-neutral-vd-grayish-blue/80 rounded-lg font-Overpass font-medium text-[15px]">
+              <li>About</li>
+              <li>Team</li>
+              <li>Blog</li>
+              <li>Careers</li>
+            </ul>
+          </li>
+          <li>
+            <div class="menubar-item cursor-pointer flex items-center justify-center text-lg font-medium text-neutral-vd-grayish-blue gap-2">
+              <a class="sub-menu" href="#">Connect</a>
+              <img class="icon" src="images/icon-arrow-dark.svg" alt="">
+            </div>
+            <ul class="hidden text-center bg-neutral-grayish-blue/30 grid gap-5 mt-5  p-4 text-neutral-vd-grayish-blue/80 rounded-lg font-Overpass font-medium text-[15px]">
+              <li>Contact</li>
+              <li>Newsletter</li>
+              <li>LinkedIn</li>
+            </ul>
+          </li>
+          <div class="btns mt-10 grid justify-center gap-5 md:m-0 md:ml-auto md:flex">
+            <button class="text-neutral-vd-black-blue font-Ubuntu text-lg">Login</button>
+            <button class="bg-gradient-to-r from-bg-vl-red to-bg-l-red px-10 py-3 text-white font-Ubuntu font-extrabold rounded-full">Sign Up</button>
+          </div>
+        </ul>
+      </nav>
       <div class="intro-text grid gap-3">
-        <h1 class="text-white text-3xl font-semibold z-10">A modern publishing platform</h1>
+        <h1 class="text-white text-3xl font-semibold z-10 md:text-6xl">A modern publishing platform</h1>
         <p class="text-neutral-grayish-blue">Grow your audience and build your online brand
       </div>
       </p>
