@@ -19,53 +19,56 @@
   </head>
   <body class="font-Overpass">
     
-    <header class="relative bg-gradient-to-b from-bg-vl-red to-bg-l-red grid gap-4 place-items-center text-center py-[10rem] px-[2rem] relative z-10 overflow-hidden rounded-bl-[6rem] ">
+    <header class="relative bg-gradient-to-b from-bg-vl-red to-bg-l-red grid gap-4 place-items-center text-center py-[10rem] px-[2rem] relative z-10 overflow-hidden rounded-bl-[6rem] md:pt-[15rem] md:py-[12rem] md:bg-gradient-to-r ">
       <nav class="absolute max-w-[1400px] top-0  nav-bar w-full py-12 px-6 z-20 md:justify-center md:flex md:items-center md:gap-16">
         <div class="navbar-items flex items-center justify-between flex-wrap md:block md:w-fit ">
-          <img class="w-16" src="images/logo.svg" alt="">
+          <img class="w-16 md:w-28" src="images/logo.svg" alt="">
           <button class="open-menu md:hidden"><img src="images/icon-hamburger.svg" alt=""></button>
           <button class="hidden close-menu md:hidden"><img src="images/icon-close.svg" alt=""></button>
         </div>
         <ul class="hidden mobile-menu bg-white px-5 py-10 mt-5 rounded-lg grid gap-6 md:bg-inherit md:flex md:items-center md:w-full md:p-0 md:m-0" role="menubar">
-          <li>
+          <li class="relative">
             <div class="menubar-item cursor-pointer flex items-center justify-center gap-2 text-lg font-medium text-neutral-vd-grayish-blue">
-              <a class="sub-menu" href="#">Product</a>
-              <img class="icon" src="images/icon-arrow-dark.svg" alt="">
+              <a class="sub-menu md:text-sm md:text-white hover:underline" href="#">Product</a>
+              <img class="icon md:hidden" src="images/icon-arrow-dark.svg" alt="">
+              <img class="hidden icon md:block" src="images/icon-arrow-light.svg" alt="">
             </div>
-            <ul class="hidden text-center bg-neutral-grayish-blue/30 grid gap-5 mt-5  p-4 text-neutral-vd-grayish-blue/80 rounded-lg font-Overpass font-medium text-[15px]">
-              <li>Overview</li>
-              <li>Pricing</li>
-              <li>Marketplace</li>
-              <li>Features</li>
-              <li>Integrations</li>
+            <ul class="hidden text-center bg-neutral-grayish-blue/30 grid gap-5 mt-5  p-4 text-neutral-vd-grayish-blue/80 rounded-lg font-Overpass font-medium text-[15px] md:absolute md:-left-5 md:bg-white md:pr-[100%] md:text-start md:py-6 md:gap-3 md:rounded-md">
+              <li class="cursor-pointer md:text-sm hover:text-black">Overview</li>
+              <li class="cursor-pointer md:text-sm hover:text-black">Pricing</li>
+              <li class="cursor-pointer md:text-sm hover:text-black">Marketplace</li>
+              <li class="cursor-pointer md:text-sm hover:text-black">Features</li>
+              <li class="cursor-pointer md:text-sm hover:text-black">Integrations</li>
             </ul>
           </li>
-          <li>
+          <li class="relative">
             <div class="menubar-item cursor-pointer flex items-center justify-center gap-2 text-lg font-medium text-neutral-vd-grayish-blue">
-              <a class="sub-menu" href="#">Company</a>
-              <img class="icon" src="images/icon-arrow-dark.svg" alt="">
+              <a class="sub-menu md:text-sm md:text-white hover:underline" href="#">Company</a>
+              <img class="icon md:hidden" src="images/icon-arrow-dark.svg" alt="">
+              <img class="hidden icon md:block" src="images/icon-arrow-light.svg" alt="">
             </div>
-            <ul class="hidden text-center bg-neutral-grayish-blue/30 grid gap-5 mt-5  p-4 text-neutral-vd-grayish-blue/80 rounded-lg font-Overpass font-medium text-[15px]">
-              <li>About</li>
-              <li>Team</li>
-              <li>Blog</li>
-              <li>Careers</li>
+            <ul class="hidden text-center bg-neutral-grayish-blue/30 grid gap-5 mt-5  p-4 text-neutral-vd-grayish-blue/80 rounded-lg font-Overpass font-medium text-[15px] md:absolute md:-left-5 md:bg-white md:pr-[100%] md:text-start md:py-6 md:gap-3 md:rounded-md">
+              <li class="cursor-pointer md:text-sm hover:text-black">About</li>
+              <li class="cursor-pointer md:text-sm hover:text-black">Team</li>
+              <li class="cursor-pointer md:text-sm hover:text-black">Blog</li>
+              <li class="cursor-pointer md:text-sm hover:text-black">Careers</li>
             </ul>
           </li>
-          <li>
+          <li class="relative">
             <div class="menubar-item cursor-pointer flex items-center justify-center text-lg font-medium text-neutral-vd-grayish-blue gap-2">
-              <a class="sub-menu" href="#">Connect</a>
-              <img class="icon" src="images/icon-arrow-dark.svg" alt="">
+              <a class="sub-menu md:text-sm md:text-white hover:underline" href="#">Connect</a>
+              <img class="icon md:hidden" src="images/icon-arrow-dark.svg" alt="">
+              <img class="hidden icon md:block" src="images/icon-arrow-light.svg" alt="">
             </div>
-            <ul class="hidden text-center bg-neutral-grayish-blue/30 grid gap-5 mt-5  p-4 text-neutral-vd-grayish-blue/80 rounded-lg font-Overpass font-medium text-[15px]">
-              <li>Contact</li>
-              <li>Newsletter</li>
-              <li>LinkedIn</li>
+            <ul class="hidden text-center bg-neutral-grayish-blue/30 grid gap-5 mt-5  p-4 text-neutral-vd-grayish-blue/80 rounded-lg font-Overpass font-medium text-[15px] md:absolute md:-left-5 md:bg-white md:pr-[100%] md:text-start md:py-6 md:gap-3 md:rounded-md">
+              <li class="cursor-pointer md:text-sm hover:text-black">Contact</li>
+              <li class="cursor-pointer md:text-sm hover:text-black">Newsletter</li>
+              <li class="cursor-pointer md:text-sm hover:text-black">LinkedIn</li>
             </ul>
           </li>
           <div class="btns mt-10 grid justify-center gap-5 md:m-0 md:ml-auto md:flex">
-            <button class="text-neutral-vd-black-blue font-Ubuntu text-lg">Login</button>
-            <button class="bg-gradient-to-r from-bg-vl-red to-bg-l-red px-10 py-3 text-white font-Ubuntu font-extrabold rounded-full">Sign Up</button>
+            <button class="text-neutral-vd-black-blue font-Ubuntu text-lg md:text-sm md:text-white">Login</button>
+            <button class="bg-gradient-to-r from-bg-vl-red to-bg-l-red px-10 py-3 text-white font-Ubuntu font-extrabold rounded-full md:text-sm  hover:bg-primary-vlight-red hover:bg-none">Sign Up</button>
           </div>
         </ul>
       </nav>
@@ -75,27 +78,33 @@
       </div>
       </p>
       <div class="header-btns flex gap-4">
-        <button class="font-Ubuntu text-sm text-primary-light-red bg-white px-5 py-2 font-bold rounded-full">Start for Free</button>
-        <button class="font-Ubuntu text-sm text-white font-bold px-5 py-2 border border-white rounded-full ">Learn More</button>
+        <button class="font-Ubuntu text-sm text-primary-light-red bg-white px-5 py-2 font-bold rounded-full hover:text-white hover:bg-primary-vlight-red">Start for Free</button>
+        <button class="font-Ubuntu text-sm text-white font-bold px-5 py-2 border border-white rounded-full hover:text-primary-light-red hover:bg-white">Learn More</button>
       </div>
-      <img class="bkg absolute scale-[3.5] left-[10rem] top-[10rem] -z-10" src="images/bg-pattern-intro-mobile.svg" alt="">
+      <img class="bkg absolute scale-[3.5] left-[10rem] top-[10rem] -z-10 md:hidden" src="images/bg-pattern-intro-mobile.svg" alt="">
+      <img class="hidden md:block bkg absolute scale-[2]  left-[25rem] -z-10" src="images/bg-pattern-intro-desktop.svg" alt="">
     </header>
 
     <main>
-      <section class="p-4 py-24 grid gap-16">
+      <section class="p-4 py-24 grid gap-16 lg:gap-0">
         <h2 class="text-center text-2xl text-primary-vdark-blue font-medium">Designed for the future</h2>
-        <img class="m-auto" src="images/illustration-editor-mobile.svg" alt="">
-        <div class="editor-info p-2 text-center grid gap-5">
-          <h3 class="text-2xl text-primary-vdark-blue font-medium">Introducing an extensible editor</h3>
-          <p class="text-sm leading-6 text-primary-vdark-blue font-light">Blogr features an exceedingly intuitive interface which lets you focus on one thing: creating content. 
-            The editor supports management of multiple blogs and allows easy manipulation of embeds such as images, 
-            videos, and Markdown. Extensibility with plugins and themes provide easy ways to add functionality or 
-            change the looks of a blog.</p>
+        <div class="content max-w-[1400px] m-auto md:grid md:grid-cols-2 md:items-center md:gap-16">
+          <img class="m-auto md:hidden " src="images/illustration-editor-mobile.svg" alt="">
+          <img class="hidden md:block col-start-2" src="images/illustration-editor-desktop.svg" alt="">
+        <div class="content-info grid gap-10 row-start-1">
+          <div class="editor-info p-2 text-center grid gap-5 md:text-start">
+            <h3 class="text-2xl text-primary-vdark-blue font-medium">Introducing an extensible editor</h3>
+            <p class="text-sm leading-6 text-primary-vdark-blue font-light">Blogr features an exceedingly intuitive interface which lets you focus on one thing: creating content. 
+              The editor supports management of multiple blogs and allows easy manipulation of embeds such as images, 
+              videos, and Markdown. Extensibility with plugins and themes provide easy ways to add functionality or 
+              change the looks of a blog.</p>
+          </div>
+          <div class="robust-content text-center grid gap-5 md:text-start">
+            <h3 class="text-2xl text-primary-vdark-blue font-medium">Robust content management</h3>
+            <p class="text-sm leading-6 text-primary-vdark-blue font-light">Flexible content management enables users to easily move through posts. Increase the usability of your blog 
+              by adding customized categories, sections, format, or flow. With this functionality, you’re in full control.</p>
+          </div>
         </div>
-        <div class="robust-content text-center grid gap-5">
-          <h3 class="text-2xl text-primary-vdark-blue font-medium">Robust content management</h3>
-          <p class="text-sm leading-6 text-primary-vdark-blue font-light">Flexible content management enables users to easily move through posts. Increase the usability of your blog 
-            by adding customized categories, sections, format, or flow. With this functionality, you’re in full control.</p>
         </div>
       </section>
       <section class="relative z-10 mt-28  bg-gradient-to-b from-bd-vd-gray-blue to-bd-dark-desat-blue py-[10rem] grid place-items-center rounded-bl-[6rem] rounded-tr-[6rem]">

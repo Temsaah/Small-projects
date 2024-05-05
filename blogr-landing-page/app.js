@@ -19,7 +19,7 @@ function toggleMenu() {
 }
 
 function handleSubMenuClick(event) {
-  const targetMenu = event.target.parentElement.nextElementSibling;
+  const targetMenu = event.target.closest(".menubar-item").nextElementSibling;
 
   if (!targetMenu.classList.contains("hidden")) {
     targetMenu.classList.add("hidden");
