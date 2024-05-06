@@ -107,28 +107,29 @@
         </div>
         </div>
       </section>
-      <section class="relative z-10 mt-28  bg-gradient-to-b from-bd-vd-gray-blue to-bd-dark-desat-blue py-[10rem] grid place-items-center rounded-bl-[6rem] rounded-tr-[6rem]">
-        <div class="phone-bkg absolute top-0 max-h-full -z-10 rounded-bl-[6rem] rounded-tr-[6rem] overflow-hidden">
-          <img class="content-bg relative scale-150  -top-32 sm:scale-90 sm:-top-64 " src="images/bg-pattern-circles.svg" alt="">
+      <section class="relative z-10 mt-28 mb-10  bg-gradient-to-b from-bd-vd-gray-blue to-bd-dark-desat-blue py-[10rem] grid place-items-center rounded-bl-[6rem] rounded-tr-[6rem] md:bg-gradient-to-r md:rounded-bl-[6rem] md:grid md:grid-cols-2 md:py-[9rem]">
+        <div class="phone-bkg absolute top-0 max-h-full -z-10 rounded-bl-[6rem] rounded-tr-[6rem] overflow-hidden md:left-0">
+          <img class="content-bg relative scale-150  -top-32 sm:scale-90 sm:-top-64 md:top-[-25rem] md:left-[-10rem] " src="images/bg-pattern-circles.svg" alt="">
         </div>
-        <div class="content-imgs absolute -top-32">
-          <img class="w-80" src="images/illustration-phones.svg" alt="">
+        <div class="content-imgs absolute -top-32 md:left-0 md:top-[50%] md:-translate-y-1/2 lg:translate-y-0 xl:left-32 lg:-top-20 md:w-[50%] md:max-w-fit">
+          <img class="w-80 md:w-full" src="images/illustration-phones.svg" alt="">
         </div>
-        <div class="info pt-14 px-5 grid gap-5 text-center">
-          <h2 class="text-3xl font-medium text-white">State of the Art Infrastructure</h2>
-          <p class="text-sm leading-6 text-neutral-grayish-blue">With reliability and speed in mind, worldwide data centers provide the backbone for ultra-fast connectivity. 
+        <div class="info pt-14 px-5 grid gap-5 text-center md:col-start-2 md:text-left md:p-0">
+          <h2 class="text-3xl font-medium text-white lg:text-4xl">State of the Art Infrastructure</h2>
+          <p class="text-sm leading-6 text-neutral-grayish-blue lg:max-w-[70%]">With reliability and speed in mind, worldwide data centers provide the backbone for ultra-fast connectivity. 
             This ensures your site will load instantly, no matter where your readers are, keeping your site competitive.</p>
         </div>
       </section>
-      <section class="p-4 py-24 grid gap-16">
-        <img class="m-auto" src="images/illustration-laptop-mobile.svg" alt="">
-        <div class="editor-info p-2 text-center grid gap-5">
+      <section class="p-4 py-24 grid gap-16 md:gap-5 md:content-center md:grid-cols-2 md:grid-rows-2 md:m-auto max-w-[1400px]">
+        <img class="m-auto md:hidden" src="images/illustration-laptop-mobile.svg" alt="">
+        <img class="hidden md:block md:row-span-2" src="images/illustration-laptop-desktop.svg" alt="">
+        <div class="editor-info p-2 text-center grid gap-5 md:content-center md:text-left md:col-start-2">
           <h3 class="text-2xl text-primary-vdark-blue font-medium">Free, open, simple</h3>
           <p class="text-sm leading-6 text-primary-vdark-blue font-light">Blogr is a free and open source application backed by a large community of helpful developers. It supports 
             features such as code syntax highlighting, RSS feeds, social media integration, third-party commenting tools, 
             and works seamlessly with Google Analytics. The architecture is clean and is relatively easy to learn.</p>
         </div>
-        <div class="robust-content text-center grid gap-5">
+        <div class="robust-content text-center grid gap-5 md:content-start md:text-left md:col-start-2">
           <h3 class="text-2xl text-primary-vdark-blue font-medium">Powerful tooling</h3>
           <p class="text-sm leading-6 text-primary-vdark-blue font-light">Batteries included. We built a simple and straightforward CLI tool that makes customization and deployment a breeze, but
             capable of producing even the most complicated sites.</p>
@@ -136,10 +137,11 @@
       </section>
     </main>
 
-    <footer class="bg-neutral-vd-black-blue py-16 grid gap-20 justify-center rounded-tr-[6rem]">
-      <a href="#"><img src="images/logo.svg" alt=""></a>
-      <nav class="grid gap-10 text-center  ">
-        <ul class="text-neutral-grayish-blue font-Ubuntu grid gap-1 [&>*:first-child]:text-white [&>*:first-child]:mb-5 ">
+    <footer class="bg-neutral-vd-black-blue rounded-tr-[6rem]">
+      <div class="footer-container max-w-[1400px] m-auto py-16 grid gap-20 justify-center md:justify-normal md:px-20 md:flex">
+        <a href="#"><img src="images/logo.svg" alt=""></a>
+      <nav class="grid gap-10 text-center md:flex md:flex-1 md:justify-evenly md:items-baseline md:text-sm ">
+        <ul class="text-neutral-grayish-blue font-Ubuntu grid gap-1 [&>*:first-child]:text-white [&>*:first-child]:mb-5 md:text-left md:gap-3 ">
           <li><strong>Product</strong></li>
           <li>Overview</li>
           <li>Pricing</li>
@@ -147,20 +149,21 @@
           <li>Features</li>
           <li>Integrations</li>
         </ul>
-        <ul class="text-neutral-grayish-blue font-Ubuntu grid gap-1 [&>*:first-child]:text-white [&>*:first-child]:mb-5 ">
+        <ul class="text-neutral-grayish-blue font-Ubuntu grid gap-1 [&>*:first-child]:text-white [&>*:first-child]:mb-5 md:text-left md:gap-3 ">
           <li>Company</li>
           <li>About</li>
           <li>Team</li>
           <li>Blog</li>
           <li>Careers</li>
         </ul>
-        <ul class="text-neutral-grayish-blue font-Ubuntu grid gap-1 [&>*:first-child]:text-white [&>*:first-child]:mb-5 ">
+        <ul class="text-neutral-grayish-blue font-Ubuntu grid gap-1 [&>*:first-child]:text-white [&>*:first-child]:mb-5 md:text-left md:gap-3 ">
           <li>Connect</li>
           <li>Contact</li>
           <li>Newsletter</li>
           <li>LinkedIn</li>
         </ul>       
       </nav>
+      </div>
     </footer>
    <script src="app.js"></script>
   </body>
