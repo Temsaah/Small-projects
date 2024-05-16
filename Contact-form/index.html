@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Contact form</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <link rel="stylesheet" href="output.css">
+  <body class="font-karla bg-primary-green/40 min-h-screen grid place-items-center">
+    <main class="grid gap-5 bg-white p-4 rounded-xl">
+      <h1 class="text-3xl font-semibold text-neutral-d-gray">Contact us</h1>
+      <form action="">
+        <div class="fname">
+          <label class="text-neutral-d-gray font-medium" for="fname-input">First Name</label>
+          <input type="text" id="fname-input" name="fname">
+        </div>
+        <div class="lname">
+          <label class="text-neutral-d-gray font-medium" for="lname-input">First Name</label>
+          <input type="text" id="lname-input" name="lname">
+        </div>
+        <div class="email">
+          <label class="text-neutral-d-gray font-medium" for="email-input">First Name</label>
+          <input type="text" id="email-input" name="email">
+        </div>
+        <div class="query-type">
+          <label class="text-neutral-d-gray font-medium" for="queryType">Query Type</label>
+          <div class="checkboxes">
+            <div class="box">
+              <input type="radio" id="choice-1" name="query-choice" value="General Enquiry">
+              <label class="text-neutral-d-gray font-medium" for="choice-1">General Enquiry</label>
+            </div>
+            <div class="box">
+              <input type="radio" id="choice-2" name="query-choice" value="Support Request">
+              <label class="text-neutral-d-gray font-medium" for="choice-2">Support Request</label>
+            </div>
+          </div>
+        </div>
+        <div class="msg">
+          <label class="text-neutral-d-gray font-medium" for="message-input">Message</label>
+          <textarea name="message-box" id="message-input" cols="30" rows="10"></textarea>
+        </div>
+        <div class="consent">
+          <input type="checkbox" id="consent-input" required>
+          <label class="text-neutral-d-gray font-medium" for="consent-input">I consent to being contacted by the team</label>
+        </div>
+        <div class="btn">
+          <input type="submit" value="Submit">
+        </div>
+      </form>
+    </main>
+    <!-- Contact Us First Name This field is required Last Name This field is
+    required Email Address Please enter a valid email address This field is
+    required Query Type General Enquiry Support Request Please select a query
+    type Message This field is required I consent to being contacted by the team
+    To submit this form, please consent to being contacted Submit Message Sent!
+    Thanks for completing the form. We'll be in touch soon! -->
+  </body>
+</html>
