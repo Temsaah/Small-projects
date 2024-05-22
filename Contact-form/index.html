@@ -25,18 +25,18 @@
           <input class="border border-primary-green p-4 rounded-xl" type="text" id="fname-input" name="fname">
         </div>
         <div class="lname flex flex-col gap-2">
-          <label class="text-neutral-d-gray font-medium" for="lname-input">First Name</label>
+          <label class="text-neutral-d-gray font-medium" for="lname-input">Last Name</label>
           <input class="border border-primary-green p-4 rounded-xl" type="text" id="lname-input" name="lname">
         </div>
         <div class="email flex flex-col gap-2">
-          <label class="text-neutral-d-gray font-medium" for="email-input">First Name</label>
+          <label class="text-neutral-d-gray font-medium" for="email-input">Email Address</label>
           <input class="border border-primary-green p-4 rounded-xl" type="text" id="email-input" name="email">
         </div>
         <div class="query-type grid gap-5">
           <label class="text-neutral-d-gray font-medium" for="queryType">Query Type</label>
           <div class="checkboxes grid gap-5">
             <div class="box flex items-center text-lg gap-5 border border-primary-green py-4 px-7 rounded-xl">
-              <input type="radio" id="choice-1" name="query-choice" value="General Enquiry">
+              <input required type="radio" id="choice-1" name="query-choice" value="General Enquiry">
               <label class="text-neutral-d-gray font-medium" for="choice-1">General Enquiry</label>
             </div>
             <div class="box flex items-center text-lg gap-5 border border-primary-green py-4 px-7 rounded-xl">
@@ -47,7 +47,7 @@
         </div>
         <div class="msg flex flex-col gap-5">
           <label class="text-neutral-d-gray font-medium" for="message-input">Message</label>
-          <textarea class="border border-primary-green rounded-xl" name="message-box" id="message-input" cols="30" rows="10"></textarea>
+          <textarea class="border border-primary-green rounded-xl p-4" name="message-box" id="message-input" cols="30" rows="10"></textarea>
         </div>
         <div class="consent flex items-center gap-5">
           <input class="w-6 h-6" type="checkbox" id="consent-input" required>
@@ -58,11 +58,6 @@
         </div>
       </form>
     </main>
-    <!-- Contact Us First Name This field is required Last Name This field is
-    required Email Address Please enter a valid email address This field is
-    required Query Type General Enquiry Support Request Please select a query
-    type Message This field is required I consent to being contacted by the team
-    To submit this form, please consent to being contacted Submit Message Sent!
-    Thanks for completing the form. We'll be in touch soon! -->
+    <script src="app.js"></script>
   </body>
 </html>
