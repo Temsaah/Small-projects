@@ -1,7 +1,7 @@
 const itemsContainer = document.querySelector(".items");
 const cartContainer = document.querySelector(".cart");
 
-const cartItems = [];
+const cartItems = new Map();
 
 async function fetchData() {
   const res = await fetch("data.json");
@@ -45,15 +45,32 @@ async function fetchData() {
 fetchData();
 
 function addToCart(name, price) {
-  const newItem = {
+  const itemInfo = {
     quantity: 1,
-    name,
     price,
   };
 
-  cartItems.push(newItem);
+  if (cartItems.has(name)) {
+    cartItems.set(name, {
+      ...cartItems.get(name),
+      quantity: cartItems.get(name).quantity + 1,
+    });
+  } else {
+    cartItems.set(name, itemInfo);
+  }
   console.log("ADDED ITEM");
   console.log(cartItems);
+
+  updateCartUI();
+}
+
+function modifyCartQuantity(name, newQuantity) {
+  if (cartItems.has(name)) {
+    cartItems.set(name, {
+      ...cartItems.get(name),
+      quantity: newQuantity,
+    });
+  }
 
   updateCartUI();
 }
@@ -65,32 +82,34 @@ function updateCartUI() {
     createCartContainer();
   }
 
-  if (cartItems.length > 0) {
+  if (cartItems.size > 0) {
     const orderContainer = document.querySelector(".cart--items");
 
     orderContainer.innerHTML = ""; // RESET Cart
-    for (let item of cartItems) {
-      console.log(item);
+
+    let totalPrice = 0;
+
+    for (let [name, info] of cartItems) {
       orderContainer.insertAdjacentHTML(
         "beforeend",
         `<div class="cart-item flex justify-between items-center">
               <div class="cart-item--info grid gap-2">
                 <div class="cart-item--name">
-                  <p class="font-medium">${item.name}</p>
+                  <p class="font-medium">${name}</p>
                 </div>
                 <div class="cart-item--numbers flex items-center gap-4">
                   <p
                     class="cart-item--quantity text-primary-red font-semibold text-sm"
                   >
-                    ${item.quantity}x
+                    ${info.quantity}x
                   </p>
                   <p class="cart-item--price text-primary-rose-400 text-sm">
-                    @$${item.price}
+                    @$${info.price}
                   </p>
                   <p
                     class="cart-item--total text-primary-rose-500 font-medium text-sm"
                   >
-                    $${(item.price * item.quantity).toFixed(2)}
+                    $${(info.price * info.quantity).toFixed(2)}
                   </p>
                 </div>
               </div>
@@ -101,8 +120,24 @@ function updateCartUI() {
               </button>
             </div>`
       );
+
+      totalPrice += info.price * info.quantity;
     }
+
+    updateOrderTotalPrice();
   }
+}
+
+function updateOrderTotalPrice() {
+  const totalPriceEl = document.querySelector(".total-order-price");
+  let totalPrice = 0;
+  // totalPriceEl.textContent = `$${totalPrice.toFixed(2)}`;
+
+  for (let { price, quantity } of cartItems.values()) {
+    totalPrice += Number(price * quantity);
+  }
+
+  totalPriceEl.textContent = `$${totalPrice.toFixed(2)}`;
 }
 
 function createCartContainer() {
@@ -113,7 +148,7 @@ function createCartContainer() {
         </div>
         <div class="cart--total flex justify-between items-center">
           <p class="text-sm">Order Total</p>
-          <p class="total-order-price text-2xl font-semibold">$46.50</p>
+          <p class="total-order-price text-2xl font-semibold">$0.00</p>
         </div>
         <div class="delivery--info flex justify-center items-center gap-2">
           <img
@@ -141,5 +176,94 @@ itemsContainer.addEventListener("click", (e) => {
     const itemPrice = item.dataset.price;
 
     addToCart(itemName, itemPrice);
+    updateCartAddBtnUI(e.target.closest(".add-cart-btn"));
+  }
+
+  if (e.target.closest(".quantity-decrement")) {
+    const decrementBtn = e.target.closest(".quantity-decrement");
+    const quantityNumber =
+      decrementBtn.parentNode.querySelector(".quantity-number");
+    let quantity = +quantityNumber.textContent;
+
+    if (quantity <= 1) return;
+
+    quantity--;
+    quantityNumber.textContent = quantity;
+    const name = quantityNumber.closest(".item").dataset.name;
+    modifyCartQuantity(name, quantity);
+  }
+
+  if (e.target.closest(".quantity-increment")) {
+    const incrementBtn = e.target.closest(".quantity-increment");
+    const quantityNumber =
+      incrementBtn.parentNode.querySelector(".quantity-number");
+    let quantity = +quantityNumber.textContent;
+
+    quantity++;
+    quantityNumber.textContent = quantity;
+    const name = quantityNumber.closest(".item").dataset.name;
+    modifyCartQuantity(name, quantity);
   }
 });
+
+function updateCartAddBtnUI(btn) {
+  // const quantitySelectorHTML = `<div
+  //             class="quantity-selector px-5 py-3 rounded-full bg-primary-red absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-14 justify-between items-center"
+  //           >
+  //             <button
+  //               class="quantity-decrement border border-primary-rose-100 w-5 h-5 rounded-full flex justify-center items-center"
+  //             >
+  //               <img
+  //                 class=""
+  //                 src="./assets/images/icon-decrement-quantity.svg"
+  //                 alt=""
+  //               />
+  //             </button>
+  //             <p class="quantity-number text-white">1</p>
+  //             <button
+  //               class="quantity-increment border border-primary-rose-100 w-5 h-5 rounded-full flex justify-center items-center"
+  //             >
+  //               <img src="./assets/images/icon-increment-quantity.svg" alt="" />
+  //             </button>
+  //           </div>`;
+
+  // const tempContainer = document.createElement("div");
+  // tempContainer.innerHTML = quantitySelectorHTML;
+
+  // const quantitySelectorEl = tempContainer.firstElementChild;
+
+  // btn.parentNode.replaceChild(quantitySelectorEl, btn);
+
+  btn.classList.add("hidden");
+  btn.parentNode.insertAdjacentHTML(
+    "beforeend",
+    `<div
+              class="quantity-selector px-5 py-3 rounded-full bg-primary-red absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-14 justify-between items-center"
+            >
+              <button
+                class="quantity-decrement border border-primary-rose-100 w-5 h-5 rounded-full flex justify-center items-center"
+              >
+                <img
+                  class=""
+                  src="./assets/images/icon-decrement-quantity.svg"
+                  alt=""
+                />
+              </button>
+              <p class="quantity-number text-white">1</p>
+              <button
+                class="quantity-increment border border-primary-rose-100 w-5 h-5 rounded-full flex justify-center items-center"
+              >
+                <img src="./assets/images/icon-increment-quantity.svg" alt="" />
+              </button>
+            </div>`
+  );
+}
+
+/*
+TO DO
+
+1) Slider to change quantity instead of multiple clicks that syncs with map
+
+2) Order Summary 
+
+*/
