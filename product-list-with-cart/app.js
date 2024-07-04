@@ -2,6 +2,7 @@ const itemsContainer = document.querySelector(".items");
 const cartContainer = document.querySelector(".cart");
 
 const cartItems = new Map();
+updateCartUI();
 
 async function fetchData() {
   const res = await fetch("data.json");
@@ -24,6 +25,25 @@ async function fetchData() {
             >
               <img src="assets/images/icon-add-to-cart.svg" /> Add to Cart
             </button>
+            <div
+              class="hidden quantity-selector px-5 py-3 rounded-full bg-primary-red absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-14 justify-between items-center"
+            >
+              <button
+                class=" quantity-decrement border border-primary-rose-100 w-5 h-5 rounded-full flex justify-center items-center"
+              >
+                <img
+                  class=""
+                  src="./assets/images/icon-decrement-quantity.svg"
+                  alt=""
+                />
+              </button>
+              <p class="quantity-number text-white">1</p>
+              <button
+                class="quantity-increment border border-primary-rose-100 w-5 h-5 rounded-full flex justify-center items-center"
+              >
+                <img src="./assets/images/icon-increment-quantity.svg" alt="" />
+              </button>
+            </div>
           </div>
           <div class="item--description grid gap-1">
             <div class="item--category text-sm text-primary-rose-400">
@@ -50,14 +70,8 @@ function addToCart(name, price) {
     price,
   };
 
-  if (cartItems.has(name)) {
-    cartItems.set(name, {
-      ...cartItems.get(name),
-      quantity: cartItems.get(name).quantity + 1,
-    });
-  } else {
-    cartItems.set(name, itemInfo);
-  }
+  cartItems.set(name, itemInfo);
+
   console.log("ADDED ITEM");
   console.log(cartItems);
 
@@ -75,8 +89,40 @@ function modifyCartQuantity(name, newQuantity) {
   updateCartUI();
 }
 
+function removeCartItem(name) {
+  if (cartItems.has(name)) {
+    cartItems.delete(name);
+  }
+
+  updateCartUI();
+  updateCartAddBtnUI(name, "Add to cart");
+}
+
 function updateCartUI() {
   const cartItemsContainer = document.querySelector(".cart-items-container");
+
+  if (cartItems.size === 0) {
+    cartItemsContainer?.remove();
+
+    const cartContainer = document.querySelector(".cart");
+    cartContainer.insertAdjacentHTML(
+      "beforeend",
+      `<div class="empty-cart flex flex-col items-center gap-5">
+          <div>
+            <img src="assets/images/illustration-empty-cart.svg" />
+          </div>
+          <p class="text-primary-rose-400">Your added items will appear here</p>
+        </div>`
+    );
+
+    updateCartItemsCount();
+
+    return;
+  } else {
+    const emptyCartContainer = document.querySelector(".empty-cart");
+
+    emptyCartContainer?.remove();
+  }
 
   if (!cartItemsContainer) {
     createCartContainer();
@@ -92,7 +138,7 @@ function updateCartUI() {
     for (let [name, info] of cartItems) {
       orderContainer.insertAdjacentHTML(
         "beforeend",
-        `<div class="cart-item flex justify-between items-center">
+        `<div class="cart-item flex justify-between items-center" data-name='${name}'>
               <div class="cart-item--info grid gap-2">
                 <div class="cart-item--name">
                   <p class="font-medium">${name}</p>
@@ -124,8 +170,35 @@ function updateCartUI() {
       totalPrice += info.price * info.quantity;
     }
 
+    const removeItemBtn = document.querySelectorAll(".remove-item-btn");
+
+    removeItemBtn.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const removePermission = confirm(
+          "Are you sure you want to delete item?"
+        );
+
+        if (removePermission) {
+          const name = btn.closest(".cart-item").dataset.name;
+          removeCartItem(name);
+        }
+      });
+    });
+
+    updateCartItemsCount();
     updateOrderTotalPrice();
   }
+}
+
+function updateCartItemsCount() {
+  const cartCountElement = document.querySelector(".cart-number");
+  let cartCount = 0;
+
+  for (let { quantity } of cartItems.values()) {
+    cartCount += quantity;
+  }
+
+  cartCountElement.textContent = cartCount;
 }
 
 function updateOrderTotalPrice() {
@@ -176,7 +249,7 @@ itemsContainer.addEventListener("click", (e) => {
     const itemPrice = item.dataset.price;
 
     addToCart(itemName, itemPrice);
-    updateCartAddBtnUI(e.target.closest(".add-cart-btn"));
+    updateCartAddBtnUI(itemName, "Quantity selector");
   }
 
   if (e.target.closest(".quantity-decrement")) {
@@ -206,8 +279,11 @@ itemsContainer.addEventListener("click", (e) => {
   }
 });
 
-function updateCartAddBtnUI(btn) {
-  // const quantitySelectorHTML = `<div
+function updateCartAddBtnUI(itemName, newBtn) {
+  // btn.classList.add("hidden");
+  // btn.parentNode.insertAdjacentHTML(
+  //   "beforeend",
+  //   `<div
   //             class="quantity-selector px-5 py-3 rounded-full bg-primary-red absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-14 justify-between items-center"
   //           >
   //             <button
@@ -225,38 +301,31 @@ function updateCartAddBtnUI(btn) {
   //             >
   //               <img src="./assets/images/icon-increment-quantity.svg" alt="" />
   //             </button>
-  //           </div>`;
+  //           </div>`
+  // );
 
-  // const tempContainer = document.createElement("div");
-  // tempContainer.innerHTML = quantitySelectorHTML;
+  // const addToCartBtn = document.querySelector(".add-cart-btn");
+  // const quantitySelector = document.querySelector(".quantity-selector");
 
-  // const quantitySelectorEl = tempContainer.firstElementChild;
+  // if (btn === "Add to cart") {
+  //   addToCartBtn.classList.remove("hidden");
+  //   quantitySelector.classList.add("hidden");
+  // } else if (btn === "Quantity selector") {
+  //   quantitySelector.classList.remove("hidden");
+  //   addToCartBtn.classList.add("hidden");
+  // }
 
-  // btn.parentNode.replaceChild(quantitySelectorEl, btn);
+  const itemContainer = document.querySelector(`[data-name='${itemName}']`);
+  const addToCartBtn = itemContainer.querySelector(".add-cart-btn");
+  const quantitySelector = itemContainer.querySelector(".quantity-selector");
 
-  btn.classList.add("hidden");
-  btn.parentNode.insertAdjacentHTML(
-    "beforeend",
-    `<div
-              class="quantity-selector px-5 py-3 rounded-full bg-primary-red absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-14 justify-between items-center"
-            >
-              <button
-                class="quantity-decrement border border-primary-rose-100 w-5 h-5 rounded-full flex justify-center items-center"
-              >
-                <img
-                  class=""
-                  src="./assets/images/icon-decrement-quantity.svg"
-                  alt=""
-                />
-              </button>
-              <p class="quantity-number text-white">1</p>
-              <button
-                class="quantity-increment border border-primary-rose-100 w-5 h-5 rounded-full flex justify-center items-center"
-              >
-                <img src="./assets/images/icon-increment-quantity.svg" alt="" />
-              </button>
-            </div>`
-  );
+  if (newBtn === "Quantity selector") {
+    quantitySelector.classList.remove("hidden");
+    addToCartBtn.classList.add("hidden");
+  } else if (newBtn === "Add to cart") {
+    addToCartBtn.classList.remove("hidden");
+    quantitySelector.classList.add("hidden");
+  }
 }
 
 /*
