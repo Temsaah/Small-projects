@@ -15,9 +15,54 @@
 
     <title>Frontend Mentor | Product list with cart</title>
   </head>
-  <body>
+  <body class="font-RedHat">
+    <div
+      class="order-confirmed fixed z-10 bottom-0 w-full bg-yellow-200 p-5 grid gap-7 rounded-t-xl"
+    >
+      <img
+        src="./assets/images/icon-order-confirmed.svg"
+        alt="order confirmed"
+      />
+      <div class="success-msg grid gap-3">
+        <h2 class="text-4xl font-bold leading-10">
+          Order <br />
+          Confirmed
+        </h2>
+        <p class="text-primary-rose-500 text-sm">
+          We hope you enjoy your food!
+        </p>
+      </div>
+      <div class="order-summary grid gap-10 p-5">
+        <div class="order-summary-item flex gap-5">
+          <div class="item-thumbnail w-12">
+            <img
+              class="rounded-lg"
+              src="./assets/images/image-tiramisu-thumbnail.jpg"
+              alt=""
+            />
+          </div>
+          <div class="item-info text-sm flex flex-col justify-between">
+            <p class="item-name font-medium">Classic Tiramisu</p>
+            <div class="item-info-quantity-price flex gap-5">
+              <p class="item-quantity text-primary-red font-medium">1x</p>
+              <p class="item-price-per-one text-primary-rose-500">@$5.50</p>
+            </div>
+          </div>
+          <div class="item-total-price ml-auto self-center">
+            <p class="font-medium">$5.50</p>
+          </div>
+        </div>
+        <div class="order-total mt-5 flex justify-between items-center">
+          <p>Order total</p>
+          <p class="text-2xl font-bold">$46.50</p>
+        </div>
+      </div>
+      <button class="bg-primary-red p-4 rounded-full text-white font-medium">
+        Start New Order
+      </button>
+    </div>
     <main class="p-4 grid gap-5">
-      <h1 class="font-semibold text-3xl">Desserts</h1>
+      <h1 class="font-bold text-3xl">Desserts</h1>
       <section class="items grid gap-8">
         <!-- <div class="item grid gap-8">
           <div class="thumbnail relative">
@@ -103,8 +148,8 @@
                 <img src="./assets/images/icon-remove-item.svg" />
               </button>
             </div>
-          </div>
-          <div class="cart--total flex justify-between items-center">
+          </div> -->
+        <!-- <div class="cart--total flex justify-between items-center">
             <p class="text-sm">Order Total</p>
             <p class="total-order-price text-2xl font-semibold">$46.50</p>
           </div>
@@ -126,6 +171,7 @@
         </div> -->
       </section>
     </main>
+
     <!-- Desserts
 
   Waffle with Berries

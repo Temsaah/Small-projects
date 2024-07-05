@@ -16,20 +16,20 @@ async function fetchData() {
       }' data-price='${item.price.toFixed(2)}'>
           <div class="thumbnail relative">
             <img
-              class="w-full max-h-[200px] object-cover object-center rounded-lg"
+              class="item-image w-full max-h-[200px] object-cover object-center rounded-lg"
               src="${item.image.mobile}"
               alt=""
             />
             <button
-              class="absolute add-cart-btn flex gap-2 text-sm font-medium border px-8 py-3 rounded-full border-primary-rose-900 bg-white left-1/2 -translate-x-1/2 -translate-y-1/2"
+              class="transition-all absolute add-cart-btn flex items-center gap-2 text-sm font-medium border px-8 py-3 rounded-full border-primary-rose-900 bg-white left-1/2 -translate-x-1/2 -translate-y-1/2"
             >
               <img src="assets/images/icon-add-to-cart.svg" /> Add to Cart
             </button>
             <div
-              class="hidden quantity-selector px-5 py-3 rounded-full bg-primary-red absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-14 justify-between items-center"
+              class="hidden quantity-selector transition-all duration-200 px-5 py-3 rounded-full bg-primary-red absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-14 justify-between items-center"
             >
               <button
-                class=" quantity-decrement border border-primary-rose-100 w-5 h-5 rounded-full flex justify-center items-center"
+                class=" quantity-decrement  border border-primary-rose-100 w-5 h-5 rounded-full flex justify-center items-center"
               >
                 <img
                   class=""
@@ -39,7 +39,7 @@ async function fetchData() {
               </button>
               <p class="quantity-number text-white">1</p>
               <button
-                class="quantity-increment border border-primary-rose-100 w-5 h-5 rounded-full flex justify-center items-center"
+                class="quantity-increment  border border-primary-rose-100 w-5 h-5 rounded-full flex justify-center items-center"
               >
                 <img src="./assets/images/icon-increment-quantity.svg" alt="" />
               </button>
@@ -96,6 +96,7 @@ function removeCartItem(name) {
 
   updateCartUI();
   updateCartAddBtnUI(name, "Add to cart");
+  removeBorderFromItemImage(name);
 }
 
 function updateCartUI() {
@@ -201,14 +202,20 @@ function updateCartItemsCount() {
   cartCountElement.textContent = cartCount;
 }
 
-function updateOrderTotalPrice() {
-  const totalPriceEl = document.querySelector(".total-order-price");
+function calculateOrderPrice() {
   let totalPrice = 0;
-  // totalPriceEl.textContent = `$${totalPrice.toFixed(2)}`;
 
   for (let { price, quantity } of cartItems.values()) {
     totalPrice += Number(price * quantity);
   }
+
+  return totalPrice;
+}
+
+function updateOrderTotalPrice() {
+  const totalPriceEl = document.querySelector(".total-order-price");
+
+  const totalPrice = calculateOrderPrice();
 
   totalPriceEl.textContent = `$${totalPrice.toFixed(2)}`;
 }
@@ -247,9 +254,11 @@ itemsContainer.addEventListener("click", (e) => {
     const item = e.target.closest(".item");
     const itemName = item.dataset.name;
     const itemPrice = item.dataset.price;
+    const itemImage = item.querySelector(".item-image");
 
     addToCart(itemName, itemPrice);
     updateCartAddBtnUI(itemName, "Quantity selector");
+    addBorderToItemImage(itemImage);
   }
 
   if (e.target.closest(".quantity-decrement")) {
@@ -326,6 +335,21 @@ function updateCartAddBtnUI(itemName, newBtn) {
     addToCartBtn.classList.remove("hidden");
     quantitySelector.classList.add("hidden");
   }
+}
+
+function addBorderToItemImage(image) {
+  image.classList.add("border-2", "border-primary-red");
+}
+
+function removeBorderFromItemImage(name) {
+  const itemImages = document.querySelectorAll(".item-image");
+
+  itemImages.forEach((image) => {
+    const itemName = image.closest(".item").dataset.name;
+    if (image.classList.contains("border-2") && itemName == name) {
+      image.classList.remove("border-2", "border-primary-red");
+    }
+  });
 }
 
 /*
