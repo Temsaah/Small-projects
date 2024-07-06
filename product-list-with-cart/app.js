@@ -1,5 +1,6 @@
 const itemsContainer = document.querySelector(".items");
 const cartContainer = document.querySelector(".cart");
+const overlay = document.querySelector(".overlay");
 
 const cartItems = new Map();
 updateCartUI();
@@ -13,7 +14,9 @@ async function fetchData() {
       "beforeend",
       `<div class="item grid gap-8 " data-name='${
         item.name
-      }' data-price='${item.price.toFixed(2)}'>
+      }' data-category='${item.category.toLowerCase()}' data-price='${item.price.toFixed(
+        2
+      )}'>
           <div class="thumbnail relative">
             <img
               class="item-image w-full max-h-[200px] object-cover object-center rounded-lg"
@@ -59,21 +62,18 @@ async function fetchData() {
         </div>`
     );
   }
-  console.log("FINISHED FETCHING DATA FUNCTION");
 }
 
 fetchData();
 
-function addToCart(name, price) {
+function addToCart(name, category, price) {
   const itemInfo = {
     quantity: 1,
-    price,
+    price: Number(price).toFixed(2),
+    category,
   };
 
   cartItems.set(name, itemInfo);
-
-  console.log("ADDED ITEM");
-  console.log(cartItems);
 
   updateCartUI();
 }
@@ -95,8 +95,8 @@ function removeCartItem(name) {
   }
 
   updateCartUI();
-  updateCartAddBtnUI(name, "Add to cart");
-  removeBorderFromItemImage(name);
+  updateMenuBtn("Add to cart", name);
+  resetImageBorder(name);
 }
 
 function updateCartUI() {
@@ -228,7 +228,7 @@ function createCartContainer() {
         </div>
         <div class="cart--total flex justify-between items-center">
           <p class="text-sm">Order Total</p>
-          <p class="total-order-price text-2xl font-semibold">$0.00</p>
+          <p class="total-order-price text-2xl font-bold">$0.00</p>
         </div>
         <div class="delivery--info flex justify-center items-center gap-2">
           <img
@@ -241,7 +241,7 @@ function createCartContainer() {
           </p>
         </div>
         <button
-          class="bg-primary-red mt-5 p-4 text-white rounded-full font-medium"
+          class="confirm-order-btn bg-primary-red mt-5 p-4 text-white rounded-full font-medium"
         >
           Confirm Order
         </button>
@@ -253,11 +253,12 @@ itemsContainer.addEventListener("click", (e) => {
   if (e.target.closest(".add-cart-btn")) {
     const item = e.target.closest(".item");
     const itemName = item.dataset.name;
+    const itemCategory = item.dataset.category.split(" ").join("-");
     const itemPrice = item.dataset.price;
     const itemImage = item.querySelector(".item-image");
 
-    addToCart(itemName, itemPrice);
-    updateCartAddBtnUI(itemName, "Quantity selector");
+    addToCart(itemName, itemCategory, itemPrice);
+    updateMenuBtn("Quantity selector", itemName);
     addBorderToItemImage(itemImage);
   }
 
@@ -288,45 +289,123 @@ itemsContainer.addEventListener("click", (e) => {
   }
 });
 
-function updateCartAddBtnUI(itemName, newBtn) {
-  // btn.classList.add("hidden");
-  // btn.parentNode.insertAdjacentHTML(
-  //   "beforeend",
-  //   `<div
-  //             class="quantity-selector px-5 py-3 rounded-full bg-primary-red absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-14 justify-between items-center"
-  //           >
-  //             <button
-  //               class="quantity-decrement border border-primary-rose-100 w-5 h-5 rounded-full flex justify-center items-center"
-  //             >
-  //               <img
-  //                 class=""
-  //                 src="./assets/images/icon-decrement-quantity.svg"
-  //                 alt=""
-  //               />
-  //             </button>
-  //             <p class="quantity-number text-white">1</p>
-  //             <button
-  //               class="quantity-increment border border-primary-rose-100 w-5 h-5 rounded-full flex justify-center items-center"
-  //             >
-  //               <img src="./assets/images/icon-increment-quantity.svg" alt="" />
-  //             </button>
-  //           </div>`
-  // );
+cartContainer.addEventListener("click", (e) => {
+  if (e.target.closest(".confirm-order-btn")) {
+    confirmOrder();
+  }
+});
 
-  // const addToCartBtn = document.querySelector(".add-cart-btn");
-  // const quantitySelector = document.querySelector(".quantity-selector");
+function confirmOrder() {
+  document.body.classList.add("overflow-hidden"); // prevent scrolling
+  overlay.classList.remove("hidden");
+  // show the order confirmed container
+  // create order summary
 
-  // if (btn === "Add to cart") {
-  //   addToCartBtn.classList.remove("hidden");
-  //   quantitySelector.classList.add("hidden");
-  // } else if (btn === "Quantity selector") {
-  //   quantitySelector.classList.remove("hidden");
-  //   addToCartBtn.classList.add("hidden");
-  // }
+  createOrderSummaryContainer();
+  calculateOrderSummary();
+}
+
+function createOrderSummaryContainer() {
+  document.body.insertAdjacentHTML(
+    "afterbegin",
+    `<div
+      class="order-confirmed transition-all duration-700 fixed z-20 -bottom-full w-full bg-white p-5 py-10 grid gap-7 rounded-t-xl"
+    >
+      <img
+        src="./assets/images/icon-order-confirmed.svg"
+        alt="order confirmed"
+      />
+      <div class="success-msg grid gap-3">
+        <h2 class="text-4xl font-bold leading-10">
+          Order <br />
+          Confirmed
+        </h2>
+        <p class="text-primary-rose-500 text-sm">
+          We hope you enjoy your food!
+        </p>
+      </div>
+      <div class="order-summary max-h-[200px] overflow-scroll grid gap-10 p-5"></div>
+      <button class="new-order-btn bg-primary-red p-4 rounded-full text-white font-medium">
+        Start New Order
+      </button>
+    </div>`
+  );
+
+  const orderConfirmedContainer = document.querySelector(".order-confirmed");
+  const newOrderBtn = document.querySelector(".new-order-btn");
+
+  newOrderBtn.addEventListener("click", () => {
+    resetApp();
+  });
+
+  setTimeout(() => {
+    orderConfirmedContainer.classList.replace("-bottom-full", "bottom-0");
+  }, 100);
+}
+
+function calculateOrderSummary() {
+  const orderSummaryContainer = document.querySelector(".order-summary");
+
+  for (let [name, info] of cartItems) {
+    orderSummaryContainer.insertAdjacentHTML(
+      "beforeend",
+      `
+          <div class="order-summary-item flex items-center gap-5">
+            <div class="item-thumbnail w-12">
+              <img
+                class="rounded-lg"
+                src="./assets/images/image-${info.category}-thumbnail.jpg"
+                alt=""
+              />
+            </div>
+            <div class="item-info text-sm flex flex-col justify-between">
+              <p class="item-name font-medium">${name}</p>
+              <div class="item-info-quantity-price flex gap-5">
+                <p class="item-quantity text-primary-red font-medium">${
+                  info.quantity
+                }x</p>
+                <p class="item-price-per-one text-primary-rose-500">@$${
+                  info.price
+                }
+                </p>
+              </div>
+            </div>
+            <div class="item-total-price ml-auto self-center">
+              <p class="font-medium">$${(info.price * info.quantity).toFixed(
+                2
+              )}</p>
+            </div>
+          </div>
+        `
+    );
+  }
+
+  orderSummaryContainer.insertAdjacentHTML(
+    "afterend",
+    `<div class="order-total p-5 flex justify-between items-center">
+            <p class="text-sm">Order total</p>
+            <p class="text-2xl font-bold">$${calculateOrderPrice().toFixed(
+              2
+            )}</p>
+          </div>`
+  );
+}
+
+function updateMenuBtn(newBtn, itemName = null) {
+  if (!itemName) {
+    const items = document.querySelectorAll(".item");
+    newBtn = "Add to cart";
+    items.forEach((item) => {
+      item.querySelector(".add-cart-btn").classList.remove("hidden");
+      item.querySelector(".quantity-selector").classList.add("hidden");
+    });
+    return;
+  }
 
   const itemContainer = document.querySelector(`[data-name='${itemName}']`);
   const addToCartBtn = itemContainer.querySelector(".add-cart-btn");
   const quantitySelector = itemContainer.querySelector(".quantity-selector");
+  const quantityNumber = quantitySelector.querySelector(".quantity-number");
 
   if (newBtn === "Quantity selector") {
     quantitySelector.classList.remove("hidden");
@@ -334,6 +413,7 @@ function updateCartAddBtnUI(itemName, newBtn) {
   } else if (newBtn === "Add to cart") {
     addToCartBtn.classList.remove("hidden");
     quantitySelector.classList.add("hidden");
+    quantityNumber.textContent = 1;
   }
 }
 
@@ -341,8 +421,18 @@ function addBorderToItemImage(image) {
   image.classList.add("border-2", "border-primary-red");
 }
 
-function removeBorderFromItemImage(name) {
+function resetImageBorder(name) {
   const itemImages = document.querySelectorAll(".item-image");
+
+  if (!name) {
+    itemImages.forEach((image) => {
+      const itemName = image.closest(".item").dataset.name;
+      if (image.classList.contains("border-2")) {
+        image.classList.remove("border-2", "border-primary-red");
+      }
+    });
+    return;
+  }
 
   itemImages.forEach((image) => {
     const itemName = image.closest(".item").dataset.name;
@@ -350,6 +440,30 @@ function removeBorderFromItemImage(name) {
       image.classList.remove("border-2", "border-primary-red");
     }
   });
+}
+
+function resetApp() {
+  const quantitySelectorNumbers = document.querySelectorAll(".quantity-number");
+
+  const orderConfirmedContainer = document.querySelector(".order-confirmed");
+  orderConfirmedContainer.classList.replace("bottom-0", "-bottom-full");
+
+  setTimeout(() => {
+    orderConfirmedContainer.remove();
+  }, 500);
+  overlay.classList.add("hidden");
+
+  document.body.classList.remove("overflow-hidden");
+
+  cartItems.clear();
+
+  quantitySelectorNumbers.forEach((selector) => {
+    selector.textContent = 1;
+  });
+
+  updateMenuBtn();
+  resetImageBorder();
+  updateCartUI();
 }
 
 /*
