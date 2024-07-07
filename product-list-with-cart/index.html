@@ -64,9 +64,13 @@
     <div
       class="overlay hidden fixed top-0 z-10 opacity-70 bg-black w-screen h-screen"
     ></div>
-    <main class="p-4 grid gap-5 select-none">
+    <main
+      class="p-4 grid gap-5 select-none max-w-[1200px] lg:grid-cols-desktop-grid lg:grid-rows-desktop-grid"
+    >
       <h1 class="font-bold text-3xl">Desserts</h1>
-      <section class="items grid gap-8">
+      <section
+        class="items grid gap-8 sm:grid-cols-2 lg:gap-5 lg:col-start-1 lg:grid-cols-3"
+      >
         <!-- <div class="item grid gap-8">
           <div class="thumbnail relative">
             <img
@@ -112,8 +116,10 @@
           </div>
         </div> -->
       </section>
-      <section class="cart p-4 grid gap-7">
-        <h2 class="text-2xl text-primary-red font-semibold">
+      <section
+        class="cart p-4 grid gap-7 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:content-start"
+      >
+        <h2 class="text-2xl text-primary-red font-bold">
           Your Cart (<span class="cart-number">0</span>)
         </h2>
         <!-- <div class="empty-cart flex flex-col items-center gap-5">

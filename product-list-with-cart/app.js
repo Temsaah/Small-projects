@@ -18,15 +18,19 @@ async function fetchData() {
         2
       )}'>
           <div class="thumbnail relative">
-            <img
-              class="item-image w-full max-h-[200px] object-cover object-center rounded-lg"
-              src="${item.image.mobile}"
-              alt=""
-            />
+            <picture> <source srcset="${
+              item.image.desktop
+            }" media="(min-width: 1024px)"> <source srcset="${
+        item.image.tablet
+      }" media="(min-width: 768px) and (max-width: 1023px)"> <source srcset="${
+        item.image.mobile
+      }" media="(max-width: 767px)"> <img class="item-image w-full max-h-[200px] object-cover object-center rounded-lg" src="${
+        item.image.mobile
+      }" alt="${item.name}"> </picture>
             <button
-              class="transition-all absolute add-cart-btn flex items-center gap-2 text-sm font-medium border px-8 py-3 rounded-full border-primary-rose-900 bg-white left-1/2 -translate-x-1/2 -translate-y-1/2"
+              class="transition-all absolute add-cart-btn flex justify-center items-center whitespace-nowrap gap-2 text-sm font-medium border px-8 py-3 rounded-full border-primary-rose-900 bg-white left-1/2 -translate-x-1/2 -translate-y-1/2"
             >
-              <img src="assets/images/icon-add-to-cart.svg" /> Add to Cart
+              <img src="assets/images/icon-add-to-cart.svg" /> <p>Add to Cart</p>
             </button>
             <div
               class="hidden quantity-selector transition-all duration-200 px-5 py-3 rounded-full bg-primary-red absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-14 justify-between items-center"
