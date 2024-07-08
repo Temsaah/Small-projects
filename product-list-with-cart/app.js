@@ -24,11 +24,11 @@ async function fetchData() {
         item.image.tablet
       }" media="(min-width: 768px) and (max-width: 1023px)"> <source srcset="${
         item.image.mobile
-      }" media="(max-width: 767px)"> <img class="item-image w-full max-h-[200px] object-cover object-center rounded-lg" src="${
+      }" media="(max-width: 767px)"> <img class="item-image w-full max-h-[200px] lg:max-h-[300px] object-cover object-center rounded-lg" src="${
         item.image.mobile
       }" alt="${item.name}"> </picture>
             <button
-              class="transition-all absolute add-cart-btn flex justify-center items-center whitespace-nowrap gap-2 text-sm font-medium border px-8 py-3 rounded-full border-primary-rose-900 bg-white left-1/2 -translate-x-1/2 -translate-y-1/2"
+              class="transition-all absolute add-cart-btn flex justify-center items-center whitespace-nowrap gap-2 text-sm lg:text-xs font-medium border px-10 py-3 rounded-full border-primary-rose-500 bg-white left-1/2 -translate-x-1/2 -translate-y-1/2"
             >
               <img src="assets/images/icon-add-to-cart.svg" /> <p>Add to Cart</p>
             </button>
@@ -53,13 +53,13 @@ async function fetchData() {
             </div>
           </div>
           <div class="item--description grid gap-1">
-            <div class="item--category text-sm text-primary-rose-400">
+            <div class="item--category text-sm  text-primary-rose-500">
               <p>${item.category}</p>
             </div>
             <div class="item--name font-medium">
               <p>${item.name}</p>
             </div>
-            <div class="item--price font-medium text-primary-red text-lg">
+            <div class="item--price font-semibold text-primary-red text-md">
               <p>$${item.price.toFixed(2)}</p>
             </div>
           </div>
@@ -116,7 +116,7 @@ function updateCartUI() {
           <div>
             <img src="assets/images/illustration-empty-cart.svg" />
           </div>
-          <p class="text-primary-rose-400">Your added items will appear here</p>
+          <p class="text-primary-rose-500 lg:text-sm font-medium">Your added items will appear here</p>
         </div>`
     );
 
@@ -146,19 +146,19 @@ function updateCartUI() {
         `<div class="cart-item flex justify-between items-center" data-name='${name}'>
               <div class="cart-item--info grid gap-2">
                 <div class="cart-item--name">
-                  <p class="font-medium">${name}</p>
+                  <p class="font-medium text-sm">${name}</p>
                 </div>
                 <div class="cart-item--numbers flex items-center gap-4">
                   <p
-                    class="cart-item--quantity text-primary-red font-semibold text-sm"
+                    class="cart-item--quantity text-primary-red font-semibold text-xs"
                   >
                     ${info.quantity}x
                   </p>
-                  <p class="cart-item--price text-primary-rose-400 text-sm">
+                  <p class="cart-item--price text-primary-rose-400 text-xs">
                     @$${info.price}
                   </p>
                   <p
-                    class="cart-item--total text-primary-rose-500 font-medium text-sm"
+                    class="cart-item--total text-primary-rose-500 font-medium text-xs"
                   >
                     $${(info.price * info.quantity).toFixed(2)}
                   </p>
@@ -313,23 +313,22 @@ function createOrderSummaryContainer() {
   document.body.insertAdjacentHTML(
     "afterbegin",
     `<div
-      class="order-confirmed transition-all duration-700 fixed z-20 -bottom-full w-full bg-white p-5 py-10 grid gap-7 rounded-t-xl"
+      class="order-confirmed transition-all duration-700 lg:duration-500 fixed z-20 -bottom-full  lg:translate-y-1/2 w-full lg:w-auto bg-white px-5 lg:px-10 py-10 grid gap-7 rounded-t-xl lg:rounded-t-lg lg:rounded-b-lg"
     >
       <img
         src="./assets/images/icon-order-confirmed.svg"
         alt="order confirmed"
       />
       <div class="success-msg grid gap-3">
-        <h2 class="text-4xl font-bold leading-10">
-          Order <br />
-          Confirmed
+        <h2 class="text-4xl font-bold leading-10 mr-10">
+          Order Confirmed
         </h2>
         <p class="text-primary-rose-500 text-sm">
           We hope you enjoy your food!
         </p>
       </div>
-      <div class="order-summary max-h-[200px] overflow-scroll grid gap-10 p-5"></div>
-      <button class="new-order-btn bg-primary-red p-4 rounded-full text-white font-medium">
+      <div class="order-summary max-h-[300px] overflow-scroll grid gap-10 p-5"></div>
+      <button class="new-order-btn bg-primary-red p-4 lg:py-3 rounded-full text-white font-medium">
         Start New Order
       </button>
     </div>`
@@ -343,8 +342,12 @@ function createOrderSummaryContainer() {
   });
 
   setTimeout(() => {
-    orderConfirmedContainer.classList.replace("-bottom-full", "bottom-0");
-  }, 100);
+    if (window.innerWidth >= 1024) {
+      orderConfirmedContainer.classList.replace("-bottom-full", "bottom-1/2");
+    } else {
+      orderConfirmedContainer.classList.replace("-bottom-full", "bottom-0");
+    }
+  }, 0);
 }
 
 function calculateOrderSummary() {
@@ -362,22 +365,22 @@ function calculateOrderSummary() {
                 alt=""
               />
             </div>
-            <div class="item-info text-sm flex flex-col justify-between">
+            <div class="item-info text-xs flex flex-col justify-between gap-3">
               <p class="item-name font-medium">${name}</p>
-              <div class="item-info-quantity-price flex gap-5">
-                <p class="item-quantity text-primary-red font-medium">${
+              <div class="item-info-quantity-price flex gap-5 lg:mr-64">
+                <p class="item-quantity text-primary-red font-semibold">${
                   info.quantity
                 }x</p>
-                <p class="item-price-per-one text-primary-rose-500">@$${
+                <p class="item-price-per-one font-medium text-primary-rose-500">@$${
                   info.price
                 }
                 </p>
               </div>
             </div>
             <div class="item-total-price ml-auto self-center">
-              <p class="font-medium">$${(info.price * info.quantity).toFixed(
-                2
-              )}</p>
+              <p class="font-medium text-sm">$${(
+                info.price * info.quantity
+              ).toFixed(2)}</p>
             </div>
           </div>
         `
@@ -452,9 +455,7 @@ function resetApp() {
   const orderConfirmedContainer = document.querySelector(".order-confirmed");
   orderConfirmedContainer.classList.replace("bottom-0", "-bottom-full");
 
-  setTimeout(() => {
-    orderConfirmedContainer.remove();
-  }, 500);
+  orderConfirmedContainer.remove();
   overlay.classList.add("hidden");
 
   document.body.classList.remove("overflow-hidden");
