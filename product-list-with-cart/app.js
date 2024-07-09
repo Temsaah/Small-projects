@@ -15,40 +15,36 @@ async function fetchData() {
       `<div class="item grid gap-8 " data-name='${
         item.name
       }' data-category='${item.category.toLowerCase()}' data-price='${item.price.toFixed(
-        2
+        2,
       )}'>
           <div class="thumbnail relative">
             <picture> <source srcset="${
               item.image.desktop
             }" media="(min-width: 1024px)"> <source srcset="${
-        item.image.tablet
-      }" media="(min-width: 768px) and (max-width: 1023px)"> <source srcset="${
-        item.image.mobile
-      }" media="(max-width: 767px)"> <img class="item-image w-full max-h-[200px] lg:max-h-[300px] object-cover object-center rounded-lg" src="${
-        item.image.mobile
-      }" alt="${item.name}"> </picture>
+              item.image.tablet
+            }" media="(min-width: 768px) and (max-width: 1023px)"> <source srcset="${
+              item.image.mobile
+            }" media="(max-width: 767px)"> <img class="item-image w-full max-h-[200px] lg:max-h-[300px] object-cover object-center rounded-lg" src="${
+              item.image.mobile
+            }" alt="${item.name}"> </picture>
             <button
-              class="transition-all absolute add-cart-btn flex justify-center items-center whitespace-nowrap gap-2 text-sm lg:text-xs font-medium border px-10 py-3 rounded-full border-primary-rose-500 bg-white left-1/2 -translate-x-1/2 -translate-y-1/2"
+              class="transition-all absolute add-cart-btn flex justify-center items-center whitespace-nowrap gap-2 text-sm lg:text-sm font-medium border px-10 py-3 rounded-full border-primary-rose-500 bg-white left-1/2 -translate-x-1/2 -translate-y-1/2 hover:text-primary-red hover:border-r-primary-red"
             >
               <img src="assets/images/icon-add-to-cart.svg" /> <p>Add to Cart</p>
             </button>
             <div
-              class="hidden quantity-selector transition-all duration-200 px-5 py-3 rounded-full bg-primary-red absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-14 justify-between items-center"
+              class="hidden quantity-selector transition-all duration-200 px-5 py-3 rounded-full bg-primary-red absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-10 lg:gap-9  justify-between items-center"
             >
               <button
-                class=" quantity-decrement  border border-primary-rose-100 w-5 h-5 rounded-full flex justify-center items-center"
+                class="quantity-decrement text-white hover:text-primary-red  border border-primary-rose-100 w-5 h-5 rounded-full flex justify-center items-center hover:bg-white"
               >
-                <img
-                  class=""
-                  src="./assets/images/icon-decrement-quantity.svg"
-                  alt=""
-                />
+                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="10" height="2" fill="none" viewBox="0 0 10 2"><path fill="currentColor" d="M0 .375h10v1.25H0V.375Z"/></svg>
               </button>
               <p class="quantity-number text-white">1</p>
               <button
-                class="quantity-increment  border border-primary-rose-100 w-5 h-5 rounded-full flex justify-center items-center"
+                class="quantity-increment text-white hover:text-primary-red border border-primary-rose-100 w-5 h-5 rounded-full flex justify-center items-center hover:bg-white"
               >
-                <img src="./assets/images/icon-increment-quantity.svg" alt="" />
+                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="none" viewBox="0 0 10 10"><path fill="currentColor" d="M10 4.375H5.625V0h-1.25v4.375H0v1.25h4.375V10h1.25V5.625H10v-1.25Z"/></svg>
               </button>
             </div>
           </div>
@@ -63,7 +59,7 @@ async function fetchData() {
               <p>$${item.price.toFixed(2)}</p>
             </div>
           </div>
-        </div>`
+        </div>`,
     );
   }
 }
@@ -117,7 +113,7 @@ function updateCartUI() {
             <img src="assets/images/illustration-empty-cart.svg" />
           </div>
           <p class="text-primary-rose-500 lg:text-sm font-medium">Your added items will appear here</p>
-        </div>`
+        </div>`,
     );
 
     updateCartItemsCount();
@@ -150,26 +146,26 @@ function updateCartUI() {
                 </div>
                 <div class="cart-item--numbers flex items-center gap-4">
                   <p
-                    class="cart-item--quantity text-primary-red font-semibold text-xs"
+                    class="cart-item--quantity text-primary-red font-semibold text-sm"
                   >
                     ${info.quantity}x
                   </p>
-                  <p class="cart-item--price text-primary-rose-400 text-xs">
-                    @$${info.price}
+                  <p class="cart-item--price text-primary-rose-400 text-sm">
+                    @ $${info.price}
                   </p>
                   <p
-                    class="cart-item--total text-primary-rose-500 font-medium text-xs"
+                    class="cart-item--total text-primary-rose-500 font-medium text-sm"
                   >
                     $${(info.price * info.quantity).toFixed(2)}
                   </p>
                 </div>
               </div>
               <button
-                class="remove-item-btn border rounded-full border-primary-rose-400 scale-100 p-1"
+                class="remove-item-btn border rounded-full border-primary-rose-400 text-[#CAAFA7] hover:text-primary-rose-900  hover:border-primary-rose-900 scale-100 p-1"
               >
-                <img src="./assets/images/icon-remove-item.svg" />
+                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="none" viewBox="0 0 10 10"><path fill="currentColor" d="M8.375 9.375 5 6 1.625 9.375l-1-1L4 5 .625 1.625l1-1L5 4 8.375.625l1 1L6 5l3.375 3.375-1 1Z"/></svg>
               </button>
-            </div>`
+            </div>`,
       );
 
       totalPrice += info.price * info.quantity;
@@ -180,7 +176,7 @@ function updateCartUI() {
     removeItemBtn.forEach((btn) => {
       btn.addEventListener("click", () => {
         const removePermission = confirm(
-          "Are you sure you want to delete item?"
+          "Are you sure you want to delete item?",
         );
 
         if (removePermission) {
@@ -245,11 +241,11 @@ function createCartContainer() {
           </p>
         </div>
         <button
-          class="confirm-order-btn bg-primary-red mt-5 p-4 text-white rounded-full font-medium"
+          class="confirm-order-btn bg-primary-red hover:bg-red-800 mt-5 p-4 text-white rounded-full font-medium"
         >
           Confirm Order
         </button>
-      </div>`
+      </div>`,
   );
 }
 
@@ -328,10 +324,10 @@ function createOrderSummaryContainer() {
         </p>
       </div>
       <div class="order-summary max-h-[300px] overflow-scroll grid gap-10 p-5"></div>
-      <button class="new-order-btn bg-primary-red p-4 lg:py-3 rounded-full text-white font-medium">
+      <button class="new-order-btn bg-primary-red p-4 lg:py-3 rounded-full text-white font-medium hover:bg-red-800">
         Start New Order
       </button>
-    </div>`
+    </div>`,
   );
 
   const orderConfirmedContainer = document.querySelector(".order-confirmed");
@@ -360,18 +356,18 @@ function calculateOrderSummary() {
           <div class="order-summary-item flex items-center gap-5">
             <div class="item-thumbnail w-12">
               <img
-                class="rounded-lg"
+                class="rounded-lg lg:rounded-sm"
                 src="./assets/images/image-${info.category}-thumbnail.jpg"
                 alt=""
               />
             </div>
-            <div class="item-info text-xs flex flex-col justify-between gap-3">
+            <div class="item-info text-sm flex flex-col justify-between gap-3">
               <p class="item-name font-medium">${name}</p>
               <div class="item-info-quantity-price flex gap-5 lg:mr-64">
                 <p class="item-quantity text-primary-red font-semibold">${
                   info.quantity
                 }x</p>
-                <p class="item-price-per-one font-medium text-primary-rose-500">@$${
+                <p class="item-price-per-one font-medium text-primary-rose-500">@ $${
                   info.price
                 }
                 </p>
@@ -383,7 +379,7 @@ function calculateOrderSummary() {
               ).toFixed(2)}</p>
             </div>
           </div>
-        `
+        `,
     );
   }
 
@@ -392,9 +388,9 @@ function calculateOrderSummary() {
     `<div class="order-total p-5 flex justify-between items-center">
             <p class="text-sm">Order total</p>
             <p class="text-2xl font-bold">$${calculateOrderPrice().toFixed(
-              2
+              2,
             )}</p>
-          </div>`
+          </div>`,
   );
 }
 
@@ -470,12 +466,3 @@ function resetApp() {
   resetImageBorder();
   updateCartUI();
 }
-
-/*
-TO DO
-
-1) Slider to change quantity instead of multiple clicks that syncs with map
-
-2) Order Summary 
-
-*/

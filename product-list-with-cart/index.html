@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -16,227 +16,27 @@
     <title>Frontend Mentor | Product list with cart</title>
   </head>
   <body
-    class="font-RedHat min-h-screen lg:flex lg:items-center lg:justify-center"
+    class="min-h-screen font-RedHat lg:flex lg:items-center lg:justify-center"
   >
-    <!-- <div
-      class="order-confirmed fixed z-20 bottom-0 w-full bg-white p-5 grid gap-7 rounded-t-xl"
-    >
-      <img
-        src="./assets/images/icon-order-confirmed.svg"
-        alt="order confirmed"
-      />
-      <div class="success-msg grid gap-3">
-        <h2 class="text-4xl font-bold leading-10">
-          Order <br />
-          Confirmed
-        </h2>
-        <p class="text-primary-rose-500 text-sm">
-          We hope you enjoy your food!
-        </p>
-      </div>
-      <div class="order-summary grid gap-10 p-5">
-        <div class="order-summary-item flex gap-5">
-          <div class="item-thumbnail w-12">
-            <img
-              class="rounded-lg"
-              src="./assets/images/image-tiramisu-thumbnail.jpg"
-              alt=""
-            />
-          </div>
-          <div class="item-info text-sm flex flex-col justify-between">
-            <p class="item-name font-medium">Classic Tiramisu</p>
-            <div class="item-info-quantity-price flex gap-5">
-              <p class="item-quantity text-primary-red font-medium">1x</p>
-              <p class="item-price-per-one text-primary-rose-500">@$5.50</p>
-            </div>
-          </div>
-          <div class="item-total-price ml-auto self-center">
-            <p class="font-medium">$5.50</p>
-          </div>
-        </div>
-        <div class="order-total mt-5 flex justify-between items-center">
-          <p>Order total</p>
-          <p class="text-2xl font-bold">$46.50</p>
-        </div>
-      </div>
-      <button class="bg-primary-red p-4 rounded-full text-white font-medium">
-        Start New Order
-      </button>
-    </div> -->
     <div
-      class="overlay hidden fixed top-0 z-10 opacity-70 bg-black w-screen h-screen"
+      class="overlay fixed top-0 z-10 hidden h-screen w-screen bg-black opacity-70"
     ></div>
     <main
-      class="p-4 grid gap-5 select-none max-w-[1200px] lg:p-10 lg:grid-cols-desktop-grid lg:grid-rows-desktop-grid"
+      class="grid max-w-[1200px] select-none gap-5 p-4 lg:grid-cols-desktop-grid lg:grid-rows-desktop-grid lg:p-10"
     >
-      <h1 class="font-bold text-3xl">Desserts</h1>
+      <h1 class="text-3xl font-bold">Desserts</h1>
       <section
-        class="items grid gap-8 sm:grid-cols-2 lg:gap-5 lg:col-start-1 lg:grid-cols-3"
+        class="items grid gap-8 sm:grid-cols-2 lg:col-start-1 lg:grid-cols-3 lg:gap-5"
       >
-        <!-- <div class="item grid gap-8">
-          <div class="thumbnail relative">
-            <img
-              class="w-full max-h-[200px] object-cover rounded-lg"
-              src="./assets/images/image-waffle-mobile.jpg"
-              alt=""
-            />
-            <button
-              class="absolute flex gap-2 text-sm font-medium border px-8 py-3 rounded-full border-primary-rose-900 bg-white left-1/2 -translate-x-1/2 -translate-y-1/2"
-            >
-              <img src="assets/images/icon-add-to-cart.svg" /> Add to Cart
-            </button>
-            <div
-              class="quantity-selector px-5 py-3 rounded-full bg-primary-red absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-14 justify-between items-center"
-            >
-              <button
-                class="quantity-decrement border border-primary-rose-100 w-5 h-5 rounded-full flex justify-center items-center"
-              >
-                <img
-                  class=""
-                  src="./assets/images/icon-decrement-quantity.svg"
-                  alt=""
-                />
-              </button>
-              <p class="quantity-number text-white">1</p>
-              <button
-                class="quantity-increment border border-primary-rose-100 w-5 h-5 rounded-full flex justify-center items-center"
-              >
-                <img src="./assets/images/icon-increment-quantity.svg" alt="" />
-              </button>
-            </div>
-          </div>
-          <div class="item--description grid gap-1">
-            <div class="item--category text-sm text-primary-rose-400">
-              <p>Waffle</p>
-            </div>
-            <div class="item--name font-medium">
-              <p>Waffle with Berries</p>
-            </div>
-            <div class="item--price font-medium text-primary-red text-lg">
-              <p>$9999</p>
-            </div>
-          </div>
-        </div> -->
       </section>
       <section
-        class="cart p-4 grid gap-7 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:content-start"
+        class="cart grid gap-7 p-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:content-start"
       >
-        <h2 class="text-2xl text-primary-red font-bold">
+        <h2 class="text-2xl font-bold text-primary-red">
           Your Cart (<span class="cart-number">0</span>)
         </h2>
-        <!-- <div class="empty-cart flex flex-col items-center gap-5">
-          <div>
-            <img src="assets/images/illustration-empty-cart.svg" />
-          </div>
-          <p class="text-primary-rose-400">Your added items will appear here</p>
-        </div> -->
-        <!-- <div class="cart-items-container grid gap-7">
-          <div class="cart--items grid gap-10 mb-5">
-            <div class="cart-item flex justify-between items-center">
-              <div class="cart-item--info grid gap-2">
-                <div class="cart-item--name">
-                  <p class="font-medium">Classic tiramisu</p>
-                </div>
-                <div class="cart-item--numbers flex items-center gap-4">
-                  <p
-                    class="cart-item--quantity text-primary-red font-semibold text-sm"
-                  >
-                    1x
-                  </p>
-                  <p class="cart-item--price text-primary-rose-400 text-sm">
-                    @$5.50
-                  </p>
-                  <p
-                    class="cart-item--total text-primary-rose-500 font-medium text-sm"
-                  >
-                    $5.50
-                  </p>
-                </div>
-              </div>
-              <button
-                class="remove-item-btn border rounded-full border-primary-rose-400 scale-100 p-1"
-              >
-                <img src="./assets/images/icon-remove-item.svg" />
-              </button>
-            </div>
-          </div> -->
-        <!-- <div class="cart--total flex justify-between items-center">
-            <p class="text-sm">Order Total</p>
-            <p class="total-order-price text-2xl font-semibold">$46.50</p>
-          </div>
-          <div class="delivery--info flex justify-center items-center gap-2">
-            <img
-              src="./assets/images/icon-carbon-neutral.svg"
-              alt="tree image"
-            />
-            <p class="text-sm text-primary-rose-900">
-              This is a
-              <span class="font-semibold">carbon-neutral</span> delivery
-            </p>
-          </div>
-          <button
-            class="bg-primary-red mt-5 p-4 text-white rounded-full font-medium"
-          >
-            Confirm Order
-          </button>
-        </div> -->
       </section>
     </main>
-
-    <!-- Desserts
-
-  Waffle with Berries
-  Waffle
-  6.50
-  Add to Cart
-
-  Vanilla Bean Crème Brûlée
-  Crème Brûlée
-  7.00
-  Add to Cart
-
-  Macaron Mix of Five
-  Macaron
-  8.00
-  Add to Cart
-
-  Classic Tiramisu
-  Tiramisu
-  5.50
-  Add to Cart
-
-  Pistachio Baklava
-  Baklava
-  4.00
-  Add to Cart
-
-  Lemon Meringue Pie
-  Pie
-  5.00
-  Add to Cart
-
-  Red Velvet Cake
-  Cake
-  4.50
-  Add to Cart
-
-  Salted Caramel Brownie
-  Brownie
-  4.50
-  Add to Cart
-
-  Vanilla Panna Cotta
-  Panna Cotta
-  6.50
-  Add to Cart
-
-  Your Cart <!-- Quantity -->
-    <!-- Your added items will appear here -->
-
-    <!-- <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div> -->
     <script src="app.js"></script>
   </body>
 </html>
