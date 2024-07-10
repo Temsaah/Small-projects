@@ -9,14 +9,14 @@ async function fetchData() {
   const res = await fetch("data.json");
   const data = await res.json();
 
+  let itemsHTML = "";
+
   for (let item of data) {
-    itemsContainer.insertAdjacentHTML(
-      "beforeend",
-      `<div class="item grid gap-8 " data-name='${
-        item.name
-      }' data-category='${item.category.toLowerCase()}' data-price='${item.price.toFixed(
-        2,
-      )}'>
+    itemsHTML += `<div class="item grid gap-8 " data-name='${
+      item.name
+    }' data-category='${item.category.toLowerCase()}' data-price='${item.price.toFixed(
+      2,
+    )}'>
           <div class="thumbnail relative">
             <picture> <source srcset="${
               item.image.desktop
@@ -59,9 +59,10 @@ async function fetchData() {
               <p>$${item.price.toFixed(2)}</p>
             </div>
           </div>
-        </div>`,
-    );
+        </div>`;
   }
+
+  itemsContainer.innerHTML = itemsHTML;
 }
 
 fetchData();
@@ -101,6 +102,7 @@ function removeCartItem(name) {
 
 function updateCartUI() {
   const cartItemsContainer = document.querySelector(".cart-items-container");
+  const emptyCartContainer = document.querySelector(".empty-cart");
 
   if (cartItems.size === 0) {
     cartItemsContainer?.remove();
@@ -119,27 +121,23 @@ function updateCartUI() {
     updateCartItemsCount();
 
     return;
-  } else {
-    const emptyCartContainer = document.querySelector(".empty-cart");
-
-    emptyCartContainer?.remove();
   }
+
+  emptyCartContainer?.remove();
 
   if (!cartItemsContainer) {
     createCartContainer();
   }
 
-  if (cartItems.size > 0) {
-    const orderContainer = document.querySelector(".cart--items");
+  const orderContainer = document.querySelector(".cart--items");
 
-    orderContainer.innerHTML = ""; // RESET Cart
+  orderContainer.innerHTML = ""; // RESET Cart
 
-    let totalPrice = 0;
+  let cartItemsHTML = "";
+  let totalPrice = 0;
 
-    for (let [name, info] of cartItems) {
-      orderContainer.insertAdjacentHTML(
-        "beforeend",
-        `<div class="cart-item flex justify-between items-center" data-name='${name}'>
+  for (let [name, info] of cartItems) {
+    cartItemsHTML += `<div class="cart-item flex justify-between items-center" data-name='${name}'>
               <div class="cart-item--info grid gap-2">
                 <div class="cart-item--name">
                   <p class="font-medium text-sm">${name}</p>
@@ -165,11 +163,9 @@ function updateCartUI() {
               >
                 <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="none" viewBox="0 0 10 10"><path fill="currentColor" d="M8.375 9.375 5 6 1.625 9.375l-1-1L4 5 .625 1.625l1-1L5 4 8.375.625l1 1L6 5l3.375 3.375-1 1Z"/></svg>
               </button>
-            </div>`,
-      );
+            </div>`;
 
-      totalPrice += info.price * info.quantity;
-    }
+    totalPrice += info.price * info.quantity;
 
     const removeItemBtn = document.querySelectorAll(".remove-item-btn");
 
@@ -189,6 +185,8 @@ function updateCartUI() {
     updateCartItemsCount();
     updateOrderTotalPrice();
   }
+
+  orderContainer.innerHTML = cartItemsHTML;
 }
 
 function updateCartItemsCount() {
