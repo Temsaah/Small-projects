@@ -11,8 +11,8 @@
   <link rel="stylesheet" href="output.css">
 </head>
 <body class="font-Rubik">
-  <main class="m-10">
-    <div class="comments-section">
+  <main class="my-10 mx-6">
+    <div class="comments-section grid gap-10">
       <div class="comment-container grid gap-5">
         <div class="comment-user-info flex items-center gap-5">
           <img class="w-8" src="images/avatars/image-amyrobson.png" alt="">
@@ -20,10 +20,10 @@
           <p class="text-neutral-grayish-blue">1 month ago</p>
         </div>
         <div class="comment">
-          <p>Impressive! qwpeojqwoi jqwdoqwijd oqwidjqwoid jqw qjwoidj qwoiqwjd oqwijd oqiwdj oqwi djqowid jqwoidj qwoi djqowid jqw</p>
+          <p class="text-primary-soft-red">Impressive! qwpeojqwoi jqwdoqwijd oqwidjqwoid jqw qjwoidj qwoiqwjd oqwijd oqiwdj oqwi djqowid jqwoidj qwoi djqowid jqw</p>
         </div>
         <div class="comment-stats flex justify-between">
-          <div class="comment-reaction flex gap-3 items-center p-3">
+          <div class="comment-reaction flex gap-5 items-center p-3">
             <img src="images/icon-plus.svg" alt="">
             <p class="text-primary-moderate-blue font-medium">12</p>
             <img src="images/icon-minus.svg" alt="">
@@ -33,29 +33,120 @@
             <button class="text-primary-moderate-blue font-semibold">Reply</button>
           </div>
         </div>
+        <div class="reply-container grid gap-5 px-5 pt-10 ">
+          <div class="reply-user-info flex items-center gap-4">
+            <img class="w-8" src="images/avatars/image-amyrobson.png" alt="">
+            <p class="text-neutral-dark-blue font-semibold">amy robson</p>
+            <p class="text-neutral-grayish-blue">1 month ago</p>
+          </div>
+          <div class="reply">
+            <p class="text-primary-soft-red">Impressive! qwpeojqwoi jqwdoqwijd oqwidjqwoid jqw qjwoidj qwoiqwjd oqwijd oqiwdj oqwi djqowid jqwoidj qwoi djqowid jqw</p>
+          </div>
+          <div class="reply-stats flex justify-between">
+            <div class="reply-reaction flex gap-5 items-center p-3">
+              <img src="images/icon-plus.svg" alt="">
+              <p class="text-primary-moderate-blue font-medium">12</p>
+              <img src="images/icon-minus.svg" alt="">
+            </div>
+            <div class="reply-reply flex gap-2 items-center">
+              <img src="images/icon-reply.svg" alt="">
+              <button class="text-primary-moderate-blue font-semibold">Reply</button>
+            </div>
+          </div>
+        </div>
+        <div class="your-reply reply-container grid gap-5 px-5 pt-10 ">
+          <div class="reply-user-info flex items-center gap-4">
+            <img class="w-8" src="images/avatars/image-amyrobson.png" alt="">
+            <p class="text-neutral-dark-blue font-semibold">juliusomo <span class="ml-1 text-sm py-[2px] px-2 rounded-sm text-white bg-primary-moderate-blue">you</span></p>
+            <p class="text-neutral-grayish-blue">1 month ago</p>
+          </div>
+          <div class="reply">
+            <p class="text-primary-soft-red">Impressive! qwpeojqwoi jqwdoqwijd oqwidjqwoid jqw qjwoidj qwoiqwjd oqwijd oqiwdj oqwi djqowid jqwoidj qwoi djqowid jqw</p>
+          </div>
+          <div class="reply-stats flex justify-between">
+            <div class="reply-reaction flex gap-5 items-center p-3">
+              <img src="images/icon-plus.svg" alt="">
+              <p class="text-primary-moderate-blue font-medium">12</p>
+              <img src="images/icon-minus.svg" alt="">
+            </div>
+            <div class="reply-reply flex gap-5 items-center">
+              <button class="flex gap-2 items-center text-primary-soft-red font-semibold"><img src="images/icon-delete.svg" alt="">Delete</button>
+              <button class="flex gap-2 items-center text-primary-moderate-blue font-semibold"><img src="images/icon-edit.svg" alt="">Edit</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="reply-container grid gap-5 px-5 pt-10 ">
-        <div class="reply-user-info flex items-center gap-5">
+      <div class="comment-container grid gap-5">
+        <div class="comment-user-info flex items-center gap-5">
           <img class="w-8" src="images/avatars/image-amyrobson.png" alt="">
           <p class="text-neutral-dark-blue font-semibold">amy robson</p>
           <p class="text-neutral-grayish-blue">1 month ago</p>
         </div>
-        <div class="reply">
-          <p>Impressive! qwpeojqwoi jqwdoqwijd oqwidjqwoid jqw qjwoidj qwoiqwjd oqwijd oqiwdj oqwi djqowid jqwoidj qwoi djqowid jqw</p>
+        <div class="comment">
+          <p class="text-primary-soft-red">Impressive! qwpeojqwoi jqwdoqwijd oqwidjqwoid jqw qjwoidj qwoiqwjd oqwijd oqiwdj oqwi djqowid jqwoidj qwoi djqowid jqw</p>
         </div>
-        <div class="reply-stats flex justify-between">
-          <div class="reply-reaction flex gap-3 items-center p-3">
+        <div class="comment-stats flex justify-between">
+          <div class="comment-reaction flex gap-5 items-center p-3">
             <img src="images/icon-plus.svg" alt="">
             <p class="text-primary-moderate-blue font-medium">12</p>
             <img src="images/icon-minus.svg" alt="">
           </div>
-          <div class="reply-reply flex gap-2 items-center">
+          <div class="comment-reply flex gap-2 items-center">
             <img src="images/icon-reply.svg" alt="">
             <button class="text-primary-moderate-blue font-semibold">Reply</button>
           </div>
         </div>
+        <div class="reply-container grid gap-5 px-5 pt-10 ">
+          <div class="reply-user-info flex items-center gap-4">
+            <img class="w-8" src="images/avatars/image-amyrobson.png" alt="">
+            <p class="text-neutral-dark-blue font-semibold">amy robson</p>
+            <p class="text-neutral-grayish-blue">1 month ago</p>
+          </div>
+          <div class="reply">
+            <p class="text-primary-soft-red">Impressive! qwpeojqwoi jqwdoqwijd oqwidjqwoid jqw qjwoidj qwoiqwjd oqwijd oqiwdj oqwi djqowid jqwoidj qwoi djqowid jqw</p>
+          </div>
+          <div class="reply-stats flex justify-between">
+            <div class="reply-reaction flex gap-5 items-center p-3">
+              <img src="images/icon-plus.svg" alt="">
+              <p class="text-primary-moderate-blue font-medium">12</p>
+              <img src="images/icon-minus.svg" alt="">
+            </div>
+            <div class="reply-reply flex gap-2 items-center">
+              <img src="images/icon-reply.svg" alt="">
+              <button class="text-primary-moderate-blue font-semibold">Reply</button>
+            </div>
+          </div>
+        </div>
+        <div class="your-reply reply-container grid gap-5 px-5 pt-10 ">
+          <div class="reply-user-info flex items-center gap-4">
+            <img class="w-8" src="images/avatars/image-amyrobson.png" alt="">
+            <p class="text-neutral-dark-blue font-semibold">juliusomo <span class="ml-1 text-sm py-[2px] px-2 rounded-sm text-white bg-primary-moderate-blue">you</span></p>
+            <p class="text-neutral-grayish-blue">1 month ago</p>
+          </div>
+          <div class="reply">
+            <p class="text-primary-soft-red">Impressive! qwpeojqwoi jqwdoqwijd oqwidjqwoid jqw qjwoidj qwoiqwjd oqwijd oqiwdj oqwi djqowid jqwoidj qwoi djqowid jqw</p>
+          </div>
+          <div class="reply-stats flex justify-between">
+            <div class="reply-reaction flex gap-5 items-center p-3">
+              <img src="images/icon-plus.svg" alt="">
+              <p class="text-primary-moderate-blue font-medium">12</p>
+              <img src="images/icon-minus.svg" alt="">
+            </div>
+            <div class="reply-reply flex gap-5 items-center">
+              <button class="flex gap-2 items-center text-primary-soft-red font-semibold"><img src="images/icon-delete.svg" alt="">Delete</button>
+              <button class="flex gap-2 items-center text-primary-moderate-blue font-semibold"><img src="images/icon-edit.svg" alt="">Edit</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    <form class="px-5 mt-10 grid gap-5" action="" class="add-comment">
+      <textarea class="border  placeholder:text-neutral-grayish-blue w-full rounded-md px-6 py-4" placeholder="Add a comment..." name="" id=""  rows="3"></textarea>
+      <div class="form-actions flex justify-between items-center">
+        <img class="w-8" src="images/avatars/image-juliusomo.png" alt="">
+        <button class="uppercase bg-primary-moderate-blue text-white font-medium py-3 px-7 rounded-md">Send</button>
+      </div>
+    </form>
   </main>
   <script src="app.js""></script>
 </body>
