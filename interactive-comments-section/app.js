@@ -1,22 +1,32 @@
 let currentUser;
+let comments;
 let commentsContainer = document.querySelector(".comments-container");
 
 async function fetchData() {
   const data = await fetch("data.json");
   const res = await data.json();
 
-  currentUser = res.currentUser;
-  createComments(res.comments);
+  ({ comments, currentUser } = res);
+
+  createComments(comments);
 }
 
 function createComments(comments) {
   let commentsHTML = "";
 
   for (let comment of comments) {
+    const isCurrentUser = comment.user.username === currentUser.username;
+
     commentsHTML += `<div class="comment-container grid gap-5">
         <div class="comment-user-info flex items-center gap-5">
           <img class="w-8" src="${comment.user.image.png}" alt="">
-          <p class="text-neutral-dark-blue font-semibold">${comment.user.username}</p>
+          <p class="text-neutral-dark-blue font-semibold">${
+            comment.user.username
+          } ${
+      isCurrentUser
+        ? `<span class="ml-1 text-sm py-[2px] px-2 rounded-sm text-white bg-primary-moderate-blue">you</span>`
+        : null
+    }</p>
           <p class="text-neutral-grayish-blue">${comment.createdAt}</p>
         </div>
         <div class="comment">
@@ -25,7 +35,9 @@ function createComments(comments) {
         <div class="comment-stats flex justify-between">
           <div class="comment-reaction flex gap-5 items-center p-3">
             <img src="images/icon-plus.svg" alt="">
-            <p class="text-primary-moderate-blue font-medium">${comment.score}</p>
+            <p class="text-primary-moderate-blue font-medium">${
+              comment.score
+            }</p>
             <img src="images/icon-minus.svg" alt="">
           </div>
           <div class="comment-reply flex gap-2 items-center">
@@ -47,10 +59,18 @@ function createReplies(commentsHTML, comment) {
     commentsHTML += replyContainerHTML;
 
     for (let reply of comment.replies) {
+    const isCurrentUser = reply.user.username === currentUser.username;
+
       commentsHTML += `<div class="reply-container grid gap-5 ">
         <div class="reply-user-info flex items-center gap-4">
           <img class="w-8" src="${reply.user.image.png}" alt="">
-          <p class="text-neutral-dark-blue font-semibold">${reply.user.username}</p>
+          <p class="text-neutral-dark-blue font-semibold">${
+            reply.user.username
+          } ${
+        isCurrentUser
+          ? `<span class="ml-1 text-sm py-[2px] px-2 rounded-sm text-white bg-primary-moderate-blue">you</span>`
+          : null
+      }</p>
           <p class="text-neutral-grayish-blue">${reply.createdAt}</p>
         </div>
         <div class="reply">
@@ -74,7 +94,6 @@ function createReplies(commentsHTML, comment) {
   } else {
     commentsHTML += `</div>`;
   }
-  console.log(commentsHTML);
   return commentsHTML;
 }
 
