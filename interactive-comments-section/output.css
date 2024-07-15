@@ -546,6 +546,30 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.col-span-2{
+  grid-column: span 2 / span 2;
+}
+
+.col-start-1{
+  grid-column-start: 1;
+}
+
+.col-start-2{
+  grid-column-start: 2;
+}
+
+.row-start-1{
+  grid-row-start: 1;
+}
+
+.row-start-2{
+  grid-row-start: 2;
+}
+
+.row-start-3{
+  grid-row-start: 3;
+}
+
 .mx-6{
   margin-left: 1.5rem;
   margin-right: 1.5rem;
@@ -580,6 +604,30 @@ video {
   width: 100%;
 }
 
+.max-w-\[600px\]{
+  max-width: 600px;
+}
+
+.grid-cols-2{
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-comment-mobile-col{
+  grid-template-columns: auto auto;
+}
+
+.grid-rows-3{
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+}
+
+.grid-rows-comment-mobile-row{
+  grid-template-rows: auto auto auto;
+}
+
+.place-items-center{
+  place-items: center;
+}
+
 .items-center{
   align-items: center;
 }
@@ -602,6 +650,22 @@ video {
 
 .gap-5{
   gap: 1.25rem;
+}
+
+.gap-y-5{
+  row-gap: 1.25rem;
+}
+
+.gap-y-3{
+  row-gap: 0.75rem;
+}
+
+.self-center{
+  align-self: center;
+}
+
+.justify-self-end{
+  justify-self: end;
 }
 
 .rounded-md{
@@ -664,22 +728,6 @@ video {
   padding-top: 2.5rem;
 }
 
-.pt-9{
-  padding-top: 2.25rem;
-}
-
-.pt-8{
-  padding-top: 2rem;
-}
-
-.pt-7{
-  padding-top: 1.75rem;
-}
-
-.pt-6{
-  padding-top: 1.5rem;
-}
-
 .pt-5{
   padding-top: 1.25rem;
 }
@@ -738,4 +786,51 @@ video {
 .placeholder\:text-neutral-grayish-blue::placeholder{
   --tw-text-opacity: 1;
   color: hsl(211 10% 45% / var(--tw-text-opacity));
+}
+
+@media (min-width: 480px){
+  .xs\:col-start-2{
+    grid-column-start: 2;
+  }
+
+  .xs\:col-start-3{
+    grid-column-start: 3;
+  }
+
+  .xs\:row-span-2{
+    grid-row: span 2 / span 2;
+  }
+
+  .xs\:row-start-1{
+    grid-row-start: 1;
+  }
+
+  .xs\:grid-cols-comment-desktop-grid{
+    grid-template-columns: auto 1fr 1fr;
+  }
+
+  .xs\:grid-rows-comment-desktop-row{
+    grid-template-rows: auto 1fr;
+  }
+
+  .xs\:flex-col{
+    flex-direction: column;
+  }
+
+  .xs\:gap-3{
+    gap: 0.75rem;
+  }
+
+  .xs\:gap-x-5{
+    -moz-column-gap: 1.25rem;
+         column-gap: 1.25rem;
+  }
+
+  .xs\:gap-y-3{
+    row-gap: 0.75rem;
+  }
+
+  .xs\:self-start{
+    align-self: flex-start;
+  }
 }
