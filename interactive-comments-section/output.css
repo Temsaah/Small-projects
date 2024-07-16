@@ -546,6 +546,10 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.relative{
+  position: relative;
+}
+
 .col-span-2{
   grid-column: span 2 / span 2;
 }
@@ -596,6 +600,10 @@ video {
   display: grid;
 }
 
+.min-h-screen{
+  min-height: 100vh;
+}
+
 .w-8{
   width: 2rem;
 }
@@ -604,8 +612,8 @@ video {
   width: 100%;
 }
 
-.max-w-\[600px\]{
-  max-width: 600px;
+.max-w-\[700px\]{
+  max-width: 700px;
 }
 
 .grid-cols-2{
@@ -644,6 +652,10 @@ video {
   gap: 0.5rem;
 }
 
+.gap-3{
+  gap: 0.75rem;
+}
+
 .gap-4{
   gap: 1rem;
 }
@@ -652,12 +664,8 @@ video {
   gap: 1.25rem;
 }
 
-.gap-y-5{
-  row-gap: 1.25rem;
-}
-
-.gap-y-3{
-  row-gap: 0.75rem;
+.gap-y-4{
+  row-gap: 1rem;
 }
 
 .self-center{
@@ -724,6 +732,11 @@ video {
   padding-bottom: 2px;
 }
 
+.py-\[3px\]{
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
 .pt-10{
   padding-top: 2.5rem;
 }
@@ -788,49 +801,214 @@ video {
   color: hsl(211 10% 45% / var(--tw-text-opacity));
 }
 
-@media (min-width: 480px){
-  .xs\:col-start-2{
+.before\:absolute::before{
+  content: var(--tw-content);
+  position: absolute;
+}
+
+.before\:left-0::before{
+  content: var(--tw-content);
+  left: 0px;
+}
+
+.before\:m-3::before{
+  content: var(--tw-content);
+  margin: 0.75rem;
+}
+
+.before\:ml-3::before{
+  content: var(--tw-content);
+  margin-left: 0.75rem;
+}
+
+.before\:ml-5::before{
+  content: var(--tw-content);
+  margin-left: 1.25rem;
+}
+
+.before\:ml-4::before{
+  content: var(--tw-content);
+  margin-left: 1rem;
+}
+
+.before\:mr-4::before{
+  content: var(--tw-content);
+  margin-right: 1rem;
+}
+
+.before\:ml-1::before{
+  content: var(--tw-content);
+  margin-left: 0.25rem;
+}
+
+.before\:-ml-1::before{
+  content: var(--tw-content);
+  margin-left: -0.25rem;
+}
+
+.before\:-ml-2::before{
+  content: var(--tw-content);
+  margin-left: -0.5rem;
+}
+
+.before\:h-10::before{
+  content: var(--tw-content);
+  height: 2.5rem;
+}
+
+.before\:h-full::before{
+  content: var(--tw-content);
+  height: 100%;
+}
+
+.before\:w-full::before{
+  content: var(--tw-content);
+  width: 100%;
+}
+
+.before\:w-5::before{
+  content: var(--tw-content);
+  width: 1.25rem;
+}
+
+.before\:w-1::before{
+  content: var(--tw-content);
+  width: 0.25rem;
+}
+
+.before\:w-\[\]::before{
+  content: var(--tw-content);
+  width: ;
+}
+
+.before\:w-\[5px\]::before{
+  content: var(--tw-content);
+  width: 5px;
+}
+
+.before\:w-\[1px\]::before{
+  content: var(--tw-content);
+  width: 1px;
+}
+
+.before\:w-\[2px\]::before{
+  content: var(--tw-content);
+  width: 2px;
+}
+
+.before\:w-\[5p4\]::before{
+  content: var(--tw-content);
+  width: 5p4;
+}
+
+.before\:w-\[4px\]::before{
+  content: var(--tw-content);
+  width: 4px;
+}
+
+.before\:w-\[4p3\]::before{
+  content: var(--tw-content);
+  width: 4p3;
+}
+
+.before\:w-\[3px\]::before{
+  content: var(--tw-content);
+  width: 3px;
+}
+
+.before\:bg-red-700::before{
+  content: var(--tw-content);
+  --tw-bg-opacity: 1;
+  background-color: rgb(185 28 28 / var(--tw-bg-opacity));
+}
+
+.before\:bg-primary-soft-red::before{
+  content: var(--tw-content);
+  --tw-bg-opacity: 1;
+  background-color: hsl(358 79% 66% / var(--tw-bg-opacity));
+}
+
+.before\:bg-primary-soft-red\/5::before{
+  content: var(--tw-content);
+  background-color: hsl(358 79% 66% / 0.05);
+}
+
+.before\:bg-primary-soft-red\/50::before{
+  content: var(--tw-content);
+  background-color: hsl(358 79% 66% / 0.5);
+}
+
+.before\:bg-primary-soft-red\/20::before{
+  content: var(--tw-content);
+  background-color: hsl(358 79% 66% / 0.2);
+}
+
+.before\:p-3::before{
+  content: var(--tw-content);
+  padding: 0.75rem;
+}
+
+@media (min-width: 640px){
+  .sm\:col-start-2{
     grid-column-start: 2;
   }
 
-  .xs\:col-start-3{
+  .sm\:col-start-3{
     grid-column-start: 3;
   }
 
-  .xs\:row-span-2{
+  .sm\:row-span-2{
     grid-row: span 2 / span 2;
   }
 
-  .xs\:row-start-1{
+  .sm\:row-start-1{
     grid-row-start: 1;
   }
 
-  .xs\:grid-cols-comment-desktop-grid{
+  .sm\:grid-cols-comment-desktop-grid{
     grid-template-columns: auto 1fr 1fr;
   }
 
-  .xs\:grid-rows-comment-desktop-row{
+  .sm\:grid-rows-comment-desktop-row{
     grid-template-rows: auto 1fr;
   }
 
-  .xs\:flex-col{
+  .sm\:flex-col{
     flex-direction: column;
   }
 
-  .xs\:gap-3{
+  .sm\:gap-3{
     gap: 0.75rem;
   }
 
-  .xs\:gap-x-5{
+  .sm\:gap-x-5{
     -moz-column-gap: 1.25rem;
          column-gap: 1.25rem;
   }
 
-  .xs\:gap-y-3{
+  .sm\:gap-y-3{
     row-gap: 0.75rem;
   }
 
-  .xs\:self-start{
+  .sm\:self-start{
     align-self: flex-start;
+  }
+
+  .sm\:p-0{
+    padding: 0px;
+  }
+
+  .sm\:pl-16{
+    padding-left: 4rem;
+  }
+
+  .sm\:before\:ml-4::before{
+    content: var(--tw-content);
+    margin-left: 1rem;
+  }
+
+  .sm\:before\:w-\[2px\]::before{
+    content: var(--tw-content);
+    width: 2px;
   }
 }
