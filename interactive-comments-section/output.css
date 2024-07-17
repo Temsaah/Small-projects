@@ -741,8 +741,16 @@ video {
   padding-top: 2.5rem;
 }
 
+.pt-16{
+  padding-top: 4rem;
+}
+
 .pt-5{
   padding-top: 1.25rem;
+}
+
+.pl-4{
+  padding-left: 1rem;
 }
 
 .font-Rubik{
@@ -811,49 +819,24 @@ video {
   left: 0px;
 }
 
-.before\:m-3::before{
-  content: var(--tw-content);
-  margin: 0.75rem;
-}
-
-.before\:ml-3::before{
-  content: var(--tw-content);
-  margin-left: 0.75rem;
-}
-
-.before\:ml-5::before{
-  content: var(--tw-content);
-  margin-left: 1.25rem;
-}
-
-.before\:ml-4::before{
-  content: var(--tw-content);
-  margin-left: 1rem;
-}
-
-.before\:mr-4::before{
-  content: var(--tw-content);
-  margin-right: 1rem;
-}
-
-.before\:ml-1::before{
-  content: var(--tw-content);
-  margin-left: 0.25rem;
-}
-
-.before\:-ml-1::before{
-  content: var(--tw-content);
-  margin-left: -0.25rem;
-}
-
 .before\:-ml-2::before{
   content: var(--tw-content);
   margin-left: -0.5rem;
 }
 
-.before\:h-10::before{
+.before\:-ml-4::before{
   content: var(--tw-content);
-  height: 2.5rem;
+  margin-left: -1rem;
+}
+
+.before\:ml-2::before{
+  content: var(--tw-content);
+  margin-left: 0.5rem;
+}
+
+.before\:-ml-3::before{
+  content: var(--tw-content);
+  margin-left: -0.75rem;
 }
 
 .before\:h-full::before{
@@ -861,91 +844,14 @@ video {
   height: 100%;
 }
 
-.before\:w-full::before{
-  content: var(--tw-content);
-  width: 100%;
-}
-
-.before\:w-5::before{
-  content: var(--tw-content);
-  width: 1.25rem;
-}
-
-.before\:w-1::before{
-  content: var(--tw-content);
-  width: 0.25rem;
-}
-
-.before\:w-\[\]::before{
-  content: var(--tw-content);
-  width: ;
-}
-
-.before\:w-\[5px\]::before{
-  content: var(--tw-content);
-  width: 5px;
-}
-
-.before\:w-\[1px\]::before{
-  content: var(--tw-content);
-  width: 1px;
-}
-
 .before\:w-\[2px\]::before{
   content: var(--tw-content);
   width: 2px;
 }
 
-.before\:w-\[5p4\]::before{
-  content: var(--tw-content);
-  width: 5p4;
-}
-
-.before\:w-\[4px\]::before{
-  content: var(--tw-content);
-  width: 4px;
-}
-
-.before\:w-\[4p3\]::before{
-  content: var(--tw-content);
-  width: 4p3;
-}
-
-.before\:w-\[3px\]::before{
-  content: var(--tw-content);
-  width: 3px;
-}
-
-.before\:bg-red-700::before{
-  content: var(--tw-content);
-  --tw-bg-opacity: 1;
-  background-color: rgb(185 28 28 / var(--tw-bg-opacity));
-}
-
-.before\:bg-primary-soft-red::before{
-  content: var(--tw-content);
-  --tw-bg-opacity: 1;
-  background-color: hsl(358 79% 66% / var(--tw-bg-opacity));
-}
-
-.before\:bg-primary-soft-red\/5::before{
-  content: var(--tw-content);
-  background-color: hsl(358 79% 66% / 0.05);
-}
-
-.before\:bg-primary-soft-red\/50::before{
-  content: var(--tw-content);
-  background-color: hsl(358 79% 66% / 0.5);
-}
-
 .before\:bg-primary-soft-red\/20::before{
   content: var(--tw-content);
   background-color: hsl(358 79% 66% / 0.2);
-}
-
-.before\:p-3::before{
-  content: var(--tw-content);
-  padding: 0.75rem;
 }
 
 @media (min-width: 640px){
@@ -994,21 +900,20 @@ video {
     align-self: flex-start;
   }
 
-  .sm\:p-0{
-    padding: 0px;
-  }
-
   .sm\:pl-16{
     padding-left: 4rem;
+  }
+
+  .sm\:pl-1{
+    padding-left: 0.25rem;
+  }
+
+  .sm\:pl-12{
+    padding-left: 3rem;
   }
 
   .sm\:before\:ml-4::before{
     content: var(--tw-content);
     margin-left: 1rem;
-  }
-
-  .sm\:before\:w-\[2px\]::before{
-    content: var(--tw-content);
-    width: 2px;
   }
 }
