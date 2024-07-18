@@ -235,16 +235,16 @@
           </div>
         </div> -->
       </div>
-      <form class="add-comment-form px-5 mt-10 grid gap-5 w-full" action="" class="add-comment">
+      <form class="add-comment-form  mt-10 grid grid-cols-2 grid-rows-comment-desktop-row gap-5 w-full sm:grid-rows-1 sm:grid-cols-comment-desktop-grid sm:items-center" action="">
         <textarea
-          class="border placeholder:text-neutral-grayish-blue w-full rounded-md px-6 py-4"
+          class="border col-span-2 sm:row-start-1 sm:order-2 placeholder:text-neutral-grayish-blue w-full rounded-md px-6 py-4"
           placeholder="Add a comment..."
-          name=""
-          id=""
           rows="3"
         ></textarea>
-        <div class="form-actions flex justify-between items-center">
-          <img class="w-8" src="images/avatars/image-juliusomo.png" alt="" />
+        <div class="comment-user-img row-start-2 self-center sm:self-start sm:row-start-1 sm:order-1 ">
+          <img class="w-8 sm:w-10" src="images/avatars/image-juliusomo.png" alt="" />
+        </div>
+        <div class="form-actions row-start-2 justify-self-end sm:self-start sm:row-start-1 sm:order-3">
           <button
             class="uppercase bg-primary-moderate-blue text-white font-medium py-3 px-7 rounded-md"
           >
