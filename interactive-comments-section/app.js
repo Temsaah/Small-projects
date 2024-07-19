@@ -68,6 +68,7 @@ function addReply(content, commenter, replyingTo) {
       },
       username: `${commenter}`,
     },
+    replies: [],
   };
 
   const comment = comments.find(
@@ -119,12 +120,17 @@ function createComments(comments) {
           </div>
 
           
-          <div class="comment-reply-action cursor-pointer justify-self-end col-start-2 row-start-3 flex gap-2 items-center sm:row-start-1 sm:col-start-3">
+          ${
+            isCurrentUser
+              ? `<div class="self-comment-reply-action cursor-pointer justify-self-end col-start-2 row-start-3 flex gap-5 items-center sm:row-start-1 sm:col-start-3">
+                <button class="delete-btn flex gap-2 items-center text-primary-soft-red font-semibold" data-id="${comment.id}"><img src="images/icon-delete.svg" alt="">Delete</button>
+                <button class="edit-btn flex gap-2 items-center text-primary-moderate-blue font-semibold" data-id="${comment.id}"><img src="images/icon-edit.svg" alt="">Edit</button>
+              </div>`
+              : `<div class="comment-reply-action cursor-pointer justify-self-end col-start-2 row-start-3 flex gap-2 items-center  sm:row-start-1 sm:col-start-3">
             <img src="images/icon-reply.svg" alt="">
-            <button class="comment-reply-btn text-primary-moderate-blue font-semibold" data-id="${
-              comment.id
-            }">Reply</button>
-          </div>
+            <button class="reply-reply-btn text-primary-moderate-blue font-semibold" data-id="${comment.id}">Reply</button>
+          </div>`
+          }
 
         </div>
       `;
@@ -135,18 +141,73 @@ function createComments(comments) {
   renderComments(commentsHTML);
 }
 
-function createReplies(commentHTML, comment) {
-  if (comment.replies.length > 0) {
+// function createReplies(commentHTML, comment) {
+//   if (!comment) return;
+
+//   if (comment.replies.length > 0) {
+//     let repliesHTML = `<div class="replies-container relative grid gap-10 pt-12 pl-4 sm:pl-12 before:absolute before:-ml-3 sm:before:ml-4 before:left-0 before:w-[2px] before:h-full before:bg-primary-soft-red/20  ">`;
+
+//     for (let reply of comment.replies) {
+//       const isCurrentUser = reply.user.username === currentUser.username;
+//       console.log(reply.user);
+
+//       repliesHTML += `<div class="reply-container grid gap-5  sm:grid-cols-comment-desktop-grid sm:grid-rows-comment-desktop-row sm:gap-x-5 sm:gap-y-3 ">
+//         <div class="reply-user-info row-start-1 col-span-2 flex items-center gap-5 sm:col-start-2 sm:self-start">
+//           <img class="w-8" src="${reply.user.image.png}" alt="">
+//           <p class="text-neutral-dark-blue font-semibold">${
+//             reply.user.username
+//           } ${
+//         isCurrentUser
+//           ? `<span class="ml-1 text-sm py-[3px] px-2 rounded-sm text-white bg-primary-moderate-blue">you</span>`
+//           : ""
+//       }</p>
+//           <p class="text-neutral-grayish-blue">${reply.createdAt}</p>
+//         </div>
+//         <div class="reply-content row-start-2  col-span-2 self-center sm:col-start-2 ">
+//           <p class="text-primary-soft-red">${reply.content}</p>
+//         </div>
+//         <div class="reply-stats col-start-1 row-start-3 flex justify-between sm:row-start-1 sm:row-span-2 ">
+//           <div class="reply-reaction flex gap-3 items-center p-3 sm:flex-col">
+//             <img src="images/icon-plus.svg" alt="">
+//             <p class="text-primary-moderate-blue font-medium">${reply.score}</p>
+//             <img src="images/icon-minus.svg" alt="">
+//           </div>
+//         </div>
+//         ${
+//           isCurrentUser
+//             ? `<div class="reply-reply-action cursor-pointer justify-self-end col-start-2 row-start-3 flex gap-5 items-center sm:row-start-1 sm:col-start-3">
+//               <button class="delete-btn flex gap-2 items-center text-primary-soft-red font-semibold" data-id="${reply.id}"><img src="images/icon-delete.svg" alt="">Delete</button>
+//               <button class="edit-btn flex gap-2 items-center text-primary-moderate-blue font-semibold" data-id="${reply.id}"><img src="images/icon-edit.svg" alt="">Edit</button>
+//             </div>`
+//             : `<div class="reply-reply-action cursor-pointer justify-self-end col-start-2 row-start-3 flex gap-2 items-center  sm:row-start-1 sm:col-start-3">
+//           <img src="images/icon-reply.svg" alt="">
+//           <button class="reply-reply-btn text-primary-moderate-blue font-semibold" data-id="${reply.id}">Reply</button>
+//         </div>`
+//         }
+//       </div>`;
+//     }
+
+//     repliesHTML += "</div>";
+//     commentHTML += repliesHTML;
+//   }
+
+//   return commentHTML;
+// }
+
+function createReplies(parentHTML, comment) {
+  if (!comment) return;
+
+  if (comment.replies?.length > 0) {
     let repliesHTML = `<div class="replies-container relative grid gap-10 pt-12 pl-4 sm:pl-12 before:absolute before:-ml-3 sm:before:ml-4 before:left-0 before:w-[2px] before:h-full before:bg-primary-soft-red/20  ">`;
 
     for (let reply of comment.replies) {
       const isCurrentUser = reply.user.username === currentUser.username;
       console.log(reply.user);
 
-      repliesHTML += `<div class="reply-container grid gap-5  sm:grid-cols-comment-desktop-grid sm:grid-rows-comment-desktop-row sm:gap-x-5 sm:gap-y-3 ">
+      let replyHTML = `<div class="reply grid gap-5  sm:grid-cols-comment-desktop-grid sm:grid-rows-comment-desktop-row sm:gap-x-5 sm:gap-y-3 ">
         <div class="reply-user-info row-start-1 col-span-2 flex items-center gap-5 sm:col-start-2 sm:self-start">
           <img class="w-8" src="${reply.user.image.png}" alt="">
-          <p class="text-neutral-dark-blue font-semibold">${
+          <p class="reply-username text-neutral-dark-blue font-semibold">${
             reply.user.username
           } ${
         isCurrentUser
@@ -167,7 +228,7 @@ function createReplies(commentHTML, comment) {
         </div>
         ${
           isCurrentUser
-            ? `<div class="reply-reply-action cursor-pointer justify-self-end col-start-2 row-start-3 flex gap-5 items-center sm:row-start-1 sm:col-start-3">
+            ? `<div class="self-reply-reply-action cursor-pointer justify-self-end col-start-2 row-start-3 flex gap-5 items-center sm:row-start-1 sm:col-start-3">
               <button class="delete-btn flex gap-2 items-center text-primary-soft-red font-semibold" data-id="${reply.id}"><img src="images/icon-delete.svg" alt="">Delete</button>
               <button class="edit-btn flex gap-2 items-center text-primary-moderate-blue font-semibold" data-id="${reply.id}"><img src="images/icon-edit.svg" alt="">Edit</button>
             </div>`
@@ -177,13 +238,17 @@ function createReplies(commentHTML, comment) {
         </div>`
         }
       </div>`;
+
+      replyHTML = createReplies(replyHTML, reply);
+
+      repliesHTML += replyHTML;
     }
 
     repliesHTML += "</div>";
-    commentHTML += repliesHTML;
+    parentHTML += repliesHTML;
   }
 
-  return commentHTML;
+  return parentHTML;
 }
 
 function renderComments(commentsHTML) {
@@ -191,18 +256,34 @@ function renderComments(commentsHTML) {
 }
 
 commentsContainer.addEventListener("click", (e) => {
-  const commentReplyBtn = e.target.closest(".comment-reply-action");
-  const commentContainer = commentReplyBtn.closest(".comment");
-  const addReplyForm = commentContainer.querySelector(".add-reply-form");
-  const commentUserName =
-    commentContainer.querySelector(".comment-username").textContent;
+  const commentReplyBtn = e.target?.closest(".comment-reply-action");
+  const replyReplyBtn = e.target?.closest(".reply-reply-action");
+  const selfReplyBtn = e.target?.closest(".self-reply-reply-aciton");
+
+  let commentContainer, userName, isReply;
 
   if (commentReplyBtn) {
+    commentContainer = commentReplyBtn.closest(".comment");
+    userName = commentContainer.querySelector(".comment-username").textContent;
+    isReply = false;
+  } else if (replyReplyBtn) {
+    commentContainer = replyReplyBtn.closest(".reply");
+    userName = commentContainer.querySelector(".reply-username").textContent;
+    isReply = true;
+  } else {
+    return;
+  }
+
+  const addReplyForm = commentContainer.querySelector(".add-reply-form");
+
+  if (commentReplyBtn || replyReplyBtn) {
     if (addReplyForm) {
       addReplyForm.remove();
       return;
     }
-    const replyFormHTML = `<form class="add-reply-form col-span-3  mt-10 grid grid-cols-2 grid-rows-comment-desktop-row gap-5 w-full sm:grid-rows-1 sm:grid-cols-comment-desktop-grid sm:items-center" action="">
+  }
+
+  const replyFormHTML = `<form class="add-reply-form col-span-3  mt-10 grid grid-cols-2 grid-rows-comment-desktop-row gap-5 w-full sm:grid-rows-1 sm:grid-cols-comment-desktop-grid sm:items-center" action="">
         <textarea
           class="reply-content border col-span-2 sm:row-start-1 sm:order-2 placeholder:text-neutral-grayish-blue w-full rounded-md px-6 py-4"
           placeholder="Add a comment..."
@@ -220,19 +301,18 @@ commentsContainer.addEventListener("click", (e) => {
         </div>
       </form>`;
 
-    commentContainer.insertAdjacentHTML("beforeend", replyFormHTML);
+  commentContainer.insertAdjacentHTML("beforeend", replyFormHTML);
 
-    const replyForm = commentContainer.querySelector(".add-reply-form");
-    const replyTextArea = commentContainer.querySelector(".reply-content");
+  const replyForm = commentContainer.querySelector(".add-reply-form");
+  const replyTextArea = commentContainer.querySelector(".reply-content");
 
-    replyForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      addReply(replyTextArea.value, currentUser.username, commentUserName);
-    });
+  replyForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    addReply(replyTextArea.value, currentUser.username, commentUserName);
+  });
 
-    replyTextArea.value = `@${commentUserName}`;
-    console.log(commentUserName);
-  }
+  replyTextArea.value = `@${commentUserName}`;
+  console.log(commentUserName);
 });
 
 fetchData();
