@@ -30,7 +30,7 @@ async function fetchData() {
 
   ({ comments, currentUser } = res);
 
-  createComments(comments);
+  updateComments(comments);
 }
 
 function addComment(content) {
@@ -50,7 +50,7 @@ function addComment(content) {
   };
 
   comments.push(comment);
-  createComments(comments);
+  updateComments(comments);
 }
 
 function addReply(contentID, content, commenter, replyingTo) {
@@ -74,7 +74,7 @@ function addReply(contentID, content, commenter, replyingTo) {
 
   if (parentComment) parentComment.replies.push(reply);
 
-  createComments(comments);
+  updateComments(comments);
 }
 
 function findCommentById(comments, id) {
@@ -90,7 +90,7 @@ function findCommentById(comments, id) {
   return null;
 }
 
-function createComments(comments) {
+function updateComments(comments) {
   commentsContainer.textContent = "";
   let commentsHTML = "";
 
@@ -99,7 +99,9 @@ function createComments(comments) {
 
     let commentHTML = `
       <div class="comment-container grid gap-5">
-        <div class="comment grid grid-cols-comment-mobile-col grid-rows-comment-mobile-row gap-y-4 sm:grid-cols-comment-desktop-grid sm:grid-rows-comment-desktop-row sm:gap-x-5 sm:gap-y-3">
+        <div class="comment grid grid-cols-comment-mobile-col grid-rows-comment-mobile-row gap-y-4 sm:grid-cols-comment-desktop-grid sm:grid-rows-comment-desktop-row sm:gap-x-5 sm:gap-y-3" data-id="${
+          comment.id
+        }">
           
           <div class="comment-user-info row-start-1 col-span-2 flex items-center gap-5 sm:col-start-2 sm:self-start">
             <img class="w-8" src="${comment.user.image.png}" alt="">
@@ -119,24 +121,29 @@ function createComments(comments) {
 
           <div class="comment-stats col-start-1 row-start-3 flex justify-between sm:row-start-1 sm:row-span-2 ">
             <div class="comment-reaction flex gap-5 items-center p-3 sm:gap-3 sm:flex-col">
-              <img src="images/icon-plus.svg" alt="">
-              <p class="text-primary-moderate-blue font-medium">${
-                comment.score
-              }</p>
-              <img src="images/icon-minus.svg" alt="">
+              <button class="like-btn ${
+                currentUser.likes?.has(comment.id) ? "clicked" : ""
+              } text-primary-light-grayish-blue hover:text-primary-moderate-blue"><svg width="11" height="11" xmlns="http://www.w3.org/2000/svg"><path d="M6.33 10.896c.137 0 .255-.05.354-.149.1-.1.149-.217.149-.354V7.004h3.315c.136 0 .254-.05.354-.149.099-.1.148-.217.148-.354V5.272a.483.483 0 0 0-.148-.354.483.483 0 0 0-.354-.149H6.833V1.4a.483.483 0 0 0-.149-.354.483.483 0 0 0-.354-.149H4.915a.483.483 0 0 0-.354.149c-.1.1-.149.217-.149.354v3.37H1.08a.483.483 0 0 0-.354.15c-.1.099-.149.217-.149.353v1.23c0 .136.05.254.149.353.1.1.217.149.354.149h3.333v3.39c0 .136.05.254.15.353.098.1.216.149.353.149H6.33Z" fill="currentColor"/></svg></button>
+            <p class="text-primary-moderate-blue font-medium">${
+              comment.score
+            }</p>
+              <button class="dislike-btn ${
+                currentUser.dislikes?.has(comment.id) ? "clicked" : ""
+              } text-primary-light-grayish-blue hover:text-primary-moderate-blue"><svg width="11" height="3" xmlns="http://www.w3.org/2000/svg"><path d="M9.256 2.66c.204 0 .38-.056.53-.167.148-.11.222-.243.222-.396V.722c0-.152-.074-.284-.223-.395a.859.859 0 0 0-.53-.167H.76a.859.859 0 0 0-.53.167C.083.437.009.57.009.722v1.375c0 .153.074.285.223.396a.859.859 0 0 0 .53.167h8.495Z" fill="currentColor"/></svg></button>
+
             </div>
           </div>
 
           
           ${
             isCurrentUser
-              ? `<div class="self-comment-reply-action cursor-pointer justify-self-end col-start-2 row-start-3 flex gap-5 items-center sm:row-start-1 sm:col-start-3" data-id="${comment.id}">
-                <button class="delete-btn flex gap-2 items-center text-primary-soft-red font-semibold" data-id="${comment.id}"><img src="images/icon-delete.svg" alt="">Delete</button>
-                <button class="edit-btn flex gap-2 items-center text-primary-moderate-blue font-semibold" data-id="${comment.id}"><img src="images/icon-edit.svg" alt="">Edit</button>
+              ? `<div class="self-comment-reply-action cursor-pointer justify-self-end col-start-2 row-start-3 flex gap-5 items-center sm:row-start-1 sm:col-start-3">
+                <button class="delete-btn flex gap-2 items-center text-primary-soft-red font-semibold"><img src="images/icon-delete.svg" alt="">Delete</button>
+                <button class="edit-btn flex gap-2 items-center text-primary-moderate-blue font-semibold"><img src="images/icon-edit.svg" alt="">Edit</button>
               </div>`
-              : `<div class="comment-reply-action cursor-pointer justify-self-end col-start-2 row-start-3 flex gap-2 items-center  sm:row-start-1 sm:col-start-3" data-id="${comment.id}">
+              : `<div class="comment-reply-action cursor-pointer justify-self-end col-start-2 row-start-3 flex gap-2 items-center  sm:row-start-1 sm:col-start-3">
             <img src="images/icon-reply.svg" alt="">
-            <button class="reply-reply-btn text-primary-moderate-blue font-semibold" data-id="${comment.id}">Reply</button>
+            <button class="reply-reply-btn text-primary-moderate-blue font-semibold">Reply</button>
           </div>`
           }
 
@@ -158,7 +165,9 @@ function createReplies(parentHTML, comment) {
     for (let reply of comment.replies) {
       const isCurrentUser = reply.user.username === currentUser.username;
 
-      let replyHTML = `<div class="reply grid gap-5  sm:grid-cols-comment-desktop-grid sm:grid-rows-comment-desktop-row sm:gap-x-5 sm:gap-y-3 ">
+      let replyHTML = `<div class="reply grid gap-5  sm:grid-cols-comment-desktop-grid sm:grid-rows-comment-desktop-row sm:gap-x-5 sm:gap-y-3" data-id="${
+        reply.id
+      }">
         <div class="reply-user-info row-start-1 col-span-2 flex items-center gap-5 sm:col-start-2 sm:self-start">
           <img class="w-8" src="${reply.user.image.png}" alt="">
           <p class="reply-username text-neutral-dark-blue font-semibold">${
@@ -175,20 +184,24 @@ function createReplies(parentHTML, comment) {
         </div>
         <div class="reply-stats col-start-1 row-start-3 flex justify-between sm:row-start-1 sm:row-span-2 ">
           <div class="reply-reaction flex gap-3 items-center p-3 sm:flex-col">
-            <img src="images/icon-plus.svg" alt="">
+              <button class="like-btn ${
+                currentUser.likes?.has(reply.id) ? "clicked" : ""
+              } text-primary-light-grayish-blue hover:text-primary-moderate-blue"><svg width="11" height="11" xmlns="http://www.w3.org/2000/svg"><path d="M6.33 10.896c.137 0 .255-.05.354-.149.1-.1.149-.217.149-.354V7.004h3.315c.136 0 .254-.05.354-.149.099-.1.148-.217.148-.354V5.272a.483.483 0 0 0-.148-.354.483.483 0 0 0-.354-.149H6.833V1.4a.483.483 0 0 0-.149-.354.483.483 0 0 0-.354-.149H4.915a.483.483 0 0 0-.354.149c-.1.1-.149.217-.149.354v3.37H1.08a.483.483 0 0 0-.354.15c-.1.099-.149.217-.149.353v1.23c0 .136.05.254.149.353.1.1.217.149.354.149h3.333v3.39c0 .136.05.254.15.353.098.1.216.149.353.149H6.33Z" fill="currentColor"/></svg></button>
             <p class="text-primary-moderate-blue font-medium">${reply.score}</p>
-            <img src="images/icon-minus.svg" alt="">
+              <button class="dislike-btn ${
+                currentUser.dislikes?.has(reply.id) ? "clicked" : ""
+              } text-primary-light-grayish-blue hover:text-primary-moderate-blue"><svg width="11" height="3" xmlns="http://www.w3.org/2000/svg"><path d="M9.256 2.66c.204 0 .38-.056.53-.167.148-.11.222-.243.222-.396V.722c0-.152-.074-.284-.223-.395a.859.859 0 0 0-.53-.167H.76a.859.859 0 0 0-.53.167C.083.437.009.57.009.722v1.375c0 .153.074.285.223.396a.859.859 0 0 0 .53.167h8.495Z" fill="currentColor"/></svg></button>
           </div>
         </div>
         ${
           isCurrentUser
-            ? `<div class="self-reply-reply-action cursor-pointer justify-self-end col-start-2 row-start-3 flex gap-5 items-center sm:row-start-1 sm:col-start-3" data-id="${reply.id}">
-              <button class="delete-btn flex gap-2 items-center text-primary-soft-red font-semibold" data-id="${reply.id}"><img src="images/icon-delete.svg" alt="">Delete</button>
-              <button class="edit-btn flex gap-2 items-center text-primary-moderate-blue font-semibold" data-id="${reply.id}"><img src="images/icon-edit.svg" alt="">Edit</button>
+            ? `<div class="self-reply-reply-action cursor-pointer justify-self-end col-start-2 row-start-3 flex gap-5 items-center sm:row-start-1 sm:col-start-3">
+              <button class="delete-btn flex gap-2 items-center text-primary-soft-red font-semibold"><img src="images/icon-delete.svg" alt="">Delete</button>
+              <button class="edit-btn flex gap-2 items-center text-primary-moderate-blue font-semibold"><img src="images/icon-edit.svg" alt="">Edit</button>
             </div>`
-            : `<div class="reply-reply-action cursor-pointer justify-self-end col-start-2 row-start-3 flex gap-2 items-center  sm:row-start-1 sm:col-start-3" data-id="${reply.id}">
+            : `<div class="reply-reply-action cursor-pointer justify-self-end col-start-2 row-start-3 flex gap-2 items-center  sm:row-start-1 sm:col-start-3">
           <img src="images/icon-reply.svg" alt="">
-          <button class="reply-reply-btn text-primary-moderate-blue font-semibold" data-id="${reply.id}">Reply</button>
+          <button class="reply-reply-btn text-primary-moderate-blue font-semibold">Reply</button>
         </div>`
         }
       </div>`;
@@ -262,11 +275,72 @@ commentsContainer.addEventListener("click", (e) => {
 
   replyForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const contentID = commentReplyBtn?.dataset.id || replyReplyBtn?.dataset.id;
+    const contentID =
+      commentReplyBtn?.closest(".comment").dataset.id ||
+      replyReplyBtn?.closest(".reply").dataset.id;
     addReply(contentID, replyTextArea.value, currentUser.username, userName);
   });
 
   replyTextArea.value = `@${userName}`;
+});
+
+commentsContainer.addEventListener("click", (e) => {
+  let likeBtn = e.target.closest(".like-btn");
+  let dislikeBtn = e.target.closest(".dislike-btn");
+
+  if (likeBtn || dislikeBtn) {
+    if (!currentUser["likes"]) {
+      currentUser["likes"] = new Set();
+    }
+
+    if (!currentUser["dislikes"]) {
+      currentUser["dislikes"] = new Set();
+    }
+  }
+
+  if (likeBtn) {
+    const commentID =
+      +likeBtn.closest(".comment")?.dataset.id ||
+      +likeBtn.closest(".reply")?.dataset.id;
+
+    const comment = findCommentById(comments, +commentID);
+
+    if (currentUser.dislikes?.has(commentID)) {
+      currentUser.likes.add(commentID);
+      comment.score += 2;
+      currentUser.dislikes.delete(commentID);
+    } else if (currentUser.likes.has(commentID)) {
+      currentUser.likes.delete(commentID);
+      comment.score--;
+    } else {
+      currentUser.likes.add(commentID);
+      comment.score++;
+    }
+
+    updateComments(comments);
+    console.log(likeBtn);
+  }
+
+  if (dislikeBtn) {
+    const commentID =
+      +dislikeBtn.closest(".comment")?.dataset.id ||
+      +dislikeBtn.closest(".reply")?.dataset.id;
+
+    const comment = findCommentById(comments, +commentID);
+
+    if (currentUser.likes?.has(commentID)) {
+      currentUser.likes.delete(commentID);
+      comment.score -= 2;
+      currentUser.dislikes.add(commentID);
+    } else if (currentUser.dislikes.has(commentID)) {
+      currentUser.dislikes.delete(commentID);
+      comment.score++;
+    } else {
+      currentUser.dislikes.add(commentID);
+      comment.score--;
+    }
+    updateComments(comments);
+  }
 });
 
 fetchData();
