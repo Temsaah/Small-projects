@@ -90,12 +90,29 @@ function findCommentById(comments, id) {
   return null;
 }
 
+function deleteCommentById(comments, id) {
+  for (let i = 0; i < comments.length; i++) {
+    if (comments[i].id === id) {
+      comments.splice(i, 1);
+      return;
+    }
+
+    if (comments[i].replies?.length > 0) {
+      deleteCommentById(comments[i].replies, id);
+    }
+  }
+
+  return null;
+}
+
 function updateComments(comments) {
   commentsContainer.textContent = "";
   let commentsHTML = "";
 
   for (let comment of comments) {
     const isCurrentUser = comment.user.username === currentUser.username;
+
+    const styledComment = styleComment(comment.content);
 
     let commentHTML = `
       <div class="comment-container grid gap-5">
@@ -116,7 +133,7 @@ function updateComments(comments) {
           </div>
 
           <div class="comment-content row-start-2  col-span-2 self-center sm:col-start-2 ">
-            <p class="text-primary-soft-red">${comment.content}</p>
+            <p class="text-primary-soft-red">${styledComment}</p>
           </div>
 
           <div class="comment-stats col-start-1 row-start-3 flex justify-between sm:row-start-1 sm:row-span-2 ">
@@ -156,6 +173,19 @@ function updateComments(comments) {
   renderComments(commentsHTML);
 }
 
+function styleComment(comment) {
+  const commentArr = comment.split(" ");
+
+  const styledComment = commentArr.map((word) => {
+    if (word.startsWith("@")) {
+      return `<span class="text-primary-moderate-blue font-semibold">${word}</span>`;
+    }
+    return word;
+  });
+
+  return styledComment.join(" ");
+}
+
 function createReplies(parentHTML, comment) {
   if (!comment) return;
 
@@ -164,6 +194,7 @@ function createReplies(parentHTML, comment) {
 
     for (let reply of comment.replies) {
       const isCurrentUser = reply.user.username === currentUser.username;
+      const styledReply = styleComment(reply.content);
 
       let replyHTML = `<div class="reply grid gap-5  sm:grid-cols-comment-desktop-grid sm:grid-rows-comment-desktop-row sm:gap-x-5 sm:gap-y-3" data-id="${
         reply.id
@@ -180,7 +211,7 @@ function createReplies(parentHTML, comment) {
           <p class="text-neutral-grayish-blue">${reply.createdAt}</p>
         </div>
         <div class="reply-content row-start-2  col-span-2 self-center sm:col-start-2 ">
-          <p class="text-primary-soft-red">${reply.content}</p>
+          <p class="text-primary-soft-red">${styledReply}</p>
         </div>
         <div class="reply-stats col-start-1 row-start-3 flex justify-between sm:row-start-1 sm:row-span-2 ">
           <div class="reply-reaction flex gap-3 items-center p-3 sm:flex-col">
@@ -225,7 +256,6 @@ function renderComments(commentsHTML) {
 commentsContainer.addEventListener("click", (e) => {
   const commentReplyBtn = e.target?.closest(".comment-reply-action");
   const replyReplyBtn = e.target?.closest(".reply-reply-action");
-  const selfReplyBtn = e.target?.closest(".self-reply-reply-aciton");
 
   let commentContainer, userName, isReply;
 
@@ -342,5 +372,49 @@ commentsContainer.addEventListener("click", (e) => {
     updateComments(comments);
   }
 });
+
+commentsContainer.addEventListener("click", (e) => {
+  const deleteBtn = e.target.closest(".delete-btn");
+
+  if (deleteBtn) {
+    const commentID =
+      +deleteBtn.closest(".comment")?.dataset.id ||
+      +deleteBtn.closest(".reply")?.dataset.id;
+    handleDeleteBtn(commentID);
+  }
+});
+
+function handleDeleteBtn(commentID) {
+  const overlay = document.querySelector(".overlay");
+
+  overlay.classList.remove("hidden");
+
+  document.body.insertAdjacentHTML(
+    "afterbegin",
+    `<div class="delete-comment-container mx-4 p-7 bg-white absolute z-20 top-1/2 -translate-y-1/2 grid gap-5 rounded-lg max-w-[400px]">
+      <h2 class="text-xl text-neutral-dark-blue font-medium">Delete comment</h2>
+      <p class="text-base text-neutral-grayish-blue">Are you sure you want to delete this comment? This will remove the comment and can't be undone.</p>
+      <div class="delete-comment-action grid grid-cols-2 gap-5 font-medium">
+        <button class="cancel-deletion-btn uppercase bg-neutral-grayish-blue hover:bg-neutral-grayish-blue/90 text-white p-3 rounded-xl">No, Cancel</button>
+        <button class="confirm-delete-btn uppercase bg-primary-soft-red hover:bg-primary-soft-red/90 text-white p-3 rounded-xl">Yes, Delete</button>
+      </div>
+    </div>`
+  );
+
+  const cancelDeletionBtn = document.querySelector(".cancel-deletion-btn");
+  const confirmDeleteBtn = document.querySelector(".confirm-delete-btn");
+
+  cancelDeletionBtn.addEventListener("click", () => {
+    overlay.classList.add("hidden");
+    document.querySelector(".delete-comment-container").remove();
+  });
+
+  confirmDeleteBtn.addEventListener("click", () => {
+    deleteCommentById(comments, commentID);
+    updateComments(comments);
+    overlay.classList.add("hidden");
+    document.querySelector(".delete-comment-container").remove();
+  });
+}
 
 fetchData();
