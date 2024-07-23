@@ -132,8 +132,8 @@ function updateComments(comments) {
             <p class="text-neutral-grayish-blue">${comment.createdAt}</p>
           </div>
 
-          <div class="comment-content row-start-2  col-span-2 self-center sm:col-start-2 ">
-            <p class="text-primary-soft-red">${styledComment}</p>
+          <div class="row-start-2  col-span-2 self-center sm:col-start-2 ">
+            <p class="comment-content text-primary-soft-red">${styledComment}</p>
           </div>
 
           <div class="comment-stats col-start-1 row-start-3 flex justify-between sm:row-start-1 sm:row-span-2 ">
@@ -210,8 +210,10 @@ function createReplies(parentHTML, comment) {
       }</p>
           <p class="text-neutral-grayish-blue">${reply.createdAt}</p>
         </div>
-        <div class="reply-content row-start-2  col-span-2 self-center sm:col-start-2 ">
-          <p class="text-primary-soft-red">${styledReply}</p>
+        <div class="row-start-2  col-span-2 self-center sm:col-start-2 ">
+          <p class="reply-content text-primary-soft-red"><span class="text-primary-moderate-blue font-medium">@${
+            reply.replyingTo
+          }</span> ${styledReply}</p>
         </div>
         <div class="reply-stats col-start-1 row-start-3 flex justify-between sm:row-start-1 sm:row-span-2 ">
           <div class="reply-reaction flex gap-3 items-center p-3 sm:flex-col">
@@ -310,8 +312,6 @@ commentsContainer.addEventListener("click", (e) => {
       replyReplyBtn?.closest(".reply").dataset.id;
     addReply(contentID, replyTextArea.value, currentUser.username, userName);
   });
-
-  replyTextArea.value = `@${userName}`;
 });
 
 commentsContainer.addEventListener("click", (e) => {
@@ -375,12 +375,56 @@ commentsContainer.addEventListener("click", (e) => {
 
 commentsContainer.addEventListener("click", (e) => {
   const deleteBtn = e.target.closest(".delete-btn");
+  const editBtn = e.target.closest(".edit-btn");
 
   if (deleteBtn) {
     const commentID =
       +deleteBtn.closest(".comment")?.dataset.id ||
       +deleteBtn.closest(".reply")?.dataset.id;
     handleDeleteBtn(commentID);
+  }
+
+  if (editBtn) {
+    const parentContainer =
+      editBtn.closest(".reply") || editBtn.closest(".comment");
+
+    console.log(parentContainer);
+
+    const content =
+      parentContainer.querySelector(".reply-content") ||
+      parentContainer.querySelector(".comment-content");
+
+    const contentParent = content.parentElement;
+
+    const text = content.textContent;
+
+    const updateContainerHTML = `<div class="update-content grid gap-5">
+                <textarea class="rounded-md update-text border border-red-700 w-full resize-none py-4 px-6 min-h-[100px]" name="" id=""></textarea>
+                <button
+            class="update-btn justify-self-end uppercase bg-primary-moderate-blue text-white font-medium py-3 px-7 rounded-md"
+          >
+            Update
+          </button>
+              </div>`;
+
+    content.remove();
+
+    contentParent.insertAdjacentHTML("beforeend", updateContainerHTML);
+
+    const updateText = contentParent.querySelector(".update-text");
+
+    updateText.value = text
+      .split(" ")
+      .filter((word) => !word.startsWith("@"))
+      .join(" ");
+
+    const updateBtn = parentContainer.querySelector(".update-btn");
+
+    updateBtn.addEventListener("click", () => {
+      const comment = findCommentById(comments, +parentContainer.dataset.id);
+      comment.content = updateText.value;
+      updateComments(comments);
+    });
   }
 });
 
