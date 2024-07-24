@@ -637,24 +637,12 @@ video {
   height: 100vh;
 }
 
-.h-\[200p\]{
-  height: 200p;
-}
-
-.h-\[200px\]{
-  height: 200px;
-}
-
-.h-\[100px\]{
-  height: 100px;
+.min-h-\[100px\]{
+  min-height: 100px;
 }
 
 .min-h-screen{
   min-height: 100vh;
-}
-
-.min-h-\[100px\]{
-  min-height: 100px;
 }
 
 .w-8{
@@ -688,10 +676,6 @@ video {
 
 .resize-none{
   resize: none;
-}
-
-.resize{
-  resize: both;
 }
 
 .grid-cols-2{
@@ -748,10 +732,6 @@ video {
 
 .gap-y-4{
   row-gap: 1rem;
-}
-
-.self-end{
-  align-self: flex-end;
 }
 
 .self-center{
@@ -824,10 +804,6 @@ video {
   padding: 1.75rem;
 }
 
-.p-4{
-  padding: 1rem;
-}
-
 .px-2{
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -866,16 +842,6 @@ video {
 .py-\[3px\]{
   padding-top: 3px;
   padding-bottom: 3px;
-}
-
-.px-1{
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
-}
-
-.px-8{
-  padding-left: 2rem;
-  padding-right: 2rem;
 }
 
 .pl-4{
@@ -923,6 +889,22 @@ video {
 
 .uppercase{
   text-transform: uppercase;
+}
+
+.leading-10{
+  line-height: 2.5rem;
+}
+
+.leading-7{
+  line-height: 1.75rem;
+}
+
+.leading-6{
+  line-height: 1.5rem;
+}
+
+.leading-5{
+  line-height: 1.25rem;
 }
 
 .text-neutral-dark-blue{
@@ -1015,9 +997,38 @@ video {
   background-color: hsl(358 79% 66% / 0.9);
 }
 
+.hover\:bg-primary-moderate-blue:hover{
+  --tw-bg-opacity: 1;
+  background-color: hsl(238 40% 52% / var(--tw-bg-opacity));
+}
+
+.hover\:bg-primary-moderate-blue\/5:hover{
+  background-color: hsl(238 40% 52% / 0.05);
+}
+
+.hover\:bg-primary-moderate-blue\/50:hover{
+  background-color: hsl(238 40% 52% / 0.5);
+}
+
 .hover\:text-primary-moderate-blue:hover{
   --tw-text-opacity: 1;
   color: hsl(238 40% 52% / var(--tw-text-opacity));
+}
+
+.hover\:opacity-0:hover{
+  opacity: 0;
+}
+
+.hover\:opacity-5:hover{
+  opacity: 0.05;
+}
+
+.hover\:opacity-50:hover{
+  opacity: 0.5;
+}
+
+.hover\:opacity-40:hover{
+  opacity: 0.4;
 }
 
 @media (min-width: 640px){
@@ -1092,6 +1103,11 @@ video {
 
   .sm\:pl-12{
     padding-left: 3rem;
+  }
+
+  .sm\:text-sm{
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 
   .sm\:before\:ml-4::before{

@@ -122,18 +122,20 @@ function updateComments(comments) {
           
           <div class="comment-user-info row-start-1 col-span-2 flex items-center gap-5 sm:col-start-2 sm:self-start">
             <img class="w-8" src="${comment.user.image.png}" alt="">
-            <p class="comment-username text-neutral-dark-blue font-semibold">${
+            <p class="comment-username text-neutral-dark-blue font-semibold sm:text-sm">${
               comment.user.username
             }${
       isCurrentUser
         ? `<span class="ml-1 text-sm py-[3px] px-2 rounded-sm text-white bg-primary-moderate-blue">you</span>`
         : ""
     }</p>
-            <p class="text-neutral-grayish-blue">${comment.createdAt}</p>
+            <p class="text-neutral-grayish-blue sm:text-sm">${
+              comment.createdAt
+            }</p>
           </div>
 
           <div class="row-start-2  col-span-2 self-center sm:col-start-2 ">
-            <p class="comment-content text-primary-soft-red">${styledComment}</p>
+            <p class="comment-content text-primary-soft-red sm:text-sm leading-6">${styledComment}</p>
           </div>
 
           <div class="comment-stats col-start-1 row-start-3 flex justify-between sm:row-start-1 sm:row-span-2 ">
@@ -155,12 +157,12 @@ function updateComments(comments) {
           ${
             isCurrentUser
               ? `<div class="self-comment-reply-action cursor-pointer justify-self-end col-start-2 row-start-3 flex gap-5 items-center sm:row-start-1 sm:col-start-3">
-                <button class="delete-btn flex gap-2 items-center text-primary-soft-red font-semibold"><img src="images/icon-delete.svg" alt="">Delete</button>
-                <button class="edit-btn flex gap-2 items-center text-primary-moderate-blue font-semibold"><img src="images/icon-edit.svg" alt="">Edit</button>
+                <button class="delete-btn flex gap-2 items-center text-primary-soft-red font-semibold hover:opacity-50"><img src="images/icon-delete.svg" alt="">Delete</button>
+                <button class="edit-btn flex gap-2 items-center text-primary-moderate-blue font-semibold hover:opacity-50"><img src="images/icon-edit.svg" alt="">Edit</button>
               </div>`
-              : `<div class="comment-reply-action cursor-pointer justify-self-end col-start-2 row-start-3 flex gap-2 items-center  sm:row-start-1 sm:col-start-3">
-            <img src="images/icon-reply.svg" alt="">
-            <button class="reply-reply-btn text-primary-moderate-blue font-semibold">Reply</button>
+              : `<div class="comment-reply-action cursor-pointer justify-self-end col-start-2 row-start-3 sm:row-start-1 sm:col-start-3">
+            
+            <button class="reply-reply-btn flex gap-2 items-center hover:opacity-40 text-primary-moderate-blue font-semibold"><img src="images/icon-reply.svg" alt=""> Reply</button>
           </div>`
           }
 
@@ -201,17 +203,17 @@ function createReplies(parentHTML, comment) {
       }">
         <div class="reply-user-info row-start-1 col-span-2 flex items-center gap-5 sm:col-start-2 sm:self-start">
           <img class="w-8" src="${reply.user.image.png}" alt="">
-          <p class="reply-username text-neutral-dark-blue font-semibold">${
+          <p class="reply-username text-neutral-dark-blue font-semibold sm:text-sm">${
             reply.user.username
           } ${
         isCurrentUser
           ? `<span class="ml-1 text-sm py-[3px] px-2 rounded-sm text-white bg-primary-moderate-blue">you</span>`
           : ""
       }</p>
-          <p class="text-neutral-grayish-blue">${reply.createdAt}</p>
+          <p class="text-neutral-grayish-blue text-sm">${reply.createdAt}</p>
         </div>
         <div class="row-start-2  col-span-2 self-center sm:col-start-2 ">
-          <p class="reply-content text-primary-soft-red"><span class="text-primary-moderate-blue font-medium">@${
+          <p class="reply-content sm:text-sm text-primary-soft-red"><span class="text-primary-moderate-blue font-medium">@${
             reply.replyingTo
           }</span> ${styledReply}</p>
         </div>
@@ -229,12 +231,12 @@ function createReplies(parentHTML, comment) {
         ${
           isCurrentUser
             ? `<div class="self-reply-reply-action cursor-pointer justify-self-end col-start-2 row-start-3 flex gap-5 items-center sm:row-start-1 sm:col-start-3">
-              <button class="delete-btn flex gap-2 items-center text-primary-soft-red font-semibold"><img src="images/icon-delete.svg" alt="">Delete</button>
-              <button class="edit-btn flex gap-2 items-center text-primary-moderate-blue font-semibold"><img src="images/icon-edit.svg" alt="">Edit</button>
+              <button class="delete-btn hover:opacity-50 flex gap-2 items-center text-primary-soft-red font-semibold"><img src="images/icon-delete.svg" alt="">Delete</button>
+              <button class="edit-btn flex gap-2 items-center text-primary-moderate-blue font-semibold hover:opacity-50"><img src="images/icon-edit.svg" alt="">Edit</button>
             </div>`
             : `<div class="reply-reply-action cursor-pointer justify-self-end col-start-2 row-start-3 flex gap-2 items-center  sm:row-start-1 sm:col-start-3">
-          <img src="images/icon-reply.svg" alt="">
-          <button class="reply-reply-btn text-primary-moderate-blue font-semibold">Reply</button>
+          
+          <button class="reply-reply-btn flex gap-2 items-center hover:opacity-50 text-primary-moderate-blue font-semibold"><img src="images/icon-reply.svg" alt=""> Reply</button>
         </div>`
         }
       </div>`;
@@ -293,7 +295,7 @@ commentsContainer.addEventListener("click", (e) => {
         </div>
         <div class="form-actions row-start-2 justify-self-end sm:self-start sm:row-start-1 sm:order-3">
           <button
-            class="uppercase bg-primary-moderate-blue text-white font-medium py-3 px-7 rounded-md"
+            class="uppercase hover:opacity-50 bg-primary-moderate-blue text-white font-medium py-3 px-7 rounded-md"
           >
             Reply
           </button>
@@ -304,6 +306,7 @@ commentsContainer.addEventListener("click", (e) => {
 
   const replyForm = commentContainer.querySelector(".add-reply-form");
   const replyTextArea = commentContainer.querySelector(".reply-text");
+  replyTextArea.focus();
 
   replyForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -412,6 +415,7 @@ commentsContainer.addEventListener("click", (e) => {
     contentParent.insertAdjacentHTML("beforeend", updateContainerHTML);
 
     const updateText = contentParent.querySelector(".update-text");
+    updateText.focus();
 
     updateText.value = text
       .split(" ")
@@ -445,12 +449,22 @@ function handleDeleteBtn(commentID) {
     </div>`
   );
 
+  const deletionContainer = document.querySelector(".delete-comment-container");
   const cancelDeletionBtn = document.querySelector(".cancel-deletion-btn");
   const confirmDeleteBtn = document.querySelector(".confirm-delete-btn");
+
+  cancelDeletionBtn.focus();
+
+  deletionContainer.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      confirmDeleteBtn.click();
+    }
+  });
 
   cancelDeletionBtn.addEventListener("click", () => {
     overlay.classList.add("hidden");
     document.querySelector(".delete-comment-container").remove();
+    document.body.classList.remove("overflow-hidden");
   });
 
   confirmDeleteBtn.addEventListener("click", () => {
@@ -458,7 +472,11 @@ function handleDeleteBtn(commentID) {
     updateComments(comments);
     overlay.classList.add("hidden");
     document.querySelector(".delete-comment-container").remove();
+    document.body.classList.remove("overflow-hidden");
   });
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  document.body.classList.add("overflow-hidden");
 }
 
 fetchData();
