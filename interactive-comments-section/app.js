@@ -205,7 +205,7 @@ function createReplies(parentHTML, comment) {
           <img class="w-8" src="${reply.user.image.png}" alt="">
           <p class="reply-username text-neutral-dark-blue font-semibold sm:text-sm">${
             reply.user.username
-          } ${
+          }${
         isCurrentUser
           ? `<span class="ml-1 text-sm py-[3px] px-2 rounded-sm text-white bg-primary-moderate-blue">you</span>`
           : ""
@@ -215,7 +215,7 @@ function createReplies(parentHTML, comment) {
         <div class="row-start-2  col-span-2 self-center sm:col-start-2 ">
           <p class="reply-content sm:text-sm text-primary-soft-red"><span class="text-primary-moderate-blue font-medium">@${
             reply.replyingTo
-          }</span> ${styledReply}</p>
+          } </span>${styledReply}</p>
         </div>
         <div class="reply-stats col-start-1 row-start-3 flex justify-between sm:row-start-1 sm:row-span-2 ">
           <div class="reply-reaction flex gap-3 items-center p-3 sm:flex-col">
@@ -261,6 +261,29 @@ commentsContainer.addEventListener("click", (e) => {
   const commentReplyBtn = e.target?.closest(".comment-reply-action");
   const replyReplyBtn = e.target?.closest(".reply-reply-action");
 
+  if (commentReplyBtn || replyReplyBtn) {
+    handleReplyAction(commentReplyBtn, replyReplyBtn);
+    return;
+  }
+
+  let likeBtn = e.target.closest(".like-btn");
+  let dislikeBtn = e.target.closest(".dislike-btn");
+
+  if (likeBtn || dislikeBtn) {
+    handleReactionsBtn(likeBtn, dislikeBtn);
+    return;
+  }
+
+  const deleteBtn = e.target.closest(".delete-btn");
+  const editBtn = e.target.closest(".edit-btn");
+
+  if (editBtn || deleteBtn) {
+    handleSelfComment(editBtn, deleteBtn);
+    return;
+  }
+});
+
+function handleReplyAction(commentReplyBtn, replyReplyBtn) {
   let commentContainer, userName, isReply;
 
   if (commentReplyBtn) {
@@ -271,8 +294,6 @@ commentsContainer.addEventListener("click", (e) => {
     commentContainer = replyReplyBtn.closest(".reply");
     userName = commentContainer.querySelector(".reply-username").textContent;
     isReply = true;
-  } else {
-    return;
   }
 
   const addReplyForm = commentContainer.querySelector(".add-reply-form");
@@ -306,6 +327,8 @@ commentsContainer.addEventListener("click", (e) => {
 
   const replyForm = commentContainer.querySelector(".add-reply-form");
   const replyTextArea = commentContainer.querySelector(".reply-text");
+  console.log("🚀 ~ handleReplyAction ~ replyTextArea:", replyTextArea.value);
+
   replyTextArea.focus();
 
   replyForm.addEventListener("submit", (e) => {
@@ -315,12 +338,9 @@ commentsContainer.addEventListener("click", (e) => {
       replyReplyBtn?.closest(".reply").dataset.id;
     addReply(contentID, replyTextArea.value, currentUser.username, userName);
   });
-});
+}
 
-commentsContainer.addEventListener("click", (e) => {
-  let likeBtn = e.target.closest(".like-btn");
-  let dislikeBtn = e.target.closest(".dislike-btn");
-
+function handleReactionsBtn(likeBtn, dislikeBtn) {
   if (likeBtn || dislikeBtn) {
     if (!currentUser["likes"]) {
       currentUser["likes"] = new Set();
@@ -351,7 +371,6 @@ commentsContainer.addEventListener("click", (e) => {
     }
 
     updateComments(comments);
-    console.log(likeBtn);
   }
 
   if (dislikeBtn) {
@@ -374,12 +393,9 @@ commentsContainer.addEventListener("click", (e) => {
     }
     updateComments(comments);
   }
-});
+}
 
-commentsContainer.addEventListener("click", (e) => {
-  const deleteBtn = e.target.closest(".delete-btn");
-  const editBtn = e.target.closest(".edit-btn");
-
+function handleSelfComment(editBtn, deleteBtn) {
   if (deleteBtn) {
     const commentID =
       +deleteBtn.closest(".comment")?.dataset.id ||
@@ -390,8 +406,6 @@ commentsContainer.addEventListener("click", (e) => {
   if (editBtn) {
     const parentContainer =
       editBtn.closest(".reply") || editBtn.closest(".comment");
-
-    console.log(parentContainer);
 
     const content =
       parentContainer.querySelector(".reply-content") ||
@@ -430,7 +444,7 @@ commentsContainer.addEventListener("click", (e) => {
       updateComments(comments);
     });
   }
-});
+}
 
 function handleDeleteBtn(commentID) {
   const overlay = document.querySelector(".overlay");
