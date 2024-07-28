@@ -34,11 +34,11 @@ function fetchPlans() {
 
   plans.forEach((plan) => {
     plansHTML += `<div
-          class="plan ${
-            plan.mostPopular ? "bg-primary-gradient" : "bg-white"
-          } text-center grid gap-5 ${
-      plan.mostPopular ? "text-white" : "bg-white"
-    } px-5 py-8 rounded-lg"
+          class="plan  text-center grid gap-5 px-5 py-8 rounded-lg lg:w-[340px]  ${
+            plan.mostPopular
+              ? "bg-primary-gradient text-white lg:py-14"
+              : "bg-white"
+          }"
         >
           <p class="${
             plan.mostPopular ? "text-white" : "text-primary-grayish-blue"
@@ -66,7 +66,7 @@ function fetchPlans() {
             </div>
           </div>
           <button
-            class="p-4  font-bold text-xs rounded-lg uppercase tracking-widest  ${
+            class="p-3  font-bold text-xs rounded-lg uppercase tracking-widest  ${
               plan.mostPopular
                 ? "text-primary-light-blue bg-primary-very-light-grayish-blue "
                 : "bg-primary-gradient text-primary-very-light-grayish-blue "
