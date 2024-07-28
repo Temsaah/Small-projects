@@ -1,4 +1,7 @@
 const plansContainer = document.querySelector(".plans");
+const BillingBtn = document.querySelector(".billing-btn");
+
+let currentPlan = "Annually";
 
 let plans = [
   {
@@ -34,7 +37,7 @@ function fetchPlans() {
 
   plans.forEach((plan) => {
     plansHTML += `<div
-          class="plan  text-center grid gap-5 px-5 py-8 rounded-lg lg:w-[340px]  ${
+          class="plan text-center grid gap-5 px-5 py-8 rounded-lg lg:w-[340px]  ${
             plan.mostPopular
               ? "bg-primary-gradient text-white lg:py-14"
               : "bg-white"
@@ -48,7 +51,12 @@ function fetchPlans() {
               ? "text-primary-very-light-grayish-blue "
               : "text-primary-dark-grayish-blue"
           }">
-            <span class="text-4xl">$</span>${plan.price}
+            <span class="text-4xl">$</span>
+            ${
+              currentPlan === "Annually"
+                ? plan.price
+                : Math.floor((plan.price / 10) * 100) / 100
+            }
           </p>
           <div
             class="plan-features my-5 divide-y divide-primary-light-grayish-blue/70 border-t border-b border-primary-light-grayish-blue/70 ${
@@ -66,10 +74,10 @@ function fetchPlans() {
             </div>
           </div>
           <button
-            class="p-3  font-bold text-xs rounded-lg uppercase tracking-widest  ${
+            class="p-3 box-content font-bold text-xs rounded-lg uppercase tracking-widest border ${
               plan.mostPopular
-                ? "text-primary-light-blue bg-primary-very-light-grayish-blue "
-                : "bg-primary-gradient text-primary-very-light-grayish-blue "
+                ? "text-primary-light-blue bg-primary-very-light-grayish-blue hover:bg-transparent hover:text-primary-very-light-grayish-blue  hover:border-primary-very-light-grayish-blue "
+                : "bg-primary-gradient text-primary-very-light-grayish-blue hover:text-primary-light-blue hover:bg-none hover:bg-transparent hover:border-primary-light-blue"
             }"
           >
             Learn More
@@ -79,5 +87,20 @@ function fetchPlans() {
 
   plansContainer.innerHTML = plansHTML;
 }
+
+BillingBtn.addEventListener("click", () => {
+  const switchBtn = BillingBtn.querySelector(".switch");
+  console.log(switchBtn);
+
+  if (switchBtn.classList.contains("translate-x-0")) {
+    switchBtn.classList.replace("translate-x-0", "translate-x-full");
+    currentPlan = "Monthly";
+    fetchPlans();
+  } else {
+    switchBtn.classList.replace("translate-x-full", "translate-x-0");
+    currentPlan = "Annually";
+    fetchPlans();
+  }
+});
 
 fetchPlans();
