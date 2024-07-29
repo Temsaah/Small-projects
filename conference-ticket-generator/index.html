@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="output.css" />
+
+    <title>Frontend Mentor | Conference ticket generator</title>
+  </head>
+  <body
+    class="font-Inconsolata h-screen bg-[url('./assets/images/background-mobile.png')] bg-cover bg-no-repeat bg-center relative"
+  >
+    <div class="background absolute w-full top-0 h-full overflow-hidden">
+      <div class="pattern-line">
+        <object
+          type="image/svg+xml"
+          data="assets/images/pattern-lines.svg"
+          width="980px"
+        ></object>
+      </div>
+      <div class="pattern-squiggly-line-top absolute top-8 right-0">
+        <img
+          class="w-[120px]"
+          src="assets/images/pattern-squiggly-line-top.svg"
+          alt=""
+        />
+      </div>
+      <div class="pattern-circle absolute top-1/2 right-0 translate-x-1/2">
+        <img class="w-[110px]" src="assets/images/pattern-circle.svg" alt="" />
+      </div>
+      <div class="pattern-squiggly-line-bottom absolute bottom-0">
+        <img
+          class="w-[300px]"
+          src="assets/images/pattern-squiggly-line-bottom.svg"
+          alt=""
+        />
+      </div>
+    </div>
+    <header class="grid place-items-center p-8">
+      <img class="w-[170px]" src="assets/images/logo-full.svg" />
+    </header>
+
+    <main class="px-3">
+      <div class="intro-text p-3 text-center grid gap-5">
+        <h1 class="text-white text-[1.8rem] font-extrabold">
+          Your Journey to Coding Conf 2025 Starts Here!
+        </h1>
+        <p class="text-neutral-300 font-semibold text-xl">
+          Secure your spot at next year's biggest coding conference.
+        </p>
+      </div>
+    </main>
+  </body>
+</html>
