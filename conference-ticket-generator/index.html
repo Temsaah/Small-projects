@@ -23,56 +23,72 @@
     <title>Frontend Mentor | Conference ticket generator</title>
   </head>
   <body
-    class="font-Inconsolata min-h-screen bg-[url('./assets/images/background-mobile.png')] bg-cover bg-no-repeat bg-center relative py-8"
+    class="font-Inconsolata min-h-screen bg-[url('./assets/images/background-mobile.png')] md:bg-[url('./assets/images/background-desktop.png')] bg-cover bg-no-repeat bg-center relative py-8"
   >
     <div class="background absolute -z-10 w-full top-0 h-full overflow-hidden">
-      <div class="pattern-line">
-        <object
-          type="image/svg+xml"
-          data="assets/images/pattern-lines.svg"
-          width="980px"
-        ></object>
-      </div>
-      <div class="pattern-squiggly-line-top absolute top-8 right-0">
+      <div class="pattern-line md:absolute md:top-0">
         <img
-          class="w-[120px]"
+          class="max-w-max w-[980px] md:w-full"
+          src="assets/images/pattern-lines.svg"
+          alt=""
+        />
+      </div>
+      <div class="pattern-squiggly-line-top absolute top-8 right-0 md:top-20">
+        <img
+          class="w-[120px] md:w-[400px]"
           src="assets/images/pattern-squiggly-line-top.svg"
           alt=""
         />
       </div>
-      <div class="pattern-circle absolute top-1/2 right-0 translate-x-1/2">
-        <img class="w-[110px]" src="assets/images/pattern-circle.svg" alt="" />
+      <div
+        class="pattern-circle absolute top-1/2 right-0 translate-x-1/2 md:left-3/4 md:-translate-x-[40%] md:-translate-y-[30%]"
+      >
+        <img
+          class="w-[110px] md:w-[200px]"
+          src="assets/images/pattern-circle.svg"
+          alt=""
+        />
+      </div>
+      <div
+        class="sm:hidden md:block pattern-circle-desktop absolute top-0 -translate-y-1/2 left-10"
+      >
+        <img
+          class="w-[110px] md:w-[200px]"
+          src="assets/images/pattern-circle.svg"
+          alt=""
+        />
       </div>
       <div class="pattern-squiggly-line-bottom absolute bottom-0">
         <img
-          class="w-[300px]"
+          class="w-[300px] md:w-[600px]"
           src="assets/images/pattern-squiggly-line-bottom.svg"
           alt=""
         />
       </div>
     </div>
-    <header class="grid place-items-center">
+    <header class="grid place-items-center md:mb-10">
       <img class="w-[170px]" src="assets/images/logo-full.svg" />
     </header>
 
-    <main class="px-5 grid">
+    <main class="px-5 grid max-w-[780px] md:mx-auto">
       <div class="intro-text p-4 text-center grid gap-5">
-        <h1 class="text-white text-[1.7rem] font-extrabold">
+        <h1 class="text-white text-[1.7rem] font-extrabold md:text-5xl">
           Your Journey to Coding Conf 2025 Starts Here!
         </h1>
-        <p class="text-neutral-300 font-semibold text-lg">
+        <p class="text-neutral-300 font-semibold text-lg md:tracking-wider">
           Secure your spot at next year's biggest coding conference.
         </p>
       </div>
 
-      <form class="grid gap-7 py-7" action="">
+      <form class="grid gap-7 py-7 w-full max-w-[450px] md:mx-auto" action="">
         <fieldset class="space-y-4">
           <legend class="text-neutral-50 text-xl font-semibold">
             Upload Avatar
           </legend>
           <label
+            tabindex="0"
             for="img"
-            class="p-4 border-2 border-dashed border-neutral-50/30 rounded-xl bg-neutral-200/10 grid gap-4 cursor-pointer place-items-center"
+            class="upload-box p-4 border-2 border-dashed border-neutral-50/30 rounded-xl bg-neutral-200/10 grid gap-4 cursor-pointer place-items-center focus:outline-none focus:ring-2 focus:ring-neutral-500/70 focus:ring-offset-neutral-900 focus:ring-offset-2"
           >
             <div
               class="upload-icon border border-neutral-300/15 bg-neutral-300/15 w-fit p-2 rounded-xl"
@@ -84,6 +100,7 @@
             </p>
           </label>
           <input
+            tabindex="-1"
             class="w-[0.1px] h-[0.1px] opacity-0 absolute"
             type="file"
             id="img"
@@ -102,7 +119,7 @@
             Full Name
           </legend>
           <input
-            class="w-full text-neutral-100 p-3 rounded-xl bg-neutral-300/15 border border-neutral-300/50 active:border-red-700"
+            class="w-full text-neutral-100 p-3 rounded-xl bg-neutral-300/15 border border-neutral-300/50 focus:outline-none focus:ring-2 focus:ring-neutral-500/70 focus:ring-offset-neutral-900 focus:ring-offset-2"
             type="text"
           />
         </fieldset>
@@ -111,8 +128,9 @@
             Email Address
           </legend>
           <input
-            class="w-full text-neutral-100 p-3 rounded-xl bg-neutral-300/15 border border-neutral-300/50"
+            class="w-full text-neutral-100 p-3 rounded-xl bg-neutral-300/15 border border-neutral-300/50 focus:outline-none focus:ring-2 focus:ring-neutral-500/70 focus:ring-offset-neutral-900 focus:ring-offset-2"
             type="text"
+            placeholder="example@email.com"
           />
         </fieldset>
         <fieldset class="space-y-4">
@@ -120,8 +138,9 @@
             Github Username
           </legend>
           <input
-            class="w-full text-neutral-100 p-3 rounded-xl bg-neutral-300/15 border border-neutral-300/50"
+            class="w-full text-neutral-100 p-3 rounded-xl bg-neutral-300/15 border border-neutral-300/50 focus:outline-none focus:ring-2 focus:ring-neutral-500/70 focus:ring-offset-neutral-900 focus:ring-offset-2"
             type="text"
+            placeholder="@yourusername"
           />
         </fieldset>
         <button class="p-3 bg-orange-700 rounded-xl text-neutral-900 font-bold">
@@ -129,5 +148,6 @@
         </button>
       </form>
     </main>
+    <script src="app.js"></script>
   </body>
 </html>
