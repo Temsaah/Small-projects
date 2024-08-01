@@ -23,7 +23,7 @@
     <title>Frontend Mentor | Conference ticket generator</title>
   </head>
   <body
-    class="font-Inconsolata min-h-screen bg-[url('./assets/images/background-mobile.png')] md:bg-[url('./assets/images/background-desktop.png')] bg-cover bg-no-repeat bg-center relative py-8"
+    class="font-Inconsolata min-h-screen bg-[url('./assets/images/background-mobile.png')] md:bg-[url('./assets/images/background-desktop.png')] bg-cover bg-no-repeat bg-center relative py-10"
   >
     <div class="background absolute -z-10 w-full top-0 h-full overflow-hidden">
       <div class="pattern-line md:absolute md:top-0">
@@ -66,13 +66,15 @@
         />
       </div>
     </div>
-    <header class="grid place-items-center md:mb-10">
+    <header class="grid place-items-center mb-8 md:my-10">
       <img class="w-[170px]" src="assets/images/logo-full.svg" />
     </header>
 
-    <main class="px-5 grid max-w-[780px] md:mx-auto">
+    <main class="px-5 grid justify-items-center">
       <div class="intro-text p-4 text-center grid gap-5">
-        <h1 class="text-white text-[1.7rem] font-extrabold md:text-5xl">
+        <h1
+          class="text-white text-[2rem] font-extrabold md:text-5xl leading-tight tracking-tighter"
+        >
           Your Journey to Coding Conf 2025 Starts Here!
         </h1>
         <p class="text-neutral-300 font-semibold text-lg md:tracking-wider">
@@ -80,25 +82,30 @@
         </p>
       </div>
 
-      <form class="grid gap-7 py-7 w-full max-w-[450px] md:mx-auto" action="">
+      <form class="grid gap-7 py-7 w-full max-w-[450px]" action="">
         <fieldset class="space-y-4">
           <legend class="text-neutral-50 text-xl font-semibold">
             Upload Avatar
           </legend>
-          <label
-            tabindex="0"
-            for="img"
-            class="upload-box p-4 border-2 border-dashed border-neutral-50/30 rounded-xl bg-neutral-200/10 grid gap-4 cursor-pointer place-items-center focus:outline-none focus:ring-2 focus:ring-neutral-500/70 focus:ring-offset-neutral-900 focus:ring-offset-2"
-          >
-            <div
-              class="upload-icon border border-neutral-300/15 bg-neutral-300/15 w-fit p-2 rounded-xl"
+          <div class="upload-box">
+            <label
+              tabindex="0"
+              for="img"
+              class="upload-label p-4 border-2 border-dashed border-neutral-50/30 rounded-xl bg-neutral-200/10 grid justify-content-center gap-4 cursor-pointer place-items-center focus:outline-none focus:ring-2 focus:ring-neutral-500/70 focus:ring-offset-neutral-900 focus:ring-offset-2"
             >
-              <img class="w-8" src="assets/images/icon-upload.svg" alt="" />
-            </div>
-            <p class="text-neutral-400 text-lg">
-              Drag and drop or click to upload
-            </p>
-          </label>
+              <div class="upload-info grid justify-items-center gap-5">
+                <div
+                  class="upload-icon border border-neutral-300/15 bg-neutral-300/15 w-fit p-2 rounded-xl"
+                >
+                  <img class="w-8" src="assets/images/icon-upload.svg" alt="" />
+                </div>
+                <p class="text-neutral-400 text-lg">
+                  Drag and drop or click to upload
+                </p>
+              </div>
+            </label>
+          </div>
+
           <input
             tabindex="-1"
             class="w-[0.1px] h-[0.1px] opacity-0 absolute"
@@ -109,7 +116,7 @@
           />
           <div class="info flex gap-2">
             <img src="assets/images/icon-info.svg" alt="Info" />
-            <p class="text-xs text-neutral-300">
+            <p class="upload-status text-xs text-neutral-300">
               Upload your photo (JPG or PNG, max size: 500KB).
             </p>
           </div>
