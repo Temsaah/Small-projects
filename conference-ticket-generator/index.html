@@ -87,23 +87,27 @@
           <legend class="text-neutral-50 text-xl font-semibold">
             Upload Avatar
           </legend>
-          <div class="upload-box">
-            <label
-              tabindex="0"
-              for="img"
-              class="upload-label p-4 border-2 border-dashed border-neutral-50/30 rounded-xl bg-neutral-200/10 grid justify-content-center gap-4 cursor-pointer place-items-center focus:outline-none focus:ring-2 focus:ring-neutral-500/70 focus:ring-offset-neutral-900 focus:ring-offset-2"
-            >
-              <div class="upload-info grid justify-items-center gap-5">
-                <div
-                  class="upload-icon border border-neutral-300/15 bg-neutral-300/15 w-fit p-2 rounded-xl"
-                >
-                  <img class="w-8" src="assets/images/icon-upload.svg" alt="" />
+          <div
+            class="upload-box p-4 border-2 border-dashed border-neutral-50/30 rounded-xl bg-neutral-200/10 grid justify-content-center gap-4 cursor-pointer place-items-center focus:outline-none focus:ring-2 focus:ring-neutral-500/70 focus:ring-offset-neutral-900 focus:ring-offset-2"
+          >
+            <button type="button" class="w-full">
+              <label tabindex="0" for="img" class="upload-label cursor-pointer">
+                <div class="upload-info grid justify-items-center gap-5">
+                  <div
+                    class="upload-icon border border-neutral-300/15 bg-neutral-300/15 w-fit p-2 rounded-xl"
+                  >
+                    <img
+                      class="w-8"
+                      src="assets/images/icon-upload.svg"
+                      alt=""
+                    />
+                  </div>
+                  <p class="text-neutral-400 text-lg">
+                    Drag and drop or click to upload
+                  </p>
                 </div>
-                <p class="text-neutral-400 text-lg">
-                  Drag and drop or click to upload
-                </p>
-              </div>
-            </label>
+              </label>
+            </button>
           </div>
 
           <input
@@ -126,7 +130,7 @@
             Full Name
           </legend>
           <input
-            class="w-full text-neutral-100 p-3 rounded-xl bg-neutral-300/15 border border-neutral-300/50 focus:outline-none focus:ring-2 focus:ring-neutral-500/70 focus:ring-offset-neutral-900 focus:ring-offset-2"
+            class="full-name w-full text-neutral-100 p-3 rounded-xl bg-neutral-300/15 border border-neutral-300/50 focus:outline-none focus:ring-2 focus:ring-neutral-500/70 focus:ring-offset-neutral-900 focus:ring-offset-2"
             type="text"
           />
         </fieldset>
@@ -135,7 +139,7 @@
             Email Address
           </legend>
           <input
-            class="w-full text-neutral-100 p-3 rounded-xl bg-neutral-300/15 border border-neutral-300/50 focus:outline-none focus:ring-2 focus:ring-neutral-500/70 focus:ring-offset-neutral-900 focus:ring-offset-2"
+            class="email-address w-full text-neutral-100 p-3 rounded-xl bg-neutral-300/15 border border-neutral-300/50 focus:outline-none focus:ring-2 focus:ring-neutral-500/70 focus:ring-offset-neutral-900 focus:ring-offset-2"
             type="text"
             placeholder="example@email.com"
           />
@@ -145,12 +149,16 @@
             Github Username
           </legend>
           <input
-            class="w-full text-neutral-100 p-3 rounded-xl bg-neutral-300/15 border border-neutral-300/50 focus:outline-none focus:ring-2 focus:ring-neutral-500/70 focus:ring-offset-neutral-900 focus:ring-offset-2"
+            class="github-username w-full text-neutral-100 p-3 rounded-xl bg-neutral-300/15 border border-neutral-300/50 focus:outline-none focus:ring-2 focus:ring-neutral-500/70 focus:ring-offset-neutral-900 focus:ring-offset-2"
             type="text"
+
             placeholder="@yourusername"
           />
         </fieldset>
-        <button class="p-3 bg-orange-700 rounded-xl text-neutral-900 font-bold">
+        <button
+          class="generate-btn p-3 bg-orange-700 rounded-xl text-neutral-900 font-bold"
+          type="button"
+        >
           Generate My Ticket
         </button>
       </form>
