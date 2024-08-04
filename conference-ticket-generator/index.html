@@ -23,7 +23,7 @@
     <title>Frontend Mentor | Conference ticket generator</title>
   </head>
   <body
-    class="font-Inconsolata min-h-screen bg-[url('./assets/images/background-mobile.png')] md:bg-[url('./assets/images/background-desktop.png')] bg-cover bg-no-repeat bg-center relative py-10"
+    class="font-Inconsolata min-h-screen bg-[url('./assets/images/background-mobile.png')] md:bg-[url('./assets/images/background-desktop.png')] bg-cover bg-no-repeat bg-center relative py-10 lg:py-2"
   >
     <div class="background absolute -z-10 w-full top-0 h-full overflow-hidden">
       <div class="pattern-line md:absolute md:top-0">
@@ -71,9 +71,9 @@
     </header>
 
     <main class="px-5 grid justify-items-center">
-      <div class="intro-text p-4 text-center grid gap-5">
+      <div class="intro-text p-4 text-center grid gap-5 justify-items-center">
         <h1
-          class="text-white text-[1.8rem] font-extrabold md:text-5xl leading-tight tracking-tighter"
+          class="text-white text-[1.8rem] font-extrabold md:text-5xl md:leading-[1.1] tracking-tighter max-w-[25ch]"
         >
           Your Journey to Coding Conf 2025 Starts Here!
         </h1>
@@ -88,11 +88,11 @@
             Upload Avatar
           </legend>
           <div
-            class="upload-box p-4 border-2 border-dashed border-neutral-50/30 rounded-xl bg-neutral-200/10 grid justify-content-center gap-4 cursor-pointer place-items-center focus:outline-none focus:ring-2 focus:ring-neutral-500/70 focus:ring-offset-neutral-900 focus:ring-offset-2"
+            class="upload-box border-2 border-dashed border-neutral-50/30 rounded-xl bg-neutral-200/10 grid justify-content-center gap-4 cursor-pointer place-items-center focus:outline-none focus:ring-2 focus:ring-neutral-500/70 focus:ring-offset-neutral-900 focus:ring-offset-2 active:bg-neutral-200/20"
           >
             <button type="button" class="w-full">
               <label tabindex="0" for="img" class="upload-label cursor-pointer">
-                <div class="upload-info grid justify-items-center gap-5">
+                <div class="upload-info p-4 grid justify-items-center gap-5">
                   <div
                     class="upload-icon border border-neutral-300/15 bg-neutral-300/15 w-fit p-2 rounded-xl"
                   >
@@ -130,7 +130,7 @@
             Full Name
           </legend>
           <input
-            class="full-name w-full text-neutral-100 p-3 rounded-xl bg-neutral-300/15 border border-neutral-300/50 focus:outline-none focus:ring-2 focus:ring-neutral-500/70 focus:ring-offset-neutral-900 focus:ring-offset-2"
+            class="full-name w-full text-neutral-100 p-3 rounded-xl bg-neutral-300/15 active:bg-neutral-300/30 active:ring-0 border border-neutral-300/50 focus:outline-none focus:ring-2 focus:ring-neutral-500/70 focus:ring-offset-neutral-900 focus:ring-offset-2"
             type="text"
           />
         </fieldset>
@@ -139,7 +139,7 @@
             Email Address
           </legend>
           <input
-            class="email-address w-full text-neutral-100 p-3 rounded-xl bg-neutral-300/15 border border-neutral-300/50 focus:outline-none focus:ring-2 focus:ring-neutral-500/70 focus:ring-offset-neutral-900 focus:ring-offset-2"
+            class="email-address w-full text-neutral-100 p-3 rounded-xl bg-neutral-300/15 active:bg-neutral-300/30 active:ring-0 border border-neutral-300/50 focus:outline-none focus:ring-2 focus:ring-neutral-500/70 focus:ring-offset-neutral-900 focus:ring-offset-2"
             type="text"
             placeholder="example@email.com"
           />
@@ -149,9 +149,8 @@
             Github Username
           </legend>
           <input
-            class="github-username w-full text-neutral-100 p-3 rounded-xl bg-neutral-300/15 border border-neutral-300/50 focus:outline-none focus:ring-2 focus:ring-neutral-500/70 focus:ring-offset-neutral-900 focus:ring-offset-2"
+            class="github-username w-full text-neutral-100 p-3 rounded-xl bg-neutral-300/15 border border-neutral-300/50 active:bg-neutral-300/30 active:ring-0 focus:outline-none focus:ring-2 focus:ring-neutral-500/70 focus:ring-offset-neutral-900 focus:ring-offset-2"
             type="text"
-
             placeholder="@yourusername"
           />
         </fieldset>
@@ -164,57 +163,65 @@
       </form>
     </main>
 
-    <!-- <main class="px-5 grid justify-items-center gap-16">
-      <div class="intro-text p-4 text-center grid gap-5">
-        <h1
-          class="text-white text-[1.8rem] font-extrabold md:text-5xl leading-tight tracking-tighter"
-        >
-          Congrats,
-          <span
-            class="text-transparent bg-gradient-to-r from-gradient-text-from to-gradient-text-to bg-clip-text"
-            >%NAME%</span
-          >! Your ticket is ready.
-        </h1>
-        <p class="text-neutral-300 font-semibold text-lg md:tracking-wider">
-          We've emailed your ticket to
-          <span class="text-orange-500">%EMAIL%</span> and will send updates in
-          the run up to the event.
-        </p>
-      </div>
+    <!-- <main class="px-5">
+      <div class="generated-ticket max-w-[600px] mx-auto grid gap-16">
+        <div class="intro-text p-4 text-center grid gap-5">
+          <h1
+            class="text-white text-[1.8rem] font-extrabold md:text-5xl leading-tight tracking-tighter"
+          >
+            Congrats,
+            <span
+              class="text-transparent bg-gradient-to-r from-gradient-text-from to-gradient-text-to bg-clip-text"
+              >Jonatan Kritsof</span
+            >! Your ticket is ready.
+          </h1>
+          <p class="text-neutral-300 font-semibold text-lg md:tracking-wider">
+            We've emailed your ticket to
+            <span class="text-orange-500">%EMAIL%</span> and will send updates
+            in the run up to the event.
+          </p>
+        </div>
 
-      <div class="ticket relative">
-        <div class="ticket-img max-w-[400px] min-w-[320px]">
-          <img src="assets/images/pattern-ticket.svg" alt="" />
-        </div>
-        <div class="location-info flex gap-3 absolute top-3 left-5">
-          <div class="logo w-7 self-center">
-            <img src="assets/images/logo-mark.svg" alt="" />
+        <div class="ticket relative mx-auto w-fit">
+          <div class="ticket-img max-w-[400px] min-w-[320px] lg:max-w-[450px]">
+            <img src="assets/images/pattern-ticket.svg" alt="" />
           </div>
-          <div class="location-details space-y-1">
-            <div class="location-details-name">
-              <p class="text-white text-2xl font-bold">Coding Conf</p>
+          <div class="location-info flex gap-3 absolute top-3 left-5">
+            <div class="logo w-7 self-center">
+              <img src="assets/images/logo-mark.svg" alt="" />
             </div>
-            <div class="location-details-date">
-              <p class="text-neutral-300 text-sm">Jan 31, 2025 / Austin, TX</p>
-            </div>
-          </div>
-        </div>
-        <div class="personal-info flex gap-3 absolute bottom-3 left-5">
-          <div class="personal-img w-9 self-center">
-            <img src="assets/images/logo-mark.svg" alt="" />
-          </div>
-          <div class="personal-details">
-            <div class="personal-details-name">
-              <p class="text-white text-lg font-semibold">Jonatan Kristof</p>
-            </div>
-            <div class="personal-details-date flex gap-1 items-center">
-              <img src="assets/images/icon-github.svg" />
-              <p class="text-neutral-300 text-sm">@jonatankristof0101</p>
+            <div class="location-details space-y-1">
+              <div class="location-details-name">
+                <p class="text-white text-2xl font-bold">Coding Conf</p>
+              </div>
+              <div class="location-details-date">
+                <p class="text-neutral-300 text-sm">
+                  Jan 31, 2025 / Austin, TX
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="id absolute top-1/2 -translate-y-1/2 right-0 rotate-90">
-          <p class="text-xl font-medium text-neutral-500">#01609</p>
+          <div class="personal-info flex gap-3 absolute bottom-3 left-5">
+            <div class="personal-img w-10 self-center lg:w-14">
+              <img
+                class="rounded-lg"
+                src="assets/images/image-avatar.jpg"
+                alt=""
+              />
+            </div>
+            <div class="personal-details">
+              <div class="personal-details-name">
+                <p class="text-white text-lg font-semibold">Jonatan Kristof</p>
+              </div>
+              <div class="personal-details-date flex gap-1 items-center">
+                <img src="assets/images/icon-github.svg" />
+                <p class="text-neutral-300 text-sm">@jonatankristof0101</p>
+              </div>
+            </div>
+          </div>
+          <div class="id absolute top-1/2 -translate-y-1/2 right-0 rotate-90">
+            <p class="text-xl font-medium text-neutral-500">#01609</p>
+          </div>
         </div>
       </div>
     </main> -->

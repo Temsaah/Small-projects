@@ -115,6 +115,10 @@ uploadLabel.addEventListener("keydown", (e) => {
   }
 });
 
+uploadLabel.addEventListener("click", (e) => {
+  if (picSrc) e.preventDefault();
+});
+
 imgInput.addEventListener("change", (e) => {
   const file = e.target.files[0];
 
@@ -139,57 +143,65 @@ generateBtn.addEventListener("click", (e) => {
   if (!picSrc || !fullName || !validateEmail(emailAddress) || !githubUsername)
     return;
 
-  mainContent.outerHTML = `    <main class="px-5 grid justify-items-center gap-16">
-      <div class="intro-text py-4 text-center grid gap-5">
-        <h1
-          class="text-white text-[1.8rem] font-extrabold md:text-5xl leading-tight tracking-tighter"
-        >
-          Congrats,
-          <span
-            class="text-transparent bg-gradient-to-r from-gradient-text-from to-gradient-text-to bg-clip-text"
-            >${fullName}</span
-          >! Your ticket is ready.
-        </h1>
-        <p class="text-neutral-300 font-semibold text-lg md:tracking-wider">
-          We've emailed your ticket to
-          <span class="text-orange-500">${emailAddress}</span> and will send updates in
-          the run up to the event.
-        </p>
-      </div>
+  mainContent.outerHTML = `<main class="px-5">
+      <div class="generated-ticket max-w-[600px] mx-auto grid gap-16">
+        <div class="intro-text p-4 text-center grid gap-5">
+          <h1
+            class="text-white text-[1.8rem] font-extrabold md:text-5xl leading-tight tracking-tighter"
+          >
+            Congrats,
+            <span
+              class="text-transparent bg-gradient-to-r from-gradient-text-from to-gradient-text-to bg-clip-text"
+              >${fullName}</span
+            >! Your ticket is ready.
+          </h1>
+          <p class="text-neutral-300 font-semibold text-lg md:tracking-wider">
+            We've emailed your ticket to
+            <span class="text-orange-500">${emailAddress}</span> and will send updates
+            in the run up to the event.
+          </p>
+        </div>
 
-      <div class="ticket relative">
-        <div class="ticket-img max-w-[400px] min-w-[320px]">
-          <img src="assets/images/pattern-ticket.svg" alt="" />
-        </div>
-        <div class="location-info flex gap-3 absolute top-3 left-5">
-          <div class="logo w-7 self-center">
-            <img src="assets/images/logo-mark.svg" alt="" />
+        <div class="ticket relative mx-auto w-fit">
+          <div class="ticket-img max-w-[400px] min-w-[320px] lg:max-w-[450px]">
+            <img src="assets/images/pattern-ticket.svg" alt="" />
           </div>
-          <div class="location-details space-y-1">
-            <div class="location-details-name">
-              <p class="text-white text-2xl font-bold">Coding Conf</p>
+          <div class="location-info flex gap-3 absolute top-3 left-5">
+            <div class="logo w-7 self-center">
+              <img src="assets/images/logo-mark.svg" alt="" />
             </div>
-            <div class="location-details-date">
-              <p class="text-neutral-300 text-sm">Jan 31, 2025 / Austin, TX</p>
-            </div>
-          </div>
-        </div>
-        <div class="personal-info flex gap-3 absolute bottom-3 left-5 ">
-          <div class="personal-img w-10 self-center rounded-xl">
-            <img class='rounded-lg' src='${picSrc}' alt="" />
-          </div>
-          <div class="personal-details">
-            <div class="personal-details-name">
-              <p class="text-white text-lg font-semibold">Jonatan Kristof</p>
-            </div>
-            <div class="personal-details-date flex gap-1 items-center">
-              <img src="assets/images/icon-github.svg" />
-              <p class="text-neutral-300 text-sm">@${githubUsername}</p>
+            <div class="location-details space-y-1">
+              <div class="location-details-name">
+                <p class="text-white text-2xl font-bold">Coding Conf</p>
+              </div>
+              <div class="location-details-date">
+                <p class="text-neutral-300 text-sm">
+                  Jan 31, 2025 / Austin, TX
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="id absolute top-1/2 -translate-y-1/2 right-0 rotate-90">
-          <p class="text-xl font-medium text-neutral-500">#01609</p>
+          <div class="personal-info flex gap-3 absolute bottom-3 left-5">
+            <div class="personal-img w-10 self-center lg:w-14 aspect-square">
+              <img
+                class="rounded-lg aspect-square"
+                src='${picSrc}'
+                alt=""
+              />
+            </div>
+            <div class="personal-details">
+              <div class="personal-details-name">
+                <p class="text-white text-lg font-semibold">${fullName}</p>
+              </div>
+              <div class="personal-details-date flex gap-1 items-center">
+                <img src="assets/images/icon-github.svg" />
+                <p class="text-neutral-300 text-sm">${githubUsername}</p>
+              </div>
+            </div>
+          </div>
+          <div class="id absolute top-1/2 -translate-y-1/2 right-0 rotate-90">
+            <p class="text-xl font-medium text-neutral-500">#01609</p>
+          </div>
         </div>
       </div>
     </main>`;
