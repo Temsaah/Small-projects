@@ -24,7 +24,7 @@ function App() {
     <Main>
       <Overlay />
       <CommentsContainer currentUser={currentUser} comments={comments} />
-      <AddCommentForm />
+      <AddCommentForm onSubmit={setComments} />
     </Main>
   );
 }
@@ -97,14 +97,25 @@ function CommentBody({ comment }) {
 }
 
 function CommentFooter({ comment }) {
+  const [likes, setLikes] = useState(comment.score);
+  const [isReact, setIsReact] = useState(false);
+
   return (
     <div className="comment-stats col-start-1 row-start-3 flex justify-between sm:row-start-1 sm:row-span-2">
       <div className="comment-reaction flex gap-5 items-center p-3 sm:gap-3 sm:flex-col">
-        <LikeButton />
-        <p className="text-primary-moderate-blue font-medium">
-          {comment.score}
-        </p>
-        <DislikeButton />
+        <LikeButton
+          isReact={isReact}
+          setIsReact={setIsReact}
+          likes={likes}
+          onReaction={setLikes}
+        />
+        <p className="text-primary-moderate-blue font-medium">{likes}</p>
+        <DislikeButton
+          isReact={isReact}
+          setIsReact={setIsReact}
+          likes={likes}
+          onReaction={setLikes}
+        />
       </div>
     </div>
   );
@@ -121,16 +132,23 @@ function RepliesContainer({ isCurrentUser, replies }) {
 }
 
 function Reply({ isCurrentUser, reply }) {
+  const [replies, setReplies] = useState(reply.replies || []);
+
   return (
-    <div
-      className="grid gap-5  sm:grid-cols-comment-desktop-grid sm:grid-rows-comment-desktop-row sm:gap-x-5 sm:gap-y-3"
-      data-id={reply.id}
-    >
-      <CommentHeader comment={reply} />
-      <CommentBody comment={reply} />
-      <CommentFooter comment={reply} />
-      {isCurrentUser ? <SelfCommentActions /> : <CommentActions />}
-    </div>
+    <>
+      <div
+        className="grid gap-5  sm:grid-cols-comment-desktop-grid sm:grid-rows-comment-desktop-row sm:gap-x-5 sm:gap-y-3"
+        data-id={reply.id}
+      >
+        <CommentHeader comment={reply} />
+        <CommentBody comment={reply} />
+        <CommentFooter comment={reply} />
+        {isCurrentUser ? <SelfCommentActions /> : <CommentActions />}
+      </div>
+      {replies.length > 0 && (
+        <RepliesContainer isCurrentUser={isCurrentUser} replies={replies} />
+      )}
+    </>
   );
 }
 
@@ -157,9 +175,30 @@ function CommentActions() {
   );
 }
 
-function LikeButton() {
+function LikeButton({ onReaction, isReact, setIsReact }) {
+  const [isLiked, setIsLiked] = useState(false);
+
+  function handleLike() {
+    if (isReact) {
+      onReaction((like) => like - 1);
+      setIsReact(false);
+      setIsLiked(false);
+      return;
+    }
+    onReaction((like) => like + 1);
+    setIsReact(true);
+    setIsLiked(true);
+  }
+
   return (
-    <button className="text-primary-light-grayish-blue hover:text-primary-moderate-blue">
+    <button
+      className={`${
+        isLiked
+          ? "text-primary-moderate-blue"
+          : "text-primary-light-grayish-blue"
+      } hover:text-primary-moderate-blue`}
+      onClick={handleLike}
+    >
       <svg width="11" height="11" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M6.33 10.896c.137 0 .255-.05.354-.149.1-.1.149-.217.149-.354V7.004h3.315c.136 0 .254-.05.354-.149.099-.1.148-.217.148-.354V5.272a.483.483 0 0 0-.148-.354.483.483 0 0 0-.354-.149H6.833V1.4a.483.483 0 0 0-.149-.354.483.483 0 0 0-.354-.149H4.915a.483.483 0 0 0-.354.149c-.1.1-.149.217-.149.354v3.37H1.08a.483.483 0 0 0-.354.15c-.1.099-.149.217-.149.353v1.23c0 .136.05.254.149.353.1.1.217.149.354.149h3.333v3.39c0 .136.05.254.15.353.098.1.216.149.353.149H6.33Z"
@@ -170,9 +209,30 @@ function LikeButton() {
   );
 }
 
-function DislikeButton() {
+function DislikeButton({ onReaction, isReact, setIsReact }) {
+  const [isDisliked, setIsDisliked] = useState(false);
+
+  function handleDislike() {
+    if (isReact) {
+      onReaction((like) => like + 1);
+      setIsReact(false);
+      setIsDisliked(false);
+      return;
+    }
+    onReaction((like) => like - 1);
+    setIsReact(true);
+    setIsDisliked(true);
+  }
+
   return (
-    <button className="text-primary-light-grayish-blue hover:text-primary-moderate-blue">
+    <button
+      className={`${
+        isDisliked
+          ? "text-primary-moderate-blue"
+          : "text-primary-light-grayish-blue"
+      } hover:text-primary-moderate-blue`}
+      onClick={handleDislike}
+    >
       <svg width="11" height="3" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M9.256 2.66c.204 0 .38-.056.53-.167.148-.11.222-.243.222-.396V.722c0-.152-.074-.284-.223-.395a.859.859 0 0 0-.53-.167H.76a.859.859 0 0 0-.53.167C.083.437.009.57.009.722v1.375c0 .153.074.285.223.396a.859.859 0 0 0 .53.167h8.495Z"
@@ -191,13 +251,40 @@ function CurrentUserBadge() {
   );
 }
 
-function AddCommentForm() {
+function AddCommentForm({ onSubmit }) {
+  const [text, setText] = useState("");
+
+  function handleAddComment(e) {
+    e.preventDefault();
+    if (!text) return;
+
+    const newComment = {
+      id: Date.now(),
+      content: text,
+      createdAt: "0 seconds ago",
+      score: 0,
+      user: {
+        image: {
+          png: "./images/avatars/image-juliusomo.png",
+          webp: "./images/avatars/image-juliusomo.webp",
+        },
+        username: "juliusomo",
+      },
+      replies: [],
+    };
+
+    onSubmit((comments) => [...comments, newComment]);
+    setText("");
+  }
+
   return (
     <form className="mt-10 grid grid-cols-2 grid-rows-comment-desktop-row gap-5 w-full sm:grid-rows-1 sm:grid-cols-comment-desktop-grid sm:items-center">
       <textarea
         className="border col-span-2 sm:row-start-1 sm:order-2 placeholder:text-neutral-grayish-blue w-full rounded-md px-6 py-4 resize-none"
         placeholder="Add a comment..."
         rows={3}
+        value={text}
+        onChange={(e) => setText(e.target.value)}
       ></textarea>
       <div className="row-start-2 self-center sm:self-start sm:row-start-1 sm:order-1 ">
         <img
@@ -207,7 +294,10 @@ function AddCommentForm() {
         />
       </div>
       <div className="row-start-2 justify-self-end sm:self-start sm:row-start-1 sm:order-3">
-        <button className="uppercase bg-primary-moderate-blue hover:bg-primary-moderate-blue/50 text-white font-medium py-3 px-7 rounded-md">
+        <button
+          className="uppercase bg-primary-moderate-blue hover:bg-primary-moderate-blue/50 text-white font-medium py-3 px-7 rounded-md"
+          onClick={handleAddComment}
+        >
           Send
         </button>
       </div>
