@@ -1,3 +1,7 @@
+/* TODO
+Manipulate the score property in comments object for liking and disliking instead of copying and manipulating the state
+*/
+
 import { useEffect } from "react";
 import "./App.css";
 import { useState } from "react";
@@ -62,7 +66,7 @@ function Comment({ isCurrentUser, comment }) {
       <div className="comment grid grid-cols-comment-mobile-col grid-rows-comment-mobile-row gap-y-4 sm:grid-cols-comment-desktop-grid sm:grid-rows-comment-desktop-row sm:gap-x-5 sm:gap-y-3">
         <CommentHeader isCurrentUser={isCurrentUser} comment={comment} />
         <CommentBody comment={comment} />
-        <CommentFooter comment={comment} />
+        <CommentReactions comment={comment} />
         {isCurrentUser ? <SelfCommentActions /> : <CommentActions />}
       </div>
       {replies.length > 0 && (
@@ -96,7 +100,7 @@ function CommentBody({ comment }) {
   );
 }
 
-function CommentFooter({ comment }) {
+function CommentReactions({ comment }) {
   const [likes, setLikes] = useState(comment.score);
   const [isReact, setIsReact] = useState(false);
 
@@ -142,7 +146,7 @@ function Reply({ isCurrentUser, reply }) {
       >
         <CommentHeader comment={reply} />
         <CommentBody comment={reply} />
-        <CommentFooter comment={reply} />
+        <CommentReactions comment={reply} />
         {isCurrentUser ? <SelfCommentActions /> : <CommentActions />}
       </div>
       {replies.length > 0 && (
@@ -179,15 +183,15 @@ function LikeButton({ onReaction, isReact, setIsReact }) {
   const [isLiked, setIsLiked] = useState(false);
 
   function handleLike() {
-    if (isReact) {
-      onReaction((like) => like - 1);
-      setIsReact(false);
-      setIsLiked(false);
-      return;
+    if (!isReact) {
+      onReaction((like) => like + 1);
+      setIsReact(true);
+      setIsLiked(true);
+    } else if (isReact) {
+      onReaction((like) => (isLiked ? like - 1 : like + 2));
+      setIsReact(isLiked ? false : true);
+      setIsLiked((like) => !like);
     }
-    onReaction((like) => like + 1);
-    setIsReact(true);
-    setIsLiked(true);
   }
 
   return (
@@ -213,15 +217,15 @@ function DislikeButton({ onReaction, isReact, setIsReact }) {
   const [isDisliked, setIsDisliked] = useState(false);
 
   function handleDislike() {
-    if (isReact) {
-      onReaction((like) => like + 1);
-      setIsReact(false);
-      setIsDisliked(false);
-      return;
+    if (!isReact) {
+      onReaction((like) => like - 1);
+      setIsReact(true);
+      setIsDisliked(true);
+    } else if (isReact) {
+      onReaction((like) => (isDisliked ? like + 1 : like - 2));
+      setIsReact(isDisliked ? false : true);
+      setIsDisliked((dislike) => !dislike);
     }
-    onReaction((like) => like - 1);
-    setIsReact(true);
-    setIsDisliked(true);
   }
 
   return (
