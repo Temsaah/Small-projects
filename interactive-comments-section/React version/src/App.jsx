@@ -21,13 +21,62 @@ function App() {
     }
 
     fetchData();
-    console.log("DATA FETCHED");
   }, []);
+
+  function handleReactions(commentID, type) {
+    function updateReactions(comments) {
+      return comments.map((comment) => {
+        if (comment.id === commentID) {
+          let newScore = comment.score;
+
+          if (comment.currentReaction === type) {
+            newScore = type === "like" ? newScore - 1 : newScore + 1;
+            return {
+              ...comment,
+              score: newScore,
+              currentReaction: null,
+            };
+          }
+
+          if (type === "like") {
+            newScore =
+              comment.currentReaction === "dislike"
+                ? newScore + 2
+                : newScore + 1;
+          } else if (type === "dislike") {
+            newScore =
+              comment.currentReaction === "like" ? newScore - 2 : newScore - 1;
+          }
+
+          return {
+            ...comment,
+            score: newScore,
+            currentReaction: type,
+          };
+        }
+
+        if (comment.replies?.length > 0) {
+          return {
+            ...comment,
+            replies: updateReactions(comment.replies),
+          };
+        }
+
+        return comment;
+      });
+    }
+
+    setComments((prevComments) => updateReactions(prevComments));
+  }
 
   return (
     <Main>
       <Overlay />
-      <CommentsContainer currentUser={currentUser} comments={comments} />
+      <CommentsContainer
+        currentUser={currentUser}
+        comments={comments}
+        onReact={handleReactions}
+      />
       <AddCommentForm onSubmit={setComments} />
     </Main>
   );
@@ -43,8 +92,7 @@ function Main({ children }) {
   return <main className="my-10 mx-6 max-w-[700px]">{children}</main>;
 }
 
-function CommentsContainer({ currentUser, comments }) {
-  console.log(comments);
+function CommentsContainer({ currentUser, comments, onReact }) {
   return (
     <div className="grid gap-10">
       {comments.map((comment) => (
@@ -52,25 +100,28 @@ function CommentsContainer({ currentUser, comments }) {
           key={comment.id}
           isCurrentUser={comment.user.username === currentUser.username}
           comment={comment}
+          onReact={onReact}
         />
       ))}
     </div>
   );
 }
 
-function Comment({ isCurrentUser, comment }) {
-  const [replies, setReplies] = useState(comment.replies || []);
-
+function Comment({ isCurrentUser, comment, onReact }) {
   return (
     <div className="comment-container grid gap-5">
       <div className="comment grid grid-cols-comment-mobile-col grid-rows-comment-mobile-row gap-y-4 sm:grid-cols-comment-desktop-grid sm:grid-rows-comment-desktop-row sm:gap-x-5 sm:gap-y-3">
         <CommentHeader isCurrentUser={isCurrentUser} comment={comment} />
         <CommentBody comment={comment} />
-        <CommentReactions comment={comment} />
+        <CommentReactions comment={comment} onReact={onReact} />
         {isCurrentUser ? <SelfCommentActions /> : <CommentActions />}
       </div>
-      {replies.length > 0 && (
-        <RepliesContainer isCurrentUser={isCurrentUser} replies={replies} />
+      {comment.replies?.length > 0 && (
+        <RepliesContainer
+          onReact={onReact}
+          isCurrentUser={isCurrentUser}
+          replies={comment.replies}
+        />
       )}
     </div>
   );
@@ -100,44 +151,71 @@ function CommentBody({ comment }) {
   );
 }
 
-function CommentReactions({ comment }) {
-  const [likes, setLikes] = useState(comment.score);
-  const [isReact, setIsReact] = useState(false);
-
+function CommentReactions({ comment, onReact }) {
   return (
     <div className="comment-stats col-start-1 row-start-3 flex justify-between sm:row-start-1 sm:row-span-2">
       <div className="comment-reaction flex gap-5 items-center p-3 sm:gap-3 sm:flex-col">
-        <LikeButton
-          isReact={isReact}
-          setIsReact={setIsReact}
-          likes={likes}
-          onReaction={setLikes}
-        />
-        <p className="text-primary-moderate-blue font-medium">{likes}</p>
-        <DislikeButton
-          isReact={isReact}
-          setIsReact={setIsReact}
-          likes={likes}
-          onReaction={setLikes}
-        />
+        <LikeButton comment={comment} onReact={onReact} />
+        <p className="text-primary-moderate-blue font-medium">
+          {comment.score}
+        </p>
+        <DislikeButton comment={comment} onReact={onReact} />
       </div>
     </div>
   );
 }
 
-function RepliesContainer({ isCurrentUser, replies }) {
+function LikeButton({ comment, onReact }) {
+  return (
+    <button
+      className={`${"text-primary-light-grayish-blue"} hover:text-primary-moderate-blue`}
+      onClick={() => onReact(comment.id, "like")}
+    >
+      <svg width="11" height="11" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M6.33 10.896c.137 0 .255-.05.354-.149.1-.1.149-.217.149-.354V7.004h3.315c.136 0 .254-.05.354-.149.099-.1.148-.217.148-.354V5.272a.483.483 0 0 0-.148-.354.483.483 0 0 0-.354-.149H6.833V1.4a.483.483 0 0 0-.149-.354.483.483 0 0 0-.354-.149H4.915a.483.483 0 0 0-.354.149c-.1.1-.149.217-.149.354v3.37H1.08a.483.483 0 0 0-.354.15c-.1.099-.149.217-.149.353v1.23c0 .136.05.254.149.353.1.1.217.149.354.149h3.333v3.39c0 .136.05.254.15.353.098.1.216.149.353.149H6.33Z"
+          fill="currentColor"
+        />
+      </svg>
+    </button>
+  );
+}
+
+function DislikeButton({ comment, onReact }) {
+  return (
+    <button
+      className={`${"text-primary-light-grayish-blue"} hover:text-primary-moderate-blue`}
+      onClick={() => onReact(comment.id, "dislike")}
+    >
+      <svg width="11" height="3" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M9.256 2.66c.204 0 .38-.056.53-.167.148-.11.222-.243.222-.396V.722c0-.152-.074-.284-.223-.395a.859.859 0 0 0-.53-.167H.76a.859.859 0 0 0-.53.167C.083.437.009.57.009.722v1.375c0 .153.074.285.223.396a.859.859 0 0 0 .53.167h8.495Z"
+          fill="currentColor"
+        />
+      </svg>
+    </button>
+  );
+}
+
+function RepliesContainer({ isCurrentUser, replies, onReact }) {
+  console.log("REPLIESCONTAINER COMPONENT RE-RENDERED");
+  console.log(replies);
+
   return (
     <div className="relative grid gap-10 pt-12 pl-4 sm:pl-12 before:absolute before:-ml-3 sm:before:ml-4 before:left-0 before:w-[2px] before:h-full before:bg-primary-soft-red/20">
       {replies.map((reply) => (
-        <Reply key={reply.id} isCurrentUser={isCurrentUser} reply={reply} />
+        <Reply
+          onReact={onReact}
+          key={reply.id}
+          isCurrentUser={isCurrentUser}
+          reply={reply}
+        />
       ))}
     </div>
   );
 }
 
-function Reply({ isCurrentUser, reply }) {
-  const [replies, setReplies] = useState(reply.replies || []);
-
+function Reply({ isCurrentUser, reply, onReact }) {
   return (
     <>
       <div
@@ -146,11 +224,15 @@ function Reply({ isCurrentUser, reply }) {
       >
         <CommentHeader comment={reply} />
         <CommentBody comment={reply} />
-        <CommentReactions comment={reply} />
+        <CommentReactions onReact={onReact} comment={reply} />
         {isCurrentUser ? <SelfCommentActions /> : <CommentActions />}
       </div>
-      {replies.length > 0 && (
-        <RepliesContainer isCurrentUser={isCurrentUser} replies={replies} />
+      {reply.replies?.length > 0 && (
+        <RepliesContainer
+          onReact={onReact}
+          isCurrentUser={isCurrentUser}
+          replies={reply.replies}
+        />
       )}
     </>
   );
@@ -176,74 +258,6 @@ function CommentActions() {
         <img src="images/icon-reply.svg" alt=""></img> Reply
       </button>
     </div>
-  );
-}
-
-function LikeButton({ onReaction, isReact, setIsReact }) {
-  const [isLiked, setIsLiked] = useState(false);
-
-  function handleLike() {
-    if (!isReact) {
-      onReaction((like) => like + 1);
-      setIsReact(true);
-      setIsLiked(true);
-    } else if (isReact) {
-      onReaction((like) => (isLiked ? like - 1 : like + 2));
-      setIsReact(isLiked ? false : true);
-      setIsLiked((like) => !like);
-    }
-  }
-
-  return (
-    <button
-      className={`${
-        isLiked
-          ? "text-primary-moderate-blue"
-          : "text-primary-light-grayish-blue"
-      } hover:text-primary-moderate-blue`}
-      onClick={handleLike}
-    >
-      <svg width="11" height="11" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M6.33 10.896c.137 0 .255-.05.354-.149.1-.1.149-.217.149-.354V7.004h3.315c.136 0 .254-.05.354-.149.099-.1.148-.217.148-.354V5.272a.483.483 0 0 0-.148-.354.483.483 0 0 0-.354-.149H6.833V1.4a.483.483 0 0 0-.149-.354.483.483 0 0 0-.354-.149H4.915a.483.483 0 0 0-.354.149c-.1.1-.149.217-.149.354v3.37H1.08a.483.483 0 0 0-.354.15c-.1.099-.149.217-.149.353v1.23c0 .136.05.254.149.353.1.1.217.149.354.149h3.333v3.39c0 .136.05.254.15.353.098.1.216.149.353.149H6.33Z"
-          fill="currentColor"
-        />
-      </svg>
-    </button>
-  );
-}
-
-function DislikeButton({ onReaction, isReact, setIsReact }) {
-  const [isDisliked, setIsDisliked] = useState(false);
-
-  function handleDislike() {
-    if (!isReact) {
-      onReaction((like) => like - 1);
-      setIsReact(true);
-      setIsDisliked(true);
-    } else if (isReact) {
-      onReaction((like) => (isDisliked ? like + 1 : like - 2));
-      setIsReact(isDisliked ? false : true);
-      setIsDisliked((dislike) => !dislike);
-    }
-  }
-
-  return (
-    <button
-      className={`${
-        isDisliked
-          ? "text-primary-moderate-blue"
-          : "text-primary-light-grayish-blue"
-      } hover:text-primary-moderate-blue`}
-      onClick={handleDislike}
-    >
-      <svg width="11" height="3" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M9.256 2.66c.204 0 .38-.056.53-.167.148-.11.222-.243.222-.396V.722c0-.152-.074-.284-.223-.395a.859.859 0 0 0-.53-.167H.76a.859.859 0 0 0-.53.167C.083.437.009.57.009.722v1.375c0 .153.074.285.223.396a.859.859 0 0 0 .53.167h8.495Z"
-          fill="currentColor"
-        />
-      </svg>
-    </button>
   );
 }
 
