@@ -23,6 +23,19 @@ function App() {
     fetchData();
   }, []);
 
+  function getComment(id, commentsList = comments) {
+    for (let comment of commentsList) {
+      if (comment.id === id) return comment;
+
+      if (comment.replies?.length > 0) {
+        const found = getComment(id, comment.replies);
+        if (found) return found;
+      }
+    }
+
+    return null;
+  }
+
   function handleReactions(commentID, type) {
     function updateReactions(comments) {
       return comments.map((comment) => {
@@ -69,6 +82,54 @@ function App() {
     setComments((prevComments) => updateReactions(prevComments));
   }
 
+  function handleAddReply(commentID, text) {
+    // Takes comment or reply id => push a reply to its replies array
+    const newReply = {
+      id: Date.now(),
+      content: text,
+      createdAt: "0 seconds ago",
+      score: 0,
+      replyingTo: "test",
+      user: {
+        image: {
+          png: `./images/avatars/image-${currentUser.username}.png`,
+          webp: `./images/avatars/image-${currentUser.username}.webp`,
+        },
+        username: `${currentUser.username}`,
+      },
+      replies: [],
+    };
+
+    setComments((prevComments) =>
+      prevComments.map((comment) =>
+        comment.id === commentID
+          ? {
+              ...comment,
+              replies: [...comment.replies, newReply],
+            }
+          : {
+              ...comment,
+              replies: updateReplies(comment.replies, commentID, newReply),
+            }
+      )
+    );
+
+    function updateReplies(replies, commentID, newReply) {
+      if (!replies) return [];
+      return replies.map((reply) =>
+        reply.id === commentID
+          ? {
+              ...reply,
+              replies: [...reply.replies, newReply],
+            }
+          : {
+              ...reply,
+              replies: updateReplies(reply.replies, commentID, newReply),
+            }
+      );
+    }
+  }
+
   return (
     <Main>
       <Overlay />
@@ -76,6 +137,7 @@ function App() {
         currentUser={currentUser}
         comments={comments}
         onReact={handleReactions}
+        onReply={handleAddReply}
       />
       <AddCommentForm onSubmit={setComments} />
     </Main>
@@ -92,35 +154,42 @@ function Main({ children }) {
   return <main className="my-10 mx-6 max-w-[700px]">{children}</main>;
 }
 
-function CommentsContainer({ currentUser, comments, onReact }) {
+function CommentsContainer({ currentUser, comments, onReact, onReply }) {
   return (
     <div className="grid gap-10">
       {comments.map((comment) => (
         <Comment
           key={comment.id}
+          currentUser={currentUser}
           isCurrentUser={comment.user.username === currentUser.username}
           comment={comment}
           onReact={onReact}
+          onReply={onReply}
         />
       ))}
     </div>
   );
 }
 
-function Comment({ isCurrentUser, comment, onReact }) {
+function Comment({ currentUser, isCurrentUser, comment, onReact, onReply }) {
   return (
-    <div className="comment-container grid gap-5">
+    <div className="comment-container grid gap-5" data-id={comment.id}>
       <div className="comment grid grid-cols-comment-mobile-col grid-rows-comment-mobile-row gap-y-4 sm:grid-cols-comment-desktop-grid sm:grid-rows-comment-desktop-row sm:gap-x-5 sm:gap-y-3">
         <CommentHeader isCurrentUser={isCurrentUser} comment={comment} />
         <CommentBody comment={comment} />
         <CommentReactions comment={comment} onReact={onReact} />
-        {isCurrentUser ? <SelfCommentActions /> : <CommentActions />}
+        {isCurrentUser ? (
+          <SelfCommentActions commentID={comment.id} onReply={onReply} />
+        ) : (
+          <CommentActions commentID={comment.id} onReply={onReply} />
+        )}
       </div>
       {comment.replies?.length > 0 && (
         <RepliesContainer
           onReact={onReact}
-          isCurrentUser={isCurrentUser}
+          currentUser={currentUser}
           replies={comment.replies}
+          onReply={onReply}
         />
       )}
     </div>
@@ -168,7 +237,11 @@ function CommentReactions({ comment, onReact }) {
 function LikeButton({ comment, onReact }) {
   return (
     <button
-      className={`${"text-primary-light-grayish-blue"} hover:text-primary-moderate-blue`}
+      className={`${
+        comment.currentReaction === "like"
+          ? "text-primary-moderate-blue"
+          : "text-primary-light-grayish-blue"
+      } hover:text-primary-moderate-blue`}
       onClick={() => onReact(comment.id, "like")}
     >
       <svg width="11" height="11" xmlns="http://www.w3.org/2000/svg">
@@ -184,7 +257,11 @@ function LikeButton({ comment, onReact }) {
 function DislikeButton({ comment, onReact }) {
   return (
     <button
-      className={`${"text-primary-light-grayish-blue"} hover:text-primary-moderate-blue`}
+      className={`${
+        comment.currentReaction === "dislike"
+          ? "text-primary-moderate-blue"
+          : "text-primary-light-grayish-blue"
+      } hover:text-primary-moderate-blue`}
       onClick={() => onReact(comment.id, "dislike")}
     >
       <svg width="11" height="3" xmlns="http://www.w3.org/2000/svg">
@@ -197,25 +274,24 @@ function DislikeButton({ comment, onReact }) {
   );
 }
 
-function RepliesContainer({ isCurrentUser, replies, onReact }) {
-  console.log("REPLIESCONTAINER COMPONENT RE-RENDERED");
-  console.log(replies);
-
+function RepliesContainer({ currentUser, replies, onReact, onReply }) {
   return (
     <div className="relative grid gap-10 pt-12 pl-4 sm:pl-12 before:absolute before:-ml-3 sm:before:ml-4 before:left-0 before:w-[2px] before:h-full before:bg-primary-soft-red/20">
       {replies.map((reply) => (
         <Reply
           onReact={onReact}
+          currentUser={currentUser}
           key={reply.id}
-          isCurrentUser={isCurrentUser}
+          isCurrentUser={currentUser.username === reply.user.username}
           reply={reply}
+          onReply={onReply}
         />
       ))}
     </div>
   );
 }
 
-function Reply({ isCurrentUser, reply, onReact }) {
+function Reply({ currentUser, isCurrentUser, reply, onReact, onReply }) {
   return (
     <>
       <div
@@ -225,13 +301,18 @@ function Reply({ isCurrentUser, reply, onReact }) {
         <CommentHeader comment={reply} />
         <CommentBody comment={reply} />
         <CommentReactions onReact={onReact} comment={reply} />
-        {isCurrentUser ? <SelfCommentActions /> : <CommentActions />}
+        {isCurrentUser ? (
+          <SelfCommentActions commentID={reply.id} />
+        ) : (
+          <CommentActions commentID={reply.id} onReply={onReply} />
+        )}
       </div>
       {reply.replies?.length > 0 && (
         <RepliesContainer
           onReact={onReact}
           isCurrentUser={isCurrentUser}
           replies={reply.replies}
+          currentUser={currentUser}
         />
       )}
     </>
@@ -251,13 +332,31 @@ function SelfCommentActions() {
   );
 }
 
-function CommentActions() {
+function CommentActions({ commentID, onReply }) {
+  const [showReplyForm, setShowReplyForm] = useState(false);
+
+  function handleAddReply() {
+    setShowReplyForm((show) => !show);
+  }
+
   return (
-    <div className="cursor-pointer justify-self-end self-center col-start-2 row-start-3 sm:row-start-1 sm:col-start-3">
-      <button className="flex gap-2 items-center hover:opacity-40 text-primary-moderate-blue font-semibold">
-        <img src="images/icon-reply.svg" alt=""></img> Reply
-      </button>
-    </div>
+    <>
+      <div className="cursor-pointer justify-self-end self-center col-start-2 row-start-3 sm:row-start-1 sm:col-start-3">
+        <button
+          className="flex gap-2 items-center hover:opacity-40 text-primary-moderate-blue font-semibold"
+          onClick={handleAddReply}
+        >
+          <img src="images/icon-reply.svg" alt=""></img> Reply
+        </button>
+      </div>
+      {showReplyForm && (
+        <AddReplyForm
+          setShowReplyForm={setShowReplyForm}
+          commentID={commentID}
+          onReply={onReply}
+        />
+      )}
+    </>
   );
 }
 
@@ -317,6 +416,43 @@ function AddCommentForm({ onSubmit }) {
           onClick={handleAddComment}
         >
           Send
+        </button>
+      </div>
+    </form>
+  );
+}
+
+function AddReplyForm({ commentID, onReply, setShowReplyForm }) {
+  const [text, setText] = useState("");
+
+  function handleAddReplyForm(e) {
+    e.preventDefault();
+    onReply(commentID, text);
+    setShowReplyForm(false);
+  }
+
+  return (
+    <form
+      className="add-reply-form col-span-3  mt-10 grid grid-cols-2 grid-rows-comment-desktop-row gap-5 w-full sm:grid-rows-1 sm:grid-cols-comment-desktop-grid sm:items-center "
+      onSubmit={handleAddReplyForm}
+    >
+      <textarea
+        className="reply-text border col-span-2 sm:row-start-1 sm:order-2 placeholder:text-neutral-grayish-blue w-full rounded-md px-6 py-4 resize-none"
+        placeholder="Add a Reply..."
+        rows="3"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      ></textarea>
+      <div className="comment-user-img row-start-2 self-center sm:self-start sm:row-start-1 sm:order-1 ">
+        <img
+          className="w-8 sm:w-10"
+          src="images/avatars/image-juliusomo.png"
+          alt=""
+        />
+      </div>
+      <div className="form-actions row-start-2 justify-self-end sm:self-start sm:row-start-1 sm:order-3">
+        <button className="uppercase hover:opacity-50 bg-primary-moderate-blue text-white font-medium py-3 px-7 rounded-md">
+          Reply
         </button>
       </div>
     </form>
