@@ -5,142 +5,18 @@ Manipulate the score property in comments object for liking and disliking instea
 import { useEffect } from "react";
 import "./App.css";
 import { useState } from "react";
+import { CommentProvider, useCommentContext } from "./CommentsContext";
 /* eslint-disable react/prop-types */
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [comments, setComments] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const data = await fetch("data.json");
-      const res = await data.json();
-
-      setCurrentUser(res.currentUser);
-      setComments(res.comments);
-    }
-
-    fetchData();
-  }, []);
-
-  function getComment(id, commentsList = comments) {
-    for (let comment of commentsList) {
-      if (comment.id === id) return comment;
-
-      if (comment.replies?.length > 0) {
-        const found = getComment(id, comment.replies);
-        if (found) return found;
-      }
-    }
-
-    return null;
-  }
-
-  function handleReactions(commentID, type) {
-    function updateReactions(comments) {
-      return comments.map((comment) => {
-        if (comment.id === commentID) {
-          let newScore = comment.score;
-
-          if (comment.currentReaction === type) {
-            newScore = type === "like" ? newScore - 1 : newScore + 1;
-            return {
-              ...comment,
-              score: newScore,
-              currentReaction: null,
-            };
-          }
-
-          if (type === "like") {
-            newScore =
-              comment.currentReaction === "dislike"
-                ? newScore + 2
-                : newScore + 1;
-          } else if (type === "dislike") {
-            newScore =
-              comment.currentReaction === "like" ? newScore - 2 : newScore - 1;
-          }
-
-          return {
-            ...comment,
-            score: newScore,
-            currentReaction: type,
-          };
-        }
-
-        if (comment.replies?.length > 0) {
-          return {
-            ...comment,
-            replies: updateReactions(comment.replies),
-          };
-        }
-
-        return comment;
-      });
-    }
-
-    setComments((prevComments) => updateReactions(prevComments));
-  }
-
-  function handleAddReply(commentID, text) {
-    // Takes comment or reply id => push a reply to its replies array
-    const newReply = {
-      id: Date.now(),
-      content: text,
-      createdAt: "0 seconds ago",
-      score: 0,
-      replyingTo: "test",
-      user: {
-        image: {
-          png: `./images/avatars/image-${currentUser.username}.png`,
-          webp: `./images/avatars/image-${currentUser.username}.webp`,
-        },
-        username: `${currentUser.username}`,
-      },
-      replies: [],
-    };
-
-    setComments((prevComments) =>
-      prevComments.map((comment) =>
-        comment.id === commentID
-          ? {
-              ...comment,
-              replies: [...comment.replies, newReply],
-            }
-          : {
-              ...comment,
-              replies: updateReplies(comment.replies, commentID, newReply),
-            }
-      )
-    );
-
-    function updateReplies(replies, commentID, newReply) {
-      if (!replies) return [];
-      return replies.map((reply) =>
-        reply.id === commentID
-          ? {
-              ...reply,
-              replies: [...reply.replies, newReply],
-            }
-          : {
-              ...reply,
-              replies: updateReplies(reply.replies, commentID, newReply),
-            }
-      );
-    }
-  }
-
   return (
-    <Main>
-      <Overlay />
-      <CommentsContainer
-        currentUser={currentUser}
-        comments={comments}
-        onReact={handleReactions}
-        onReply={handleAddReply}
-      />
-      <AddCommentForm onSubmit={setComments} />
-    </Main>
+    <CommentProvider>
+      <Main>
+        <Overlay />
+        <CommentsContainer />
+        <AddCommentForm />
+      </Main>
+    </CommentProvider>
   );
 }
 
@@ -154,49 +30,45 @@ function Main({ children }) {
   return <main className="my-10 mx-6 max-w-[700px]">{children}</main>;
 }
 
-function CommentsContainer({ currentUser, comments, onReact, onReply }) {
+function CommentsContainer() {
+  const { comments, currentUser } = useCommentContext();
+
   return (
     <div className="grid gap-10">
       {comments.map((comment) => (
-        <Comment
-          key={comment.id}
-          currentUser={currentUser}
-          isCurrentUser={comment.user.username === currentUser.username}
-          comment={comment}
-          onReact={onReact}
-          onReply={onReply}
-        />
+        <Comment key={comment.id} comment={comment} />
       ))}
     </div>
   );
 }
 
-function Comment({ currentUser, isCurrentUser, comment, onReact, onReply }) {
+function Comment({ comment }) {
+  const { currentUser } = useCommentContext();
+  const isCurrentUser = currentUser.username === comment.user.username;
+
   return (
     <div className="comment-container grid gap-5" data-id={comment.id}>
       <div className="comment grid grid-cols-comment-mobile-col grid-rows-comment-mobile-row gap-y-4 sm:grid-cols-comment-desktop-grid sm:grid-rows-comment-desktop-row sm:gap-x-5 sm:gap-y-3">
-        <CommentHeader isCurrentUser={isCurrentUser} comment={comment} />
+        <CommentHeader comment={comment} />
         <CommentBody comment={comment} />
-        <CommentReactions comment={comment} onReact={onReact} />
+        <CommentReactions comment={comment} />
         {isCurrentUser ? (
-          <SelfCommentActions commentID={comment.id} onReply={onReply} />
+          <SelfCommentActions commentID={comment.id} />
         ) : (
-          <CommentActions commentID={comment.id} onReply={onReply} />
+          <CommentActions commentID={comment.id} />
         )}
       </div>
       {comment.replies?.length > 0 && (
-        <RepliesContainer
-          onReact={onReact}
-          currentUser={currentUser}
-          replies={comment.replies}
-          onReply={onReply}
-        />
+        <RepliesContainer replies={comment.replies} />
       )}
     </div>
   );
 }
 
-function CommentHeader({ isCurrentUser, comment }) {
+function CommentHeader({ comment }) {
+  const { currentUser } = useCommentContext();
+  const isCurrentUser = currentUser.username === comment.user.username;
+
   return (
     <div className="comment-user-info row-start-1 col-span-2 flex items-center gap-5 sm:col-start-2 sm:self-start">
       <img className="w-8" src={comment.user.image.png}></img>
@@ -220,21 +92,23 @@ function CommentBody({ comment }) {
   );
 }
 
-function CommentReactions({ comment, onReact }) {
+function CommentReactions({ comment }) {
   return (
     <div className="comment-stats col-start-1 row-start-3 flex justify-between sm:row-start-1 sm:row-span-2">
       <div className="comment-reaction flex gap-5 items-center p-3 sm:gap-3 sm:flex-col">
-        <LikeButton comment={comment} onReact={onReact} />
+        <LikeButton comment={comment} />
         <p className="text-primary-moderate-blue font-medium">
           {comment.score}
         </p>
-        <DislikeButton comment={comment} onReact={onReact} />
+        <DislikeButton comment={comment} />
       </div>
     </div>
   );
 }
 
-function LikeButton({ comment, onReact }) {
+function LikeButton({ comment }) {
+  const { handleReactions } = useCommentContext();
+
   return (
     <button
       className={`${
@@ -242,7 +116,7 @@ function LikeButton({ comment, onReact }) {
           ? "text-primary-moderate-blue"
           : "text-primary-light-grayish-blue"
       } hover:text-primary-moderate-blue`}
-      onClick={() => onReact(comment.id, "like")}
+      onClick={() => handleReactions(comment.id, "like")}
     >
       <svg width="11" height="11" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -254,7 +128,9 @@ function LikeButton({ comment, onReact }) {
   );
 }
 
-function DislikeButton({ comment, onReact }) {
+function DislikeButton({ comment }) {
+  const { handleReactions } = useCommentContext();
+
   return (
     <button
       className={`${
@@ -262,7 +138,7 @@ function DislikeButton({ comment, onReact }) {
           ? "text-primary-moderate-blue"
           : "text-primary-light-grayish-blue"
       } hover:text-primary-moderate-blue`}
-      onClick={() => onReact(comment.id, "dislike")}
+      onClick={() => handleReactions(comment.id, "dislike")}
     >
       <svg width="11" height="3" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -274,24 +150,19 @@ function DislikeButton({ comment, onReact }) {
   );
 }
 
-function RepliesContainer({ currentUser, replies, onReact, onReply }) {
+function RepliesContainer({ replies }) {
   return (
     <div className="relative grid gap-10 pt-12 pl-4 sm:pl-12 before:absolute before:-ml-3 sm:before:ml-4 before:left-0 before:w-[2px] before:h-full before:bg-primary-soft-red/20">
       {replies.map((reply) => (
-        <Reply
-          onReact={onReact}
-          currentUser={currentUser}
-          key={reply.id}
-          isCurrentUser={currentUser.username === reply.user.username}
-          reply={reply}
-          onReply={onReply}
-        />
+        <Reply key={reply.id} reply={reply} />
       ))}
     </div>
   );
 }
 
-function Reply({ currentUser, isCurrentUser, reply, onReact, onReply }) {
+function Reply({ reply }) {
+  const { currentUser } = useCommentContext();
+  const isCurrentUser = currentUser.username === reply.user.username;
   return (
     <>
       <div
@@ -300,20 +171,15 @@ function Reply({ currentUser, isCurrentUser, reply, onReact, onReply }) {
       >
         <CommentHeader comment={reply} />
         <CommentBody comment={reply} />
-        <CommentReactions onReact={onReact} comment={reply} />
+        <CommentReactions comment={reply} />
         {isCurrentUser ? (
           <SelfCommentActions commentID={reply.id} />
         ) : (
-          <CommentActions commentID={reply.id} onReply={onReply} />
+          <CommentActions commentID={reply.id} />
         )}
       </div>
       {reply.replies?.length > 0 && (
-        <RepliesContainer
-          onReact={onReact}
-          isCurrentUser={isCurrentUser}
-          replies={reply.replies}
-          currentUser={currentUser}
-        />
+        <RepliesContainer replies={reply.replies} />
       )}
     </>
   );
@@ -321,18 +187,20 @@ function Reply({ currentUser, isCurrentUser, reply, onReact, onReply }) {
 
 function SelfCommentActions() {
   return (
-    <div className="cursor-pointer justify-self-end col-start-2 row-start-3 flex gap-5 items-center sm:row-start-1 sm:col-start-3">
-      <button className="delete-btn flex gap-2 items-center text-primary-soft-red font-semibold hover:opacity-50">
-        <img src="images/icon-delete.svg" alt=""></img>Delete
-      </button>
-      <button className="flex gap-2 items-center text-primary-moderate-blue font-semibold hover:opacity-50">
-        <img src="images/icon-edit.svg" alt=""></img>Edit
-      </button>
-    </div>
+    <>
+      <div className="cursor-pointer justify-self-end col-start-2 row-start-3 flex gap-5 items-center sm:row-start-1 sm:col-start-3">
+        <button className="delete-btn flex gap-2 items-center text-primary-soft-red font-semibold hover:opacity-50">
+          <img src="images/icon-delete.svg" alt=""></img>Delete
+        </button>
+        <button className="flex gap-2 items-center text-primary-moderate-blue font-semibold hover:opacity-50">
+          <img src="images/icon-edit.svg" alt=""></img>Edit
+        </button>
+      </div>
+    </>
   );
 }
 
-function CommentActions({ commentID, onReply }) {
+function CommentActions({ commentID }) {
   const [showReplyForm, setShowReplyForm] = useState(false);
 
   function handleAddReply() {
@@ -353,10 +221,31 @@ function CommentActions({ commentID, onReply }) {
         <AddReplyForm
           setShowReplyForm={setShowReplyForm}
           commentID={commentID}
-          onReply={onReply}
         />
       )}
     </>
+  );
+}
+
+function ConfirmDeleteModal() {
+  return (
+    <div className="delete-comment-container mx-4 p-7 bg-white absolute z-20 top-1/2 -translate-y-1/2 grid gap-5 rounded-lg max-w-[400px]">
+      <h2 className="text-xl text-neutral-dark-blue font-medium">
+        Delete comment
+      </h2>
+      <p className="text-base text-neutral-grayish-blue">
+        Are you sure you want to delete this comment? This will remove the
+        comment and can't be undone.
+      </p>
+      <div className="delete-comment-action grid grid-cols-2 gap-5 font-medium">
+        <button className="cancel-deletion-btn uppercase bg-neutral-grayish-blue hover:bg-neutral-grayish-blue/90 text-white p-3 rounded-xl">
+          No, Cancel
+        </button>
+        <button className="confirm-delete-btn uppercase bg-primary-soft-red hover:bg-primary-soft-red/90 text-white p-3 rounded-xl">
+          Yes, Delete
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -368,8 +257,9 @@ function CurrentUserBadge() {
   );
 }
 
-function AddCommentForm({ onSubmit }) {
+function AddCommentForm() {
   const [text, setText] = useState("");
+  const { setComments } = useCommentContext();
 
   function handleAddComment(e) {
     e.preventDefault();
@@ -390,7 +280,7 @@ function AddCommentForm({ onSubmit }) {
       replies: [],
     };
 
-    onSubmit((comments) => [...comments, newComment]);
+    setComments((comments) => [...comments, newComment]);
     setText("");
   }
 
@@ -422,12 +312,13 @@ function AddCommentForm({ onSubmit }) {
   );
 }
 
-function AddReplyForm({ commentID, onReply, setShowReplyForm }) {
+function AddReplyForm({ commentID, setShowReplyForm }) {
   const [text, setText] = useState("");
+  const { handleAddReply } = useCommentContext();
 
   function handleAddReplyForm(e) {
     e.preventDefault();
-    onReply(commentID, text);
+    handleAddReply(commentID, text);
     setShowReplyForm(false);
   }
 
