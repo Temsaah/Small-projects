@@ -2,21 +2,23 @@
 Manipulate the score property in comments object for liking and disliking instead of copying and manipulating the state
 */
 
-import { useEffect } from "react";
 import "./App.css";
 import { useState } from "react";
 import { CommentProvider, useCommentContext } from "./CommentsContext";
 /* eslint-disable react/prop-types */
 
 function App() {
+  const { showDeleteModal } = useCommentContext();
+
   return (
-    <CommentProvider>
+    <>
+      {showDeleteModal && <ConfirmDeleteModal />}
       <Main>
         <Overlay />
         <CommentsContainer />
         <AddCommentForm />
       </Main>
-    </CommentProvider>
+    </>
   );
 }
 
@@ -185,11 +187,21 @@ function Reply({ reply }) {
   );
 }
 
-function SelfCommentActions() {
+function SelfCommentActions({ commentID }) {
+  const { setShowDeleteModal, setCurrentCommentID } = useCommentContext();
+
+  function handleDeleteBtn() {
+    setShowDeleteModal(true);
+    setCurrentCommentID(commentID);
+  }
+
   return (
     <>
       <div className="cursor-pointer justify-self-end col-start-2 row-start-3 flex gap-5 items-center sm:row-start-1 sm:col-start-3">
-        <button className="delete-btn flex gap-2 items-center text-primary-soft-red font-semibold hover:opacity-50">
+        <button
+          className="delete-btn flex gap-2 items-center text-primary-soft-red font-semibold hover:opacity-50"
+          onClick={handleDeleteBtn}
+        >
           <img src="images/icon-delete.svg" alt=""></img>Delete
         </button>
         <button className="flex gap-2 items-center text-primary-moderate-blue font-semibold hover:opacity-50">
@@ -228,24 +240,41 @@ function CommentActions({ commentID }) {
 }
 
 function ConfirmDeleteModal() {
+  const { currentCommentID, handleDeleteComment, setShowDeleteModal } =
+    useCommentContext();
+
+  function handleConfirmDelete() {
+    handleDeleteComment(currentCommentID);
+    setShowDeleteModal(false);
+  }
+
   return (
-    <div className="delete-comment-container mx-4 p-7 bg-white absolute z-20 top-1/2 -translate-y-1/2 grid gap-5 rounded-lg max-w-[400px]">
-      <h2 className="text-xl text-neutral-dark-blue font-medium">
-        Delete comment
-      </h2>
-      <p className="text-base text-neutral-grayish-blue">
-        Are you sure you want to delete this comment? This will remove the
-        comment and can't be undone.
-      </p>
-      <div className="delete-comment-action grid grid-cols-2 gap-5 font-medium">
-        <button className="cancel-deletion-btn uppercase bg-neutral-grayish-blue hover:bg-neutral-grayish-blue/90 text-white p-3 rounded-xl">
-          No, Cancel
-        </button>
-        <button className="confirm-delete-btn uppercase bg-primary-soft-red hover:bg-primary-soft-red/90 text-white p-3 rounded-xl">
-          Yes, Delete
-        </button>
+    <>
+      <div className="absolute w-full h-full bg-black/80 z-10"></div>
+      <div className="delete-comment-container mx-4 p-7 bg-white absolute z-20 top-1/2 -translate-y-1/2 grid gap-5 rounded-lg max-w-[400px]">
+        <h2 className="text-xl text-neutral-dark-blue font-medium">
+          Delete comment
+        </h2>
+        <p className="text-base text-neutral-grayish-blue">
+          Are you sure you want to delete this comment? This will remove the
+          comment and can't be undone.
+        </p>
+        <div className="delete-comment-action grid grid-cols-2 gap-5 font-medium">
+          <button
+            className="cancel-deletion-btn uppercase bg-neutral-grayish-blue hover:bg-neutral-grayish-blue/90 text-white p-3 rounded-xl"
+            onClick={() => setShowDeleteModal(false)}
+          >
+            No, Cancel
+          </button>
+          <button
+            className="confirm-delete-btn uppercase bg-primary-soft-red hover:bg-primary-soft-red/90 text-white p-3 rounded-xl"
+            onClick={handleConfirmDelete}
+          >
+            Yes, Delete
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

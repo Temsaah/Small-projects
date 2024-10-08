@@ -6,6 +6,8 @@ const CommentContext = createContext();
 export function CommentProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [comments, setComments] = useState([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [currentCommentID, setCurrentCommentID] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -113,6 +115,27 @@ export function CommentProvider({ children }) {
     }
   }
 
+  function handleDeleteComment(commentID) {
+    function deleteComment(comments) {
+      return comments
+        .map((comment) => {
+          if (comment.id === commentID) return null;
+
+          if (comment.replies.length > 0) {
+            return {
+              ...comment,
+              replies: deleteComment(comment.replies),
+            };
+          }
+
+          return comment;
+        })
+        .filter((comment) => comment !== null);
+    }
+
+    setComments((prevComments) => deleteComment(prevComments));
+  }
+
   return (
     <CommentContext.Provider
       value={{
@@ -122,6 +145,11 @@ export function CommentProvider({ children }) {
         setCurrentUser,
         handleReactions,
         handleAddReply,
+        handleDeleteComment,
+        showDeleteModal,
+        setShowDeleteModal,
+        currentCommentID,
+        setCurrentCommentID,
       }}
     >
       {children}
