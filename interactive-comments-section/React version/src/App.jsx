@@ -5,6 +5,7 @@ Manipulate the score property in comments object for liking and disliking instea
 import "./App.css";
 import { useState } from "react";
 import { CommentProvider, useCommentContext } from "./CommentsContext";
+import { comment } from "postcss";
 /* eslint-disable react/prop-types */
 
 function App() {
@@ -24,12 +25,12 @@ function App() {
 
 function Overlay() {
   return (
-    <div className="hidden overlay absolute top-0 w-screen h-screen bg-black opacity-60 z-10"></div>
+    <div className="overlay absolute top-0 z-10 hidden h-screen w-screen bg-black opacity-60"></div>
   );
 }
 
 function Main({ children }) {
-  return <main className="my-10 mx-6 max-w-[700px]">{children}</main>;
+  return <main className="mx-6 my-10 max-w-[700px]">{children}</main>;
 }
 
 function CommentsContainer() {
@@ -70,40 +71,75 @@ function Comment({ comment }) {
 function CommentHeader({ comment }) {
   const { currentUser } = useCommentContext();
   const isCurrentUser = currentUser.username === comment.user.username;
+  const [originalComment] = useState(comment.content);
+  const isEdited = originalComment !== comment.content;
 
   return (
-    <div className="comment-user-info row-start-1 col-span-2 flex items-center gap-5 sm:col-start-2 sm:self-start">
+    <div className="comment-user-info col-span-2 row-start-1 flex items-center gap-5 sm:col-start-2 sm:self-start">
       <img className="w-8" src={comment.user.image.png}></img>
-      <div className="comment-username text-neutral-dark-blue font-semibold sm:text-sm">
+      <div className="comment-username font-semibold text-neutral-dark-blue sm:text-sm">
         {comment.user.username} {isCurrentUser ? <CurrentUserBadge /> : null}
       </div>
       <p className="text-neutral-grayish-blue sm:text-sm">
-        {comment.createdAt}
+        {comment.createdAt}{" "}
+        <span className="ml-2 font-semibold">{isEdited && "(Edited)"}</span>
       </p>
     </div>
   );
 }
 
 function CommentBody({ comment }) {
+  const { isEditing, currentCommentID } = useCommentContext();
+
   return (
-    <div className="row-start-2  col-span-2 self-center sm:col-start-2">
-      <p className="text-primary-soft-red sm:text-sm leading-6">
-        {comment.content}
-      </p>
+    <div className="col-span-2 row-start-2 self-center sm:col-start-2">
+      {isEditing && currentCommentID === comment.id ? (
+        <UpdateComment commentID={comment.id} />
+      ) : (
+        <p className="leading-6 text-primary-soft-red sm:text-sm">
+          {comment.content}
+        </p>
+      )}
     </div>
   );
 }
 
 function CommentReactions({ comment }) {
   return (
-    <div className="comment-stats col-start-1 row-start-3 flex justify-between sm:row-start-1 sm:row-span-2">
-      <div className="comment-reaction flex gap-5 items-center p-3 sm:gap-3 sm:flex-col">
+    <div className="comment-stats col-start-1 row-start-3 flex justify-between sm:row-span-2 sm:row-start-1">
+      <div className="comment-reaction flex items-center gap-5 p-3 sm:flex-col sm:gap-3">
         <LikeButton comment={comment} />
-        <p className="text-primary-moderate-blue font-medium">
+        <p className="font-medium text-primary-moderate-blue">
           {comment.score}
         </p>
         <DislikeButton comment={comment} />
       </div>
+    </div>
+  );
+}
+
+function UpdateComment({ commentID }) {
+  const { handleUpdateComment, setIsEditing } = useCommentContext();
+  const [text, setText] = useState("");
+  function handleUpdateBtn() {
+    handleUpdateComment(commentID, text);
+    setIsEditing(false);
+  }
+  return (
+    <div className="update-content grid gap-5">
+      <textarea
+        className="update-text min-h-[100px] w-full resize-none rounded-md border border-red-700 px-6 py-4"
+        name=""
+        id=""
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      ></textarea>
+      <button
+        className="update-btn justify-self-end rounded-md bg-primary-moderate-blue px-7 py-3 font-medium uppercase text-white"
+        onClick={handleUpdateBtn}
+      >
+        Update
+      </button>
     </div>
   );
 }
@@ -154,7 +190,7 @@ function DislikeButton({ comment }) {
 
 function RepliesContainer({ replies }) {
   return (
-    <div className="relative grid gap-10 pt-12 pl-4 sm:pl-12 before:absolute before:-ml-3 sm:before:ml-4 before:left-0 before:w-[2px] before:h-full before:bg-primary-soft-red/20">
+    <div className="relative grid gap-10 pl-4 pt-12 before:absolute before:left-0 before:-ml-3 before:h-full before:w-[2px] before:bg-primary-soft-red/20 sm:pl-12 sm:before:ml-4">
       {replies.map((reply) => (
         <Reply key={reply.id} reply={reply} />
       ))}
@@ -168,7 +204,7 @@ function Reply({ reply }) {
   return (
     <>
       <div
-        className="grid gap-5  sm:grid-cols-comment-desktop-grid sm:grid-rows-comment-desktop-row sm:gap-x-5 sm:gap-y-3"
+        className="grid gap-5 sm:grid-cols-comment-desktop-grid sm:grid-rows-comment-desktop-row sm:gap-x-5 sm:gap-y-3"
         data-id={reply.id}
       >
         <CommentHeader comment={reply} />
@@ -188,23 +224,32 @@ function Reply({ reply }) {
 }
 
 function SelfCommentActions({ commentID }) {
-  const { setShowDeleteModal, setCurrentCommentID } = useCommentContext();
+  const { setShowDeleteModal, setCurrentCommentID, setIsEditing } =
+    useCommentContext();
 
   function handleDeleteBtn() {
     setShowDeleteModal(true);
     setCurrentCommentID(commentID);
   }
 
+  function handleEditBtn() {
+    setCurrentCommentID(commentID);
+    setIsEditing(true);
+  }
+
   return (
     <>
-      <div className="cursor-pointer justify-self-end col-start-2 row-start-3 flex gap-5 items-center sm:row-start-1 sm:col-start-3">
+      <div className="col-start-2 row-start-3 flex cursor-pointer items-center gap-5 justify-self-end sm:col-start-3 sm:row-start-1">
         <button
-          className="delete-btn flex gap-2 items-center text-primary-soft-red font-semibold hover:opacity-50"
+          className="delete-btn flex items-center gap-2 font-semibold text-primary-soft-red hover:opacity-50"
           onClick={handleDeleteBtn}
         >
           <img src="images/icon-delete.svg" alt=""></img>Delete
         </button>
-        <button className="flex gap-2 items-center text-primary-moderate-blue font-semibold hover:opacity-50">
+        <button
+          className="flex items-center gap-2 font-semibold text-primary-moderate-blue hover:opacity-50"
+          onClick={handleEditBtn}
+        >
           <img src="images/icon-edit.svg" alt=""></img>Edit
         </button>
       </div>
@@ -221,9 +266,9 @@ function CommentActions({ commentID }) {
 
   return (
     <>
-      <div className="cursor-pointer justify-self-end self-center col-start-2 row-start-3 sm:row-start-1 sm:col-start-3">
+      <div className="col-start-2 row-start-3 cursor-pointer self-center justify-self-end sm:col-start-3 sm:row-start-1">
         <button
-          className="flex gap-2 items-center hover:opacity-40 text-primary-moderate-blue font-semibold"
+          className="flex items-center gap-2 font-semibold text-primary-moderate-blue hover:opacity-40"
           onClick={handleAddReply}
         >
           <img src="images/icon-reply.svg" alt=""></img> Reply
@@ -250,9 +295,9 @@ function ConfirmDeleteModal() {
 
   return (
     <>
-      <div className="absolute w-full h-full bg-black/80 z-10"></div>
-      <div className="delete-comment-container mx-4 p-7 bg-white absolute z-20 top-1/2 -translate-y-1/2 grid gap-5 rounded-lg max-w-[400px]">
-        <h2 className="text-xl text-neutral-dark-blue font-medium">
+      <div className="absolute z-10 h-full w-full bg-black/80"></div>
+      <div className="delete-comment-container absolute top-1/2 z-20 mx-4 grid max-w-[400px] -translate-y-1/2 gap-5 rounded-lg bg-white p-7">
+        <h2 className="text-xl font-medium text-neutral-dark-blue">
           Delete comment
         </h2>
         <p className="text-base text-neutral-grayish-blue">
@@ -261,13 +306,13 @@ function ConfirmDeleteModal() {
         </p>
         <div className="delete-comment-action grid grid-cols-2 gap-5 font-medium">
           <button
-            className="cancel-deletion-btn uppercase bg-neutral-grayish-blue hover:bg-neutral-grayish-blue/90 text-white p-3 rounded-xl"
+            className="cancel-deletion-btn rounded-xl bg-neutral-grayish-blue p-3 uppercase text-white hover:bg-neutral-grayish-blue/90"
             onClick={() => setShowDeleteModal(false)}
           >
             No, Cancel
           </button>
           <button
-            className="confirm-delete-btn uppercase bg-primary-soft-red hover:bg-primary-soft-red/90 text-white p-3 rounded-xl"
+            className="confirm-delete-btn rounded-xl bg-primary-soft-red p-3 uppercase text-white hover:bg-primary-soft-red/90"
             onClick={handleConfirmDelete}
           >
             Yes, Delete
@@ -280,7 +325,7 @@ function ConfirmDeleteModal() {
 
 function CurrentUserBadge() {
   return (
-    <span className="ml-1 text-sm py-[3px] px-2 rounded-sm text-white bg-primary-moderate-blue">
+    <span className="ml-1 rounded-sm bg-primary-moderate-blue px-2 py-[3px] text-sm text-white">
       you
     </span>
   );
@@ -314,24 +359,24 @@ function AddCommentForm() {
   }
 
   return (
-    <form className="mt-10 grid grid-cols-2 grid-rows-comment-desktop-row gap-5 w-full sm:grid-rows-1 sm:grid-cols-comment-desktop-grid sm:items-center">
+    <form className="mt-10 grid w-full grid-cols-2 grid-rows-comment-desktop-row gap-5 sm:grid-cols-comment-desktop-grid sm:grid-rows-1 sm:items-center">
       <textarea
-        className="border col-span-2 sm:row-start-1 sm:order-2 placeholder:text-neutral-grayish-blue w-full rounded-md px-6 py-4 resize-none"
+        className="col-span-2 w-full resize-none rounded-md border px-6 py-4 placeholder:text-neutral-grayish-blue sm:order-2 sm:row-start-1"
         placeholder="Add a comment..."
         rows={3}
         value={text}
         onChange={(e) => setText(e.target.value)}
       ></textarea>
-      <div className="row-start-2 self-center sm:self-start sm:row-start-1 sm:order-1 ">
+      <div className="row-start-2 self-center sm:order-1 sm:row-start-1 sm:self-start">
         <img
           className="w-8 sm:w-10"
           src="./images/avatars/image-juliusomo.png"
           alt="Your image"
         />
       </div>
-      <div className="row-start-2 justify-self-end sm:self-start sm:row-start-1 sm:order-3">
+      <div className="row-start-2 justify-self-end sm:order-3 sm:row-start-1 sm:self-start">
         <button
-          className="uppercase bg-primary-moderate-blue hover:bg-primary-moderate-blue/50 text-white font-medium py-3 px-7 rounded-md"
+          className="rounded-md bg-primary-moderate-blue px-7 py-3 font-medium uppercase text-white hover:bg-primary-moderate-blue/50"
           onClick={handleAddComment}
         >
           Send
@@ -353,25 +398,25 @@ function AddReplyForm({ commentID, setShowReplyForm }) {
 
   return (
     <form
-      className="add-reply-form col-span-3  mt-10 grid grid-cols-2 grid-rows-comment-desktop-row gap-5 w-full sm:grid-rows-1 sm:grid-cols-comment-desktop-grid sm:items-center "
+      className="add-reply-form col-span-3 mt-10 grid w-full grid-cols-2 grid-rows-comment-desktop-row gap-5 sm:grid-cols-comment-desktop-grid sm:grid-rows-1 sm:items-center"
       onSubmit={handleAddReplyForm}
     >
       <textarea
-        className="reply-text border col-span-2 sm:row-start-1 sm:order-2 placeholder:text-neutral-grayish-blue w-full rounded-md px-6 py-4 resize-none"
+        className="reply-text col-span-2 w-full resize-none rounded-md border px-6 py-4 placeholder:text-neutral-grayish-blue sm:order-2 sm:row-start-1"
         placeholder="Add a Reply..."
         rows="3"
         value={text}
         onChange={(e) => setText(e.target.value)}
       ></textarea>
-      <div className="comment-user-img row-start-2 self-center sm:self-start sm:row-start-1 sm:order-1 ">
+      <div className="comment-user-img row-start-2 self-center sm:order-1 sm:row-start-1 sm:self-start">
         <img
           className="w-8 sm:w-10"
           src="images/avatars/image-juliusomo.png"
           alt=""
         />
       </div>
-      <div className="form-actions row-start-2 justify-self-end sm:self-start sm:row-start-1 sm:order-3">
-        <button className="uppercase hover:opacity-50 bg-primary-moderate-blue text-white font-medium py-3 px-7 rounded-md">
+      <div className="form-actions row-start-2 justify-self-end sm:order-3 sm:row-start-1 sm:self-start">
+        <button className="rounded-md bg-primary-moderate-blue px-7 py-3 font-medium uppercase text-white hover:opacity-50">
           Reply
         </button>
       </div>

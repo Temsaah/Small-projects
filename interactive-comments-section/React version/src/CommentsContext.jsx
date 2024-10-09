@@ -8,6 +8,7 @@ export function CommentProvider({ children }) {
   const [comments, setComments] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [currentCommentID, setCurrentCommentID] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -95,8 +96,8 @@ export function CommentProvider({ children }) {
           : {
               ...comment,
               replies: updateReplies(comment.replies, commentID, newReply),
-            }
-      )
+            },
+      ),
     );
 
     function updateReplies(replies, commentID, newReply) {
@@ -110,7 +111,7 @@ export function CommentProvider({ children }) {
           : {
               ...reply,
               replies: updateReplies(reply.replies, commentID, newReply),
-            }
+            },
       );
     }
   }
@@ -136,6 +137,30 @@ export function CommentProvider({ children }) {
     setComments((prevComments) => deleteComment(prevComments));
   }
 
+  function handleUpdateComment(commentID, newContent) {
+    function updateComment(comments) {
+      return comments.map((comment) => {
+        if (comment.id === commentID) {
+          return {
+            ...comment,
+            content: newContent,
+          };
+        }
+
+        if (comment.replies.length > 0) {
+          return {
+            ...comment,
+            replies: updateComment(comment.replies),
+          };
+        }
+
+        return comment;
+      });
+    }
+
+    setComments((prevComments) => updateComment(prevComments));
+  }
+
   return (
     <CommentContext.Provider
       value={{
@@ -150,6 +175,9 @@ export function CommentProvider({ children }) {
         setShowDeleteModal,
         currentCommentID,
         setCurrentCommentID,
+        isEditing,
+        setIsEditing,
+        handleUpdateComment,
       }}
     >
       {children}
