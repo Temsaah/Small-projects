@@ -73,7 +73,7 @@ export function CommentProvider({ children }) {
     const newReply = {
       id: Date.now(),
       content: text,
-      createdAt: "0 seconds ago",
+      createdAt: Date.now(),
       score: 0,
       replyingTo: "test",
       user: {

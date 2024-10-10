@@ -3,9 +3,9 @@ Manipulate the score property in comments object for liking and disliking instea
 */
 
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CommentProvider, useCommentContext } from "./CommentsContext";
-import { comment } from "postcss";
+
 /* eslint-disable react/prop-types */
 
 function App() {
@@ -81,10 +81,33 @@ function CommentHeader({ comment }) {
         {comment.user.username} {isCurrentUser ? <CurrentUserBadge /> : null}
       </div>
       <p className="text-neutral-grayish-blue sm:text-sm">
-        {comment.createdAt}{" "}
+        <CommentTimer createdAt={comment.createdAt} />
         <span className="ml-2 font-semibold">{isEdited && "(Edited)"}</span>
       </p>
     </div>
+  );
+}
+
+function CommentTimer({ createdAt }) {
+  const [currentTime, setCurrentTime] = useState(Date.now());
+
+  useEffect(() => {
+    const id = setInterval(() => setCurrentTime(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  if (typeof createdAt === "string") return <span>{createdAt}</span>;
+
+  const elapsedTime = Math.floor((currentTime - createdAt) / 1000);
+  const minutes = Math.floor(elapsedTime / 60);
+  const seconds = elapsedTime % 60;
+
+  return (
+    <span>
+      {minutes > 0
+        ? `${minutes} minute${minutes > 1 ? "s" : ""} ago`
+        : `${seconds} second${seconds > 1 ? "s" : ""} ago`}
+    </span>
   );
 }
 
@@ -342,7 +365,7 @@ function AddCommentForm() {
     const newComment = {
       id: Date.now(),
       content: text,
-      createdAt: "0 seconds ago",
+      createdAt: Date.now(),
       score: 0,
       user: {
         image: {
