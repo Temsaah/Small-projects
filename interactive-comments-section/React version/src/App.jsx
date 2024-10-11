@@ -3,7 +3,7 @@ Manipulate the score property in comments object for liking and disliking instea
 */
 
 import "./App.css";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CommentProvider, useCommentContext } from "./CommentsContext";
 
 /* eslint-disable react/prop-types */
@@ -39,16 +39,17 @@ function CommentsContainer() {
   return (
     <div className="grid gap-10">
       {comments.map((comment) => (
-        <Comment key={comment.id} comment={comment} />
+        <Comment
+          key={comment.id}
+          comment={comment}
+          isCurrentUser={currentUser.username === comment.user.username}
+        />
       ))}
     </div>
   );
 }
 
-function Comment({ comment }) {
-  const { currentUser } = useCommentContext();
-  const isCurrentUser = currentUser.username === comment.user.username;
-
+const Comment = React.memo(function Comment({ comment, isCurrentUser }) {
   return (
     <div className="comment-container grid gap-5" data-id={comment.id}>
       <div className="comment grid grid-cols-comment-mobile-col grid-rows-comment-mobile-row gap-y-4 sm:grid-cols-comment-desktop-grid sm:grid-rows-comment-desktop-row sm:gap-x-5 sm:gap-y-3">
@@ -66,7 +67,7 @@ function Comment({ comment }) {
       )}
     </div>
   );
-}
+});
 
 function CommentHeader({ comment }) {
   const { currentUser } = useCommentContext();
@@ -92,9 +93,10 @@ function CommentTimer({ createdAt }) {
   const [currentTime, setCurrentTime] = useState(Date.now());
 
   useEffect(() => {
+    if (typeof createdAt === "string") return;
     const id = setInterval(() => setCurrentTime(Date.now()), 1000);
     return () => clearInterval(id);
-  }, []);
+  }, [createdAt]);
 
   if (typeof createdAt === "string") return <span>{createdAt}</span>;
 

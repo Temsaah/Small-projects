@@ -55,21 +55,30 @@ export function CommentProvider({ children }) {
         }
 
         if (comment.replies?.length > 0) {
-          return {
-            ...comment,
-            replies: updateReactions(comment.replies),
-          };
+          const updatedReplies = updateReactions(comment.replies);
+
+          if (
+            JSON.stringify(updatedReplies) !== JSON.stringify(comment.replies)
+          ) {
+            return {
+              ...comment,
+              replies: updatedReplies,
+            };
+          }
         }
 
         return comment;
       });
     }
 
-    setComments((prevComments) => updateReactions(prevComments));
+    setComments((prevComments) => {
+      const updatedComments = updateReactions(prevComments);
+
+      return updatedComments !== prevComments ? updatedComments : prevComments;
+    });
   }
 
   function handleAddReply(commentID, text) {
-    // Takes comment or reply id => push a reply to its replies array
     const newReply = {
       id: Date.now(),
       content: text,
