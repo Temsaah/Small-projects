@@ -1,0 +1,26 @@
+[
+  {
+    "mostPopular": false,
+    "name": "Basic",
+    "price": "199.99",
+    "storage": "500 GB",
+    "userCount": "2",
+    "send": "3 GB"
+  },
+  {
+    "mostPopular": true,
+    "name": "Professional",
+    "price": "249.99",
+    "storage": "1 TB",
+    "userCount": "5",
+    "send": "10 GB"
+  },
+  {
+    "mostPopular": false,
+    "name": "Master",
+    "price": "399.99",
+    "storage": "2 TB",
+    "userCount": "10",
+    "send": "20 GB"
+  }
+]
