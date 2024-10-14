@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import "./App.css";
 import { FormContext, FormProvider } from "./FormContext";
 
@@ -69,12 +69,21 @@ function Main() {
 }
 
 function MainForm() {
-  const { file, setFile, formData, updateFormData } = useContext(FormContext);
+  const { file, setFile, formData, updateFormData, setTicketGenerated } =
+    useContext(FormContext);
   const [isDragging, setIsDragging] = useState(false);
 
   function validateEmail(email) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
+  }
+
+  function convertFileToSrc(file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setFile(e.target.result); // Save the image src (base64 URL)
+    };
+    reader.readAsDataURL(file);
   }
 
   function handleDragOver(e) {
@@ -101,7 +110,7 @@ function MainForm() {
       droppedFile &&
       (droppedFile.type === "image/jpeg" || droppedFile.type === "image/png")
     ) {
-      setFile(droppedFile);
+      convertFileToSrc(droppedFile);
     }
   }
 
@@ -111,7 +120,7 @@ function MainForm() {
       selectedFile &&
       (selectedFile.type === "image/jpeg" || selectedFile.type === "image/png")
     ) {
-      setFile(selectedFile);
+      convertFileToSrc(selectedFile);
     } else {
       alert("Please upload a valid image file (JPG or PNG).");
     }
@@ -129,6 +138,8 @@ function MainForm() {
       !formData.githubUsername
     )
       return;
+
+    setTicketGenerated(true);
   }
 
   return (
@@ -246,29 +257,138 @@ function UploadInterface() {
 }
 
 function UploadedPhotoPreview() {
+  const { file, setFile } = useContext(FormContext);
+  const inputRef = useRef(null);
+
+  function handleRemoveImage(e) {
+    e.preventDefault();
+    setFile("");
+  }
+
+  function handleChangeImage(e) {
+    e.preventDefault();
+    inputRef.current.click();
+  }
+
+  function handleFileChange(e) {
+    const selectedFile = e.target.files[0];
+    if (
+      selectedFile &&
+      (selectedFile.type === "image/jpeg" || selectedFile.type === "image/png")
+    ) {
+      const reader = new FileReader();
+      reader.onload = (e) => setFile(e.target.result);
+      reader.readAsDataURL(selectedFile);
+    } else {
+      alert("Please upload a valid image file (JPG or PNG).");
+    }
+  }
+
   return (
     <>
       <div className="upload-icon w-fit rounded-xl border border-neutral-300/15 bg-neutral-300/15">
-        Photo
+        <img
+          className="aspect-square w-12 rounded-xl object-cover"
+          src={file}
+        ></img>
       </div>
-      <div className="btns">
+      <div className="btns flex gap-2">
         <button
           type="button"
           className="remove-btn rounded-md bg-neutral-700/50 px-2 py-1 text-xs text-gray-300/90 underline underline-offset-2 transition-colors hover:bg-neutral-700"
+          onClick={handleRemoveImage}
         >
           Remove image
         </button>
         <button
           type="button"
           className="change-btn rounded-md bg-neutral-700/50 px-2 py-1 text-xs text-gray-300/90 transition-colors hover:bg-neutral-700"
+          onClick={handleChangeImage}
         >
           Change image
         </button>
+        <input
+          ref={inputRef}
+          type="file"
+          accept="image/jpeg, image/png"
+          className="hidden"
+          onChange={handleFileChange}
+        />
       </div>
     </>
   );
 }
 
-function GeneratedTicket() {}
+function GeneratedTicket() {
+  const { file, formData } = useContext(FormContext);
+
+  return (
+    <main className="px-5">
+      <div className="generated-ticket mx-auto grid max-w-[600px] gap-16">
+        <div className="intro-text grid gap-5 p-4 text-center">
+          <h1 className="text-[1.8rem] font-extrabold leading-tight tracking-tighter text-white md:text-5xl">
+            Congrats,
+            <span className="bg-gradient-to-r from-gradient-text-from to-gradient-text-to bg-clip-text text-transparent">
+              {" "}
+              {formData.fullName}
+            </span>
+            ! Your ticket is ready.
+          </h1>
+          <p className="text-lg font-semibold text-neutral-300 md:tracking-wider">
+            We've emailed your ticket to
+            <span className="text-orange-500"> {formData.email}</span> and will
+            send updates in the run up to the event.
+          </p>
+        </div>
+
+        <div className="ticket relative mx-auto w-fit">
+          <div className="ticket-img min-w-[320px] max-w-[400px] lg:max-w-[450px]">
+            <img src="assets/images/pattern-ticket.svg" alt="" />
+          </div>
+          <div className="location-info absolute left-5 top-3 flex gap-3">
+            <div className="logo w-7 self-center">
+              <img src="assets/images/logo-mark.svg" alt="" />
+            </div>
+            <div className="location-details space-y-1">
+              <div className="location-details-name">
+                <p className="text-2xl font-bold text-white">Coding Conf</p>
+              </div>
+              <div className="location-details-date">
+                <p className="text-sm text-neutral-300">
+                  Jan 31, 2025 / Austin, TX
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="personal-info absolute bottom-3 left-5 flex gap-3">
+            <div className="personal-img aspect-square w-10 self-center lg:w-14">
+              <img
+                className="aspect-square rounded-lg object-cover"
+                src={file}
+                alt=""
+              />
+            </div>
+            <div className="personal-details">
+              <div className="personal-details-name">
+                <p className="text-lg font-semibold text-white">
+                  {formData.fullName}
+                </p>
+              </div>
+              <div className="personal-details-date flex items-center gap-1">
+                <img src="assets/images/icon-github.svg" />
+                <p className="text-sm text-neutral-300">
+                  {formData.githubUsername}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="id absolute right-0 top-1/2 -translate-y-1/2 rotate-90">
+            <p className="text-xl font-medium text-neutral-500">#01609</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
 
 export default App;
