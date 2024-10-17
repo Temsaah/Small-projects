@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import Cart from "./Cart";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -14,9 +15,10 @@ function App() {
 
 function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showCart, setShowCart] = useState(false);
 
   return (
-    <header className="flex items-center gap-10 p-5">
+    <header className="relative flex items-center gap-10 p-5">
       <div className="flex">
         <button
           className="w-10 md:hidden"
@@ -39,10 +41,11 @@ function Header() {
         setIsMobileMenuOpen={setIsMobileMenuOpen}
       />
 
-      <div className="ml-auto flex gap-5">
-        <Cart />
+      <div className="ml-auto flex items-center gap-5">
+        <CartBtn setShowCart={setShowCart} />
         <User />
       </div>
+      {showCart && <Cart />}
     </header>
   );
 }
@@ -99,9 +102,9 @@ function Navbar({ isMobileMenuOpen, setIsMobileMenuOpen }) {
   );
 }
 
-function Cart() {
+function CartBtn({ setShowCart }) {
   return (
-    <button className="text-white">
+    <button className="text-white" onClick={() => setShowCart((show) => !show)}>
       <img
         className="fill-current text-white"
         src="/src/images/icon-cart.svg"
