@@ -1,21 +1,22 @@
 import { useState } from "react";
 import "./App.css";
 import Cart from "./Cart";
+import { CartProvider, useCart } from "./CartContext";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <>
+    <CartProvider>
       <Header />
       <Main />
-    </>
+    </CartProvider>
   );
 }
 
 function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [showCart, setShowCart] = useState(false);
+  const { showCart, setShowCart } = useCart();
 
   return (
     <header className="relative flex items-center gap-10 p-5">
@@ -41,8 +42,8 @@ function Header() {
         setIsMobileMenuOpen={setIsMobileMenuOpen}
       />
 
-      <div className="ml-auto flex items-center gap-5">
-        <CartBtn setShowCart={setShowCart} />
+      <div className="ml-auto flex items-end gap-5">
+        <CartBtn />
         <User />
       </div>
       {showCart && <Cart />}
@@ -58,11 +59,11 @@ function Navbar({ isMobileMenuOpen, setIsMobileMenuOpen }) {
   return (
     <>
       <div
-        className={`absolute left-0 top-0 h-screen w-screen bg-black/70 ${isMobileMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"} transition-opacity duration-500 md:hidden`}
+        className={`absolute left-0 top-0 z-20 h-screen w-screen bg-black/70 ${isMobileMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"} transition-opacity duration-500 md:hidden`}
         onClick={() => setIsMobileMenuOpen(false)}
       ></div>
       <nav
-        className={`absolute left-0 top-0 -translate-x-full ${isMobileMenuOpen ? "translate-x-0" : ""} h-screen w-[60%] space-y-10 bg-white p-6 transition-all duration-300 md:relative md:h-auto md:w-auto md:translate-x-0 md:space-y-0 md:bg-transparent md:p-0`}
+        className={`absolute left-0 top-0 z-30 -translate-x-full ${isMobileMenuOpen ? "translate-x-0" : ""} h-screen w-[60%] space-y-10 bg-white p-6 transition-all duration-300 md:relative md:h-auto md:w-auto md:translate-x-0 md:space-y-0 md:bg-transparent md:p-0`}
       >
         <button
           className="md:hidden"
@@ -102,14 +103,30 @@ function Navbar({ isMobileMenuOpen, setIsMobileMenuOpen }) {
   );
 }
 
-function CartBtn({ setShowCart }) {
+function CartBtn() {
+  const { cartItems, setShowCart } = useCart();
+
   return (
-    <button className="text-white" onClick={() => setShowCart((show) => !show)}>
-      <img
-        className="fill-current text-white"
-        src="/src/images/icon-cart.svg"
-        alt="Shopping cart"
-      />
+    <button
+      className="relative text-black"
+      onClick={() => setShowCart((show) => !show)}
+    >
+      <svg
+        fill="currentColor"
+        className="w-6"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z"
+          fillRule="nonzero"
+        />
+      </svg>
+      {cartItems.length > 0 && (
+        <span className="absolute -top-2.5 left-2 rounded-full bg-primary-orange px-2 text-xs font-semibold text-white">
+          {cartItems.length}
+        </span>
+      )}
     </button>
   );
 }
@@ -143,14 +160,29 @@ function ItemPhoto() {
 }
 
 function ItemInfo() {
+  const [quantity, setQuantity] = useState(1);
+  const { addtoCart } = useCart();
+
+  function handleAddToCart() {
+    const item = {
+      thumbnail: "src/images/image-product-1-thumbnail.jpg",
+      name: "Fall Limited Edition Sneakers",
+      price: 125.0,
+      quantity,
+    };
+
+    addtoCart(item);
+  }
+
   return (
     <div className="space-y-5 p-7">
       <ItemDescription />
       <ItemPrice />
-      <ItemQuantity />
+      <ItemQuantity quantity={quantity} onQuantityChange={setQuantity} />
       <button
         className="flex w-full items-center justify-center gap-4 rounded-xl bg-primary-orange p-4 text-neutral-very-dark-blue"
         aria-label="Add to cart"
+        onClick={handleAddToCart}
       >
         <svg
           fill="currentColor"
@@ -199,14 +231,24 @@ function ItemPrice() {
   );
 }
 
-function ItemQuantity() {
+function ItemQuantity({ quantity, onQuantityChange }) {
   return (
     <div className="flex justify-between p-5">
-      <button>
+      <button
+        className="p-2"
+        onClick={() =>
+          onQuantityChange((quantity) => (quantity > 1 ? --quantity : 1))
+        }
+      >
         <img src="/src/images/icon-minus.svg" alt="" />
       </button>
-      <p className="text-lg font-bold text-neutral-very-dark-blue">0</p>
-      <button>
+      <p className="text-lg font-bold text-neutral-very-dark-blue">
+        {quantity}
+      </p>
+      <button
+        className="p-2"
+        onClick={() => onQuantityChange((quantity) => ++quantity)}
+      >
         <img src="/src/images/icon-plus.svg" alt="" />
       </button>
     </div>
