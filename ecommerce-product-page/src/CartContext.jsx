@@ -16,8 +16,20 @@ export function CartProvider({ children }) {
 
   */
 
-  function addtoCart(item) {
-    setCartItems((items) => [...items, item]);
+  function addtoCart(newItem) {
+    setCartItems((items) => {
+      const itemExist = items.find((item) => item.name === newItem.name);
+
+      if (itemExist) {
+        return items.map((item) =>
+          item.name === newItem.name
+            ? { ...item, quantity: item.quantity + newItem.quantity }
+            : item,
+        );
+      }
+
+      return [...items, newItem];
+    });
   }
 
   function removeFromCart(itemName) {

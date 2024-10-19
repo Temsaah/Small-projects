@@ -8,8 +8,10 @@ function App() {
 
   return (
     <CartProvider>
-      <Header />
-      <Main />
+      <div className="grid h-screen max-w-[1150px] grid-rows-[max-content,1fr] md:mx-auto">
+        <Header />
+        <Main />
+      </div>
     </CartProvider>
   );
 }
@@ -19,7 +21,7 @@ function Header() {
   const { showCart, setShowCart } = useCart();
 
   return (
-    <header className="relative flex items-center gap-10 p-5">
+    <header className="relative flex items-center gap-10 p-5 md:border-b md:p-10">
       <div className="flex">
         <button
           className="w-10 md:hidden"
@@ -71,29 +73,44 @@ function Navbar({ isMobileMenuOpen, setIsMobileMenuOpen }) {
         >
           <img src="/src/images/icon-close.svg" alt="" />
         </button>
-        <ul className="flex flex-col gap-5 md:flex-row">
-          <li>
-            <a className="text-lg font-semibold" href="#">
+        <ul className="flex flex-col gap-5 text-lg font-semibold md:flex-row md:text-base md:font-normal md:text-neutral-dark-grayish-blue">
+          <li className="relative">
+            <a
+              className="hover:text-neutral-very-dark-blue md:after:absolute md:after:bottom-[-2.6rem] md:after:left-0 md:after:h-[4px] md:after:w-0 md:after:bg-primary-orange md:after:transition-all md:after:duration-300 hover:md:after:w-full"
+              href="#"
+            >
               Collections
             </a>
           </li>
-          <li>
-            <a className="text-lg font-semibold" href="#">
+          <li className="relative">
+            <a
+              className="hover:text-neutral-very-dark-blue md:after:absolute md:after:bottom-[-2.6rem] md:after:left-0 md:after:h-[4px] md:after:w-0 md:after:bg-primary-orange md:after:transition-all md:after:duration-300 hover:md:after:w-full"
+              href="#"
+            >
               Men
             </a>
           </li>
-          <li>
-            <a className="text-lg font-semibold" href="#">
+          <li className="relative">
+            <a
+              className="hover:text-neutral-very-dark-blue md:after:absolute md:after:bottom-[-2.6rem] md:after:left-0 md:after:h-[4px] md:after:w-0 md:after:bg-primary-orange md:after:transition-all md:after:duration-300 hover:md:after:w-full"
+              href="#"
+            >
               Women
             </a>
           </li>
-          <li>
-            <a className="text-lg font-semibold" href="#">
+          <li className="relative">
+            <a
+              className="hover:text-neutral-very-dark-blue md:after:absolute md:after:bottom-[-2.6rem] md:after:left-0 md:after:h-[4px] md:after:w-0 md:after:bg-primary-orange md:after:transition-all md:after:duration-300 hover:md:after:w-full"
+              href="#"
+            >
               About
             </a>
           </li>
-          <li>
-            <a className="text-lg font-semibold" href="#">
+          <li className="relative">
+            <a
+              className="hover:text-neutral-very-dark-blue md:after:absolute md:after:bottom-[-2.6rem] md:after:left-0 md:after:h-[4px] md:after:w-0 md:after:bg-primary-orange md:after:transition-all md:after:duration-300 hover:md:after:w-full"
+              href="#"
+            >
               Contact
             </a>
           </li>
@@ -141,7 +158,7 @@ function User() {
 
 function Main() {
   return (
-    <main className="">
+    <main className="md:grid md:grid-cols-2 md:items-center md:p-16">
       <ItemPhoto />
       <ItemInfo />
     </main>
@@ -149,12 +166,71 @@ function Main() {
 }
 
 function ItemPhoto() {
+  const [selectedImage, setSelectedImage] = useState(1);
   return (
     <div className="w-full">
-      <img
-        className="h-[300px] w-full object-cover object-center"
-        src="/src/images/image-product-1.jpg"
-      ></img>
+      <div className="md:max-w-[400px] md:space-y-5">
+        <div className="">
+          <img
+            className="h-[300px] w-full object-cover object-center md:h-full md:max-h-[500px] md:rounded-xl"
+            src={`/src/images/image-product-${selectedImage}.jpg`}
+          ></img>
+        </div>
+        <div className="hidden gap-5 md:flex">
+          <button
+            className={
+              selectedImage === 1
+                ? "rounded-xl border-2 border-primary-orange"
+                : ""
+            }
+            onClick={() => setSelectedImage(1)}
+          >
+            <img
+              className={`rounded-lg transition-all hover:opacity-50 ${selectedImage === 1 && "opacity-50"}`}
+              src="/src/images/image-product-1.jpg"
+            ></img>
+          </button>
+          <button
+            onClick={() => setSelectedImage(2)}
+            className={
+              selectedImage === 2
+                ? "rounded-xl border-2 border-primary-orange"
+                : ""
+            }
+          >
+            <img
+              className={`rounded-lg transition-all hover:opacity-50 ${selectedImage === 2 && "opacity-50"}`}
+              src="/src/images/image-product-2.jpg"
+            ></img>
+          </button>
+          <button
+            onClick={() => setSelectedImage(3)}
+            className={
+              selectedImage === 3
+                ? "rounded-xl border-2 border-primary-orange"
+                : ""
+            }
+          >
+            <img
+              className={`rounded-lg transition-all hover:opacity-50 ${selectedImage === 3 && "opacity-50"}`}
+              src="/src/images/image-product-3.jpg"
+            ></img>
+          </button>
+          <button
+            onClick={() => setSelectedImage(4)}
+            className={
+              selectedImage === 4
+                ? "rounded-xl border-2 border-primary-orange"
+                : ""
+            }
+          >
+            <img
+              className={`rounded-lg transition-all hover:opacity-50 ${selectedImage === 4 && "opacity-50"}`}
+              src="/src/images/image-product-4.jpg"
+            ></img>
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -208,7 +284,7 @@ function ItemDescription() {
         Sneaker Company{" "}
       </p>
       <p className="text-3xl font-bold">Fall Limited Edition Sneakers</p>
-      <p className="text-[0.93rem] text-neutral-dark-grayish-blue">
+      <p className="text-[0.93rem] leading-7 text-neutral-dark-grayish-blue">
         These low-profile sneakers are your perfect casual wear companion.
         Feauting a durable rubber outer sole. they'll withstand everything the
         weather can offer.
