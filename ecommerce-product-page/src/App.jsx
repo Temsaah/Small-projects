@@ -21,7 +21,7 @@ function Header() {
   const { showCart, setShowCart } = useCart();
 
   return (
-    <header className="relative flex items-center gap-10 p-5 md:border-b md:p-10">
+    <header className="relative flex items-center gap-10 p-5 md:mx-10 md:border-b md:px-0 md:py-10">
       <div className="flex">
         <button
           className="w-10 md:hidden"
@@ -44,7 +44,7 @@ function Header() {
         setIsMobileMenuOpen={setIsMobileMenuOpen}
       />
 
-      <div className="ml-auto flex items-end gap-5">
+      <div className="relative ml-auto flex items-end gap-5">
         <CartBtn />
         <User />
       </div>
@@ -158,7 +158,7 @@ function User() {
 
 function Main() {
   return (
-    <main className="md:grid md:grid-cols-2 md:items-center md:p-16">
+    <main className="md:grid md:grid-cols-2 md:items-center md:gap-10 md:p-16">
       <ItemPhoto />
       <ItemInfo />
     </main>
@@ -167,12 +167,34 @@ function Main() {
 
 function ItemPhoto() {
   const [selectedImage, setSelectedImage] = useState(1);
+
+  function handlePreviousImg() {
+    setSelectedImage((curr) => (curr === 1 ? 4 : --curr));
+  }
+  function handleNextImg() {
+    setSelectedImage((curr) => (curr === 4 ? 1 : ++curr));
+  }
+
   return (
-    <div className="w-full">
+    <div className="relative w-full md:justify-items-center">
+      <div className="absolute top-1/2 w-full md:hidden">
+        <button
+          className="absolute left-4 grid aspect-square w-10 -translate-y-1/2 place-items-center rounded-full bg-neutral-light-grayish-blue shadow-2xl"
+          onClick={handlePreviousImg}
+        >
+          <img src="/src/images/icon-previous.svg"></img>
+        </button>
+        <button
+          className="absolute right-4 grid aspect-square w-10 -translate-y-1/2 place-items-center rounded-full bg-neutral-light-grayish-blue shadow-2xl"
+          onClick={handleNextImg}
+        >
+          <img src="/src/images/icon-next.svg"></img>
+        </button>
+      </div>
       <div className="md:max-w-[400px] md:space-y-5">
         <div className="">
           <img
-            className="h-[300px] w-full object-cover object-center md:h-full md:max-h-[500px] md:rounded-xl"
+            className="h-[350px] w-full object-cover object-center sm:h-[400px] sm:object-contain md:h-full md:max-h-[500px] md:rounded-xl"
             src={`/src/images/image-product-${selectedImage}.jpg`}
           ></img>
         </div>
@@ -251,28 +273,30 @@ function ItemInfo() {
   }
 
   return (
-    <div className="space-y-5 p-7">
+    <div className="space-y-6 p-7">
       <ItemDescription />
       <ItemPrice />
-      <ItemQuantity quantity={quantity} onQuantityChange={setQuantity} />
-      <button
-        className="flex w-full items-center justify-center gap-4 rounded-xl bg-primary-orange p-4 text-neutral-very-dark-blue"
-        aria-label="Add to cart"
-        onClick={handleAddToCart}
-      >
-        <svg
-          fill="currentColor"
-          className="w-5"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
+      <div className="flex flex-col gap-5 md:grid md:grid-cols-[auto,1fr] md:gap-2">
+        <ItemQuantity quantity={quantity} onQuantityChange={setQuantity} />
+        <button
+          className="flex w-full items-center justify-center gap-4 rounded-xl bg-primary-orange p-4 text-neutral-very-dark-blue md:gap-2 md:text-sm lg:gap-4 lg:text-base"
+          aria-label="Add to cart"
+          onClick={handleAddToCart}
         >
-          <path
-            d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z"
-            fillRule="nonzero"
-          />
-        </svg>
-        <p className="font-bold text-neutral-very-dark-blue">Add to cart</p>
-      </button>
+          <svg
+            fill="currentColor"
+            className="w-5"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z"
+              fillRule="nonzero"
+            />
+          </svg>
+          <p className="font-bold text-neutral-very-dark-blue">Add to cart</p>
+        </button>
+      </div>
     </div>
   );
 }
@@ -284,7 +308,7 @@ function ItemDescription() {
         Sneaker Company{" "}
       </p>
       <p className="text-3xl font-bold">Fall Limited Edition Sneakers</p>
-      <p className="text-[0.93rem] leading-7 text-neutral-dark-grayish-blue">
+      <p className="text-[0.93rem] leading-7 text-neutral-dark-grayish-blue md:!mt-10">
         These low-profile sneakers are your perfect casual wear companion.
         Feauting a durable rubber outer sole. they'll withstand everything the
         weather can offer.
@@ -295,12 +319,16 @@ function ItemDescription() {
 
 function ItemPrice() {
   return (
-    <div className="flex items-center gap-5">
-      <p className="text-3xl font-bold text-neutral-very-dark-blue">$125.00</p>
-      <p className="rounded-md bg-neutral-very-dark-blue px-3 py-0.5 font-bold text-white">
-        50%
-      </p>
-      <p className="ml-auto font-bold text-neutral-dark-grayish-blue line-through">
+    <div className="flex items-center gap-5 md:flex-col md:items-start md:gap-3">
+      <div className="flex items-center gap-5">
+        <p className="text-3xl font-bold text-neutral-very-dark-blue">
+          $125.00
+        </p>
+        <p className="rounded-md bg-neutral-very-dark-blue px-3 py-0.5 font-bold text-white">
+          50%
+        </p>
+      </div>
+      <p className="ml-auto font-bold text-neutral-dark-grayish-blue line-through md:ml-0">
         $250.00
       </p>
     </div>
@@ -309,23 +337,23 @@ function ItemPrice() {
 
 function ItemQuantity({ quantity, onQuantityChange }) {
   return (
-    <div className="flex justify-between p-5">
+    <div className="flex justify-between p-5 md:items-center md:gap-3 md:p-0 lg:gap-10">
       <button
         className="p-2"
         onClick={() =>
           onQuantityChange((quantity) => (quantity > 1 ? --quantity : 1))
         }
       >
-        <img src="/src/images/icon-minus.svg" alt="" />
+        <img className="md:w-3" src="/src/images/icon-minus.svg" alt="" />
       </button>
-      <p className="text-lg font-bold text-neutral-very-dark-blue">
+      <p className="text-lg font-bold text-neutral-very-dark-blue md:text-base">
         {quantity}
       </p>
       <button
         className="p-2"
         onClick={() => onQuantityChange((quantity) => ++quantity)}
       >
-        <img src="/src/images/icon-plus.svg" alt="" />
+        <img className="md:w-3" src="/src/images/icon-plus.svg" alt="" />
       </button>
     </div>
   );
