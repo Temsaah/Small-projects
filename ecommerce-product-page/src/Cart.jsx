@@ -4,7 +4,7 @@ function Cart() {
   const { cartItems } = useCart();
 
   return (
-    <div className="animation-slide-in absolute right-2 top-20 z-10 flex min-h-64 w-[95%] max-w-[400px] -translate-x-1/2 flex-col rounded-xl bg-white shadow-xl sm:right-0 2xl:!translate-x-1/3">
+    <div className="animation-slide-in absolute right-2 top-20 z-30 flex min-h-64 w-[95%] max-w-[400px] -translate-x-1/2 flex-col rounded-xl bg-white shadow-xl sm:right-0 2xl:!translate-x-1/3">
       <div className="border-b px-7 py-5">
         <p className="font-bold">Cart</p>
       </div>

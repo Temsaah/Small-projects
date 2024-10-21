@@ -4,15 +4,17 @@ import Cart from "./Cart";
 import { CartProvider, useCart } from "./CartContext";
 
 function App() {
+  const { previewGallery } = useCart();
   const [count, setCount] = useState(0);
 
   return (
-    <CartProvider>
+    <>
+      {previewGallery.isOpen && <GalleryPreview />}
       <div className="grid h-screen max-w-[1150px] grid-rows-[max-content,1fr] md:mx-auto">
         <Header />
         <Main />
       </div>
-    </CartProvider>
+    </>
   );
 }
 
@@ -61,11 +63,11 @@ function Navbar({ isMobileMenuOpen, setIsMobileMenuOpen }) {
   return (
     <>
       <div
-        className={`absolute left-0 top-0 z-20 h-screen w-screen bg-black/70 ${isMobileMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"} transition-opacity duration-500 md:hidden`}
+        className={`absolute left-0 top-0 z-40 h-screen w-screen bg-black/70 ${isMobileMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"} transition-opacity duration-500 md:hidden`}
         onClick={() => setIsMobileMenuOpen(false)}
       ></div>
       <nav
-        className={`absolute left-0 top-0 z-30 -translate-x-full ${isMobileMenuOpen ? "translate-x-0" : ""} h-screen w-[60%] space-y-10 bg-white p-6 transition-all duration-300 md:relative md:h-auto md:w-auto md:translate-x-0 md:space-y-0 md:bg-transparent md:p-0`}
+        className={`absolute left-0 top-0 z-50 -translate-x-full ${isMobileMenuOpen ? "translate-x-0" : ""} h-screen w-[60%] space-y-10 bg-white p-6 transition-all duration-300 md:relative md:h-auto md:w-auto md:translate-x-0 md:space-y-0 md:bg-transparent md:p-0`}
       >
         <button
           className="md:hidden"
@@ -165,8 +167,11 @@ function Main() {
   );
 }
 
-function ItemPhoto() {
-  const [selectedImage, setSelectedImage] = useState(1);
+function ItemPhoto({ isPreview, children }) {
+  const { previewGallery, setPreviewGallery } = useCart();
+  const [selectedImage, setSelectedImage] = useState(
+    previewGallery.currentPhoto || 1,
+  );
 
   function handlePreviousImg() {
     setSelectedImage((curr) => (curr === 1 ? 4 : --curr));
@@ -175,30 +180,38 @@ function ItemPhoto() {
     setSelectedImage((curr) => (curr === 4 ? 1 : ++curr));
   }
 
+  function handlePhotoPreview() {
+    setPreviewGallery({ isOpen: true, currentPhoto: selectedImage });
+  }
+
   return (
-    <div className="relative w-full md:justify-items-center">
-      <div className="absolute top-1/2 w-full md:hidden">
-        <button
-          className="absolute left-4 grid aspect-square w-10 -translate-y-1/2 place-items-center rounded-full bg-neutral-light-grayish-blue shadow-2xl"
-          onClick={handlePreviousImg}
-        >
-          <img src="/src/images/icon-previous.svg"></img>
-        </button>
-        <button
-          className="absolute right-4 grid aspect-square w-10 -translate-y-1/2 place-items-center rounded-full bg-neutral-light-grayish-blue shadow-2xl"
-          onClick={handleNextImg}
-        >
-          <img src="/src/images/icon-next.svg"></img>
-        </button>
-      </div>
-      <div className="md:max-w-[400px] md:space-y-5">
-        <div className="">
-          <img
-            className="h-[350px] w-full object-cover object-center sm:h-[400px] sm:object-contain md:h-full md:max-h-[500px] md:rounded-xl"
-            src={`/src/images/image-product-${selectedImage}.jpg`}
-          ></img>
+    <div className="relative w-full md:w-auto md:justify-items-center">
+      <CarouselButtons
+        handlePreviousImg={handlePreviousImg}
+        handleNextImg={handleNextImg}
+      />
+      <div
+        className={`grid justify-items-center md:max-w-[400px] md:space-y-5 ${isPreview && "md:max-w-[600px]"}`}
+      >
+        <div className="relative w-full">
+          <button
+            className="pointer-events-none w-full md:pointer-events-auto"
+            onClick={handlePhotoPreview}
+          >
+            <img
+              className={`h-[350px] w-full object-cover object-center sm:h-[400px] sm:object-contain md:h-full md:max-h-[500px] md:rounded-xl ${isPreview && "md:h-[600px] md:max-h-full md:object-cover"}`}
+              src={`/src/images/image-product-${selectedImage}.jpg`}
+            ></img>
+          </button>
+          {isPreview && (
+            <CarouselButtons
+              isPreview={true}
+              handlePreviousImg={handlePreviousImg}
+              handleNextImg={handleNextImg}
+            />
+          )}
         </div>
-        <div className="hidden gap-5 md:flex">
+        <div className="hidden max-w-[400px] gap-5 md:flex">
           <button
             className={
               selectedImage === 1
@@ -354,6 +367,46 @@ function ItemQuantity({ quantity, onQuantityChange }) {
         onClick={() => onQuantityChange((quantity) => ++quantity)}
       >
         <img className="md:w-3" src="/src/images/icon-plus.svg" alt="" />
+      </button>
+    </div>
+  );
+}
+
+function GalleryPreview() {
+  const { setPreviewGallery } = useCart();
+
+  function handleClosePreview() {
+    setPreviewGallery((prev) => ({ ...prev, isOpen: false }));
+  }
+
+  return (
+    <div className="absolute z-50 grid h-screen w-screen place-items-center">
+      <div
+        className="absolute h-screen w-full bg-black/85"
+        onClick={handleClosePreview}
+      ></div>
+
+      <ItemPhoto isPreview={true} />
+    </div>
+  );
+}
+
+function CarouselButtons({ isPreview, handlePreviousImg, handleNextImg }) {
+  return (
+    <div
+      className={`absolute top-1/2 z-10 w-full ${isPreview ? "md:block" : "md:hidden"}`}
+    >
+      <button
+        className={`absolute ${isPreview ? "-left-6 w-12" : "left-4 w-10"} grid aspect-square -translate-y-1/2 place-items-center rounded-full bg-neutral-light-grayish-blue shadow-2xl`}
+        onClick={handlePreviousImg}
+      >
+        <img src="/src/images/icon-previous.svg"></img>
+      </button>
+      <button
+        className={`absolute ${isPreview ? "-right-6 w-12" : "right-4 w-10"} grid aspect-square -translate-y-1/2 place-items-center rounded-full bg-neutral-light-grayish-blue shadow-2xl`}
+        onClick={handleNextImg}
+      >
+        <img src="/src/images/icon-next.svg"></img>
       </button>
     </div>
   );

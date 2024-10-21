@@ -5,6 +5,10 @@ const CartContext = createContext();
 export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
   const [showCart, setShowCart] = useState(false);
+  const [previewGallery, setPreviewGallery] = useState({
+    isOpen: false,
+    currentPhoto: 1,
+  });
 
   /*
   {
@@ -42,6 +46,8 @@ export function CartProvider({ children }) {
     removeFromCart,
     showCart,
     setShowCart,
+    previewGallery,
+    setPreviewGallery,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
