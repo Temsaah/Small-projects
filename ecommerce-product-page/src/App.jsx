@@ -30,13 +30,13 @@ function Header() {
         >
           <img
             className=""
-            src="/src/images/icon-menu.svg"
+            src="src/images/icon-menu.svg"
             alt="Menu icon"
             aria-hidden="true"
           />
         </button>
         <div>
-          <img src="/src/images/logo.svg" alt="" />
+          <img src="src/images/logo.svg" alt="" />
         </div>
       </div>
 
@@ -72,7 +72,7 @@ function Navbar({ isMobileMenuOpen, setIsMobileMenuOpen }) {
           className="md:hidden"
           onClick={() => setIsMobileMenuOpen(false)}
         >
-          <img src="/src/images/icon-close.svg" alt="" />
+          <img src="src/images/icon-close.svg" alt="" />
         </button>
         <ul className="flex flex-col gap-5 text-lg font-semibold md:flex-row md:text-base md:font-normal md:text-neutral-dark-grayish-blue">
           <li className="relative">
@@ -152,7 +152,7 @@ function CartBtn() {
 function User() {
   return (
     <div className="w-7 border-2 border-transparent hover:rounded-full md:w-11 md:hover:border-2 md:hover:border-primary-orange">
-      <img src="/src/images/image-avatar.png" alt="User Avatar" />
+      <img src="src/images/image-avatar.png" alt="User Avatar" />
     </div>
   );
 }
@@ -199,7 +199,7 @@ function ItemPhoto({ isPreview, children }) {
           >
             <img
               className={`h-[300px] w-full object-cover object-center sm:h-[400px] sm:object-contain md:h-full md:max-h-[500px] md:rounded-xl ${isPreview && "md:h-[600px] md:max-h-full md:object-cover"}`}
-              src={`/src/images/image-product-${selectedImage}.jpg`}
+              src={`src/images/image-product-${selectedImage}.jpg`}
             ></img>
           </button>
           {isPreview && (
@@ -221,7 +221,7 @@ function ItemPhoto({ isPreview, children }) {
           >
             <img
               className={`rounded-lg transition-all ${selectedImage === 1 && ""}`}
-              src="/src/images/image-product-1.jpg"
+              src="src/images/image-product-1.jpg"
             ></img>
           </button>
           <button
@@ -234,7 +234,7 @@ function ItemPhoto({ isPreview, children }) {
           >
             <img
               className={`rounded-lg transition-all hover:opacity-50 ${selectedImage === 2 && "opacity-50"}`}
-              src="/src/images/image-product-2.jpg"
+              src="src/images/image-product-2.jpg"
             ></img>
           </button>
           <button
@@ -247,7 +247,7 @@ function ItemPhoto({ isPreview, children }) {
           >
             <img
               className={`rounded-lg transition-all hover:opacity-50 ${selectedImage === 3 && "opacity-50"}`}
-              src="/src/images/image-product-3.jpg"
+              src="src/images/image-product-3.jpg"
             ></img>
           </button>
           <button
@@ -260,7 +260,7 @@ function ItemPhoto({ isPreview, children }) {
           >
             <img
               className={`rounded-lg transition-all hover:opacity-50 ${selectedImage === 4 && "opacity-50"}`}
-              src="/src/images/image-product-4.jpg"
+              src="src/images/image-product-4.jpg"
             ></img>
           </button>
         </div>
