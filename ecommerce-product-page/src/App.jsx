@@ -320,7 +320,7 @@ function ItemDescription() {
       <p className="text-xs font-bold uppercase tracking-widest text-neutral-dark-grayish-blue">
         Sneaker Company{" "}
       </p>
-      <p className="text-3xl font-bold">Fall Limited Edition Sneakers</p>
+      <p className="text-4xl font-bold">Fall Limited Edition Sneakers</p>
       <p className="text-[0.93rem] leading-7 text-neutral-dark-grayish-blue md:!mt-10">
         These low-profile sneakers are your perfect casual wear companion.
         Feauting a durable rubber outer sole. they'll withstand everything the
