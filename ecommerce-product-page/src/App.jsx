@@ -1,11 +1,10 @@
 import { useState } from "react";
 import "./App.css";
 import Cart from "./Cart";
-import { CartProvider, useCart } from "./CartContext";
+import { useCart } from "./CartContext";
 
 function App() {
   const { previewGallery } = useCart();
-  const [count, setCount] = useState(0);
 
   return (
     <>
@@ -20,7 +19,7 @@ function App() {
 
 function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { showCart, setShowCart } = useCart();
+  const { showCart } = useCart();
 
   return (
     <header className="relative flex items-center gap-10 p-5 md:mx-10 md:border-b md:px-0 md:py-10">
@@ -46,7 +45,7 @@ function Header() {
         setIsMobileMenuOpen={setIsMobileMenuOpen}
       />
 
-      <div className="relative ml-auto flex items-end gap-5">
+      <div className="relative ml-auto flex items-end gap-5 md:items-center md:gap-9">
         <CartBtn />
         <User />
       </div>
@@ -67,7 +66,7 @@ function Navbar({ isMobileMenuOpen, setIsMobileMenuOpen }) {
         onClick={() => setIsMobileMenuOpen(false)}
       ></div>
       <nav
-        className={`absolute left-0 top-0 z-50 -translate-x-full ${isMobileMenuOpen ? "translate-x-0" : ""} h-screen w-[60%] space-y-10 bg-white p-6 transition-all duration-300 md:relative md:h-auto md:w-auto md:translate-x-0 md:space-y-0 md:bg-transparent md:p-0`}
+        className={`absolute left-0 top-0 z-[49] -translate-x-full ${isMobileMenuOpen ? "translate-x-0" : ""} h-screen w-[60%] space-y-10 bg-white p-6 transition-all duration-300 md:relative md:h-auto md:w-auto md:translate-x-0 md:space-y-0 md:bg-transparent md:p-0`}
       >
         <button
           className="md:hidden"
@@ -127,7 +126,7 @@ function CartBtn() {
 
   return (
     <button
-      className="relative text-black"
+      className="relative text-neutral-dark-grayish-blue hover:text-black"
       onClick={() => setShowCart((show) => !show)}
     >
       <svg
@@ -152,7 +151,7 @@ function CartBtn() {
 
 function User() {
   return (
-    <div className="w-7">
+    <div className="w-7 border-2 border-transparent hover:rounded-full md:w-11 md:hover:border-2 md:hover:border-primary-orange">
       <img src="/src/images/image-avatar.png" alt="User Avatar" />
     </div>
   );
@@ -199,7 +198,7 @@ function ItemPhoto({ isPreview, children }) {
             onClick={handlePhotoPreview}
           >
             <img
-              className={`h-[350px] w-full object-cover object-center sm:h-[400px] sm:object-contain md:h-full md:max-h-[500px] md:rounded-xl ${isPreview && "md:h-[600px] md:max-h-full md:object-cover"}`}
+              className={`h-[300px] w-full object-cover object-center sm:h-[400px] sm:object-contain md:h-full md:max-h-[500px] md:rounded-xl ${isPreview && "md:h-[600px] md:max-h-full md:object-cover"}`}
               src={`/src/images/image-product-${selectedImage}.jpg`}
             ></img>
           </button>
@@ -213,25 +212,25 @@ function ItemPhoto({ isPreview, children }) {
         </div>
         <div className="hidden max-w-[400px] gap-5 md:flex">
           <button
-            className={
+            className={`relative after:absolute after:top-0 after:block after:h-full after:w-full after:rounded-xl after:bg-white after:opacity-0 ${
               selectedImage === 1
-                ? "rounded-xl border-2 border-primary-orange"
-                : ""
-            }
+                ? "rounded-xl border-2 border-primary-orange after:opacity-60"
+                : "hover:after:opacity-40"
+            }`}
             onClick={() => setSelectedImage(1)}
           >
             <img
-              className={`rounded-lg transition-all hover:opacity-50 ${selectedImage === 1 && "opacity-50"}`}
+              className={`rounded-lg transition-all ${selectedImage === 1 && ""}`}
               src="/src/images/image-product-1.jpg"
             ></img>
           </button>
           <button
             onClick={() => setSelectedImage(2)}
-            className={
+            className={`relative after:absolute after:top-0 after:block after:h-full after:w-full after:rounded-xl after:bg-white after:opacity-0 ${
               selectedImage === 2
-                ? "rounded-xl border-2 border-primary-orange"
-                : ""
-            }
+                ? "rounded-xl border-2 border-primary-orange after:opacity-60"
+                : "hover:after:opacity-40"
+            }`}
           >
             <img
               className={`rounded-lg transition-all hover:opacity-50 ${selectedImage === 2 && "opacity-50"}`}
@@ -240,11 +239,11 @@ function ItemPhoto({ isPreview, children }) {
           </button>
           <button
             onClick={() => setSelectedImage(3)}
-            className={
+            className={`relative after:absolute after:top-0 after:block after:h-full after:w-full after:rounded-xl after:bg-white after:opacity-0 ${
               selectedImage === 3
-                ? "rounded-xl border-2 border-primary-orange"
-                : ""
-            }
+                ? "rounded-xl border-2 border-primary-orange after:opacity-60"
+                : "hover:after:opacity-40"
+            }`}
           >
             <img
               className={`rounded-lg transition-all hover:opacity-50 ${selectedImage === 3 && "opacity-50"}`}
@@ -253,11 +252,11 @@ function ItemPhoto({ isPreview, children }) {
           </button>
           <button
             onClick={() => setSelectedImage(4)}
-            className={
+            className={`relative after:absolute after:top-0 after:block after:h-full after:w-full after:rounded-xl after:bg-white after:opacity-0 ${
               selectedImage === 4
-                ? "rounded-xl border-2 border-primary-orange"
-                : ""
-            }
+                ? "rounded-xl border-2 border-primary-orange after:opacity-60"
+                : "hover:after:opacity-40"
+            }`}
           >
             <img
               className={`rounded-lg transition-all hover:opacity-50 ${selectedImage === 4 && "opacity-50"}`}
@@ -271,10 +270,11 @@ function ItemPhoto({ isPreview, children }) {
 }
 
 function ItemInfo() {
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(0);
   const { addtoCart } = useCart();
 
   function handleAddToCart() {
+    if (quantity < 1) return;
     const item = {
       thumbnail: "src/images/image-product-1-thumbnail.jpg",
       name: "Fall Limited Edition Sneakers",
@@ -286,13 +286,13 @@ function ItemInfo() {
   }
 
   return (
-    <div className="space-y-6 p-7">
+    <div className="space-y-6 p-6">
       <ItemDescription />
       <ItemPrice />
       <div className="flex flex-col gap-5 md:grid md:grid-cols-[auto,1fr] md:gap-2">
         <ItemQuantity quantity={quantity} onQuantityChange={setQuantity} />
         <button
-          className="flex w-full items-center justify-center gap-4 rounded-xl bg-primary-orange p-4 text-neutral-very-dark-blue md:gap-2 md:text-sm lg:gap-4 lg:text-base"
+          className="flex w-full items-center justify-center gap-4 rounded-xl bg-primary-orange p-4 text-neutral-very-dark-blue hover:bg-primary-orange/70 md:gap-2 md:text-sm lg:gap-4 lg:text-base"
           aria-label="Add to cart"
           onClick={handleAddToCart}
         >
@@ -316,7 +316,7 @@ function ItemInfo() {
 
 function ItemDescription() {
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       <p className="text-xs font-bold uppercase tracking-widest text-neutral-dark-grayish-blue">
         Sneaker Company{" "}
       </p>
@@ -352,21 +352,47 @@ function ItemQuantity({ quantity, onQuantityChange }) {
   return (
     <div className="flex justify-between p-5 md:items-center md:gap-3 md:p-0 lg:gap-10">
       <button
-        className="p-2"
+        className="p-2 text-primary-orange hover:text-primary-orange/70"
         onClick={() =>
           onQuantityChange((quantity) => (quantity > 1 ? --quantity : 1))
         }
       >
-        <img className="md:w-3" src="/src/images/icon-minus.svg" alt="" />
+        <svg
+          width="12"
+          height="4"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlnsXlink="http://www.w3.org/1999/xlink"
+        >
+          <defs>
+            <path
+              d="M11.357 3.332A.641.641 0 0 0 12 2.69V.643A.641.641 0 0 0 11.357 0H.643A.641.641 0 0 0 0 .643v2.046c0 .357.287.643.643.643h10.714Z"
+              id="a"
+            />
+          </defs>
+          <use fill="currentColor" fillRule="nonzero" xlinkHref="#a" />
+        </svg>{" "}
       </button>
       <p className="text-lg font-bold text-neutral-very-dark-blue md:text-base">
         {quantity}
       </p>
       <button
-        className="p-2"
+        className="p-2 text-primary-orange hover:text-primary-orange/70"
         onClick={() => onQuantityChange((quantity) => ++quantity)}
       >
-        <img className="md:w-3" src="/src/images/icon-plus.svg" alt="" />
+        <svg
+          width="12"
+          height="12"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlnsXlink="http://www.w3.org/1999/xlink"
+        >
+          <defs>
+            <path
+              d="M12 7.023V4.977a.641.641 0 0 0-.643-.643h-3.69V.643A.641.641 0 0 0 7.022 0H4.977a.641.641 0 0 0-.643.643v3.69H.643A.641.641 0 0 0 0 4.978v2.046c0 .356.287.643.643.643h3.69v3.691c0 .356.288.643.644.643h2.046a.641.641 0 0 0 .643-.643v-3.69h3.691A.641.641 0 0 0 12 7.022Z"
+              id="b"
+            />
+          </defs>
+          <use fill="currentColor" fillRule="nonzero" xlinkHref="#b" />
+        </svg>
       </button>
     </div>
   );
@@ -380,13 +406,32 @@ function GalleryPreview() {
   }
 
   return (
-    <div className="absolute z-50 grid h-screen w-screen place-items-center">
+    <div className="absolute z-50 flex h-screen w-screen flex-col items-center justify-center">
       <div
         className="absolute h-screen w-full bg-black/85"
         onClick={handleClosePreview}
       ></div>
 
-      <ItemPhoto isPreview={true} />
+      <div className="z-50 flex flex-col gap-6">
+        <div className="self-end text-white hover:text-primary-orange">
+          <button onClick={handleClosePreview}>
+            <svg
+              className="scale-125"
+              width="14"
+              height="15"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z"
+                fill="currentColor"
+                fillRule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <ItemPhoto isPreview={true} />
+      </div>
     </div>
   );
 }
@@ -397,16 +442,32 @@ function CarouselButtons({ isPreview, handlePreviousImg, handleNextImg }) {
       className={`absolute top-1/2 z-10 w-full ${isPreview ? "md:block" : "md:hidden"}`}
     >
       <button
-        className={`absolute ${isPreview ? "-left-6 w-12" : "left-4 w-10"} grid aspect-square -translate-y-1/2 place-items-center rounded-full bg-neutral-light-grayish-blue shadow-2xl`}
+        className={`absolute hover:text-primary-orange ${isPreview ? "-left-6 w-12" : "left-4 w-10"} grid aspect-square -translate-y-1/2 place-items-center rounded-full bg-neutral-light-grayish-blue shadow-2xl`}
         onClick={handlePreviousImg}
       >
-        <img src="/src/images/icon-previous.svg"></img>
+        <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M11 1 3 9l8 8"
+            stroke="currentColor"
+            strokeWidth="3"
+            fill="none"
+            fillRule="evenodd"
+          />
+        </svg>{" "}
       </button>
       <button
-        className={`absolute ${isPreview ? "-right-6 w-12" : "right-4 w-10"} grid aspect-square -translate-y-1/2 place-items-center rounded-full bg-neutral-light-grayish-blue shadow-2xl`}
+        className={`absolute hover:text-primary-orange ${isPreview ? "-right-6 w-12" : "right-4 w-10"} grid aspect-square -translate-y-1/2 place-items-center rounded-full bg-neutral-light-grayish-blue shadow-2xl`}
         onClick={handleNextImg}
       >
-        <img src="/src/images/icon-next.svg"></img>
+        <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="m2 1 8 8-8 8"
+            stroke="currentColor"
+            strokeWidth="3"
+            fill="none"
+            fillRule="evenodd"
+          />
+        </svg>{" "}
       </button>
     </div>
   );
