@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./App.css";
-import Form from "./Form";
+import Form from "./form/PersonalInfoForm";
+import PersonalInfoForm from "./form/PersonalInfoForm";
+import PlanSelectionForm from "./form/PlanSelectionForm";
 
 function App() {
   const [currStep, setCurrStep] = useState(1);
@@ -9,9 +11,7 @@ function App() {
   return (
     <div className="grid h-screen w-screen grid-rows-[25vh,1fr]">
       <FormProgress currStep={currStep} />
-      <FormContainer currStep={currStep}>
-        <Form setFormData={setFormData} />
-      </FormContainer>
+      <FormContainer currStep={currStep} setCurrStep={setCurrStep} />
     </div>
   );
 }
@@ -64,14 +64,16 @@ function FormProgress({ currStep }) {
   );
 }
 
-function FormContainer({ children, currStep }) {
+function FormContainer({ children, currStep, setCurrStep }) {
   return (
-    <div className="flex p-5">
-      {children}
-      <div className="flex w-full justify-between self-end">
-        {currStep > 1 && <button>Go Back</button>}
-        <button className="ml-auto">Next Step</button>
-      </div>
+    <div className="relative grid bg-neutral-magnolia p-5">
+      {currStep === 1 && (
+        <PersonalInfoForm currStep={currStep} setCurrStep={setCurrStep} />
+      )}
+
+      {currStep === 2 && (
+        <PlanSelectionForm currStep={currStep} setCurrStep={setCurrStep} />
+      )}
     </div>
   );
 }
