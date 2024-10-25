@@ -3,13 +3,10 @@ import FormNavigation from "../FormNavigation";
 
 function PersonalInfoForm({ formData, setFormData, currStep, setCurrStep }) {
   const [isValid, setIsValid] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
 
   function isFormValid() {
-    return true;
-    if (name && validateEmail(email) && phone) return true;
+    if (formData.name && validateEmail(formData.email) && formData.phone)
+      return true;
     return false;
   }
 
@@ -20,7 +17,7 @@ function PersonalInfoForm({ formData, setFormData, currStep, setCurrStep }) {
 
   return (
     <>
-      <form className="relative -top-20 rounded-xl bg-white p-7 shadow-xl">
+      <form className="relative -top-14 rounded-xl bg-white p-8 shadow-xl">
         <fieldset className="space-y-3">
           <legend className="text-2xl font-bold text-primary-marine-blue">
             Personal info
@@ -43,7 +40,10 @@ function PersonalInfoForm({ formData, setFormData, currStep, setCurrStep }) {
                 placeholder="e.g. Stephen King"
                 id="name"
                 name="name"
-                onChange={(e) => setName(e.target.value)}
+                value={formData?.name}
+                onChange={(e) =>
+                  setFormData((data) => ({ ...data, name: e.target.value }))
+                }
               ></input>
             </div>
 
@@ -60,7 +60,9 @@ function PersonalInfoForm({ formData, setFormData, currStep, setCurrStep }) {
                 id="email"
                 name="email"
                 placeholder="e.g. stephenking@lorem.com"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) =>
+                  setFormData((data) => ({ ...data, email: e.target.value }))
+                }
               ></input>
             </div>
 
@@ -77,7 +79,9 @@ function PersonalInfoForm({ formData, setFormData, currStep, setCurrStep }) {
                 id="phone"
                 name="phone"
                 placeholder="e.g. +1 234 567 890"
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={(e) =>
+                  setFormData((data) => ({ ...data, phone: e.target.value }))
+                }
               ></input>
             </div>
           </div>

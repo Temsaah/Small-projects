@@ -6,12 +6,23 @@ import PlanSelectionForm from "./form/PlanSelectionForm";
 
 function App() {
   const [currStep, setCurrStep] = useState(1);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    plan: "",
+    billing: "monthly",
+  });
 
   return (
-    <div className="grid h-screen w-screen grid-rows-[25vh,1fr]">
+    <div className="grid h-screen w-screen grid-rows-[23vh,1fr]">
       <FormProgress currStep={currStep} />
-      <FormContainer currStep={currStep} setCurrStep={setCurrStep} />
+      <FormContainer
+        currStep={currStep}
+        setCurrStep={setCurrStep}
+        formData={formData}
+        setFormData={setFormData}
+      />
     </div>
   );
 }
@@ -64,15 +75,31 @@ function FormProgress({ currStep }) {
   );
 }
 
-function FormContainer({ children, currStep, setCurrStep }) {
+function FormContainer({
+  children,
+  currStep,
+  setCurrStep,
+  formData,
+  setFormData,
+}) {
   return (
-    <div className="relative grid bg-neutral-magnolia p-5">
+    <div className="relative grid grid-rows-[auto,1fr] bg-neutral-magnolia p-5 pt-0">
       {currStep === 1 && (
-        <PersonalInfoForm currStep={currStep} setCurrStep={setCurrStep} />
+        <PersonalInfoForm
+          currStep={currStep}
+          setCurrStep={setCurrStep}
+          formData={formData}
+          setFormData={setFormData}
+        />
       )}
 
       {currStep === 2 && (
-        <PlanSelectionForm currStep={currStep} setCurrStep={setCurrStep} />
+        <PlanSelectionForm
+          currStep={currStep}
+          setCurrStep={setCurrStep}
+          formData={formData}
+          setFormData={setFormData}
+        />
       )}
     </div>
   );
